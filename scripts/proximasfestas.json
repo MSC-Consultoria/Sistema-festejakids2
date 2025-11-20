@@ -1,0 +1,652 @@
+[
+  {
+    "codigo": "061725TH",
+    "cliente": "Thayanara Souza",
+    "data_fechamento": "2025-06-17 00:00:00",
+    "data_festa": "2025-11-22 00:00:00",
+    "valor_festa": 5290.0,
+    "valor_recebido": 2290.0,
+    "convidados": 110,
+    "telefone": "964990498"
+  },
+  {
+    "codigo": "081525MA",
+    "cliente": "Mariane Silva ",
+    "data_fechamento": "2025-08-15 00:00:00",
+    "data_festa": "2025-11-23 00:00:00",
+    "valor_festa": 4800.0,
+    "valor_recebido": 500.0,
+    "convidados": 80,
+    "telefone": "994401210"
+  },
+  {
+    "codigo": "071025DA",
+    "cliente": "Daiana Damasceno ",
+    "data_fechamento": "2025-07-10 00:00:00",
+    "data_festa": "2025-11-28 00:00:00",
+    "valor_festa": 4990.0,
+    "valor_recebido": 500.0,
+    "convidados": 110,
+    "telefone": "969498422"
+  },
+  {
+    "codigo": "041025LE",
+    "cliente": "Leila oliveira ",
+    "data_fechamento": "2025-04-10 00:00:00",
+    "data_festa": "2025-11-29 00:00:00",
+    "valor_festa": 4800.0,
+    "valor_recebido": 4800.0,
+    "convidados": 80,
+    "telefone": "99149-5332"
+  },
+  {
+    "codigo": "071325JE",
+    "cliente": "Jessica Da Silva ",
+    "data_fechamento": "2025-07-13 00:00:00",
+    "data_festa": "2025-11-29 00:00:00",
+    "valor_festa": 5990.0,
+    "valor_recebido": 500.0,
+    "convidados": 130,
+    "telefone": "994864394"
+  },
+  {
+    "codigo": "083125LE",
+    "cliente": "Leonardo e Silva",
+    "data_fechamento": "2025-08-31 00:00:00",
+    "data_festa": "2025-11-30 00:00:00",
+    "valor_festa": 5290.0,
+    "valor_recebido": 500.0,
+    "convidados": 100,
+    "telefone": "975335604"
+  },
+  {
+    "codigo": "102825TH",
+    "cliente": "Thaine Souza",
+    "data_fechamento": "2025-10-28 00:00:00",
+    "data_festa": "2025-11-30 00:00:00",
+    "valor_festa": 6890.0,
+    "valor_recebido": 500.0,
+    "convidados": 160,
+    "telefone": "97639-9717"
+  },
+  {
+    "codigo": "111625LU",
+    "cliente": "Luciana",
+    "data_fechamento": "2025-11-16 00:00:00",
+    "data_festa": "2025-12-03 00:00:00",
+    "valor_festa": 4690.0,
+    "valor_recebido": 4600.0,
+    "convidados": 110,
+    "telefone": "98756-0724"
+  },
+  {
+    "codigo": "090525JU",
+    "cliente": "Julianna Silva",
+    "data_fechamento": "2025-09-05 00:00:00",
+    "data_festa": "2025-12-05 00:00:00",
+    "valor_festa": 4600.0,
+    "valor_recebido": 4122.0,
+    "convidados": 90,
+    "telefone": "964883945"
+  },
+  {
+    "codigo": "072625AM",
+    "cliente": "Amanda Pinheiro",
+    "data_fechamento": "2025-07-26 00:00:00",
+    "data_festa": "2025-12-06 00:00:00",
+    "valor_festa": 5190.0,
+    "valor_recebido": 3500.0,
+    "convidados": 110,
+    "telefone": "97319-9416"
+  },
+  {
+    "codigo": "081525RO",
+    "cliente": "Rodrigo Rios",
+    "data_fechamento": "2025-08-15 00:00:00",
+    "data_festa": "2025-12-07 00:00:00",
+    "valor_festa": 4290.0,
+    "valor_recebido": 500.0,
+    "convidados": 110,
+    "telefone": "979771992"
+  },
+  {
+    "codigo": "090225SA",
+    "cliente": "Santana Maria",
+    "data_fechamento": "2025-09-02 00:00:00",
+    "data_festa": "2025-12-11 00:00:00",
+    "valor_festa": 4990.0,
+    "valor_recebido": 400.0,
+    "convidados": 110,
+    "telefone": "969718268"
+  },
+  {
+    "codigo": "031425MA",
+    "cliente": "Marcos Vinicios ",
+    "data_fechamento": "2025-03-14 00:00:00",
+    "data_festa": "2025-12-12 00:00:00",
+    "valor_festa": 4700.0,
+    "valor_recebido": 4700.0,
+    "convidados": 70,
+    "telefone": "97637-4100"
+  },
+  {
+    "codigo": "090225ST",
+    "cliente": "Santana Maria",
+    "data_fechamento": "2025-09-02 00:00:00",
+    "data_festa": "2025-12-12 00:00:00",
+    "valor_festa": 4990.0,
+    "valor_recebido": 400.0,
+    "convidados": 110,
+    "telefone": "969718268"
+  },
+  {
+    "codigo": "032225KA",
+    "cliente": "Karoline Dias",
+    "data_fechamento": "2025-03-22 00:00:00",
+    "data_festa": "2025-12-13 00:00:00",
+    "valor_festa": 4800.0,
+    "valor_recebido": 4800.0,
+    "convidados": 80,
+    "telefone": "99486-7997"
+  },
+  {
+    "codigo": "092325CH",
+    "cliente": "Charlene Ignacio",
+    "data_fechamento": "2025-09-23 00:00:00",
+    "data_festa": "2025-12-14 00:00:00",
+    "valor_festa": 4600.0,
+    "valor_recebido": 500.0,
+    "convidados": 60,
+    "telefone": "979316891"
+  },
+  {
+    "codigo": "101315MI",
+    "cliente": "Mylena Barbosa",
+    "data_fechamento": "2025-10-13 00:00:00",
+    "data_festa": "2025-12-14 00:00:00",
+    "valor_festa": 6890.0,
+    "valor_recebido": 950.0,
+    "convidados": 160,
+    "telefone": "98084-3470"
+  },
+  {
+    "codigo": "102925JA",
+    "cliente": "Jardim Escola",
+    "data_fechamento": "2025-10-29 00:00:00",
+    "data_festa": "2025-12-17 00:00:00",
+    "valor_festa": 4490.0,
+    "valor_recebido": 100.0,
+    "convidados": 60,
+    "telefone": "96464-4770"
+  },
+  {
+    "codigo": "092025LE",
+    "cliente": "Leandro Carvalho",
+    "data_fechamento": "2025-09-20 00:00:00",
+    "data_festa": "2025-12-18 00:00:00",
+    "valor_festa": 4390.0,
+    "valor_recebido": 4390.0,
+    "convidados": 80,
+    "telefone": "995020671"
+  },
+  {
+    "codigo": "092625CA",
+    "cliente": "Caroline Rodrigues",
+    "data_fechamento": "2025-09-26 00:00:00",
+    "data_festa": "",
+    "valor_festa": 5590.0,
+    "valor_recebido": 3900.0,
+    "convidados": 130,
+    "telefone": "964228038"
+  },
+  {
+    "codigo": "041225CI",
+    "cliente": "Cintia martins",
+    "data_fechamento": "2025-04-12 00:00:00",
+    "data_festa": "2025-12-20 00:00:00",
+    "valor_festa": 5290.0,
+    "valor_recebido": 500.0,
+    "convidados": 110,
+    "telefone": "99388-7449"
+  },
+  {
+    "codigo": "062925ME",
+    "cliente": "Melissa Chavante",
+    "data_fechamento": "2025-06-29 00:00:00",
+    "data_festa": "2025-12-20 00:00:00",
+    "valor_festa": 4800.0,
+    "valor_recebido": 4800.0,
+    "convidados": 70,
+    "telefone": "99387-2624"
+  },
+  {
+    "codigo": "041325ES",
+    "cliente": "Esthefany ",
+    "data_fechamento": "2025-04-13 00:00:00",
+    "data_festa": "2025-12-21 00:00:00",
+    "valor_festa": 5290.0,
+    "valor_recebido": 500.0,
+    "convidados": 110,
+    "telefone": "96988-5663"
+  },
+  {
+    "codigo": "071225NE",
+    "cliente": "Neide Dos Santos",
+    "data_fechamento": "2025-07-12 00:00:00",
+    "data_festa": "2025-12-21 00:00:00",
+    "valor_festa": 6090.0,
+    "valor_recebido": 2363.0,
+    "convidados": 130,
+    "telefone": "99349-1708"
+  },
+  {
+    "codigo": "080125VA",
+    "cliente": "Vânia de Cássia",
+    "data_fechamento": "2025-08-01 00:00:00",
+    "data_festa": "2025-12-23 00:00:00",
+    "valor_festa": 4590.0,
+    "valor_recebido": 2500.0,
+    "convidados": 80,
+    "telefone": "993466284"
+  },
+  {
+    "codigo": "090725FR",
+    "cliente": "Francyne Santiago",
+    "data_fechamento": "2025-09-07 00:00:00",
+    "data_festa": "2025-12-27 00:00:00",
+    "valor_festa": 4290.0,
+    "valor_recebido": 500.0,
+    "convidados": 110,
+    "telefone": "980030718"
+  },
+  {
+    "codigo": "061425MO",
+    "cliente": "Monize Pimenta",
+    "data_fechamento": "2025-06-14 00:00:00",
+    "data_festa": "2026-01-04 00:00:00",
+    "valor_festa": 4800.0,
+    "valor_recebido": 500.0,
+    "convidados": 80,
+    "telefone": "97011-1425"
+  },
+  {
+    "codigo": "050325JE",
+    "cliente": "Jean marrie",
+    "data_fechamento": "2025-05-03 00:00:00",
+    "data_festa": "2026-01-10 00:00:00",
+    "valor_festa": 5290.0,
+    "valor_recebido": 500.0,
+    "convidados": 110,
+    "telefone": "97333-8310"
+  },
+  {
+    "codigo": "060825AN",
+    "cliente": "Ana Carolina",
+    "data_fechamento": "2025-06-08 00:00:00",
+    "data_festa": "2026-01-10 00:00:00",
+    "valor_festa": 6890.0,
+    "valor_recebido": 6790.0,
+    "convidados": 100,
+    "telefone": ""
+  },
+  {
+    "codigo": "060125JE",
+    "cliente": "Jeniffer Lauana",
+    "data_fechamento": "2025-06-01 00:00:00",
+    "data_festa": "2026-01-17 00:00:00",
+    "valor_festa": 5290.0,
+    "valor_recebido": 500.0,
+    "convidados": 100,
+    "telefone": "978776173"
+  },
+  {
+    "codigo": "071625ED",
+    "cliente": "Eduarda Joplin",
+    "data_fechamento": "2025-07-16 00:00:00",
+    "data_festa": "2026-01-18 00:00:00",
+    "valor_festa": 5290.0,
+    "valor_recebido": 500.0,
+    "convidados": 100,
+    "telefone": "98201-6553"
+  },
+  {
+    "codigo": "080925DI",
+    "cliente": "Diogo Oliveira",
+    "data_fechamento": "2025-08-09 00:00:00",
+    "data_festa": "2026-01-18 00:00:00",
+    "valor_festa": 6890.0,
+    "valor_recebido": 500.0,
+    "convidados": 160,
+    "telefone": "968360463"
+  },
+  {
+    "codigo": "091425MI",
+    "cliente": "Michelle Pavani",
+    "data_fechamento": "2025-09-14 00:00:00",
+    "data_festa": "2026-01-23 00:00:00",
+    "valor_festa": 4390.0,
+    "valor_recebido": 400.0,
+    "convidados": 80,
+    "telefone": "979001526"
+  },
+  {
+    "codigo": "043025TA",
+    "cliente": "Taiane da silva ",
+    "data_fechamento": "2025-04-30 00:00:00",
+    "data_festa": "2026-01-24 00:00:00",
+    "valor_festa": 5290.0,
+    "valor_recebido": 500.0,
+    "convidados": 100,
+    "telefone": "96715-6707"
+  },
+  {
+    "codigo": "111525KH",
+    "cliente": "Khayllyanne",
+    "data_fechamento": "2025-11-15 00:00:00",
+    "data_festa": "2026-01-25 00:00:00",
+    "valor_festa": 5290.0,
+    "valor_recebido": 500.0,
+    "convidados": 110,
+    "telefone": "99907-0186"
+  },
+  {
+    "codigo": "071525CA",
+    "cliente": "Caio Willian",
+    "data_fechamento": "2025-07-15 00:00:00",
+    "data_festa": "2026-01-31 00:00:00",
+    "valor_festa": 6890.0,
+    "valor_recebido": 1000.0,
+    "convidados": 150,
+    "telefone": "92000-9768"
+  },
+  {
+    "codigo": "102425JE",
+    "cliente": "Jeferson Ferreira",
+    "data_fechamento": "2025-10-24 00:00:00",
+    "data_festa": "2026-01-31 00:00:00",
+    "valor_festa": 5290.0,
+    "valor_recebido": 3000.0,
+    "convidados": 110,
+    "telefone": "99589-5425"
+  },
+  {
+    "codigo": "101925GI",
+    "cliente": "Giselle Costa",
+    "data_fechamento": "2025-10-19 00:00:00",
+    "data_festa": "2026-02-08 00:00:00",
+    "valor_festa": 4800.0,
+    "valor_recebido": 500.0,
+    "convidados": 80,
+    "telefone": "96451-1401"
+  },
+  {
+    "codigo": "100325KE",
+    "cliente": "Kellita Mota",
+    "data_fechamento": "2025-10-03 00:00:00",
+    "data_festa": "2026-02-21 00:00:00",
+    "valor_festa": 4800.0,
+    "valor_recebido": 500.0,
+    "convidados": 80,
+    "telefone": "99218-2556"
+  },
+  {
+    "codigo": "082125TH",
+    "cliente": "Thamiris Rodrigues",
+    "data_fechamento": "2025-08-21 00:00:00",
+    "data_festa": "2026-02-27 00:00:00",
+    "valor_festa": 4800.0,
+    "valor_recebido": 500.0,
+    "convidados": 80,
+    "telefone": "993046033"
+  },
+  {
+    "codigo": "062925MR",
+    "cliente": "",
+    "data_fechamento": "2025-06-29 00:00:00",
+    "data_festa": "2026-03-07 00:00:00",
+    "valor_festa": 4600.0,
+    "valor_recebido": 500.0,
+    "convidados": 50,
+    "telefone": ""
+  },
+  {
+    "codigo": "092325JO",
+    "cliente": "Jonathan Victor ",
+    "data_fechamento": "2025-09-23 00:00:00",
+    "data_festa": "2026-03-08 00:00:00",
+    "valor_festa": 4800.0,
+    "valor_recebido": 800.0,
+    "convidados": 80,
+    "telefone": "987256732"
+  },
+  {
+    "codigo": "101325MO",
+    "cliente": "Monique Barros",
+    "data_fechamento": "2025-10-13 00:00:00",
+    "data_festa": "2026-03-11 00:00:00",
+    "valor_festa": 5290.0,
+    "valor_recebido": 500.0,
+    "convidados": 110,
+    "telefone": "96445-0319"
+  },
+  {
+    "codigo": "072025NA",
+    "cliente": "Natasha Michele",
+    "data_fechamento": "2025-07-20 00:00:00",
+    "data_festa": "2026-03-14 00:00:00",
+    "valor_festa": 4990.0,
+    "valor_recebido": 2000.0,
+    "convidados": 100,
+    "telefone": "96465-6222"
+  },
+  {
+    "codigo": "092625VE",
+    "cliente": "Veronica França",
+    "data_fechamento": "2025-09-27 00:00:00",
+    "data_festa": "2026-03-14 00:00:00",
+    "valor_festa": 5290.0,
+    "valor_recebido": 500.0,
+    "convidados": 110,
+    "telefone": "994970903"
+  },
+  {
+    "codigo": "062925MA",
+    "cliente": "Mariana Ribeiro",
+    "data_fechamento": "2025-06-29 00:00:00",
+    "data_festa": "2026-03-15 00:00:00",
+    "valor_festa": 6890.0,
+    "valor_recebido": 500.0,
+    "convidados": 150,
+    "telefone": "982753415"
+  },
+  {
+    "codigo": "110825CA",
+    "cliente": "Caio",
+    "data_fechamento": "2025-11-08 00:00:00",
+    "data_festa": "2026-03-20 00:00:00",
+    "valor_festa": 5100.0,
+    "valor_recebido": 500.0,
+    "convidados": 80,
+    "telefone": "99084-5018"
+  },
+  {
+    "codigo": "060425MA",
+    "cliente": "Maria José",
+    "data_fechamento": "2025-06-04 00:00:00",
+    "data_festa": "2026-03-21 00:00:00",
+    "valor_festa": 5290.0,
+    "valor_recebido": 500.0,
+    "convidados": 100,
+    "telefone": "97692-4913"
+  },
+  {
+    "codigo": "091025SA",
+    "cliente": "Sandro Luiz",
+    "data_fechamento": "2025-09-10 00:00:00",
+    "data_festa": "2026-03-22 00:00:00",
+    "valor_festa": 5290.0,
+    "valor_recebido": 500.0,
+    "convidados": 110,
+    "telefone": "989110208"
+  },
+  {
+    "codigo": "101025JE",
+    "cliente": "Jeferson Matos",
+    "data_fechamento": "2025-10-10 00:00:00",
+    "data_festa": "2026-04-04 00:00:00",
+    "valor_festa": 4800.0,
+    "valor_recebido": 500.0,
+    "convidados": 80,
+    "telefone": "99148-7539"
+  },
+  {
+    "codigo": "071925CA",
+    "cliente": "Carime Elisa",
+    "data_fechamento": "2025-07-19 00:00:00",
+    "data_festa": "2026-04-11 00:00:00",
+    "valor_festa": 5190.0,
+    "valor_recebido": 500.0,
+    "convidados": 110,
+    "telefone": "981735-7774"
+  },
+  {
+    "codigo": "072225CI",
+    "cliente": "Cintia Michele",
+    "data_fechamento": "2025-07-22 00:00:00",
+    "data_festa": "2026-04-11 00:00:00",
+    "valor_festa": 4890.0,
+    "valor_recebido": 500.0,
+    "convidados": 110,
+    "telefone": "99722-5256"
+  },
+  {
+    "codigo": "081425RO",
+    "cliente": "Rozangela Adriana",
+    "data_fechamento": "2025-08-14 00:00:00",
+    "data_festa": "2026-04-12 00:00:00",
+    "valor_festa": 4390.0,
+    "valor_recebido": 500.0,
+    "convidados": 60,
+    "telefone": "94927368"
+  },
+  {
+    "codigo": "080125LA",
+    "cliente": "Laissa Fernandes",
+    "data_fechamento": "2025-08-01 00:00:00",
+    "data_festa": "2026-04-17 00:00:00",
+    "valor_festa": 4990.0,
+    "valor_recebido": 500.0,
+    "convidados": 100,
+    "telefone": "995682441"
+  },
+  {
+    "codigo": "091925AL",
+    "cliente": "",
+    "data_fechamento": "2025-09-19 00:00:00",
+    "data_festa": "2026-04-20 00:00:00",
+    "valor_festa": 4590.0,
+    "valor_recebido": 500.0,
+    "convidados": 0,
+    "telefone": ""
+  },
+  {
+    "codigo": "091825GA",
+    "cliente": "Gabriel josé",
+    "data_fechamento": "2025-09-19 00:00:00",
+    "data_festa": "2026-04-25 00:00:00",
+    "valor_festa": 5290.0,
+    "valor_recebido": 500.0,
+    "convidados": 110,
+    "telefone": "987867290"
+  },
+  {
+    "codigo": "072225RO",
+    "cliente": "Rogério Castro",
+    "data_fechamento": "2025-07-22 00:00:00",
+    "data_festa": "2026-05-02 00:00:00",
+    "valor_festa": 6090.0,
+    "valor_recebido": 500.0,
+    "convidados": 130,
+    "telefone": "96484-0806"
+  },
+  {
+    "codigo": "102325AL",
+    "cliente": "Alexandro Alves",
+    "data_fechamento": "2025-10-23 00:00:00",
+    "data_festa": "2026-05-16 00:00:00",
+    "valor_festa": 6300.0,
+    "valor_recebido": 500.0,
+    "convidados": 150,
+    "telefone": ""
+  },
+  {
+    "codigo": "102825EM",
+    "cliente": "Emmanuel Faustino",
+    "data_fechamento": "2025-10-28 00:00:00",
+    "data_festa": "2026-05-29 00:00:00",
+    "valor_festa": 4390.0,
+    "valor_recebido": 500.0,
+    "convidados": 60,
+    "telefone": "99031-6060"
+  },
+  {
+    "codigo": "091925VA",
+    "cliente": "Vanessa Sampaio",
+    "data_fechamento": "2025-09-19 00:00:00",
+    "data_festa": "2026-05-30 00:00:00",
+    "valor_festa": 5290.0,
+    "valor_recebido": 500.0,
+    "convidados": 110,
+    "telefone": "98295334"
+  },
+  {
+    "codigo": "092625LU",
+    "cliente": "Luiza Ferreira",
+    "data_fechamento": "2025-09-26 00:00:00",
+    "data_festa": "2026-05-30 00:00:00",
+    "valor_festa": 5290.0,
+    "valor_recebido": 500.0,
+    "convidados": 110,
+    "telefone": "967628449"
+  },
+  {
+    "codigo": "100325LA",
+    "cliente": "Lais",
+    "data_fechamento": "2025-10-03 00:00:00",
+    "data_festa": "2026-06-13 00:00:00",
+    "valor_festa": 4650.0,
+    "valor_recebido": 500.0,
+    "convidados": 80,
+    "telefone": "97898-5619"
+  },
+  {
+    "codigo": "031125TH",
+    "cliente": "Thiago Ribeiro",
+    "data_fechamento": "2025-03-11 00:00:00",
+    "data_festa": "2026-07-19 00:00:00",
+    "valor_festa": 4800.0,
+    "valor_recebido": 4800.0,
+    "convidados": 80,
+    "telefone": "99121-2589"
+  },
+  {
+    "codigo": "090225PR",
+    "cliente": "Priscilla Calazans",
+    "data_fechamento": "2025-09-02 00:00:00",
+    "data_festa": "2026-08-15 00:00:00",
+    "valor_festa": 6090.0,
+    "valor_recebido": 500.0,
+    "convidados": 130,
+    "telefone": "990288835"
+  },
+  {
+    "codigo": "062125VI",
+    "cliente": "Vivianne Messias",
+    "data_fechamento": "2025-06-21 00:00:00",
+    "data_festa": "2026-11-08 00:00:00",
+    "valor_festa": 5290.0,
+    "valor_recebido": 500.0,
+    "convidados": 100,
+    "telefone": "98666-2498"
+  }
+]

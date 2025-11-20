@@ -90,3 +90,18 @@
 - [x] Identificar festas faltantes ou duplicadas
 - [x] Corrigir divergências de valores e datas
 - [x] Sincronizar todos os dados
+
+## Limpeza de Banco de Dados
+- [x] Limpar tabela de pagamentos
+- [x] Limpar tabela de festas
+- [x] Limpar tabela de clientes
+- [x] Limpar tabela de custos variáveis
+- [x] Limpar tabela de custos fixos
+- [x] Verificar limpeza completa
+
+## Importação de Próximasfestas.xlsx (Fonte Única)
+- [x] Analisar estrutura da planilha
+- [x] Criar script de importação dedicado
+- [x] Importar clientes da planilha
+- [x] Importar festas da planilha
+- [x] Validar dados importados
