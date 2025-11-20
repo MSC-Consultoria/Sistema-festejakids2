@@ -2,7 +2,7 @@ export { COOKIE_NAME, ONE_YEAR_MS } from "@shared/const";
 
 export const APP_TITLE = import.meta.env.VITE_APP_TITLE || "App";
 
-export const APP_LOGO = "https://placehold.co/128x128/E1E7EF/1F2937?text=App";
+export const APP_LOGO = "https://placehold.co/128x128/FF6B9D/FFFFFF?text=FK";
 
 // Generate login URL at runtime so redirect URI reflects the current origin.
 export const getLoginUrl = () => {
@@ -19,3 +19,38 @@ export const getLoginUrl = () => {
 
   return url.toString();
 };
+
+// Função auxiliar para formatar valores em centavos para reais
+export function formatCurrency(centavos: number): string {
+  return new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  }).format(centavos / 100);
+}
+
+// Função auxiliar para converter reais para centavos
+export function toCentavos(reais: number): number {
+  return Math.round(reais * 100);
+}
+
+// Função auxiliar para formatar datas
+export function formatDate(date: Date | string | number): string {
+  const d = typeof date === 'string' || typeof date === 'number' ? new Date(date) : date;
+  return d.toLocaleDateString('pt-BR', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+  });
+}
+
+// Função auxiliar para formatar data e hora
+export function formatDateTime(date: Date | string | number): string {
+  const d = typeof date === 'string' || typeof date === 'number' ? new Date(date) : date;
+  return d.toLocaleString('pt-BR', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+}

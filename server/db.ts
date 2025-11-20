@@ -1,6 +1,19 @@
 import { eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users } from "../drizzle/schema";
+import { 
+  InsertUser, 
+  users,
+  clientes,
+  InsertCliente,
+  festas,
+  InsertFesta,
+  pagamentos,
+  InsertPagamento,
+  custosVariaveis,
+  InsertCustoVariavel,
+  custosFixos,
+  InsertCustoFixo
+} from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -89,4 +102,255 @@ export async function getUserByOpenId(openId: string) {
   return result.length > 0 ? result[0] : undefined;
 }
 
-// TODO: add feature queries here as your schema grows.
+// ============ CLIENTES ============
+
+export async function createCliente(cliente: InsertCliente) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  const result = await db.insert(clientes).values(cliente);
+  return Number(result[0].insertId);
+}
+
+export async function getClienteById(id: number) {
+  const db = await getDb();
+  if (!db) return undefined;
+  const result = await db.select().from(clientes).where(eq(clientes.id, id)).limit(1);
+  return result[0];
+}
+
+export async function getAllClientes() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(clientes).orderBy(clientes.nome);
+}
+
+export async function updateCliente(id: number, data: Partial<InsertCliente>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.update(clientes).set(data).where(eq(clientes.id, id));
+}
+
+export async function deleteCliente(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.delete(clientes).where(eq(clientes.id, id));
+}
+
+export async function searchClientes(searchTerm: string) {
+  const db = await getDb();
+  if (!db) return [];
+  const { or, like } = await import("drizzle-orm");
+  return db.select().from(clientes)
+    .where(
+      or(
+        like(clientes.nome, `%${searchTerm}%`),
+        like(clientes.telefone, `%${searchTerm}%`),
+        like(clientes.email, `%${searchTerm}%`)
+      )
+    )
+    .orderBy(clientes.nome);
+}
+
+// ============ FESTAS ============
+
+export async function createFesta(festa: InsertFesta) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  const result = await db.insert(festas).values(festa);
+  return Number(result[0].insertId);
+}
+
+export async function getFestaById(id: number) {
+  const db = await getDb();
+  if (!db) return undefined;
+  const result = await db.select().from(festas).where(eq(festas.id, id)).limit(1);
+  return result[0];
+}
+
+export async function getFestaByCodigo(codigo: string) {
+  const db = await getDb();
+  if (!db) return undefined;
+  const result = await db.select().from(festas).where(eq(festas.codigo, codigo)).limit(1);
+  return result[0];
+}
+
+export async function getAllFestas() {
+  const db = await getDb();
+  if (!db) return [];
+  const { desc } = await import("drizzle-orm");
+  return db.select().from(festas).orderBy(desc(festas.dataFesta));
+}
+
+export async function getFestasByStatus(status: "agendada" | "realizada" | "cancelada") {
+  const db = await getDb();
+  if (!db) return [];
+  const { desc } = await import("drizzle-orm");
+  return db.select().from(festas)
+    .where(eq(festas.status, status))
+    .orderBy(desc(festas.dataFesta));
+}
+
+export async function getFestasByCliente(clienteId: number) {
+  const db = await getDb();
+  if (!db) return [];
+  const { desc } = await import("drizzle-orm");
+  return db.select().from(festas)
+    .where(eq(festas.clienteId, clienteId))
+    .orderBy(desc(festas.dataFesta));
+}
+
+export async function getFestasByDateRange(startDate: Date, endDate: Date) {
+  const db = await getDb();
+  if (!db) return [];
+  const { and, gte, lte, desc } = await import("drizzle-orm");
+  return db.select().from(festas)
+    .where(
+      and(
+        gte(festas.dataFesta, startDate),
+        lte(festas.dataFesta, endDate)
+      )
+    )
+    .orderBy(desc(festas.dataFesta));
+}
+
+export async function updateFesta(id: number, data: Partial<InsertFesta>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.update(festas).set(data).where(eq(festas.id, id));
+}
+
+export async function deleteFesta(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.delete(festas).where(eq(festas.id, id));
+}
+
+// ============ PAGAMENTOS ============
+
+export async function createPagamento(pagamento: InsertPagamento) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  const result = await db.insert(pagamentos).values(pagamento);
+  return Number(result[0].insertId);
+}
+
+export async function getPagamentosByFesta(festaId: number) {
+  const db = await getDb();
+  if (!db) return [];
+  const { desc } = await import("drizzle-orm");
+  return db.select().from(pagamentos)
+    .where(eq(pagamentos.festaId, festaId))
+    .orderBy(desc(pagamentos.dataPagamento));
+}
+
+export async function deletePagamento(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.delete(pagamentos).where(eq(pagamentos.id, id));
+}
+
+// ============ CUSTOS VARIÁVEIS ============
+
+export async function createCustoVariavel(custo: InsertCustoVariavel) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  const result = await db.insert(custosVariaveis).values(custo);
+  return Number(result[0].insertId);
+}
+
+export async function getAllCustosVariaveis() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(custosVariaveis).orderBy(custosVariaveis.ordem);
+}
+
+export async function getActiveCustosVariaveis() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(custosVariaveis)
+    .where(eq(custosVariaveis.ativo, 1))
+    .orderBy(custosVariaveis.ordem);
+}
+
+export async function updateCustoVariavel(id: number, data: Partial<InsertCustoVariavel>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.update(custosVariaveis).set(data).where(eq(custosVariaveis.id, id));
+}
+
+export async function deleteCustoVariavel(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.delete(custosVariaveis).where(eq(custosVariaveis.id, id));
+}
+
+// ============ CUSTOS FIXOS ============
+
+export async function createCustoFixo(custo: InsertCustoFixo) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  const result = await db.insert(custosFixos).values(custo);
+  return Number(result[0].insertId);
+}
+
+export async function getAllCustosFixos() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(custosFixos).orderBy(custosFixos.ordem);
+}
+
+export async function getActiveCustosFixos() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(custosFixos)
+    .where(eq(custosFixos.ativo, 1))
+    .orderBy(custosFixos.ordem);
+}
+
+export async function updateCustoFixo(id: number, data: Partial<InsertCustoFixo>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.update(custosFixos).set(data).where(eq(custosFixos.id, id));
+}
+
+export async function deleteCustoFixo(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.delete(custosFixos).where(eq(custosFixos.id, id));
+}
+
+// ============ FUNÇÕES DE CÁLCULO ============
+
+export async function calcularCustoTotalVariavel(valorFesta: number) {
+  const custosAtivos = await getActiveCustosVariaveis();
+  let total = 0;
+  
+  for (const custo of custosAtivos) {
+    if (custo.percentual && custo.percentual > 0) {
+      // Custo percentual (ex: comissão)
+      total += Math.round((valorFesta * custo.percentual) / 100);
+    } else {
+      // Custo fixo
+      total += custo.valor;
+    }
+  }
+  
+  return total;
+}
+
+export async function calcularCustoTotalFixoMensal() {
+  const custosAtivos = await getActiveCustosFixos();
+  return custosAtivos.reduce((total, custo) => total + custo.valor, 0);
+}
+
+export async function calcularMargemLucro(valorFesta: number) {
+  const custoVariavel = await calcularCustoTotalVariavel(valorFesta);
+  const margemBruta = valorFesta - custoVariavel;
+  const percentualMargem = (margemBruta / valorFesta) * 100;
+  
+  return {
+    custoVariavel,
+    margemBruta,
+    percentualMargem,
+  };
+}
