@@ -164,3 +164,14 @@
 - [x] Implementar gráfico de análise trimestral
 - [x] Implementar gráfico de análise anual
 - [x] Adicionar gráfico de custos vs receita
+
+## Acompanhamento de Pagamentos e Projeção Financeira
+- [x] Criar procedure para calcular status de pagamento (em dia, atrasado, quitado)
+- [x] Implementar validação de parcela mínima (R$ 500/mês)
+- [x] Implementar validação de quitação 10 dias antes do evento
+- [x] Criar aba de Acompanhamento de Pagamentos
+- [x] Implementar tabela de clientes com status de pagamento
+- [x] Adicionar alertas visuais (cores) para status
+- [x] Criar projeção financeira para próximos 12 meses
+- [x] Implementar gráfico de fluxo de recebimento projetado
+- [x] Adicionar comparativo: recebimento esperado vs realizado
