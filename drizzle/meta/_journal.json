@@ -15,6 +15,13 @@
       "when": 1763612951426,
       "tag": "0001_loving_hobgoblin",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1763613887384,
+      "tag": "0002_quick_wild_pack",
+      "breakpoints": true
     }
   ]
 }

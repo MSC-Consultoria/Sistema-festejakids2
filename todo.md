@@ -76,3 +76,10 @@
 - [ ] Adicionar validações de formulários
 - [ ] Otimizar performance de queries
 - [ ] Criar documentação de uso do sistema
+
+## Importação de Contratos em PDF
+- [x] Extrair dados dos contratos de novembro 2025
+- [x] Extrair dados dos contratos de dezembro 2025
+- [x] Extrair dados dos contratos de 2026
+- [x] Validar dados extraídos dos PDFs
+- [x] Importar festas futuras no banco de dados

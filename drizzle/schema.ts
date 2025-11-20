@@ -32,7 +32,9 @@ export const clientes = mysqlTable("clientes", {
   id: int("id").autoincrement().primaryKey(),
   nome: varchar("nome", { length: 255 }).notNull(),
   telefone: varchar("telefone", { length: 20 }),
-  email: varchar("email", { length: 320 }),
+  email: varchar("email", { length: 255 }),
+  cpf: varchar("cpf", { length: 14 }),
+  endereco: text("endereco"),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
 });
