@@ -148,8 +148,8 @@
 ## Novas Funcionalidades Solicitadas
 - [x] Criar aba de Agenda em formato de calendário
 - [x] Integrar com Google Calendar para inserir festas de janeiro
-- [ ] Fazer commit do projeto no repositório GitHub
-- [ ] Criar linha do tempo do projeto
+- [x] Fazer commit do projeto no repositório GitHub
+- [x] Criar linha do tempo do projeto
 - [x] Criar aba Financeiro com dashboard completo
 - [x] Criar formulário de registro de pagamentos (valor, código contrato, forma de pagamento)
 - [ ] Implementar busca de festa por código de contrato
