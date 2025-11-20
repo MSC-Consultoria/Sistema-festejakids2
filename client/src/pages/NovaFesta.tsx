@@ -26,8 +26,30 @@ export default function NovaFesta() {
     horario: "",
     observacoes: "",
   });
+  
+  const [novoCliente, setNovoCliente] = useState({
+    nome: "",
+    telefone: "",
+    cpf: "",
+    endereco: "",
+  });
+  
+  const [mostrarNovoCliente, setMostrarNovoCliente] = useState(false);
 
   const { data: clientes, isLoading: loadingClientes } = trpc.clientes.list.useQuery();
+  
+  const createCliente = trpc.clientes.create.useMutation({
+    onSuccess: (data) => {
+      toast.success("Cliente cadastrado com sucesso!");
+      setFormData(prev => ({ ...prev, clienteId: data.id.toString() }));
+      setMostrarNovoCliente(false);
+      setNovoCliente({ nome: "", telefone: "", cpf: "", endereco: "" });
+    },
+    onError: (error) => {
+      toast.error(`Erro ao cadastrar cliente: ${error.message}`);
+    },
+  });
+  
   const createFesta = trpc.festas.create.useMutation({
     onSuccess: () => {
       toast.success("Festa cadastrada com sucesso!");
@@ -96,25 +118,99 @@ export default function NovaFesta() {
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Cliente */}
               <div className="space-y-2">
-                <Label htmlFor="clienteId">Cliente *</Label>
-                {loadingClientes ? (
-                  <div className="flex items-center gap-2">
-                    <Loader2 className="h-4 w-4 animate-spin" />
-                    <span className="text-sm text-muted-foreground">Carregando clientes...</span>
+                <div className="flex items-center justify-between">
+                  <Label htmlFor="clienteId">Cliente *</Label>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setMostrarNovoCliente(!mostrarNovoCliente)}
+                  >
+                    {mostrarNovoCliente ? "Selecionar Existente" : "+ Novo Cliente"}
+                  </Button>
+                </div>
+                
+                {mostrarNovoCliente ? (
+                  <div className="border rounded-lg p-4 space-y-4 bg-muted/50">
+                    <div className="space-y-2">
+                      <Label htmlFor="nomeCliente">Nome *</Label>
+                      <Input
+                        id="nomeCliente"
+                        value={novoCliente.nome}
+                        onChange={(e) => setNovoCliente(prev => ({ ...prev, nome: e.target.value }))}
+                        placeholder="Nome completo do cliente"
+                      />
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="telefoneCliente">Telefone *</Label>
+                        <Input
+                          id="telefoneCliente"
+                          value={novoCliente.telefone}
+                          onChange={(e) => setNovoCliente(prev => ({ ...prev, telefone: e.target.value }))}
+                          placeholder="(00) 00000-0000"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="cpfCliente">CPF</Label>
+                        <Input
+                          id="cpfCliente"
+                          value={novoCliente.cpf}
+                          onChange={(e) => setNovoCliente(prev => ({ ...prev, cpf: e.target.value }))}
+                          placeholder="000.000.000-00"
+                        />
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="enderecoCliente">Endereço</Label>
+                      <Input
+                        id="enderecoCliente"
+                        value={novoCliente.endereco}
+                        onChange={(e) => setNovoCliente(prev => ({ ...prev, endereco: e.target.value }))}
+                        placeholder="Endereço completo"
+                      />
+                    </div>
+                    <Button
+                      type="button"
+                      onClick={() => {
+                        if (!novoCliente.nome || !novoCliente.telefone) {
+                          toast.error("Preencha nome e telefone do cliente");
+                          return;
+                        }
+                        createCliente.mutate(novoCliente);
+                      }}
+                      disabled={createCliente.isPending}
+                    >
+                      {createCliente.isPending ? (
+                        <>
+                          <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                          Cadastrando...
+                        </>
+                      ) : (
+                        "Cadastrar Cliente"
+                      )}
+                    </Button>
                   </div>
                 ) : (
-                  <Select value={formData.clienteId} onValueChange={(value) => handleChange("clienteId", value)}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Selecione um cliente" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {clientes?.map((cliente) => (
-                        <SelectItem key={cliente.id} value={cliente.id.toString()}>
-                          {cliente.nome} {cliente.telefone ? `- ${cliente.telefone}` : ""}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                  loadingClientes ? (
+                    <div className="flex items-center gap-2">
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                      <span className="text-sm text-muted-foreground">Carregando clientes...</span>
+                    </div>
+                  ) : (
+                    <Select value={formData.clienteId} onValueChange={(value) => handleChange("clienteId", value)}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Selecione um cliente" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {clientes?.map((cliente) => (
+                          <SelectItem key={cliente.id} value={cliente.id.toString()}>
+                            {cliente.nome} {cliente.telefone ? `- ${cliente.telefone}` : ""}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  )
                 )}
               </div>
 

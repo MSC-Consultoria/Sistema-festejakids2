@@ -1,0 +1,1 @@
+ALTER TABLE `custosFixos` ADD `mesReferencia` timestamp NOT NULL;

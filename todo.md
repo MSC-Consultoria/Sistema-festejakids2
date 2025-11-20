@@ -136,3 +136,11 @@
 - [x] Traduzir página 404 para português
 - [x] Ajustar tema escuro na página 404
 - [x] Testar todas as rotas do sistema
+
+## Correções e Melhorias Solicitadas
+- [x] Corrigir cálculo de ticket médio para considerar apenas festas realizadas
+- [x] Adicionar opção de cadastrar novo cliente no formulário de festa
+- [x] Criar aba de calendário mensal mostrando quantidade de festas por mês
+- [x] Criar aba de custos para inserir custos de cada festa
+- [x] Implementar visualização de custos variáveis e fixos
+- [x] Implementar cadastro e exclusão de custos

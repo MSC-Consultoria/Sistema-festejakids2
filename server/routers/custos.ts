@@ -81,6 +81,7 @@ export const custosRouter = router({
         z.object({
           descricao: z.string().min(1),
           valor: z.number().min(0), // em centavos
+          mesReferencia: z.number(), // timestamp
           ordem: z.number().optional(),
         })
       )
@@ -88,6 +89,7 @@ export const custosRouter = router({
         const id = await db.createCustoFixo({
           descricao: input.descricao,
           valor: input.valor,
+          mesReferencia: new Date(input.mesReferencia),
           ativo: 1,
           ordem: input.ordem || 0,
         });

@@ -105,6 +105,7 @@ export const custosFixos = mysqlTable("custosFixos", {
   id: int("id").autoincrement().primaryKey(),
   descricao: varchar("descricao", { length: 255 }).notNull(),
   valor: int("valor").notNull(), // em centavos
+  mesReferencia: timestamp("mesReferencia").notNull(), // mês de referência do custo
   ativo: int("ativo").default(1).notNull(), // 0 ou 1 (boolean)
   ordem: int("ordem").default(0).notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
