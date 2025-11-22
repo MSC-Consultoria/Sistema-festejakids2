@@ -43,6 +43,26 @@ export type Cliente = typeof clientes.$inferSelect;
 export type InsertCliente = typeof clientes.$inferInsert;
 
 /**
+ * Tabela de visitações (leads)
+ */
+export const visitacoes = mysqlTable("visitacoes", {
+  id: int("id").autoincrement().primaryKey(),
+  nome: varchar("nome", { length: 255 }).notNull(),
+  telefone: varchar("telefone", { length: 20 }).notNull(),
+  email: varchar("email", { length: 255 }),
+  dataVisita: timestamp("dataVisita").notNull(),
+  interesse: text("interesse"), // Tipo de festa, tema, etc
+  status: mysqlEnum("status", ["visitou", "aguardando", "proposta_enviada", "fechado", "perdido"]).default("visitou").notNull(),
+  observacoes: text("observacoes"),
+  clienteId: int("clienteId"), // ID do cliente se foi convertido
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type Visitacao = typeof visitacoes.$inferSelect;
+export type InsertVisitacao = typeof visitacoes.$inferInsert;
+
+/**
  * Tabela de festas
  */
 export const festas = mysqlTable("festas", {

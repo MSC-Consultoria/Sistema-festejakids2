@@ -12,7 +12,9 @@ import {
   custosVariaveis,
   InsertCustoVariavel,
   custosFixos,
-  InsertCustoFixo
+  InsertCustoFixo,
+  visitacoes,
+  InsertVisitacao
 } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
@@ -404,5 +406,81 @@ export async function calcularMargemLucro(valorFesta: number) {
     custoVariavel,
     margemBruta,
     percentualMargem,
+  };
+}
+
+// ============================================
+// VISITAÇÕES (LEADS)
+// ============================================
+
+export async function createVisitacao(data: InsertVisitacao) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  const result = await db.insert(visitacoes).values(data);
+  return { id: Number(result[0].insertId) };
+}
+
+export async function getAllVisitacoes() {
+  const db = await getDb();
+  if (!db) return [];
+  
+  return await db.select().from(visitacoes).orderBy(visitacoes.dataVisita);
+}
+
+export async function getVisitacaoById(id: number) {
+  const db = await getDb();
+  if (!db) return undefined;
+  
+  const result = await db.select().from(visitacoes).where(eq(visitacoes.id, id)).limit(1);
+  return result.length > 0 ? result[0] : undefined;
+}
+
+export async function updateVisitacao(id: number, data: Partial<InsertVisitacao>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  await db.update(visitacoes).set(data).where(eq(visitacoes.id, id));
+  return { success: true };
+}
+
+export async function deleteVisitacao(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  await db.delete(visitacoes).where(eq(visitacoes.id, id));
+  return { success: true };
+}
+
+export async function getVisitacoesStats() {
+  const db = await getDb();
+  if (!db) return {
+    total: 0,
+    visitou: 0,
+    aguardando: 0,
+    propostaEnviada: 0,
+    fechado: 0,
+    perdido: 0,
+    taxaConversao: 0
+  };
+  
+  const all = await db.select().from(visitacoes);
+  
+  const visitou = all.filter(v => v.status === "visitou").length;
+  const aguardando = all.filter(v => v.status === "aguardando").length;
+  const propostaEnviada = all.filter(v => v.status === "proposta_enviada").length;
+  const fechado = all.filter(v => v.status === "fechado").length;
+  const perdido = all.filter(v => v.status === "perdido").length;
+  
+  const taxaConversao = all.length > 0 ? (fechado / all.length) * 100 : 0;
+  
+  return {
+    total: all.length,
+    visitou,
+    aguardando,
+    propostaEnviada,
+    fechado,
+    perdido,
+    taxaConversao: Math.round(taxaConversao * 10) / 10
   };
 }

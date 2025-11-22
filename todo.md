@@ -219,3 +219,15 @@
 - [x] Implementar navegação inferior (bottom nav) para mobile
 - [x] Melhorar espaçamentos e respiração do layout
 - [x] Adicionar micro-interações nos botões
+
+## Controle de Visitações (Leads)
+- [x] Criar tabela de visitações no schema
+- [x] Adicionar campos: nome, telefone, email, data visita, interesse, status, observações
+- [x] Implementar helpers de banco para CRUD de visitações
+- [x] Criar procedures tRPC para visitações
+- [x] Criar página de listagem de visitações
+- [x] Criar formulário de cadastro de visitação
+- [x] Implementar status de acompanhamento (Visitou, Aguardando, Proposta Enviada, Fechado, Perdido)
+- [x] Adicionar função de converter visitante em cliente
+- [x] Criar dashboard de conversão com taxa e funil de vendas
+- [x] Criar testes unitários para router de visitações (8 testes passando)
