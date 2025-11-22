@@ -175,3 +175,28 @@
 - [x] Criar projeção financeira para próximos 12 meses
 - [x] Implementar gráfico de fluxo de recebimento projetado
 - [x] Adicionar comparativo: recebimento esperado vs realizado
+
+## Commit no GitHub
+- [x] Configurar repositório remoto do GitHub
+- [x] Adicionar todos os arquivos ao staging
+- [x] Fazer commit com mensagem descritiva
+- [x] Push para o repositório remoto
+- [x] Verificar commit no GitHub
+
+## Página de Detalhes da Festa
+- [x] Criar rota e página de detalhes
+- [x] Exibir informações completas da festa
+- [x] Mostrar timeline de pagamentos
+- [x] Adicionar botão de edição
+- [x] Calcular margem de lucro
+
+## Exportação e Relatórios
+- [ ] Implementar exportação para PDF
+- [ ] Implementar exportação para Excel
+- [ ] Gerar recibos de pagamento
+
+## Filtros Avançados
+- [ ] Adicionar busca por código
+- [ ] Implementar filtros por data
+- [ ] Implementar filtros por status
+- [ ] Adicionar ordenação

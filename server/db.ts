@@ -163,7 +163,28 @@ export async function createFesta(festa: InsertFesta) {
 export async function getFestaById(id: number) {
   const db = await getDb();
   if (!db) return undefined;
-  const result = await db.select().from(festas).where(eq(festas.id, id)).limit(1);
+  const result = await db
+    .select({
+      id: festas.id,
+      codigo: festas.codigo,
+      clienteId: festas.clienteId,
+      nomeCliente: clientes.nome,
+      dataFechamento: festas.dataFechamento,
+      dataFesta: festas.dataFesta,
+      valorTotal: festas.valorTotal,
+      valorPago: festas.valorPago,
+      numeroConvidados: festas.numeroConvidados,
+      tema: festas.tema,
+      horario: festas.horario,
+      status: festas.status,
+      observacoes: festas.observacoes,
+      createdAt: festas.createdAt,
+      updatedAt: festas.updatedAt,
+    })
+    .from(festas)
+    .leftJoin(clientes, eq(festas.clienteId, clientes.id))
+    .where(eq(festas.id, id))
+    .limit(1);
   return result[0];
 }
 

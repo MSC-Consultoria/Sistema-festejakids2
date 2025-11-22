@@ -16,6 +16,7 @@ import RegistrarPagamento from "./pages/RegistrarPagamento";
 import Relatorios from "./pages/Relatorios";
 import AcompanhamentoPagamentos from "./pages/AcompanhamentoPagamentos";
 import ProjecaoFinanceira from "./pages/ProjecaoFinanceira";
+import DetalhesFesta from "./pages/DetalhesFesta";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -33,6 +34,7 @@ function Router() {
       <Route path="/relatorios" component={Relatorios} />
       <Route path="/acompanhamento" component={AcompanhamentoPagamentos} />
       <Route path="/projecao" component={ProjecaoFinanceira} />
+      <Route path="/festas/:id" component={DetalhesFesta} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
