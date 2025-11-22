@@ -203,7 +203,7 @@ export default function Financeiro() {
                   <CardDescription>Valores recebidos por mês</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <ResponsiveContainer width="100%" height={300}>
+                  <ResponsiveContainer width="100%" height={250} className="text-xs md:text-sm">
                     <LineChart data={estatisticas.dadosGraficoMensal}>
                       <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
                       <XAxis dataKey="mes" stroke="#9ca3af" />
@@ -234,7 +234,7 @@ export default function Financeiro() {
                   <CardDescription>Proporção de valores recebidos e pendentes</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <ResponsiveContainer width="100%" height={300}>
+                  <ResponsiveContainer width="100%" height={250} className="text-xs md:text-sm">
                     <PieChart>
                       <Pie
                         data={estatisticas.dadosGraficoPizza}
@@ -266,7 +266,7 @@ export default function Financeiro() {
                   <CardDescription>Quantidade de festas agendadas nos últimos 6 meses</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <ResponsiveContainer width="100%" height={300}>
+                  <ResponsiveContainer width="100%" height={250} className="text-xs md:text-sm">
                     <BarChart data={estatisticas.dadosGraficoFestas}>
                       <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
                       <XAxis dataKey="mes" stroke="#9ca3af" />

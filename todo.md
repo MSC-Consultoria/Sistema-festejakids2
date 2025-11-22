@@ -200,3 +200,12 @@
 - [ ] Implementar filtros por data
 - [ ] Implementar filtros por status
 - [ ] Adicionar ordenação
+
+## Otimização Mobile
+- [x] Adaptar DashboardLayout com menu hamburguer
+- [x] Converter tabelas em cards empilháveis (Festas)
+- [x] Converter tabelas em cards empilháveis (Clientes)
+- [x] Ajustar tamanhos de botões e áreas de toque
+- [x] Otimizar gráficos para telas verticais
+- [x] Melhorar legibilidade de textos
+- [ ] Testar em diferentes resoluções mobile
