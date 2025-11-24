@@ -2,7 +2,7 @@ import DashboardLayout from "@/components/DashboardLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { trpc } from "@/lib/trpc";
 import { formatCurrency } from "@/const";
-import { Calendar, DollarSign, PartyPopper, TrendingUp, FileCheck, CheckCircle, UserPlus } from "lucide-react";
+import { Calendar, DollarSign, PartyPopper, TrendingUp, FileCheck, CheckCircle, UserPlus, CalendarCheck, ShoppingCart } from "lucide-react";
 
 export default function Dashboard() {
   const { data: stats, isLoading } = trpc.festas.stats.useQuery();
@@ -86,6 +86,39 @@ export default function Dashboard() {
               <div className="text-2xl font-bold">{visitacoesStats?.taxaConversao.toFixed(1) || 0}%</div>
               <p className="text-xs text-muted-foreground mt-1">
                 Visitas convertidas em contratos
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Cards do Mês Corrente */}
+        <div className="grid gap-4 md:grid-cols-2">
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">
+                Festas Realizadas (Mês)
+              </CardTitle>
+              <CalendarCheck className="h-4 w-4 text-green-500" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{stats?.festasRealizadasMes || 0}</div>
+              <p className="text-xs text-muted-foreground mt-1">
+                Festas concluídas no mês corrente
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">
+                Festas Vendidas (Mês)
+              </CardTitle>
+              <ShoppingCart className="h-4 w-4 text-blue-500" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{stats?.festasVendidasMes || 0}</div>
+              <p className="text-xs text-muted-foreground mt-1">
+                Contratos fechados no mês corrente
               </p>
             </CardContent>
           </Card>

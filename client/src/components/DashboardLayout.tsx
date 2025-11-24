@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/sidebar";
 import { APP_LOGO, APP_TITLE, getLoginUrl } from "@/const";
 import { useIsMobile } from "@/hooks/useMobile";
-import { LayoutDashboard, LogOut, PanelLeft, Users, PartyPopper, DollarSign, BarChart3, Calendar, Wallet, TrendingUp, UserPlus, Upload } from "lucide-react";
+import { LayoutDashboard, LogOut, PanelLeft, Users, PartyPopper, DollarSign, BarChart3, Calendar, Wallet, TrendingUp, UserPlus, Upload, Clock } from "lucide-react";
 import { CSSProperties, useEffect, useRef, useState } from "react";
 import { useLocation } from "wouter";
 import { DashboardLayoutSkeleton } from './DashboardLayoutSkeleton';
@@ -148,6 +148,42 @@ type DashboardLayoutContentProps = {
   children: React.ReactNode;
   setSidebarWidth: (width: number) => void;
 };
+
+// Componente de relógio em tempo real
+function LiveClock() {
+  const [time, setTime] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTime(new Date());
+    }, 10000); // Atualiza a cada 10 segundos
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const formatDate = (date: Date) => {
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
+
+  const formatTime = (date: Date) => {
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    return `${hours}:${minutes}`;
+  };
+
+  return (
+    <div className="flex items-center gap-2 text-xs text-muted-foreground">
+      <Clock className="h-3.5 w-3.5" />
+      <div className="flex flex-col leading-tight">
+        <span className="font-medium">{formatTime(time)}</span>
+        <span className="text-[10px]">{formatDate(time)}</span>
+      </div>
+    </div>
+  );
+}
 
 function DashboardLayoutContent({
   children,
@@ -325,6 +361,12 @@ function DashboardLayoutContent({
                 </div>
               </div>
             </div>
+            <LiveClock />
+          </div>
+        )}
+        {!isMobile && (
+          <div className="flex border-b h-14 items-center justify-end bg-background/95 px-4 backdrop-blur supports-[backdrop-filter]:backdrop-blur sticky top-0 z-40">
+            <LiveClock />
           </div>
         )}
         <main className="flex-1 p-4">{children}</main>

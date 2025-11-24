@@ -162,6 +162,22 @@ export const festasRouter = router({
     const agendadas = todasFestas.filter((f) => f.status === "agendada");
     const realizadas = todasFestas.filter((f) => f.status === "realizada");
     
+    // Métricas do mês corrente
+    const now = new Date();
+    const mesAtual = now.getMonth();
+    const anoAtual = now.getFullYear();
+    
+    const festasDoMes = todasFestas.filter((f) => {
+      const dataFesta = new Date(f.dataFesta);
+      return dataFesta.getMonth() === mesAtual && dataFesta.getFullYear() === anoAtual;
+    });
+    
+    const festasRealizadasMes = festasDoMes.filter((f) => f.status === "realizada").length;
+    const festasVendidasMes = todasFestas.filter((f) => {
+      const dataFechamento = new Date(f.dataFechamento);
+      return dataFechamento.getMonth() === mesAtual && dataFechamento.getFullYear() === anoAtual;
+    }).length;
+    
     const valorTotal = todasFestas.reduce((sum, f) => sum + f.valorTotal, 0);
     const valorPago = todasFestas.reduce((sum, f) => sum + f.valorPago, 0);
     const valorAReceber = valorTotal - valorPago;
@@ -175,6 +191,8 @@ export const festasRouter = router({
       total: todasFestas.length,
       agendadas: agendadas.length,
       realizadas: realizadas.length,
+      festasRealizadasMes,
+      festasVendidasMes,
       valorTotal,
       valorPago,
       valorAReceber,

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -19,10 +20,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { UserPlus, Phone, Mail, Calendar, TrendingUp, Users, CheckCircle2, XCircle, Clock, Send } from "lucide-react";
+import { UserPlus, Phone, Mail, Calendar, TrendingUp, Users, CheckCircle2, XCircle, Clock, Send, ArrowLeft } from "lucide-react";
 import { toast } from "sonner";
 
 export default function Visitacoes() {
+  const [, setLocation] = useLocation();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingId, setEditingId] = useState<number | null>(null);
   
@@ -149,11 +151,21 @@ export default function Visitacoes() {
       <div className="max-w-7xl mx-auto space-y-6">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-          <div>
-            <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-              Controle de Visitações
-            </h1>
-            <p className="text-gray-400 mt-1">Gerencie leads e acompanhe conversões</p>
+          <div className="flex items-center gap-4">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setLocation("/")}
+              className="text-gray-400 hover:text-white hover:bg-gray-800"
+            >
+              <ArrowLeft className="h-5 w-5" />
+            </Button>
+            <div>
+              <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                Controle de Visitações
+              </h1>
+              <p className="text-gray-400 mt-1">Gerencie leads e acompanhe conversões</p>
+            </div>
           </div>
           
           <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>

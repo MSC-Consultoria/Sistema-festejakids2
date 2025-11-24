@@ -287,3 +287,12 @@
 - [ ] Criar página de registro (futura)
 - [ ] Adicionar validação de email (futura)
 - [ ] Implementar recuperação de senha (futura)
+
+## Melhorias de UX e Configuração Inicial
+- [x] Adicionar botão voltar na página de Visitações
+- [x] Criar script para resetar completamente o banco de dados
+- [x] Criar seed de 3 usuários padrão (Moises, Gabriel, Adriano)
+- [ ] Implementar sistema de troca de senha obrigatória no primeiro login (futura)
+- [ ] Restringir acesso apenas aos 3 usuários iniciais (futura - requer mudança no OAuth)
+- [x] Adicionar métricas do mês corrente no Dashboard (Festas Realizadas e Vendidas)
+- [x] Adicionar relógio em tempo real no header (atualização a cada 10s)
