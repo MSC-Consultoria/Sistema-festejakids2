@@ -308,3 +308,10 @@
 - [x] Testar importação com planilha real de 2025 (100 festas válidas de 168 linhas)
 - [x] Adicionar preview de dados antes de importar
 - [x] Criar log de importações com sucesso/erros
+
+## Botão de Reset do Banco de Dados
+- [x] Criar procedure tRPC para reset do banco
+- [x] Adicionar botão de reset na interface (apenas para admin)
+- [x] Adicionar confirmação dupla antes de resetar
+- [x] Executar reset e recriar usuários padrão
+- [x] Testar funcionalidade de reset

@@ -19,6 +19,7 @@ import ProjecaoFinanceira from "./pages/ProjecaoFinanceira";
 import Visitacoes from "./pages/Visitacoes";
 import DetalhesFesta from "./pages/DetalhesFesta";
 import Importacao from "./pages/Importacao";
+import Configuracoes from "./pages/Configuracoes";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -39,6 +40,7 @@ function Router() {
       <Route path="/visitacoes" component={Visitacoes} />
       <Route path="/festas/:id" component={DetalhesFesta} />
       <Route path="/importacao" component={Importacao} />
+      <Route path="/configuracoes" component={Configuracoes} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />

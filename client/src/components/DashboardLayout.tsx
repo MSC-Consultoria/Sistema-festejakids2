@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/sidebar";
 import { APP_LOGO, APP_TITLE, getLoginUrl } from "@/const";
 import { useIsMobile } from "@/hooks/useMobile";
-import { LayoutDashboard, LogOut, PanelLeft, Users, PartyPopper, DollarSign, BarChart3, Calendar, Wallet, TrendingUp, UserPlus, Upload, Clock } from "lucide-react";
+import { LayoutDashboard, LogOut, PanelLeft, Users, PartyPopper, DollarSign, BarChart3, Calendar, Wallet, TrendingUp, UserPlus, Upload, Clock, Settings } from "lucide-react";
 import { CSSProperties, useEffect, useRef, useState } from "react";
 import { useLocation } from "wouter";
 import { DashboardLayoutSkeleton } from './DashboardLayoutSkeleton';
@@ -46,6 +46,7 @@ const menuItems: MenuItem[] = [
   { icon: BarChart3, label: "Relatórios", path: "/relatorios", roles: ["admin", "gerente"] },
   { icon: UserPlus, label: "Visitações", path: "/visitacoes", roles: ["admin", "gerente", "atendente"] },
   { icon: Upload, label: "Importação", path: "/importacao", roles: ["admin", "gerente"] },
+  { icon: Settings, label: "Configurações", path: "/configuracoes", roles: ["admin"] },
 ];
 
 // Menu simplificado para atendentes
