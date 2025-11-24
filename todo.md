@@ -296,3 +296,15 @@
 - [ ] Restringir acesso apenas aos 3 usuários iniciais (futura - requer mudança no OAuth)
 - [x] Adicionar métricas do mês corrente no Dashboard (Festas Realizadas e Vendidas)
 - [x] Adicionar relógio em tempo real no header (atualização a cada 10s)
+
+## Implementação de Importação Excel
+- [x] Analisar estrutura da planilha Festasvendidas2025.xlsx
+- [x] Instalar biblioteca xlsx (npm install xlsx)
+- [x] Criar parser para processar colunas: Código, Nome Cliente, Data Fechamento, Data Evento, Horário, Tema, Valor, Total Pago, Custo, Telefone
+- [x] Criar procedure tRPC para importação de festas
+- [x] Validar dados importados (datas, valores, telefones)
+- [x] Criar ou buscar clientes automaticamente durante importação
+- [x] Atualizar interface de importação para upload e processamento
+- [x] Testar importação com planilha real de 2025 (100 festas válidas de 168 linhas)
+- [x] Adicionar preview de dados antes de importar
+- [x] Criar log de importações com sucesso/erros
