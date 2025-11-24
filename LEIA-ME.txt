@@ -1,0 +1,308 @@
+================================================================================
+  FESTEJA KIDS 2.0 - SISTEMA DE GESTÃO DE FESTAS INFANTIS
+================================================================================
+
+📦 CONTEÚDO DO PACOTE
+================================================================================
+
+Este arquivo ZIP contém o projeto completo do Festeja Kids 2.0, incluindo:
+
+✅ Código-fonte completo (Frontend + Backend)
+✅ Documentação técnica detalhada
+✅ Notebooks Jupyter para análise de dados e APIs
+✅ Scripts de importação e sincronização
+✅ Testes unitários (Vitest)
+✅ Configurações de desenvolvimento
+
+================================================================================
+📋 ESTRUTURA DO PROJETO
+================================================================================
+
+festeja-kids-2/
+├── client/                    # Frontend React + Tailwind
+│   ├── src/
+│   │   ├── pages/            # Páginas do sistema
+│   │   ├── components/       # Componentes reutilizáveis
+│   │   ├── hooks/            # Custom hooks
+│   │   └── lib/              # Bibliotecas (tRPC, utils)
+│   └── public/               # Assets estáticos
+│
+├── server/                    # Backend Node.js + tRPC
+│   ├── _core/                # Infraestrutura (OAuth, LLM, Storage)
+│   ├── routers/              # Routers tRPC (festas, clientes, etc)
+│   └── *.test.ts             # Testes unitários
+│
+├── drizzle/                   # Schema do banco de dados
+│   └── schema.ts             # Definição de tabelas
+│
+├── shared/                    # Código compartilhado
+│   └── const.ts              # Constantes
+│
+├── scripts/                   # Scripts de importação/sincronização
+│
+├── 📚 DOCUMENTAÇÃO
+│   ├── TIMELINE.md                    # Linha do tempo completa do projeto
+│   ├── DESENVOLVIMENTO_LOCAL.md       # Guia de setup local
+│   ├── DOCUMENTACAO_TECNICA.md        # Arquitetura e API
+│   ├── GUIA_INTEGRACAO_APIs.md        # Integração com APIs de IA
+│   └── GITHUB_ISSUES.md               # Lista de melhorias futuras
+│
+├── 📓 NOTEBOOKS JUPYTER
+│   ├── Festeja_Kids_Analise.ipynb     # Análise de dados
+│   └── Festeja_Kids_APIs_IA.ipynb     # Integração com APIs de IA
+│
+└── 📝 OUTROS
+    ├── todo.md                        # Lista de tarefas
+    ├── package.json                   # Dependências
+    └── README.md                      # Documentação do template
+
+================================================================================
+🚀 INÍCIO RÁPIDO
+================================================================================
+
+1. DESCOMPACTAR O ARQUIVO
+   - Extraia o conteúdo do ZIP para uma pasta local
+
+2. INSTALAR DEPENDÊNCIAS
+   ```bash
+   cd festeja-kids-2
+   pnpm install
+   ```
+
+3. CONFIGURAR VARIÁVEIS DE AMBIENTE
+   - Copie .env.example para .env
+   - Preencha as credenciais do banco de dados
+   - Configure as API keys necessárias
+
+4. EXECUTAR MIGRAÇÕES DO BANCO
+   ```bash
+   pnpm db:push
+   ```
+
+5. INICIAR SERVIDOR DE DESENVOLVIMENTO
+   ```bash
+   pnpm dev
+   ```
+
+6. ACESSAR O SISTEMA
+   - Frontend: http://localhost:3000
+   - Documentação completa em DESENVOLVIMENTO_LOCAL.md
+
+================================================================================
+📊 TECNOLOGIAS UTILIZADAS
+================================================================================
+
+Frontend:
+  - React 19
+  - TypeScript 5.7
+  - Tailwind CSS 4
+  - shadcn/ui
+  - Wouter (roteamento)
+  - tRPC React Query
+
+Backend:
+  - Node.js 22
+  - Express 4
+  - tRPC 11
+  - Drizzle ORM
+  - MySQL/TiDB
+
+Ferramentas:
+  - Vite 6 (build)
+  - Vitest (testes)
+  - pnpm (gerenciador de pacotes)
+
+Integrações:
+  - Manus OAuth (autenticação)
+  - Manus LLM (IA)
+  - Manus Storage (S3)
+  - Google Maps (via proxy Manus)
+
+================================================================================
+📚 DOCUMENTAÇÃO PRINCIPAL
+================================================================================
+
+1. TIMELINE.md
+   - Histórico completo do desenvolvimento
+   - 11 fases documentadas
+   - Erros encontrados e soluções
+   - Lógica de raciocínio de cada decisão
+
+2. DESENVOLVIMENTO_LOCAL.md
+   - Guia passo a passo de instalação
+   - Configuração de ambiente
+   - Comandos úteis
+   - Troubleshooting
+
+3. DOCUMENTACAO_TECNICA.md
+   - Arquitetura do sistema
+   - Fluxo de dados
+   - API endpoints (tRPC)
+   - Estrutura do banco de dados
+   - Segurança e autenticação
+
+4. GUIA_INTEGRACAO_APIs.md
+   - 9 APIs documentadas (Manus, OpenAI, Gemini, etc)
+   - Como obter API keys
+   - Exemplos de código Python e TypeScript
+   - Preços e comparações
+
+================================================================================
+🔐 CREDENCIAIS E SEGURANÇA
+================================================================================
+
+⚠️ IMPORTANTE: Este pacote NÃO contém credenciais sensíveis!
+
+Você precisará configurar:
+  - DATABASE_URL (conexão com banco de dados)
+  - JWT_SECRET (gerado automaticamente)
+  - MANUS_API_KEY (fornecida: FESTEJA-KIDS2-API-241120250201)
+  - Outras API keys conforme necessário
+
+Consulte DESENVOLVIMENTO_LOCAL.md para instruções detalhadas.
+
+================================================================================
+📓 NOTEBOOKS JUPYTER
+================================================================================
+
+1. Festeja_Kids_Analise.ipynb
+   - Análise de dados do sistema
+   - 8 gráficos interativos
+   - Exportação para Excel
+   - Pronto para Google Colab
+
+2. Festeja_Kids_APIs_IA.ipynb
+   - Integração com APIs de IA
+   - 6 casos de uso práticos
+   - Comparação de APIs
+   - Exemplos prontos para usar
+
+Como usar:
+  1. Acesse https://colab.research.google.com
+  2. Faça upload do notebook
+  3. Execute as células
+
+================================================================================
+🧪 TESTES
+================================================================================
+
+O projeto inclui testes unitários com Vitest:
+
+Executar todos os testes:
+  ```bash
+  pnpm test
+  ```
+
+Executar testes específicos:
+  ```bash
+  pnpm test festas
+  pnpm test visitacoes
+  ```
+
+Cobertura de testes:
+  - auth.logout.test.ts (autenticação)
+  - festas.test.ts (CRUD de festas)
+  - festas.create.test.ts (criação de festas)
+  - visitacoes.test.ts (leads e conversão)
+
+================================================================================
+🗂️ FUNCIONALIDADES IMPLEMENTADAS
+================================================================================
+
+✅ Autenticação e Autorização
+   - Login com Manus OAuth
+   - Sistema de roles (Admin, Gerente, Atendente, Cliente)
+   - Controle de acesso por permissão
+
+✅ Gestão de Festas
+   - Cadastro completo de festas
+   - Agenda visual
+   - Status (agendada, realizada, cancelada)
+   - Temas personalizados
+
+✅ Gestão de Clientes
+   - Cadastro de clientes
+   - Histórico de festas
+   - Informações de contato
+
+✅ Controle Financeiro
+   - Registro de pagamentos
+   - Controle de parcelas
+   - Custos fixos e variáveis
+   - Dashboard financeiro
+
+✅ Visitações (Leads)
+   - Cadastro de visitantes
+   - Funil de vendas
+   - Taxa de conversão
+   - Conversão para cliente
+
+✅ Dashboard Analítico
+   - Faturamento mensal
+   - Festas agendadas/realizadas
+   - Taxa de conversão
+   - Contratos fechados
+
+✅ Importação de Dados
+   - Interface para upload de Excel
+   - Validação de dados
+   - Preview antes de importar
+
+================================================================================
+🎨 IDENTIDADE VISUAL
+================================================================================
+
+Logo: Logomarca-Festejakids2.png (incluída em client/public/)
+
+Paleta de Cores:
+  - Vermelho: #FF0000
+  - Amarelo: #FFD700
+  - Ciano: #00CED1
+  - Verde: #32CD32
+  - Magenta: #FF00FF
+  - Roxo: #9370DB
+
+Tema: Light (configurável para dark)
+
+================================================================================
+📞 SUPORTE E RECURSOS
+================================================================================
+
+Repositório GitHub:
+  https://github.com/MSC-Consultoria/Sistema-festejakids2
+
+Issues (15 melhorias planejadas):
+  https://github.com/MSC-Consultoria/Sistema-festejakids2/issues
+
+Documentação Manus:
+  https://docs.manus.im
+
+================================================================================
+📝 LICENÇA E CRÉDITOS
+================================================================================
+
+Projeto: Festeja Kids 2.0
+Desenvolvido para: MSC Consultoria
+Stack: React + TypeScript + tRPC + Tailwind
+Plataforma: Manus
+
+Última Atualização: 24 de novembro de 2025
+
+================================================================================
+🚀 PRÓXIMOS PASSOS SUGERIDOS
+================================================================================
+
+1. ⚙️ Configurar ambiente local (DESENVOLVIMENTO_LOCAL.md)
+2. 🗄️ Conectar ao banco de dados
+3. 📊 Testar notebooks Jupyter no Google Colab
+4. 🔌 Integrar APIs de IA (GUIA_INTEGRACAO_APIs.md)
+5. 🧪 Executar testes unitários
+6. 🎯 Implementar issues de prioridade alta (#1, #2, #15)
+
+================================================================================
+
+Obrigado por usar o Festeja Kids 2.0! 🎉
+
+Para dúvidas ou suporte, consulte a documentação completa incluída neste pacote.
+
+================================================================================
