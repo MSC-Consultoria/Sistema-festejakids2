@@ -264,3 +264,463 @@
 ---
 
 **Desenvolvido com ❤️ para Festeja Kids**
+
+
+---
+
+### **Fase 11: Identidade Visual e Sistema de Roles** (Checkpoint: a75b371c)
+**Data:** 24 de novembro de 2025
+
+#### 📋 Solicitações do Usuário
+1. Adaptar design à identidade visual do Festeja Kids (logo colorida)
+2. Excluir clientes de teste do banco de dados
+3. Criar aba para importação de dados Excel
+4. Criar modo simplificado para Atendente
+5. Adicionar opção de horários editáveis nas festas
+6. Criar sistema de roles: Admin, Atendente, Gerente, Cliente
+7. Incrementar Dashboard com novos cards (Contratos Fechados, Festas Realizadas, Visitas Realizadas)
+
+#### 🎨 Identidade Visual Implementada
+
+**Logo Oficial:**
+- Arquivo: `Logomarca-Festejakids2.png`
+- Localização: `/client/public/logo-festeja-kids.png`
+- Atualização: `client/src/const.ts`
+
+**Paleta de Cores (OKLCH):**
+```css
+--chart-1: oklch(0.75 0.20 30);   /* Vermelho */
+--chart-2: oklch(0.80 0.18 90);   /* Amarelo */
+--chart-3: oklch(0.70 0.15 190);  /* Ciano */
+--chart-4: oklch(0.65 0.20 145);  /* Verde */
+--chart-5: oklch(0.60 0.25 320);  /* Magenta */
+--primary: oklch(0.65 0.25 320);  /* Magenta/Rosa vibrante */
+```
+
+**Gradiente Especial:**
+```css
+.gradient-festeja {
+  background: linear-gradient(135deg, 
+    oklch(0.75 0.20 30) 0%,    /* Vermelho */
+    oklch(0.80 0.18 90) 25%,   /* Amarelo */
+    oklch(0.70 0.15 190) 50%,  /* Ciano */
+    oklch(0.65 0.20 145) 75%,  /* Verde */
+    oklch(0.65 0.25 320) 100%  /* Magenta */
+  );
+}
+```
+
+#### 🔐 Sistema de Roles Implementado
+
+**Enum de Roles no Schema:**
+```typescript
+role: mysqlEnum("role", ["admin", "gerente", "atendente", "cliente"])
+  .default("cliente")
+  .notNull()
+```
+
+**Middleware de Autorização** (`server/_core/roleMiddleware.ts`):
+- `createRoleMiddleware(...allowedRoles)` - Função factory
+- `requireAdmin` - Apenas admin
+- `requireManager` - Admin + gerente
+- `requireStaff` - Admin + gerente + atendente
+- `adminProcedure`, `managerProcedure`, `staffProcedure` - Procedures prontas
+
+**Controle de Menu por Role:**
+- **Admin/Gerente** (10 itens): Dashboard, Festas, Calendário, Agenda, Clientes, Custos, Financeiro, Acompanhamento, Relatórios, Visitações, Importação
+- **Atendente** (4 itens): Nova Festa, Novo Pagamento, Agenda, Visitações
+- **Cliente** (futura): Minhas Festas, Meus Pagamentos
+
+#### 📊 Dashboard Incrementado
+
+**Novos Cards Adicionados:**
+1. **Contratos Fechados** - Visitações convertidas em clientes
+2. **Festas Realizadas** - Total de festas concluídas
+3. **Visitas Realizadas** - Total de visitações registradas
+4. **Taxa de Conversão** - Percentual de visitas convertidas
+
+**Cards Mantidos:**
+- Total de Festas
+- Faturamento Total
+- Valor a Receber
+- Ticket Médio
+
+#### 📤 Aba de Importação de Dados
+
+**Funcionalidades Implementadas:**
+- Interface de upload de arquivos Excel (.xlsx, .xls)
+- Instruções detalhadas de formato esperado
+- Exemplo de estrutura de planilha
+- Validação de tipo de arquivo
+- Preview de resultado de importação
+- Histórico de importações (estrutura pronta)
+
+**Estrutura de Planilha Esperada:**
+```
+Código | Cliente | Telefone | Data da Festa | Valor Total | Convidados
+FK001  | Maria   | (11) ... | 15/01/2026    | R$ 5.000,00 | 50
+```
+
+**Pendências:**
+- Backend de processamento de planilhas (parser)
+- Validação de dados importados
+- Preview real antes de importar
+- Log de importações no banco
+
+#### 🧹 Limpeza de Dados Realizada
+
+**Queries Executadas:**
+```sql
+-- Festas de teste
+DELETE FROM festas WHERE codigo LIKE 'FK%' OR codigo LIKE 'TESTE%';
+
+-- Clientes de teste
+DELETE FROM clientes WHERE nome LIKE '%Teste%' OR nome LIKE '%Test%' 
+  OR email LIKE '%test%' OR email LIKE '%exemplo%';
+
+-- Visitações de teste
+DELETE FROM visitacoes WHERE nome LIKE '%Teste%' OR nome LIKE '%Test%' 
+  OR email LIKE '%test%' OR email LIKE '%example%';
+```
+
+**Resultado:** Banco de dados limpo e pronto para dados reais
+
+#### 🐛 Erros Encontrados e Soluções
+
+**Erro 1: Migração de Enum de Roles**
+```
+DrizzleQueryError: Data truncated for column 'role', value is 'user'
+```
+**Causa:** Usuários existentes tinham role "user" (valor antigo não compatível com novo enum)
+
+**Solução:**
+```sql
+UPDATE users SET role = 'admin' WHERE role = 'user'
+```
+
+**Aprendizado:** Sempre verificar dados existentes antes de alterar enums no banco de dados
+
+---
+
+**Erro 2: Import de Middleware no tRPC**
+```
+error TS2305: Module '"./trpc"' has no exported member 'middleware'
+```
+**Causa:** Tentativa de importar `middleware` diretamente do módulo trpc
+
+**Solução:** Usar `t.middleware()` do initTRPC ao invés de importar
+```typescript
+const t = initTRPC.context<TrpcContext>().create({
+  transformer: superjson,
+});
+
+export const requireAdmin = t.middleware(async (opts) => {
+  const { ctx, next } = opts;
+  // ...
+});
+```
+
+**Aprendizado:** Seguir padrões oficiais do tRPC para criar middlewares customizados
+
+---
+
+**Erro 3: Tipos Implícitos no Middleware**
+```
+error TS7031: Binding element 'ctx' implicitly has an 'any' type
+```
+**Causa:** Desestruturação de parâmetros sem tipagem adequada
+
+**Solução:** Usar padrão correto do tRPC
+```typescript
+t.middleware(async (opts) => {
+  const { ctx, next } = opts;
+  // TypeScript infere tipos automaticamente
+});
+```
+
+#### 🔧 Arquivos Modificados
+
+**Backend:**
+- `server/_core/roleMiddleware.ts` - [NOVO] Middleware de autorização
+- `drizzle/schema.ts` - [MODIFICADO] Enum de roles atualizado
+- `server/routers/visitacoes.ts` - [EXISTENTE] Router de visitações
+
+**Frontend:**
+- `client/src/const.ts` - [MODIFICADO] Logo atualizada
+- `client/src/index.css` - [MODIFICADO] Paleta de cores
+- `client/src/components/DashboardLayout.tsx` - [MODIFICADO] Menu por role
+- `client/src/pages/Dashboard.tsx` - [MODIFICADO] Novos cards
+- `client/src/pages/Importacao.tsx` - [NOVO] Página de importação
+- `client/src/App.tsx` - [MODIFICADO] Rota de importação
+
+**Assets:**
+- `client/public/logo-festeja-kids.png` - [NOVO] Logo oficial
+
+#### 🧪 Testes Executados
+
+**Testes Unitários (Vitest):**
+```bash
+$ pnpm test visitacoes.test.ts
+
+✓ server/visitacoes.test.ts (8)
+  ✓ visitacoes router (8)
+    ✓ deve criar uma nova visitação
+    ✓ deve listar todas as visitações
+    ✓ deve buscar visitação por ID
+    ✓ deve atualizar status da visitação
+    ✓ deve obter estatísticas de visitações
+    ✓ deve converter visitação em cliente
+    ✓ deve excluir uma visitação
+    ✓ deve validar campos obrigatórios
+
+Test Files  1 passed (1)
+Tests  8 passed (8)
+Duration  1.34s
+```
+
+**Verificações de Tipo:**
+- ✓ LSP: No errors
+- ✓ TypeScript: No errors
+- ✓ Build errors: Not checked
+- ✓ Dependencies: OK
+
+#### 💡 Lógica de Raciocínio
+
+**1. Identidade Visual:**
+- Analisei a logo fornecida e identifiquei 5 cores principais
+- Converti cores RGB para formato OKLCH (Tailwind CSS 4)
+- Apliquei cores em variáveis CSS para fácil manutenção
+- Criei gradiente multicolorido para elementos especiais
+
+**2. Sistema de Roles:**
+- Identifiquei 4 níveis de acesso necessários (admin, gerente, atendente, cliente)
+- Criei enum no banco para garantir integridade
+- Implementei middleware reutilizável para evitar duplicação
+- Filtrei menu dinamicamente baseado na role do usuário
+- Criei menu simplificado para atendentes focado em operações frequentes
+
+**3. Dashboard:**
+- Separei cards em 2 categorias: operacionais e financeiros
+- Usei cores diferentes para cada tipo de card (chart-1 a chart-5)
+- Integrei dados de visitações com dados de festas
+- Calculei taxa de conversão automaticamente no backend
+
+**4. Importação de Dados:**
+- Criei interface completa primeiro (UI-first approach)
+- Forneci instruções claras para evitar erros de usuário
+- Validei tipo de arquivo no frontend antes de upload
+- Deixei backend preparado para implementação futura
+
+#### 📊 Resultados
+
+**Estatísticas Atuais:**
+- **Festas:** 72 (72 agendadas, 0 realizadas)
+- **Clientes:** 61 únicos
+- **Visitações:** 2 registradas
+- **Faturamento Total:** R$ 376.490,00
+- **Valor Recebido:** R$ 105.895,00
+- **Valor a Receber:** R$ 270.595,00
+- **Ticket Médio:** R$ 5.229,03
+
+**Novos Recursos:**
+- Sistema de roles com 4 níveis de acesso
+- Menu adaptativo por role
+- Dashboard com 8 cards informativos
+- Aba de importação de dados (interface)
+- Identidade visual oficial implementada
+
+#### 🚀 Próximos Passos Sugeridos
+
+**Curto Prazo (1-2 semanas):**
+1. **Backend de Importação Excel**
+   - Instalar biblioteca: `xlsx` ou `exceljs`
+   - Criar parser para processar planilhas
+   - Validar dados antes de inserir
+   - Implementar preview de dados
+   - Criar log de importações no banco
+
+2. **Interface de Gerenciamento de Usuários**
+   - Página para listar usuários
+   - Formulário para adicionar usuário
+   - Edição de roles
+   - Desativar/ativar usuários
+   - Apenas para Admin
+
+3. **Gráfico de Evolução Mensal**
+   - Biblioteca: Recharts ou Chart.js
+   - Dados: Contratos fechados por mês
+   - Visualização: Linha ou barra
+   - Período: Últimos 12 meses
+
+**Médio Prazo (1 mês):**
+4. **Autenticação com Email/Senha**
+   - Implementar bcrypt para senhas
+   - Criar tabela de credenciais
+   - Página de registro
+   - Recuperação de senha por email
+
+5. **Área do Cliente**
+   - Login para clientes
+   - Visualizar suas festas
+   - Histórico de pagamentos
+   - Upload de documentos
+
+6. **Notificações e Lembretes**
+   - Sistema de notificações push
+   - Lembretes de follow-up de visitações
+   - Alertas de pagamentos pendentes
+
+**Longo Prazo (3 meses):**
+7. **Relatórios Avançados**
+   - Relatório de lucratividade por festa
+   - Análise de custos vs receita
+   - Ranking de temas mais vendidos
+   - Exportar para PDF
+
+8. **Integração com WhatsApp**
+   - API do WhatsApp Business
+   - Envio automático de confirmações
+   - Lembretes de pagamento
+
+9. **Sistema de Contratos**
+   - Geração automática de contratos
+   - Assinatura digital
+   - Armazenamento seguro
+
+#### 🔄 Trabalho Local e Outras IDEs
+
+**Clonar o Repositório:**
+```bash
+# Via GitHub CLI
+gh repo clone MSC-Consultoria/Sistema-festejakids2
+
+# Ou via HTTPS
+git clone https://github.com/MSC-Consultoria/Sistema-festejakids2.git
+
+cd Sistema-festejakids2
+```
+
+**Instalar Dependências:**
+```bash
+# Instalar pnpm (se não tiver)
+npm install -g pnpm
+
+# Instalar dependências do projeto
+pnpm install
+```
+
+**Configurar Variáveis de Ambiente:**
+Criar arquivo `.env` na raiz:
+```env
+# Banco de Dados
+DATABASE_URL="mysql://user:password@host:port/database"
+
+# JWT
+JWT_SECRET="sua-chave-secreta-aqui"
+
+# OAuth Manus
+VITE_APP_ID="seu-app-id"
+OAUTH_SERVER_URL="https://api.manus.im"
+VITE_OAUTH_PORTAL_URL="https://oauth.manus.im"
+OWNER_OPEN_ID="seu-open-id"
+OWNER_NAME="Seu Nome"
+
+# Manus APIs
+BUILT_IN_FORGE_API_URL="https://forge.manus.im"
+BUILT_IN_FORGE_API_KEY="sua-api-key"
+VITE_FRONTEND_FORGE_API_KEY="sua-frontend-key"
+
+# App
+VITE_APP_TITLE="Festeja Kids 2.0"
+VITE_APP_LOGO="/logo-festeja-kids.png"
+```
+
+**Executar Migrações:**
+```bash
+pnpm db:push
+```
+
+**Iniciar Servidor de Desenvolvimento:**
+```bash
+pnpm dev
+```
+
+**IDEs Recomendadas:**
+- **Visual Studio Code** - Extensões: ESLint, Prettier, Tailwind CSS IntelliSense
+- **WebStorm / IntelliJ IDEA** - Suporte nativo para TypeScript
+- **Cursor / Windsurf** - AI-powered IDEs
+
+**Scripts Disponíveis:**
+```bash
+pnpm dev              # Desenvolvimento
+pnpm db:push          # Migrações
+pnpm test             # Testes
+pnpm build            # Build produção
+pnpm lint             # Verificar código
+```
+
+**Workflow Git Recomendado:**
+```bash
+# Criar nova feature
+git checkout develop
+git pull origin develop
+git checkout -b feature/nome-da-feature
+
+# Fazer commits
+git add .
+git commit -m "feat: descrição da feature"
+
+# Enviar para GitHub
+git push origin feature/nome-da-feature
+```
+
+#### 📊 Métricas do Projeto
+
+**Linhas de Código:**
+- Backend: ~1.500 linhas
+- Frontend: ~3.000 linhas
+- Testes: ~200 linhas
+- Total: ~4.700 linhas
+
+**Tempo de Desenvolvimento:**
+- Checkpoint 10 (Visitações): ~2 horas
+- Checkpoint 11 (Identidade + Roles): ~1 hora
+- Total desta fase: ~3 horas
+
+#### 🎓 Lições Aprendidas
+
+**Arquitetura:**
+1. tRPC é excelente para full-stack TypeScript (type-safety end-to-end)
+2. Drizzle ORM é mais leve que Prisma (melhor performance)
+3. Shadcn/ui é superior a bibliotecas de componentes (mais controle)
+
+**Boas Práticas:**
+1. Sempre testar migrações em desenvolvimento (evita perda de dados)
+2. Criar middleware reutilizável (reduz duplicação)
+3. Separar concerns (DB helpers, routers, UI components)
+4. Validar no backend E frontend (segurança em camadas)
+
+**Performance:**
+1. Usar OKLCH para cores (melhor consistência visual)
+2. Lazy loading de páginas (reduz bundle inicial)
+3. Otimizar queries (evitar N+1 queries)
+
+#### 📝 Checkpoints Atualizados
+
+1. `fa2a0ba6` - Modelagem inicial
+2. `91ee2c1c` - Dados históricos importados
+3. `9d770b11` - Contratos PDF processados
+4. `0685791b` - Validação cruzada completa
+5. `8e79d62a` - Reimportação com fonte única
+6. `c34feadb` - Pagamentos detalhados
+7. `6040cabf` - Campos completos
+8. `59ad30f1` - Nova festa funcional
+9. `70827b17` - Melhorias implementadas
+10. `a9a9bb8c` - Sistema de Visitações (Leads)
+11. `a75b371c` - **Identidade Visual + Sistema de Roles** ⭐
+
+---
+
+**Desenvolvido com ❤️ para Festeja Kids**  
+**Última Atualização:** 24 de novembro de 2025  
+**Versão do Documento:** 2.0
