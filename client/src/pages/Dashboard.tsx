@@ -2,10 +2,11 @@ import DashboardLayout from "@/components/DashboardLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { trpc } from "@/lib/trpc";
 import { formatCurrency } from "@/const";
-import { Calendar, DollarSign, PartyPopper, TrendingUp } from "lucide-react";
+import { Calendar, DollarSign, PartyPopper, TrendingUp, FileCheck, CheckCircle, UserPlus } from "lucide-react";
 
 export default function Dashboard() {
   const { data: stats, isLoading } = trpc.festas.stats.useQuery();
+  const { data: visitacoesStats } = trpc.visitacoes.stats.useQuery();
 
   if (isLoading) {
     return (
@@ -27,6 +28,70 @@ export default function Dashboard() {
           </p>
         </div>
 
+        {/* Cards principais */}
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">
+                Contratos Fechados
+              </CardTitle>
+              <FileCheck className="h-4 w-4 text-chart-1" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{visitacoesStats?.fechado || 0}</div>
+              <p className="text-xs text-muted-foreground mt-1">
+                Visitações convertidas em clientes
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">
+                Festas Realizadas
+              </CardTitle>
+              <CheckCircle className="h-4 w-4 text-chart-4" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{stats?.realizadas || 0}</div>
+              <p className="text-xs text-muted-foreground mt-1">
+                Festas já concluídas
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">
+                Visitas Realizadas
+              </CardTitle>
+              <UserPlus className="h-4 w-4 text-chart-3" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{visitacoesStats?.total || 0}</div>
+              <p className="text-xs text-muted-foreground mt-1">
+                Total de visitações registradas
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">
+                Taxa de Conversão
+              </CardTitle>
+              <TrendingUp className="h-4 w-4 text-chart-5" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{visitacoesStats?.taxaConversao.toFixed(1) || 0}%</div>
+              <p className="text-xs text-muted-foreground mt-1">
+                Visitas convertidas em contratos
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Cards de faturamento */}
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">

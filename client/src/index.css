@@ -43,15 +43,15 @@
 }
 
 :root {
-  --primary: oklch(0.55 0.25 265);
-  --primary-foreground: oklch(0.98 0.01 265);
-  --sidebar-primary: oklch(0.6 0.23 265);
-  --sidebar-primary-foreground: oklch(0.98 0.01 265);
-  --chart-1: var(--color-blue-300);
-  --chart-2: var(--color-blue-500);
-  --chart-3: var(--color-blue-600);
-  --chart-4: var(--color-blue-700);
-  --chart-5: var(--color-blue-800);
+  --primary: oklch(0.65 0.25 320); /* Magenta/Rosa vibrante */
+  --primary-foreground: oklch(0.98 0.01 320);
+  --sidebar-primary: oklch(0.7 0.23 320);
+  --sidebar-primary-foreground: oklch(0.98 0.01 320);
+  --chart-1: oklch(0.75 0.20 30); /* Vermelho */
+  --chart-2: oklch(0.80 0.18 90); /* Amarelo */
+  --chart-3: oklch(0.70 0.15 190); /* Ciano */
+  --chart-4: oklch(0.65 0.20 145); /* Verde */
+  --chart-5: oklch(0.60 0.25 320); /* Magenta */
   --radius: 0.75rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.235 0.015 65);
@@ -79,10 +79,10 @@
 }
 
 .dark {
-  --primary: oklch(0.6 0.25 265);
-  --primary-foreground: oklch(0.98 0.01 265);
-  --sidebar-primary: oklch(0.55 0.23 265);
-  --sidebar-primary-foreground: oklch(0.98 0.01 265);
+  --primary: oklch(0.65 0.25 320); /* Magenta/Rosa vibrante */
+  --primary-foreground: oklch(0.98 0.01 320);
+  --sidebar-primary: oklch(0.7 0.23 320);
+  --sidebar-primary-foreground: oklch(0.98 0.01 320);
   --background: oklch(0.141 0.005 285.823);
   --foreground: oklch(0.85 0.005 65);
   --card: oklch(0.21 0.006 285.885);
@@ -100,11 +100,11 @@
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.488 0.243 264.376);
-  --chart-1: var(--color-blue-300);
-  --chart-2: var(--color-blue-500);
-  --chart-3: var(--color-blue-600);
-  --chart-4: var(--color-blue-700);
-  --chart-5: var(--color-blue-800);
+  --chart-1: oklch(0.75 0.20 30); /* Vermelho */
+  --chart-2: oklch(0.80 0.18 90); /* Amarelo */
+  --chart-3: oklch(0.70 0.15 190); /* Ciano */
+  --chart-4: oklch(0.65 0.20 145); /* Verde */
+  --chart-5: oklch(0.60 0.25 320); /* Magenta */
   --sidebar: oklch(0.21 0.006 285.885);
   --sidebar-foreground: oklch(0.85 0.005 65);
   --sidebar-accent: oklch(0.274 0.006 286.033);
@@ -181,7 +181,11 @@
   }
 
   .gradient-primary {
-    background: linear-gradient(135deg, oklch(0.6 0.25 265) 0%, oklch(0.5 0.28 280) 100%);
+    background: linear-gradient(135deg, oklch(0.65 0.25 320) 0%, oklch(0.60 0.25 280) 100%);
+  }
+
+  .gradient-festeja {
+    background: linear-gradient(135deg, oklch(0.75 0.20 30) 0%, oklch(0.80 0.18 90) 25%, oklch(0.70 0.15 190) 50%, oklch(0.65 0.20 145) 75%, oklch(0.65 0.25 320) 100%);
   }
 
   .gradient-success {

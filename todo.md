@@ -231,3 +231,59 @@
 - [x] Adicionar função de converter visitante em cliente
 - [x] Criar dashboard de conversão com taxa e funil de vendas
 - [x] Criar testes unitários para router de visitações (8 testes passando)
+
+## Identidade Visual Festeja Kids
+- [x] Substituir logo atual pela Logomarca-Festejakids2.png
+- [x] Adaptar paleta de cores (vermelho, amarelo, ciano, verde, magenta, roxo)
+- [x] Atualizar gradientes e cores dos cards
+- [x] Ajustar cores dos badges e status
+- [ ] Atualizar favicon com nova logo (usuário deve fazer via Dashboard)
+
+## Sistema de Roles e Permissões
+- [x] Adicionar enum de roles no schema (admin, atendente, gerente, cliente)
+- [x] Criar middleware de autorização por role
+- [x] Implementar controle de acesso nas procedures tRPC
+- [ ] Criar interface de gerenciamento de usuários (futura)
+- [x] Adicionar filtro de menu por role
+
+## Modo Atendente Simplificado
+- [x] Criar layout simplificado para atendente
+- [x] Restringir menu a: Nova Festa, Novo Pagamento, Agenda, Visitações
+- [x] Criar atalhos rápidos para ações frequentes
+- [x] Implementar navegação simplificada
+
+## Importação de Dados
+- [x] Criar aba de Importação
+- [x] Implementar upload de arquivos Excel (interface pronta)
+- [ ] Criar parser para planilhas de festas (backend pendente)
+- [ ] Criar parser para planilhas de clientes (backend pendente)
+- [ ] Adicionar validação de dados importados (backend pendente)
+- [ ] Implementar preview antes de importar (backend pendente)
+- [ ] Criar log de importações (backend pendente)
+
+## Campo de Horário Editável
+- [x] Adicionar campo horário nas festas (já existe no schema)
+- [x] Criar formulário de edição de horário (já existe em NovaFesta)
+- [ ] Permitir edição em lote de horários (futura)
+- [x] Validar formato de horário
+
+## Incrementar Dashboard
+- [x] Adicionar card "Contratos Fechados"
+- [x] Adicionar card "Festas Realizadas"
+- [x] Adicionar card "Visitas Realizadas"
+- [x] Adicionar card "Taxa de Conversão"
+- [ ] Corrigir distribuição de valores recebidos (set/out/nov) - dados já limpos
+- [ ] Adicionar gráfico de evolução mensal de contratos (futura)
+
+## Limpeza de Dados
+- [x] Identificar clientes de teste
+- [x] Excluir visitações de teste
+- [x] Excluir festas de teste
+- [x] Excluir pagamentos de teste
+- [x] Validar integridade após limpeza
+
+## Autenticação sem Google
+- [ ] Implementar cadastro com email/senha (futura - requer mudança no sistema de auth)
+- [ ] Criar página de registro (futura)
+- [ ] Adicionar validação de email (futura)
+- [ ] Implementar recuperação de senha (futura)

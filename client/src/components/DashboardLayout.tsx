@@ -21,24 +21,54 @@ import {
 } from "@/components/ui/sidebar";
 import { APP_LOGO, APP_TITLE, getLoginUrl } from "@/const";
 import { useIsMobile } from "@/hooks/useMobile";
-import { LayoutDashboard, LogOut, PanelLeft, Users, PartyPopper, DollarSign, BarChart3, Calendar, Wallet, TrendingUp, UserPlus } from "lucide-react";
+import { LayoutDashboard, LogOut, PanelLeft, Users, PartyPopper, DollarSign, BarChart3, Calendar, Wallet, TrendingUp, UserPlus, Upload } from "lucide-react";
 import { CSSProperties, useEffect, useRef, useState } from "react";
 import { useLocation } from "wouter";
 import { DashboardLayoutSkeleton } from './DashboardLayoutSkeleton';
 import { Button } from "./ui/button";
 
-const menuItems = [
-  { icon: LayoutDashboard, label: "Dashboard", path: "/" },
-  { icon: PartyPopper, label: "Festas", path: "/festas" },
-  { icon: Calendar, label: "Calendário", path: "/calendario" },
+type MenuItem = {
+  icon: any;
+  label: string;
+  path: string;
+  roles?: string[]; // Se não especificado, todos podem acessar
+};
+
+const menuItems: MenuItem[] = [
+  { icon: LayoutDashboard, label: "Dashboard", path: "/", roles: ["admin", "gerente"] },
+  { icon: PartyPopper, label: "Festas", path: "/festas", roles: ["admin", "gerente", "atendente"] },
+  { icon: Calendar, label: "Calendário", path: "/calendario", roles: ["admin", "gerente"] },
+  { icon: Calendar, label: "Agenda", path: "/agenda", roles: ["admin", "gerente", "atendente"] },
+  { icon: Users, label: "Clientes", path: "/clientes", roles: ["admin", "gerente"] },
+  { icon: DollarSign, label: "Custos", path: "/custos", roles: ["admin", "gerente"] },
+  { icon: Wallet, label: "Financeiro", path: "/financeiro", roles: ["admin", "gerente", "atendente"] },
+  { icon: TrendingUp, label: "Acompanhamento", path: "/acompanhamento", roles: ["admin", "gerente"] },
+  { icon: BarChart3, label: "Relatórios", path: "/relatorios", roles: ["admin", "gerente"] },
+  { icon: UserPlus, label: "Visitações", path: "/visitacoes", roles: ["admin", "gerente", "atendente"] },
+  { icon: Upload, label: "Importação", path: "/importacao", roles: ["admin", "gerente"] },
+];
+
+// Menu simplificado para atendentes
+const atendenteMenuItems: MenuItem[] = [
+  { icon: PartyPopper, label: "Nova Festa", path: "/festas/nova" },
+  { icon: Wallet, label: "Novo Pagamento", path: "/financeiro/registrar" },
   { icon: Calendar, label: "Agenda", path: "/agenda" },
-  { icon: Users, label: "Clientes", path: "/clientes" },
-  { icon: DollarSign, label: "Custos", path: "/custos" },
-  { icon: Wallet, label: "Financeiro", path: "/financeiro" },
-  { icon: TrendingUp, label: "Acompanhamento", path: "/acompanhamento" },
-  { icon: BarChart3, label: "Relatórios", path: "/relatorios" },
   { icon: UserPlus, label: "Visitações", path: "/visitacoes" },
 ];
+
+function getMenuItemsForRole(role: string | undefined): MenuItem[] {
+  if (!role) return [];
+  
+  // Atendente tem menu simplificado
+  if (role === "atendente") {
+    return atendenteMenuItems;
+  }
+  
+  // Filtrar menu completo baseado na role
+  return menuItems.filter(item => 
+    !item.roles || item.roles.includes(role)
+  );
+}
 
 const SIDEBAR_WIDTH_KEY = "sidebar-width";
 const DEFAULT_WIDTH = 280;
@@ -129,8 +159,11 @@ function DashboardLayoutContent({
   const isCollapsed = state === "collapsed";
   const [isResizing, setIsResizing] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
-  const activeMenuItem = menuItems.find(item => item.path === location);
   const isMobile = useIsMobile();
+  
+  // Obter menu baseado na role do usuário
+  const userMenuItems = getMenuItemsForRole(user?.role);
+  const activeMenuItem = userMenuItems.find(item => item.path === location);
 
   useEffect(() => {
     if (isCollapsed) {
@@ -217,7 +250,7 @@ function DashboardLayoutContent({
 
           <SidebarContent className="gap-0">
             <SidebarMenu className="px-2 py-1">
-              {menuItems.map(item => {
+              {userMenuItems.map(item => {
                 const isActive = location === item.path;
                 return (
                   <SidebarMenuItem key={item.path}>
