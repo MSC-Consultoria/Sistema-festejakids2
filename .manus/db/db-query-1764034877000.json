@@ -1,0 +1,15 @@
+{
+  "query": "SELECT COUNT(*) as total, MIN(dataFesta) as primeira_festa, MAX(dataFesta) as ultima_festa FROM festas",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 48JvJ4xGnzv6z7Y.root --database kipPpydFSSmPdFAif48Epo --execute SELECT COUNT(*) as total, MIN(dataFesta) as primeira_festa, MAX(dataFesta) as ultima_festa FROM festas",
+  "rows": [
+    {
+      "total": "63",
+      "primeira_festa": "2025-11-27 19:00:00",
+      "ultima_festa": "2026-11-07 19:00:00"
+    }
+  ],
+  "messages": [],
+  "stdout": "total\tprimeira_festa\tultima_festa\n63\t2025-11-27 19:00:00\t2026-11-07 19:00:00\n",
+  "stderr": "",
+  "execution_time_ms": 54
+}

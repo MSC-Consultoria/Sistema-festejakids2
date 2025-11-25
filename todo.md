@@ -315,3 +315,11 @@
 - [x] Adicionar confirmação dupla antes de resetar
 - [x] Executar reset e recriar usuários padrão
 - [x] Testar funcionalidade de reset
+
+## Adicionar Novos Administradores e Importar Festas
+- [x] Adicionar gabrielol2035@gmail.com como admin
+- [x] Adicionar recantodoacaienventosrj@gmail.com como admin
+- [x] Analisar estrutura da planilha Próximasfestas.xlsx (66 festas)
+- [x] Validar dados da planilha
+- [x] Importar festas da planilha para o banco (63 festas importadas com sucesso)
+- [x] Verificar importação bem-sucedida (Dashboard mostrando R$ 328.700,00)
