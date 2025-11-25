@@ -323,3 +323,10 @@
 - [x] Validar dados da planilha
 - [x] Importar festas da planilha para o banco (63 festas importadas com sucesso)
 - [x] Verificar importação bem-sucedida (Dashboard mostrando R$ 328.700,00)
+
+## Correção de Datas das Festas
+- [x] Investigar problema de conversão de datas do Excel (1 dia adiantado)
+- [x] Corrigir função excelDateToJSDate no script de importação (meio-dia UTC)
+- [x] Resetar banco de dados
+- [x] Reimportar festas com datas corretas
+- [x] Verificar datas no sistema (Rodrigo Rios agora é 07/12/25 12:00:00 UTC)

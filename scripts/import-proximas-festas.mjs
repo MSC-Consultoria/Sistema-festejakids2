@@ -28,9 +28,16 @@ console.log("");
 const db = drizzle(DATABASE_URL);
 
 // Função para converter data do Excel para JavaScript
+// Excel armazena datas como número de dias desde 1900-01-01
+// Ajustamos para meio-dia UTC para evitar problemas de timezone
 function excelDateToJSDate(excelDate) {
   if (!excelDate || typeof excelDate !== 'number') return null;
-  const date = new Date((excelDate - 25569) * 86400 * 1000);
+  // 25569 = dias entre 1900-01-01 e 1970-01-01 (epoch Unix)
+  // Multiplicamos por 86400000 (milissegundos em um dia)
+  const utcDays = Math.floor(excelDate - 25569);
+  // Adiciona 12 horas (meio-dia UTC) para evitar problemas de timezone
+  const utcValue = utcDays * 86400 * 1000 + (12 * 60 * 60 * 1000);
+  const date = new Date(utcValue);
   return date;
 }
 

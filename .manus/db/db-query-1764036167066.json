@@ -1,0 +1,9 @@
+{
+  "query": "INSERT INTO users (openId, name, email, loginMethod, role, createdAt, updatedAt, lastSignedIn)\nVALUES \n  ('gabriel-oliveira-2035', 'Gabriel Oliveira', 'gabrielol2035@gmail.com', 'google', 'admin', NOW(), NOW(), NOW()),\n  ('recanto-acai-eventos', 'Recanto do Açaí Eventos', 'recantodoacaienventosrj@gmail.com', 'google', 'admin', NOW(), NOW(), NOW())",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 48JvJ4xGnzv6z7Y.root --database kipPpydFSSmPdFAif48Epo --execute INSERT INTO users (openId, name, email, loginMethod, role, createdAt, updatedAt, lastSignedIn)\nVALUES \n  ('gabriel-oliveira-2035', 'Gabriel Oliveira', 'gabrielol2035@gmail.com', 'google', 'admin', NOW(), NOW(), NOW()),\n  ('recanto-acai-eventos', 'Recanto do Açaí Eventos', 'recantodoacaienventosrj@gmail.com', 'google', 'admin', NOW(), NOW(), NOW())",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 58
+}
