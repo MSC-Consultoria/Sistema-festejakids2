@@ -71,7 +71,7 @@ export default function Visitacoes() {
         cpf: formData.cpf || undefined,
         endereco: formData.endereco || undefined,
         dataVisita: new Date(formData.dataVisita).getTime(),
-        dataPretendida: formData.dataPretendida ? new Date(formData.dataPretendida).getTime() : undefined,
+        dataPretendida: formData.dataPretendida || undefined,
         horario: formData.horario || undefined,
         interesse: formData.interesse || undefined,
         tema: formData.tema || undefined,
@@ -170,7 +170,12 @@ export default function Visitacoes() {
     }
   };
 
-  const handleConverter = async (id: number) => {
+  const handleConverter = (id: number) => {
+    // Redirecionar para página de conversão
+    setLocation(`/visitacoes/converter/${id}`);
+  };
+
+  const handleConverterOld = async (id: number) => {
     try {
       await converterMutation.mutateAsync({ visitacaoId: id });
       toast.success("Visitação convertida em cliente com sucesso!");

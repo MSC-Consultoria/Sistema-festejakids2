@@ -22,6 +22,8 @@ import DetalhesFesta from "./pages/DetalhesFesta";
 import Importacao from "./pages/Importacao";
 import Configuracoes from "./pages/Configuracoes";
 import Usuarios from "./pages/Usuarios";
+import DetalhesCliente from "./pages/DetalhesCliente";
+import ConverterVisitacao from "./pages/ConverterVisitacao";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -32,6 +34,7 @@ function Router() {
       <Route path="/festas/nova" component={NovaFesta} />
       <Route path="/festas/editar/:id" component={EditarFesta} />
       <Route path="/clientes" component={Clientes} />
+      <Route path="/clientes/:id" component={DetalhesCliente} />
       <Route path="/calendario" component={Calendario} />
       <Route path="/custos" component={Custos} />
       <Route path="/agenda" component={Agenda} />
@@ -41,6 +44,7 @@ function Router() {
       <Route path="/acompanhamento" component={AcompanhamentoPagamentos} />
       <Route path="/projecao-financeira" component={ProjecaoFinanceira} />
       <Route path="/visitacoes" component={Visitacoes} />
+      <Route path="/visitacoes/converter/:id" component={ConverterVisitacao} />
       <Route path="/festas/:id" component={DetalhesFesta} />
       <Route path="/importacao" component={Importacao} />
       <Route path="/configuracoes" component={Configuracoes} />

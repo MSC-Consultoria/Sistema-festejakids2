@@ -382,3 +382,32 @@
 - [x] Atualizar linha do tempo do projeto
 - [x] Atualizar documentação do projeto (README.md)
 - [x] Fazer commit no GitHub com todas as alterações
+
+## A. Correções de Erros Críticos (404)
+- [x] Corrigir erro 404 na Página de Edição de Festa (já estava funcionando)
+- [x] Corrigir erro 404 na Visualização de Detalhes do Cliente
+
+## B. Melhorias na Funcionalidade de Visitações e Status
+- [x] Implementar os 5 status de Visitação (já implementado)
+- [x] Ajustar validação de E-mail na Visitação para permitir cadastro com ou sem e-mail
+- [x] CPF é opcional na visitação, obrigatório apenas ao fechar contrato
+- [x] Implementar fluxo de conversão: tela intermediária ao clicar em "Converter"
+- [x] Flexibilizar Data do Evento na Visitação (opcional para visitação, obrigatória para contrato)
+
+## C. Melhorias de Usabilidade e Interface (UX/UI)
+- [ ] Tornar o Dashboard clicável (cards levam para páginas específicas)
+- [ ] Detalhar Contrato no Calendário (modal com informações completas ao clicar na festa)
+- [ ] Criar Filtro Avançado de Pesquisa em todas as abas
+- [ ] Criar Versão Simplificada para usuário "Atendimento" com foco em:
+  - [ ] Adicionar/Editar Visitação
+  - [ ] Adicionar/Editar Novo Cliente
+  - [ ] Adicionar/Editar Novo Pagamento
+
+## D. Gerenciamento de Usuários e Permissões
+- [ ] Configurar usuários iniciais: recantodoacaienventosrj@gmail.com e gabrielol2035@gmail.com
+- [ ] Definir perfis de acesso (Administrador por padrão, com opção de alterar roles)
+- [ ] Permitir que administrador gerencie todos os usuários na aba "Usuários"
+
+## E. Otimização de Performance
+- [ ] Otimizar velocidade de carregamento da aba Acompanhamentos
+- [ ] Investigar possíveis problemas de quebra de banco

@@ -52,7 +52,7 @@ export const festasRouter = router({
         dataFechamento: z.number(), // timestamp em ms
         dataFesta: z.number(), // timestamp em ms
         valorTotal: z.number().min(0), // em centavos
-        numeroConvidados: z.number().min(1),
+        numeroConvidados: z.number().min(1).optional(),
         tema: z.string().optional(),
         horario: z.string().optional(),
         cpfCliente: z.string().optional(),

@@ -87,7 +87,7 @@ export const festas = mysqlTable("festas", {
   dataFesta: timestamp("dataFesta").notNull(),
   valorTotal: int("valorTotal").notNull(), // em centavos
   valorPago: int("valorPago").default(0).notNull(), // em centavos
-  numeroConvidados: int("numeroConvidados").notNull(),
+  numeroConvidados: int("numeroConvidados"),
   tema: varchar("tema", { length: 255 }),
   horario: varchar("horario", { length: 50 }),
   // Campos da Ficha de Contrato

@@ -21,17 +21,33 @@ export const visitacoesRouter = router({
       z.object({
         nome: z.string().min(1, "Nome é obrigatório"),
         telefone: z.string().min(1, "Telefone é obrigatório"),
-        email: z.string().email("Email inválido").optional(),
+        email: z.string().email("Email inválido").optional().or(z.literal("")),
+        cpf: z.string().optional(),
+        endereco: z.string().optional(),
         dataVisita: z.number(), // timestamp
+        dataPretendida: z.string().optional(), // Data do evento (opcional para visitação)
+        horario: z.string().optional(),
         interesse: z.string().optional(),
+        tema: z.string().optional(),
+        numeroConvidados: z.number().optional(),
+        brinde: z.string().optional(),
+        refeicao: z.string().optional(),
+        massaType: z.string().optional(),
+        molhoType: z.string().optional(),
+        bolo: z.string().optional(),
+        nomeAniversariante: z.string().optional(),
+        idadeAniversariante: z.number().optional(),
+        status: z.enum(["aguardando", "fechou_pre_contrato", "fechou_contrato", "tem_interesse", "faltou", "remarcar"]).optional(),
         observacoes: z.string().optional(),
       })
     )
     .mutation(async ({ input }) => {
+      const { dataPretendida, ...rest } = input;
       return await db.createVisitacao({
-        ...input,
+        ...rest,
         dataVisita: new Date(input.dataVisita),
-        status: "aguardando",
+        dataPretendida: dataPretendida ? new Date(dataPretendida) : null,
+        status: input.status || "aguardando",
       });
     }),
 
@@ -45,7 +61,20 @@ export const visitacoesRouter = router({
         email: z.string().email("Email inválido").optional().nullable(),
         dataVisita: z.number().optional(),
         interesse: z.string().optional().nullable(),
-        status: z.enum(["visitou", "aguardando", "proposta_enviada", "fechado", "perdido"]).optional(),
+        cpf: z.string().optional(),
+        endereco: z.string().optional(),
+        dataPretendida: z.string().optional(),
+        horario: z.string().optional(),
+        tema: z.string().optional(),
+        numeroConvidados: z.number().optional(),
+        brinde: z.string().optional(),
+        refeicao: z.string().optional(),
+        massaType: z.string().optional(),
+        molhoType: z.string().optional(),
+        bolo: z.string().optional(),
+        nomeAniversariante: z.string().optional(),
+        idadeAniversariante: z.number().optional(),
+        status: z.enum(["aguardando", "fechou_pre_contrato", "fechou_contrato", "tem_interesse", "faltou", "remarcar"]).optional(),
         observacoes: z.string().optional().nullable(),
       })
     )
