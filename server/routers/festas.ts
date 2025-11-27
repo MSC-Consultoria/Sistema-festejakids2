@@ -55,6 +55,15 @@ export const festasRouter = router({
         numeroConvidados: z.number().min(1),
         tema: z.string().optional(),
         horario: z.string().optional(),
+        cpfCliente: z.string().optional(),
+        endereco: z.string().optional(),
+        brinde: z.string().optional(),
+        refeicao: z.string().optional(),
+        massaType: z.string().optional(),
+        molhoType: z.string().optional(),
+        bolo: z.string().optional(),
+        nomeAniversariante: z.string().optional(),
+        idadeAniversariante: z.number().optional(),
         observacoes: z.string().optional(),
       })
     )

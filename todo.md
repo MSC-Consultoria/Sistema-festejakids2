@@ -9,7 +9,7 @@
 
 ## Gestão de Festas
 - [x] Criar interface de listagem de festas com filtros (data, status, cliente)
-- [ ] Criar formulário de cadastro de nova festa
+- [x] Criar formulário de cadastro de nova festa
 - [ ] Criar formulário de edição de festa existente
 - [ ] Implementar visualização detalhada de festa individual
 - [x] Implementar controle de status da festa (agendada, realizada, cancelada)
@@ -354,3 +354,12 @@
 - [x] Implementar listagem com filtros e busca
 - [x] Importar 8 visitações da semana de 27/11/2025 (Nadia, Suzane, Marcelaine, Caryne, Thais, Jenifer, Karien, Valzenir)
 - [x] Testar funcionalidade completa
+
+## Atualização da Tela de Nova Festa
+- [ ] Estender schema de festas com campos de contrato (CPF cliente, endereço, brinde, refeição, bolo, aniversariante, idade aniversariante)
+- [ ] Atualizar procedures tRPC para aceitar novos campos de contrato
+- [ ] Reescrever formulário de Nova Festa com todos os campos
+- [ ] Implementar validações de CPF e telefone
+- [ ] Adicionar opções pré-definidas para brinde, massa e molho
+- [ ] Implementar busca de cliente por CPF ou nome
+- [ ] Testar cadastro de nova festa com todos os campos

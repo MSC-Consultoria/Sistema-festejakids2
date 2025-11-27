@@ -1,4 +1,3 @@
-import { useAuth } from "@/_core/hooks/useAuth";
 import DashboardLayout from "@/components/DashboardLayout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -6,8 +5,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { trpc } from "@/lib/trpc";
-import { Loader2 } from "lucide-react";
+import { useAuth } from "@/_core/hooks/useAuth";
+import { Loader2, ArrowLeft } from "lucide-react";
 import { useState } from "react";
 import { useLocation } from "wouter";
 import { toast } from "sonner";
@@ -24,6 +25,16 @@ export default function NovaFesta() {
     numeroConvidados: "",
     tema: "",
     horario: "",
+    // Campos da Ficha de Contrato
+    cpfCliente: "",
+    endereco: "",
+    brinde: "",
+    refeicao: "",
+    massaType: "",
+    molhoType: "",
+    bolo: "",
+    nomeAniversariante: "",
+    idadeAniversariante: "",
     observacoes: "",
   });
   
@@ -32,6 +43,7 @@ export default function NovaFesta() {
     telefone: "",
     cpf: "",
     endereco: "",
+    email: "",
   });
   
   const [mostrarNovoCliente, setMostrarNovoCliente] = useState(false);
@@ -41,9 +53,14 @@ export default function NovaFesta() {
   const createCliente = trpc.clientes.create.useMutation({
     onSuccess: (data) => {
       toast.success("Cliente cadastrado com sucesso!");
-      setFormData(prev => ({ ...prev, clienteId: data.id.toString() }));
+      setFormData(prev => ({ 
+        ...prev, 
+        clienteId: data.id.toString(),
+        cpfCliente: data.cpf || "",
+        endereco: data.endereco || "",
+      }));
       setMostrarNovoCliente(false);
-      setNovoCliente({ nome: "", telefone: "", cpf: "", endereco: "" });
+      setNovoCliente({ nome: "", telefone: "", cpf: "", endereco: "", email: "" });
     },
     onError: (error) => {
       toast.error(`Erro ao cadastrar cliente: ${error.message}`);
@@ -60,260 +77,485 @@ export default function NovaFesta() {
     },
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSelectChange = (name: string, value: string) => {
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleNovoClienteChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setNovoCliente(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleCadastrarCliente = async () => {
+    if (!novoCliente.nome || !novoCliente.telefone) {
+      toast.error("Nome e telefone são obrigatórios");
+      return;
+    }
+    await createCliente.mutateAsync(novoCliente);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Validação
-    if (!formData.clienteId || !formData.dataFechamento || !formData.dataFesta || 
-        !formData.valorTotal || !formData.numeroConvidados) {
+    if (!formData.clienteId || !formData.dataFechamento || !formData.dataFesta || !formData.valorTotal || !formData.numeroConvidados) {
       toast.error("Preencha todos os campos obrigatórios");
       return;
     }
 
-    // Converter valor para centavos
-    const valorEmCentavos = Math.round(parseFloat(formData.valorTotal.replace(/[^\d,]/g, "").replace(",", ".")) * 100);
-    
-    createFesta.mutate({
+    const clienteSelecionado = clientes?.find(c => c.id.toString() === formData.clienteId);
+    if (!clienteSelecionado) {
+      toast.error("Cliente inválido");
+      return;
+    }
+
+    await createFesta.mutateAsync({
       clienteId: parseInt(formData.clienteId),
-      dataFechamento: new Date(formData.dataFechamento + "T00:00:00").getTime(),
-      dataFesta: new Date(formData.dataFesta + "T00:00:00").getTime(),
-      valorTotal: valorEmCentavos,
+      dataFechamento: new Date(formData.dataFechamento).getTime(),
+      dataFesta: new Date(formData.dataFesta).getTime(),
+      valorTotal: Math.round(parseFloat(formData.valorTotal) * 100),
       numeroConvidados: parseInt(formData.numeroConvidados),
-      tema: formData.tema || undefined,
-      horario: formData.horario || undefined,
-      observacoes: formData.observacoes || undefined,
+      tema: formData.tema,
+      horario: formData.horario,
+      cpfCliente: formData.cpfCliente,
+      endereco: formData.endereco,
+      brinde: formData.brinde,
+      refeicao: formData.refeicao,
+      massaType: formData.massaType,
+      molhoType: formData.molhoType,
+      bolo: formData.bolo,
+      nomeAniversariante: formData.nomeAniversariante,
+      idadeAniversariante: formData.idadeAniversariante ? parseInt(formData.idadeAniversariante) : undefined,
+      observacoes: formData.observacoes,
     });
   };
 
-  const handleChange = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
-  };
-
   if (authLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <Loader2 className="h-8 w-8 animate-spin" />
-      </div>
-    );
-  }
-
-  if (!user) {
-    return null;
+    return <DashboardLayout><div className="flex justify-center items-center h-screen"><Loader2 className="animate-spin" /></div></DashboardLayout>;
   }
 
   return (
     <DashboardLayout>
-      <div className="container py-8">
-        <div className="mb-6">
-          <h1 className="text-3xl font-bold">Nova Festa</h1>
-          <p className="text-muted-foreground">Cadastre uma nova festa no sistema</p>
-        </div>
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-6">
+        <div className="max-w-4xl mx-auto">
+          {/* Header */}
+          <div className="mb-8 flex items-center gap-4">
+            <button
+              onClick={() => setLocation("/festas")}
+              className="p-2 hover:bg-slate-700 rounded-lg transition"
+            >
+              <ArrowLeft className="w-6 h-6 text-slate-400" />
+            </button>
+            <div>
+              <h1 className="text-4xl font-bold text-white mb-2">Nova Festa</h1>
+              <p className="text-slate-400">Cadastre uma nova festa com todos os detalhes da Ficha de Contrato</p>
+            </div>
+          </div>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Informações da Festa</CardTitle>
-            <CardDescription>Preencha os dados da festa a ser cadastrada</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Cliente */}
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <Label htmlFor="clienteId">Cliente *</Label>
-                  <Button
-                    type="button"
-                    variant="outline"
-                    size="sm"
-                    onClick={() => setMostrarNovoCliente(!mostrarNovoCliente)}
-                  >
-                    {mostrarNovoCliente ? "Selecionar Existente" : "+ Novo Cliente"}
-                  </Button>
-                </div>
-                
-                {mostrarNovoCliente ? (
-                  <div className="border rounded-lg p-4 space-y-4 bg-muted/50">
-                    <div className="space-y-2">
-                      <Label htmlFor="nomeCliente">Nome *</Label>
-                      <Input
-                        id="nomeCliente"
-                        value={novoCliente.nome}
-                        onChange={(e) => setNovoCliente(prev => ({ ...prev, nome: e.target.value }))}
-                        placeholder="Nome completo do cliente"
-                      />
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="telefoneCliente">Telefone *</Label>
-                        <Input
-                          id="telefoneCliente"
-                          value={novoCliente.telefone}
-                          onChange={(e) => setNovoCliente(prev => ({ ...prev, telefone: e.target.value }))}
-                          placeholder="(00) 00000-0000"
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="cpfCliente">CPF</Label>
-                        <Input
-                          id="cpfCliente"
-                          value={novoCliente.cpf}
-                          onChange={(e) => setNovoCliente(prev => ({ ...prev, cpf: e.target.value }))}
-                          placeholder="000.000.000-00"
-                        />
-                      </div>
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="enderecoCliente">Endereço</Label>
-                      <Input
-                        id="enderecoCliente"
-                        value={novoCliente.endereco}
-                        onChange={(e) => setNovoCliente(prev => ({ ...prev, endereco: e.target.value }))}
-                        placeholder="Endereço completo"
-                      />
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Seleção/Cadastro de Cliente */}
+            <Card className="bg-slate-800 border-slate-700">
+              <CardHeader>
+                <CardTitle className="text-white">Cliente</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {!mostrarNovoCliente ? (
+                  <div className="space-y-4">
+                    <div>
+                      <Label className="text-slate-300">Selecione um cliente</Label>
+                      <Select value={formData.clienteId} onValueChange={(value) => {
+                        const cliente = clientes?.find(c => c.id.toString() === value) as any;
+                        setFormData(prev => ({
+                          ...prev,
+                          clienteId: value,
+                          cpfCliente: cliente?.cpf || "",
+                          endereco: cliente?.endereco || "",
+                        }));
+                      }}>
+                        <SelectTrigger className="bg-slate-700 border-slate-600 text-white">
+                          <SelectValue placeholder="Escolha um cliente..." />
+                        </SelectTrigger>
+                        <SelectContent className="bg-slate-700 border-slate-600">
+                          {loadingClientes ? (
+                            <SelectItem value="loading" disabled>Carregando...</SelectItem>
+                          ) : clientes && clientes.length > 0 ? (
+                            clientes.map(cliente => (
+                              <SelectItem key={cliente.id} value={cliente.id.toString()} className="text-white">
+                                {cliente.nome} ({cliente.telefone})
+                              </SelectItem>
+                            ))
+                          ) : (
+                            <SelectItem value="empty" disabled>Nenhum cliente encontrado</SelectItem>
+                          )}
+                        </SelectContent>
+                      </Select>
                     </div>
                     <Button
                       type="button"
-                      onClick={() => {
-                        if (!novoCliente.nome || !novoCliente.telefone) {
-                          toast.error("Preencha nome e telefone do cliente");
-                          return;
-                        }
-                        createCliente.mutate(novoCliente);
-                      }}
-                      disabled={createCliente.isPending}
+                      variant="outline"
+                      onClick={() => setMostrarNovoCliente(true)}
+                      className="w-full text-slate-300 border-slate-600 hover:bg-slate-700"
                     >
-                      {createCliente.isPending ? (
-                        <>
-                          <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                          Cadastrando...
-                        </>
-                      ) : (
-                        "Cadastrar Cliente"
-                      )}
+                      + Cadastrar novo cliente
                     </Button>
                   </div>
                 ) : (
-                  loadingClientes ? (
-                    <div className="flex items-center gap-2">
-                      <Loader2 className="h-4 w-4 animate-spin" />
-                      <span className="text-sm text-muted-foreground">Carregando clientes...</span>
+                  <div className="space-y-4">
+                    <div>
+                      <Label className="text-slate-300">Nome do cliente</Label>
+                      <Input
+                        name="nome"
+                        value={novoCliente.nome}
+                        onChange={handleNovoClienteChange}
+                        placeholder="Nome completo"
+                        className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-500"
+                      />
                     </div>
-                  ) : (
-                    <Select value={formData.clienteId} onValueChange={(value) => handleChange("clienteId", value)}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Selecione um cliente" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {clientes?.map((cliente) => (
-                          <SelectItem key={cliente.id} value={cliente.id.toString()}>
-                            {cliente.nome} {cliente.telefone ? `- ${cliente.telefone}` : ""}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  )
+                    <div>
+                      <Label className="text-slate-300">Telefone</Label>
+                      <Input
+                        name="telefone"
+                        value={novoCliente.telefone}
+                        onChange={handleNovoClienteChange}
+                        placeholder="(21) 99999-9999"
+                        className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-500"
+                      />
+                    </div>
+                    <div>
+                      <Label className="text-slate-300">CPF</Label>
+                      <Input
+                        name="cpf"
+                        value={novoCliente.cpf}
+                        onChange={handleNovoClienteChange}
+                        placeholder="000.000.000-00"
+                        className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-500"
+                      />
+                    </div>
+                    <div>
+                      <Label className="text-slate-300">Email</Label>
+                      <Input
+                        name="email"
+                        type="email"
+                        value={novoCliente.email}
+                        onChange={handleNovoClienteChange}
+                        placeholder="email@exemplo.com"
+                        className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-500"
+                      />
+                    </div>
+                    <div>
+                      <Label className="text-slate-300">Endereço</Label>
+                      <Input
+                        name="endereco"
+                        value={novoCliente.endereco}
+                        onChange={handleNovoClienteChange}
+                        placeholder="Rua, número, complemento"
+                        className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-500"
+                      />
+                    </div>
+                    <div className="flex gap-2">
+                      <Button
+                        type="button"
+                        onClick={handleCadastrarCliente}
+                        disabled={createCliente.isPending}
+                        className="flex-1 bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600"
+                      >
+                        {createCliente.isPending ? <Loader2 className="animate-spin mr-2 w-4 h-4" /> : null}
+                        Cadastrar cliente
+                      </Button>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        onClick={() => setMostrarNovoCliente(false)}
+                        className="flex-1 text-slate-300 border-slate-600 hover:bg-slate-700"
+                      >
+                        Cancelar
+                      </Button>
+                    </div>
+                  </div>
                 )}
-              </div>
+              </CardContent>
+            </Card>
 
-              {/* Datas */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="dataFechamento">Data de Fechamento *</Label>
-                  <Input
-                    id="dataFechamento"
-                    type="date"
-                    value={formData.dataFechamento}
-                    onChange={(e) => handleChange("dataFechamento", e.target.value)}
-                    required
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="dataFesta">Data da Festa *</Label>
-                  <Input
-                    id="dataFesta"
-                    type="date"
-                    value={formData.dataFesta}
-                    onChange={(e) => handleChange("dataFesta", e.target.value)}
-                    required
-                  />
-                </div>
-              </div>
+            {/* Tabs para Ficha de Contrato e Degustação */}
+            <Tabs defaultValue="contrato" className="w-full">
+              <TabsList className="grid w-full grid-cols-2 bg-slate-800 border border-slate-700">
+                <TabsTrigger value="contrato" className="text-slate-300 data-[state=active]:bg-slate-700 data-[state=active]:text-white">
+                  Ficha de Contrato
+                </TabsTrigger>
+                <TabsTrigger value="degustacao" className="text-slate-300 data-[state=active]:bg-slate-700 data-[state=active]:text-white">
+                  Ficha de Degustação
+                </TabsTrigger>
+              </TabsList>
 
-              {/* Valor e Convidados */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="valorTotal">Valor Total (R$) *</Label>
+              {/* Ficha de Contrato */}
+              <TabsContent value="contrato" className="space-y-4">
+                <Card className="bg-slate-800 border-slate-700">
+                  <CardHeader>
+                    <CardTitle className="text-white">Informações do Contrato</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <Label className="text-slate-300">CPF do Cliente</Label>
+                        <Input
+                          name="cpfCliente"
+                          value={formData.cpfCliente}
+                          onChange={handleInputChange}
+                          placeholder="000.000.000-00"
+                          className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-500"
+                        />
+                      </div>
+                      <div>
+                        <Label className="text-slate-300">Email</Label>
+                        <Input
+                          type="email"
+                          value={(clientes?.find(c => c.id.toString() === formData.clienteId) as any)?.email || ""}
+                          disabled
+                          className="bg-slate-700 border-slate-600 text-slate-400"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <Label className="text-slate-300">Endereço</Label>
+                      <Input
+                        name="endereco"
+                        value={formData.endereco}
+                        onChange={handleInputChange}
+                        placeholder="Rua, número, complemento"
+                        className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-500"
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <Label className="text-slate-300">Data de Fechamento *</Label>
+                        <Input
+                          name="dataFechamento"
+                          type="date"
+                          value={formData.dataFechamento}
+                          onChange={handleInputChange}
+                          required
+                          className="bg-slate-700 border-slate-600 text-white"
+                        />
+                      </div>
+                      <div>
+                        <Label className="text-slate-300">Data do Evento *</Label>
+                        <Input
+                          name="dataFesta"
+                          type="date"
+                          value={formData.dataFesta}
+                          onChange={handleInputChange}
+                          required
+                          className="bg-slate-700 border-slate-600 text-white"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <Label className="text-slate-300">Horário do Evento</Label>
+                        <Input
+                          name="horario"
+                          value={formData.horario}
+                          onChange={handleInputChange}
+                          placeholder="19h"
+                          className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-500"
+                        />
+                      </div>
+                      <div>
+                        <Label className="text-slate-300">Quantidade de Convidados *</Label>
+                        <Input
+                          name="numeroConvidados"
+                          type="number"
+                          value={formData.numeroConvidados}
+                          onChange={handleInputChange}
+                          placeholder="80"
+                          required
+                          className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-500"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <Label className="text-slate-300">Tema *</Label>
+                      <Input
+                        name="tema"
+                        value={formData.tema}
+                        onChange={handleInputChange}
+                        placeholder="Pintando o 7 - formatura"
+                        required
+                        className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-500"
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <Label className="text-slate-300">Nome do Aniversariante</Label>
+                        <Input
+                          name="nomeAniversariante"
+                          value={formData.nomeAniversariante}
+                          onChange={handleInputChange}
+                          placeholder="Nome completo"
+                          className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-500"
+                        />
+                      </div>
+                      <div>
+                        <Label className="text-slate-300">Idade do Aniversariante</Label>
+                        <Input
+                          name="idadeAniversariante"
+                          type="number"
+                          value={formData.idadeAniversariante}
+                          onChange={handleInputChange}
+                          placeholder="7"
+                          className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-500"
+                        />
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+
+              {/* Ficha de Degustação */}
+              <TabsContent value="degustacao" className="space-y-4">
+                <Card className="bg-slate-800 border-slate-700">
+                  <CardHeader>
+                    <CardTitle className="text-white">Ficha de Degustação</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div>
+                      <Label className="text-slate-300">Brinde</Label>
+                      <Select value={formData.brinde} onValueChange={(value) => handleSelectChange("brinde", value)}>
+                        <SelectTrigger className="bg-slate-700 border-slate-600 text-white">
+                          <SelectValue placeholder="Escolha o brinde..." />
+                        </SelectTrigger>
+                        <SelectContent className="bg-slate-700 border-slate-600">
+                          <SelectItem value="acai" className="text-white">Açaí</SelectItem>
+                          <SelectItem value="sorvete" className="text-white">Sorvete</SelectItem>
+                          <SelectItem value="picolé" className="text-white">Picolé</SelectItem>
+                          <SelectItem value="mousse" className="text-white">Mousse</SelectItem>
+                          <SelectItem value="outro" className="text-white">Outro</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div>
+                      <Label className="text-slate-300">Refeição</Label>
+                      <Textarea
+                        name="refeicao"
+                        value={formData.refeicao}
+                        onChange={handleInputChange}
+                        placeholder="Ex: Penne à bolonhesa"
+                        className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-500"
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <Label className="text-slate-300">Tipo de Massa</Label>
+                        <Select value={formData.massaType} onValueChange={(value) => handleSelectChange("massaType", value)}>
+                          <SelectTrigger className="bg-slate-700 border-slate-600 text-white">
+                            <SelectValue placeholder="Escolha a massa..." />
+                          </SelectTrigger>
+                          <SelectContent className="bg-slate-700 border-slate-600">
+                            <SelectItem value="pene" className="text-white">Penne</SelectItem>
+                            <SelectItem value="fusilli" className="text-white">Fusilli</SelectItem>
+                            <SelectItem value="talharim" className="text-white">Talharim</SelectItem>
+                            <SelectItem value="outro" className="text-white">Outro</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+
+                      <div>
+                        <Label className="text-slate-300">Tipo de Molho</Label>
+                        <Select value={formData.molhoType} onValueChange={(value) => handleSelectChange("molhoType", value)}>
+                          <SelectTrigger className="bg-slate-700 border-slate-600 text-white">
+                            <SelectValue placeholder="Escolha o molho..." />
+                          </SelectTrigger>
+                          <SelectContent className="bg-slate-700 border-slate-600">
+                            <SelectItem value="bolonhesa" className="text-white">Bolonhesa</SelectItem>
+                            <SelectItem value="calabresa" className="text-white">Calabresa</SelectItem>
+                            <SelectItem value="sugo" className="text-white">Ao Sugo</SelectItem>
+                            <SelectItem value="branco" className="text-white">Molho Branco</SelectItem>
+                            <SelectItem value="outro" className="text-white">Outro</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+
+                    <div>
+                      <Label className="text-slate-300">Bolo</Label>
+                      <Textarea
+                        name="bolo"
+                        value={formData.bolo}
+                        onChange={handleInputChange}
+                        placeholder="Ex: Massa de chocolate com recheio de brigadeiro"
+                        className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-500"
+                      />
+                    </div>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+            </Tabs>
+
+            {/* Informações Financeiras */}
+            <Card className="bg-slate-800 border-slate-700">
+              <CardHeader>
+                <CardTitle className="text-white">Informações Financeiras</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <Label className="text-slate-300">Valor Total da Festa (R$) *</Label>
                   <Input
-                    id="valorTotal"
-                    type="text"
-                    placeholder="5.290,00"
-                    value={formData.valorTotal}
-                    onChange={(e) => handleChange("valorTotal", e.target.value)}
-                    required
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="numeroConvidados">Número de Convidados *</Label>
-                  <Input
-                    id="numeroConvidados"
+                    name="valorTotal"
                     type="number"
-                    placeholder="100"
-                    value={formData.numeroConvidados}
-                    onChange={(e) => handleChange("numeroConvidados", e.target.value)}
+                    step="0.01"
+                    value={formData.valorTotal}
+                    onChange={handleInputChange}
+                    placeholder="5000.00"
                     required
-                    min="1"
+                    className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-500"
                   />
                 </div>
-              </div>
 
-              {/* Tema e Horário */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="tema">Tema</Label>
-                  <Input
-                    id="tema"
-                    type="text"
-                    placeholder="Ex: Frozen, Super-Heróis..."
-                    value={formData.tema}
-                    onChange={(e) => handleChange("tema", e.target.value)}
+                <div>
+                  <Label className="text-slate-300">Observações</Label>
+                  <Textarea
+                    name="observacoes"
+                    value={formData.observacoes}
+                    onChange={handleInputChange}
+                    placeholder="Observações adicionais sobre a festa"
+                    className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-500"
                   />
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="horario">Horário</Label>
-                  <Input
-                    id="horario"
-                    type="text"
-                    placeholder="Ex: 14h às 18h"
-                    value={formData.horario}
-                    onChange={(e) => handleChange("horario", e.target.value)}
-                  />
-                </div>
-              </div>
+              </CardContent>
+            </Card>
 
-              {/* Observações */}
-              <div className="space-y-2">
-                <Label htmlFor="observacoes">Observações</Label>
-                <Textarea
-                  id="observacoes"
-                  placeholder="Informações adicionais sobre a festa..."
-                  value={formData.observacoes}
-                  onChange={(e) => handleChange("observacoes", e.target.value)}
-                  rows={4}
-                />
-              </div>
-
-              {/* Botões */}
-              <div className="flex gap-4">
-                <Button type="submit" disabled={createFesta.isPending}>
-                  {createFesta.isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                  Cadastrar Festa
-                </Button>
-                <Button type="button" variant="outline" onClick={() => setLocation("/festas")}>
-                  Cancelar
-                </Button>
-              </div>
-            </form>
-          </CardContent>
-        </Card>
+            {/* Botões de Ação */}
+            <div className="flex gap-4">
+              <Button
+                type="submit"
+                disabled={createFesta.isPending}
+                className="flex-1 bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white font-semibold py-3"
+              >
+                {createFesta.isPending ? <Loader2 className="animate-spin mr-2 w-4 h-4" /> : null}
+                Cadastrar Festa
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setLocation("/festas")}
+                className="flex-1 text-slate-300 border-slate-600 hover:bg-slate-700"
+              >
+                Cancelar
+              </Button>
+            </div>
+          </form>
+        </div>
       </div>
     </DashboardLayout>
   );

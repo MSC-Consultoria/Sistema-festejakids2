@@ -28,6 +28,8 @@ export const clientesRouter = router({
         nome: z.string().min(1),
         telefone: z.string().optional(),
         email: z.string().email().optional().or(z.literal("")),
+        cpf: z.string().optional(),
+        endereco: z.string().optional(),
       })
     )
     .mutation(async ({ input }) => {
@@ -35,8 +37,10 @@ export const clientesRouter = router({
         nome: input.nome,
         telefone: input.telefone || null,
         email: input.email || null,
+        cpf: input.cpf || null,
+        endereco: input.endereco || null,
       });
-      return { id };
+      return { id, cpf: input.cpf, endereco: input.endereco };
     }),
 
   update: protectedProcedure
@@ -46,6 +50,8 @@ export const clientesRouter = router({
         nome: z.string().min(1).optional(),
         telefone: z.string().optional(),
         email: z.string().email().optional().or(z.literal("")),
+        cpf: z.string().optional(),
+        endereco: z.string().optional(),
       })
     )
     .mutation(async ({ input }) => {
