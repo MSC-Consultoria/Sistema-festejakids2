@@ -550,3 +550,14 @@
 - [x] Criar roadmap detalhado dos próximos passos (ROADMAP.md com 16 features)
 - [x] Fazer commit no GitHub com todas as alterações (commit a86f6f0)
 - [x] Atualizar README.md do projeto (com badges e estatísticas)
+
+
+## Aba de Pagamentos e Agenda Integrada (Fase 23)
+- [x] Criar aba de Pagamentos dentro de Financeiro (com tabs Resumo/Pagamentos)
+- [x] Processar 34 pagamentos de novembro (JSON gerado)
+- [x] Criar procedure importarLote para inserção em massa
+- [x] Criar página temporária /importar-pagamentos-novembro
+- [ ] Atualizar Agenda para mostrar pagamentos com data, valor, nome, forma (futura)
+- [ ] Atualizar Agenda para mostrar visitações (futura)
+- [ ] Criar modal de detalhes ao clicar em evento da agenda (futura)
+- [ ] Adicionar filtros na agenda (Festas/Pagamentos/Visitações) (futura)

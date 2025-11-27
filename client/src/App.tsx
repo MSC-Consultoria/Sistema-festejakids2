@@ -24,6 +24,7 @@ import Configuracoes from "./pages/Configuracoes";
 import Usuarios from "./pages/Usuarios";
 import DetalhesCliente from "./pages/DetalhesCliente";
 import ConverterVisitacao from "./pages/ConverterVisitacao";
+import ImportarPagamentosNovembro from "./pages/ImportarPagamentosNovembro";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -49,6 +50,7 @@ function Router() {
       <Route path="/importacao" component={Importacao} />
       <Route path="/configuracoes" component={Configuracoes} />
       <Route path="/usuarios" component={Usuarios} />
+      <Route path="/importar-pagamentos-novembro" component={ImportarPagamentosNovembro} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />

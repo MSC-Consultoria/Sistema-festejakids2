@@ -88,4 +88,52 @@ export const pagamentosRouter = router({
         pagamentos,
       };
     }),
+
+  importarLote: protectedProcedure
+    .input(
+      z.object({
+        pagamentos: z.array(
+          z.object({
+            codigo: z.string(),
+            data: z.string(), // YYYY-MM-DD
+            pagador: z.string(),
+            valor: z.number(), // em reais
+            formaPagamento: z.string(),
+          })
+        ),
+      })
+    )
+    .mutation(async ({ input }) => {
+      let inserted = 0;
+      let errors = 0;
+      const results = [];
+
+      for (const pag of input.pagamentos) {
+        try {
+          const id = await db.createPagamento({
+            codigo: pag.codigo,
+            festaId: null,
+            valor: Math.round(pag.valor * 100), // Converter para centavos
+            dataPagamento: new Date(pag.data),
+            metodoPagamento: pag.formaPagamento,
+            pagador: pag.pagador,
+            comprovanteUrl: null,
+            comprovanteFileKey: null,
+            observacoes: 'Pagamento de novembro/2025 - Importado automaticamente',
+          });
+          inserted++;
+          results.push({ codigo: pag.codigo, status: 'success', id });
+        } catch (error: any) {
+          errors++;
+          results.push({ codigo: pag.codigo, status: 'error', error: error.message });
+        }
+      }
+
+      return {
+        inserted,
+        errors,
+        total: input.pagamentos.length,
+        results,
+      };
+    }),
 });

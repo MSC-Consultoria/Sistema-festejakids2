@@ -11,8 +11,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { trpc } from "@/lib/trpc";
-import { DollarSign, Loader2, Plus, TrendingDown, TrendingUp, Wallet } from "lucide-react";
+import { DollarSign, Loader2, Plus, TrendingDown, TrendingUp, Wallet, Receipt } from "lucide-react";
 import { useMemo } from "react";
 import {
   LineChart,
@@ -139,7 +140,19 @@ export default function Financeiro() {
             <Loader2 className="h-8 w-8 animate-spin" />
           </div>
         ) : estatisticas ? (
-          <div className="space-y-6">
+          <Tabs defaultValue="resumo" className="space-y-6">
+            <TabsList>
+              <TabsTrigger value="resumo" className="flex items-center gap-2">
+                <Wallet className="h-4 w-4" />
+                Resumo
+              </TabsTrigger>
+              <TabsTrigger value="pagamentos" className="flex items-center gap-2">
+                <Receipt className="h-4 w-4" />
+                Pagamentos
+              </TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="resumo" className="space-y-6">
             {/* Cards de Resumo */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <Card>
@@ -337,7 +350,67 @@ export default function Financeiro() {
                 </Table>
               </CardContent>
             </Card>
-          </div>
+            </TabsContent>
+
+            <TabsContent value="pagamentos" className="space-y-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Todos os Pagamentos</CardTitle>
+                  <CardDescription>
+                    {pagamentos?.length || 0} pagamentos registrados
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Código</TableHead>
+                        <TableHead>Pagador</TableHead>
+                        <TableHead>Data</TableHead>
+                        <TableHead>Forma</TableHead>
+                        <TableHead className="text-right">Valor</TableHead>
+                        <TableHead>Festa</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {pagamentos && pagamentos.length > 0 ? (
+                        pagamentos.map((pag) => (
+                          <TableRow key={pag.id}>
+                            <TableCell className="font-medium">{pag.codigo}</TableCell>
+                            <TableCell>{pag.pagador || "-"}</TableCell>
+                            <TableCell>
+                              {new Date(pag.dataPagamento).toLocaleDateString("pt-BR")}
+                            </TableCell>
+                            <TableCell>
+                              <Badge variant="outline">{pag.metodoPagamento || "PIX"}</Badge>
+                            </TableCell>
+                            <TableCell className="text-right font-medium">
+                              R$ {(pag.valor / 100).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}
+                            </TableCell>
+                            <TableCell>
+                              {pag.festaId ? (
+                                <Badge variant="secondary">
+                                  {festas?.find(f => f.id === pag.festaId)?.codigo || `Festa #${pag.festaId}`}
+                                </Badge>
+                              ) : (
+                                <span className="text-muted-foreground text-sm">Sem festa</span>
+                              )}
+                            </TableCell>
+                          </TableRow>
+                        ))
+                      ) : (
+                        <TableRow>
+                          <TableCell colSpan={6} className="text-center text-muted-foreground">
+                            Nenhum pagamento registrado
+                          </TableCell>
+                        </TableRow>
+                      )}
+                    </TableBody>
+                  </Table>
+                </CardContent>
+              </Card>
+            </TabsContent>
+          </Tabs>
         ) : (
           <p className="text-center text-muted-foreground py-12">
             Nenhum dado financeiro disponível
