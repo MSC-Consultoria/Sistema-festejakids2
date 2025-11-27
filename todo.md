@@ -381,4 +381,4 @@
 - [x] Limpar festas de teste do banco de dados
 - [x] Atualizar linha do tempo do projeto
 - [x] Atualizar documentação do projeto (README.md)
-- [ ] Fazer commit no GitHub com todas as alterações
+- [x] Fazer commit no GitHub com todas as alterações
