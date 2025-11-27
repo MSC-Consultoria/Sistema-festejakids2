@@ -583,3 +583,16 @@
 - [x] Implementar navegação para edição de Festas, Pagamentos e Visitações
 - [x] Geração automática de código ao criar nova visitação
 - [x] Testar fluxo completo de visualização e edição
+
+
+## Importação de Contratos Históricos (Fase 26)
+- [x] Processar arquivos JSON de contratos (2024: 173, 2025: 193, 2026: 41)
+- [x] Limpar tabela de festas (manter pagamentos, usuários, visitações)
+- [x] Mapear campos JSON para schema de festas (focar em campos essenciais)
+- [x] Gerar SQL de importação (393 festas válidas em 4 partes)
+- [x] Importar parte 1 (50 festas) com sucesso
+- [x] Importar parte 2 (86 festas) com sucesso
+- [x] Importar parte 3 (86 festas) com sucesso
+- [x] Importar parte 4 (85 festas) com sucesso - Última parte!
+- [x] Verificar total de 307 festas importadas (faturamento: R$ 1.521.484,00)
+- [x] Validar campos essenciais (data fechamento, data evento, valor, convidados)

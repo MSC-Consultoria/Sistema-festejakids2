@@ -1,6 +1,8 @@
 import { z } from "zod";
 import { protectedProcedure, router } from "../_core/trpc";
 import * as db from "../db";
+import { getDb } from "../db";
+import { festas } from "../../drizzle/schema";
 import { gerarContratoPDF } from "../contratoGenerator";
 import { storagePut } from "../storage";
 import { notifyOwner } from "../_core/notification";
@@ -288,5 +290,58 @@ export const festasRouter = router({
     .input(z.object({ festaId: z.number() }))
     .query(async ({ input }) => {
       return db.getContratosByFesta(input.festaId);
+    }),
+
+  // Importação em lote de festas
+  importarLote: protectedProcedure
+    .input(
+      z.array(
+        z.object({
+          codigo: z.string(),
+          dataFechamento: z.string().nullable(),
+          dataFesta: z.string(),
+          valorTotal: z.number(),
+          numeroConvidados: z.number(),
+          tema: z.string().optional(),
+          aniversariante: z.string().optional(),
+          horario: z.string().optional(),
+          duracao: z.string().optional(),
+          clienteNome: z.string(),
+          clienteCpf: z.string().optional(),
+          clienteTelefone: z.string().optional(),
+        })
+      )
+    )
+    .mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new Error("Database not available");
+
+      let success = 0;
+      let errors = 0;
+
+      for (const festa of input) {
+        try {
+          await db.insert(festas).values({
+            codigo: festa.codigo,
+            clienteId: 1, // Cliente genérico para importação
+            dataFechamento: festa.dataFechamento ? new Date(festa.dataFechamento) : new Date(),
+            dataFesta: new Date(festa.dataFesta),
+            valorTotal: festa.valorTotal,
+            numeroConvidados: festa.numeroConvidados || 0,
+            tema: festa.tema || null,
+            nomeAniversariante: festa.aniversariante || null,
+            horario: festa.horario || null,
+            cpfCliente: festa.clienteCpf || null,
+            status: "agendada",
+            valorPago: 0,
+          });
+          success++;
+        } catch (error) {
+          errors++;
+          console.error(`Erro ao importar festa ${festa.codigo}:`, error);
+        }
+      }
+
+      return { success, errors, total: input.length };
     }),
 });

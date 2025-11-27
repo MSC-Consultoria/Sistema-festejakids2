@@ -1,0 +1,13 @@
+{
+  "query": "SELECT SUM(valorTotal) as faturamento_total FROM festas;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 48JvJ4xGnzv6z7Y.root --database kipPpydFSSmPdFAif48Epo --execute SELECT SUM(valorTotal) as faturamento_total FROM festas;",
+  "rows": [
+    {
+      "faturamento_total": "150783500"
+    }
+  ],
+  "messages": [],
+  "stdout": "faturamento_total\n150783500\n",
+  "stderr": "",
+  "execution_time_ms": 59
+}
