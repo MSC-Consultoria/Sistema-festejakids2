@@ -498,3 +498,11 @@
 - [x] Criar tabela de templates de contrato no banco de dados
 - [ ] Desenvolver interface de edição de template de contrato para administradores (futura)
 - [x] Adicionar botão voltar na página de Usuários
+
+
+## Versão Demo para Apresentação (Fase 18)
+- [x] Melhorar visualmente Dashboard com dados de exemplo atraentes
+- [x] Melhorar visualmente Agenda com eventos de exemplo
+- [x] Melhorar visualmente Visitação com leads de exemplo
+- [x] Garantir que as 3 telas estejam polidas para demonstração
+- [x] Testar fluxo completo Dashboard → Agenda → Visitação
