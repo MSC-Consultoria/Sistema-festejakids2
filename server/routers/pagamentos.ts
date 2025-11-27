@@ -136,4 +136,41 @@ export const pagamentosRouter = router({
         results,
       };
     }),
+
+  associarFesta: protectedProcedure
+    .input(
+      z.object({
+        pagamentoId: z.number(),
+        festaId: z.number().nullable(),
+      })
+    )
+    .mutation(async ({ input }) => {
+      const pagamento = await db.getPagamentoById(input.pagamentoId);
+      if (!pagamento) {
+        throw new Error("Pagamento não encontrado");
+      }
+
+      // Se tinha festa anterior, remover o valor
+      if (pagamento.festaId) {
+        const festaAnterior = await db.getFestaById(pagamento.festaId);
+        if (festaAnterior) {
+          const novoValor = Math.max(0, festaAnterior.valorPago - pagamento.valor);
+          await db.updateFesta(pagamento.festaId, { valorPago: novoValor });
+        }
+      }
+
+      // Atualizar o pagamento
+      await db.updatePagamento(input.pagamentoId, { festaId: input.festaId });
+
+      // Se tem nova festa, adicionar o valor
+      if (input.festaId) {
+        const novaFesta = await db.getFestaById(input.festaId);
+        if (novaFesta) {
+          const novoValor = novaFesta.valorPago + pagamento.valor;
+          await db.updateFesta(input.festaId, { valorPago: novoValor });
+        }
+      }
+
+      return { success: true };
+    }),
 });

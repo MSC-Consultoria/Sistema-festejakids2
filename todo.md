@@ -561,3 +561,14 @@
 - [ ] Atualizar Agenda para mostrar visitações (futura)
 - [ ] Criar modal de detalhes ao clicar em evento da agenda (futura)
 - [ ] Adicionar filtros na agenda (Festas/Pagamentos/Visitações) (futura)
+
+
+## Implementação dos Próximos Passos (Fase 24)
+- [x] Importar automaticamente os 34 pagamentos de novembro no banco (via SQL)
+- [x] Atualizar Agenda para buscar e exibir Festas, Pagamentos e Visitações
+- [x] Adicionar cores diferentes para cada tipo de evento na agenda (roxo/verde/azul)
+- [x] Criar modal de detalhes ao clicar em evento da agenda (Dialog com informações completas)
+- [x] Adicionar filtros de tipo de evento (Festas/Pagamentos/Visitações) (botões toggle)
+- [x] Criar interface dropdown na aba Pagamentos para associar à festa (Select component)
+- [x] Atualizar automaticamente valorPago da festa ao associar pagamento (procedure associarFesta)
+- [x] Testar fluxo completo de importação, visualização e associação

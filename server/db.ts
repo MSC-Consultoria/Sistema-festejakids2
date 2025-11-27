@@ -310,6 +310,19 @@ export async function getPagamentosByFesta(festaId: number) {
     .orderBy(desc(pagamentos.dataPagamento));
 }
 
+export async function getPagamentoById(id: number) {
+  const db = await getDb();
+  if (!db) return undefined;
+  const result = await db.select().from(pagamentos).where(eq(pagamentos.id, id)).limit(1);
+  return result.length > 0 ? result[0] : undefined;
+}
+
+export async function updatePagamento(id: number, data: Partial<InsertPagamento>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.update(pagamentos).set(data).where(eq(pagamentos.id, id));
+}
+
 export async function deletePagamento(id: number) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");

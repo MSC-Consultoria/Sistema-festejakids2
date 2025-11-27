@@ -1,25 +1,103 @@
 import { useAuth } from "@/_core/hooks/useAuth";
 import DashboardLayout from "@/components/DashboardLayout";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { trpc } from "@/lib/trpc";
-import { CalendarDays, Loader2 } from "lucide-react";
+import { CalendarDays, Loader2, PartyPopper, DollarSign, Users, Filter } from "lucide-react";
 import { useMemo, useState } from "react";
+
+type EventoAgenda = {
+  id: number;
+  tipo: "festa" | "pagamento" | "visitacao";
+  data: Date;
+  titulo: string;
+  subtitulo?: string;
+  valor?: number;
+  detalhes: any;
+};
 
 export default function Agenda() {
   const { user, loading: authLoading } = useAuth();
-  const { data: festas, isLoading } = trpc.festas.list.useQuery();
+  const { data: festas, isLoading: loadingFestas } = trpc.festas.list.useQuery();
+  const { data: pagamentos, isLoading: loadingPagamentos } = trpc.pagamentos.listAll.useQuery();
+  const { data: visitacoes, isLoading: loadingVisitacoes } = trpc.visitacoes.list.useQuery();
+  
   const [mesAtual, setMesAtual] = useState(() => {
     const hoje = new Date();
     return `${hoje.getFullYear()}-${String(hoje.getMonth() + 1).padStart(2, "0")}`;
   });
+  
+  const [filtros, setFiltros] = useState({
+    festas: true,
+    pagamentos: true,
+    visitacoes: true,
+  });
+  
+  const [eventoSelecionado, setEventoSelecionado] = useState<EventoAgenda | null>(null);
+
+  // Consolidar todos os eventos
+  const eventos = useMemo((): EventoAgenda[] => {
+    const todosEventos: EventoAgenda[] = [];
+
+    if (filtros.festas && festas) {
+      festas.forEach((festa) => {
+        todosEventos.push({
+          id: festa.id,
+          tipo: "festa",
+          data: new Date(festa.dataFesta),
+          titulo: festa.codigo,
+          subtitulo: festa.clienteNome ?? undefined,
+          valor: festa.valorTotal,
+          detalhes: festa,
+        });
+      });
+    }
+
+    if (filtros.pagamentos && pagamentos) {
+      pagamentos.forEach((pag) => {
+        todosEventos.push({
+          id: pag.id,
+          tipo: "pagamento",
+          data: new Date(pag.dataPagamento),
+          titulo: pag.codigo,
+          subtitulo: pag.pagador ?? undefined,
+          valor: pag.valor,
+          detalhes: pag,
+        });
+      });
+    }
+
+    if (filtros.visitacoes && visitacoes) {
+      visitacoes.forEach((vis) => {
+        if (vis.dataVisita) {
+          todosEventos.push({
+            id: vis.id,
+            tipo: "visitacao",
+            data: new Date(vis.dataVisita),
+            titulo: `Visitação - ${vis.nome}`,
+            subtitulo: vis.telefone ?? undefined,
+            detalhes: vis,
+          });
+        }
+      });
+    }
+
+    return todosEventos;
+  }, [festas, pagamentos, visitacoes, filtros]);
 
   // Gerar dias do mês
   const diasDoMes = useMemo(() => {
     const [ano, mes] = mesAtual.split("-").map(Number);
-    const primeiroDia = new Date(ano, mes - 1, 1);
-    const ultimoDia = new Date(ano, mes, 0);
     const dias: Date[] = [];
+    const ultimoDia = new Date(ano, mes, 0);
     
     for (let dia = 1; dia <= ultimoDia.getDate(); dia++) {
       dias.push(new Date(ano, mes - 1, dia));
@@ -28,24 +106,21 @@ export default function Agenda() {
     return dias;
   }, [mesAtual]);
 
-  // Agrupar festas por dia
-  const festasPorDia = useMemo(() => {
-    if (!festas) return {};
+  // Agrupar eventos por dia
+  const eventosPorDia = useMemo(() => {
+    const grupos: Record<string, EventoAgenda[]> = {};
     
-    const grupos: Record<string, typeof festas> = {};
-    
-    festas.forEach((festa) => {
-      const data = new Date(festa.dataFesta);
-      const diaKey = `${data.getFullYear()}-${String(data.getMonth() + 1).padStart(2, "0")}-${String(data.getDate()).padStart(2, "0")}`;
+    eventos.forEach((evento) => {
+      const diaKey = `${evento.data.getFullYear()}-${String(evento.data.getMonth() + 1).padStart(2, "0")}-${String(evento.data.getDate()).padStart(2, "0")}`;
       
       if (!grupos[diaKey]) {
         grupos[diaKey] = [];
       }
-      grupos[diaKey].push(festa);
+      grupos[diaKey].push(evento);
     });
     
     return grupos;
-  }, [festas]);
+  }, [eventos]);
 
   const formatarMesAno = (mesAno: string) => {
     const [ano, mes] = mesAno.split("-");
@@ -57,6 +132,32 @@ export default function Agenda() {
     const [ano, mes] = mesAtual.split("-").map(Number);
     const novaData = new Date(ano, mes - 1 + direcao, 1);
     setMesAtual(`${novaData.getFullYear()}-${String(novaData.getMonth() + 1).padStart(2, "0")}`);
+  };
+
+  const getCorEvento = (tipo: EventoAgenda["tipo"]) => {
+    switch (tipo) {
+      case "festa":
+        return "border-purple-500 bg-purple-50 dark:bg-purple-950";
+      case "pagamento":
+        return "border-green-500 bg-green-50 dark:bg-green-950";
+      case "visitacao":
+        return "border-blue-500 bg-blue-50 dark:bg-blue-950";
+    }
+  };
+
+  const getIconeEvento = (tipo: EventoAgenda["tipo"]) => {
+    switch (tipo) {
+      case "festa":
+        return <PartyPopper className="h-4 w-4" />;
+      case "pagamento":
+        return <DollarSign className="h-4 w-4" />;
+      case "visitacao":
+        return <Users className="h-4 w-4" />;
+    }
+  };
+
+  const toggleFiltro = (tipo: keyof typeof filtros) => {
+    setFiltros((prev) => ({ ...prev, [tipo]: !prev[tipo] }));
   };
 
   if (authLoading) {
@@ -71,15 +172,51 @@ export default function Agenda() {
     return null;
   }
 
+  const isLoading = loadingFestas || loadingPagamentos || loadingVisitacoes;
+
   return (
     <DashboardLayout>
       <div className="container py-8">
-        <div className="mb-6">
-          <h1 className="text-3xl font-bold flex items-center gap-2">
-            <CalendarDays className="h-8 w-8" />
-            Agenda de Festas
-          </h1>
-          <p className="text-muted-foreground">Visualize as festas em formato de agenda</p>
+        <div className="mb-6 flex items-start justify-between">
+          <div>
+            <h1 className="text-3xl font-bold flex items-center gap-2">
+              <CalendarDays className="h-8 w-8" />
+              Agenda Integrada
+            </h1>
+            <p className="text-muted-foreground">Festas, Pagamentos e Visitações</p>
+          </div>
+          
+          {/* Filtros */}
+          <div className="flex items-center gap-2">
+            <Filter className="h-4 w-4 text-muted-foreground" />
+            <Button
+              variant={filtros.festas ? "default" : "outline"}
+              size="sm"
+              onClick={() => toggleFiltro("festas")}
+              className="gap-2"
+            >
+              <PartyPopper className="h-4 w-4" />
+              Festas
+            </Button>
+            <Button
+              variant={filtros.pagamentos ? "default" : "outline"}
+              size="sm"
+              onClick={() => toggleFiltro("pagamentos")}
+              className="gap-2"
+            >
+              <DollarSign className="h-4 w-4" />
+              Pagamentos
+            </Button>
+            <Button
+              variant={filtros.visitacoes ? "default" : "outline"}
+              size="sm"
+              onClick={() => toggleFiltro("visitacoes")}
+              className="gap-2"
+            >
+              <Users className="h-4 w-4" />
+              Visitações
+            </Button>
+          </div>
         </div>
 
         {isLoading ? (
@@ -105,25 +242,24 @@ export default function Agenda() {
                 </button>
               </div>
               <CardDescription>
-                {Object.values(festasPorDia).flat().filter(f => {
-                  const data = new Date(f.dataFesta);
+                {eventos.filter(e => {
                   const [ano, mes] = mesAtual.split("-").map(Number);
-                  return data.getFullYear() === ano && data.getMonth() === mes - 1;
-                }).length} festas neste mês
+                  return e.data.getFullYear() === ano && e.data.getMonth() === mes - 1;
+                }).length} eventos neste mês
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 gap-2">
                 {diasDoMes.map((dia) => {
                   const diaKey = `${dia.getFullYear()}-${String(dia.getMonth() + 1).padStart(2, "0")}-${String(dia.getDate()).padStart(2, "0")}`;
-                  const festasNoDia = festasPorDia[diaKey] || [];
+                  const eventosNoDia = eventosPorDia[diaKey] || [];
                   const hoje = new Date();
                   const ehHoje = dia.toDateString() === hoje.toDateString();
                   
                   return (
                     <div
                       key={diaKey}
-                      className={`border rounded-lg p-4 ${ehHoje ? "border-primary bg-primary/5" : ""} ${festasNoDia.length > 0 ? "bg-accent/50" : ""}`}
+                      className={`border rounded-lg p-4 ${ehHoje ? "border-primary bg-primary/5" : ""} ${eventosNoDia.length > 0 ? "bg-accent/30" : ""}`}
                     >
                       <div className="flex items-start justify-between mb-2">
                         <div>
@@ -132,45 +268,40 @@ export default function Agenda() {
                             {ehHoje && <Badge className="ml-2" variant="default">Hoje</Badge>}
                           </div>
                           <div className="text-sm text-muted-foreground">
-                            {festasNoDia.length > 0 ? `${festasNoDia.length} ${festasNoDia.length === 1 ? "festa" : "festas"}` : "Sem festas"}
+                            {eventosNoDia.length > 0 ? `${eventosNoDia.length} ${eventosNoDia.length === 1 ? "evento" : "eventos"}` : "Sem eventos"}
                           </div>
                         </div>
                       </div>
                       
-                      {festasNoDia.length > 0 && (
+                      {eventosNoDia.length > 0 && (
                         <div className="space-y-2 mt-3">
-                          {festasNoDia.map((festa) => (
-                            <div
-                              key={festa.id}
-                              className="border-l-4 border-primary pl-3 py-2 bg-background rounded-r"
+                          {eventosNoDia.map((evento) => (
+                            <button
+                              key={`${evento.tipo}-${evento.id}`}
+                              onClick={() => setEventoSelecionado(evento)}
+                              className={`w-full border-l-4 pl-3 py-2 rounded-r text-left hover:opacity-80 transition-opacity ${getCorEvento(evento.tipo)}`}
                             >
                               <div className="flex items-center justify-between">
-                                <div>
-                                  <div className="font-medium">{festa.codigo}</div>
-                                  <div className="text-sm text-muted-foreground">
-                                    {festa.clienteNome}
+                                <div className="flex-1">
+                                  <div className="flex items-center gap-2 font-medium">
+                                    {getIconeEvento(evento.tipo)}
+                                    <span>{evento.titulo}</span>
                                   </div>
-                                  {festa.horario && (
-                                    <div className="text-xs text-muted-foreground mt-1">
-                                      🕐 {festa.horario}
-                                    </div>
-                                  )}
-                                  {festa.tema && (
-                                    <div className="text-xs text-muted-foreground">
-                                      🎨 {festa.tema}
+                                  {evento.subtitulo && (
+                                    <div className="text-sm text-muted-foreground mt-1">
+                                      {evento.subtitulo}
                                     </div>
                                   )}
                                 </div>
-                                <div className="text-right">
-                                  <div className="font-semibold text-sm">
-                                    R$ {(festa.valorTotal / 100).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}
+                                {evento.valor !== undefined && (
+                                  <div className="text-right ml-4">
+                                    <div className="font-semibold text-sm">
+                                      R$ {(evento.valor / 100).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}
+                                    </div>
                                   </div>
-                                  <Badge variant={festa.status === "agendada" ? "default" : "secondary"} className="text-xs">
-                                    {festa.status}
-                                  </Badge>
-                                </div>
+                                )}
                               </div>
-                            </div>
+                            </button>
                           ))}
                         </div>
                       )}
@@ -181,6 +312,123 @@ export default function Agenda() {
             </CardContent>
           </Card>
         )}
+
+        {/* Modal de Detalhes */}
+        <Dialog open={!!eventoSelecionado} onOpenChange={() => setEventoSelecionado(null)}>
+          <DialogContent className="max-w-2xl">
+            <DialogHeader>
+              <DialogTitle className="flex items-center gap-2">
+                {eventoSelecionado && getIconeEvento(eventoSelecionado.tipo)}
+                {eventoSelecionado?.titulo}
+              </DialogTitle>
+              <DialogDescription>
+                {eventoSelecionado?.data.toLocaleDateString("pt-BR", { 
+                  weekday: "long", 
+                  year: "numeric", 
+                  month: "long", 
+                  day: "numeric" 
+                })}
+              </DialogDescription>
+            </DialogHeader>
+            
+            {eventoSelecionado && (
+              <div className="space-y-4">
+                {eventoSelecionado.tipo === "festa" && (
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <div className="text-sm text-muted-foreground">Código</div>
+                      <div className="font-medium">{eventoSelecionado.detalhes.codigo}</div>
+                    </div>
+                    <div>
+                      <div className="text-sm text-muted-foreground">Cliente</div>
+                      <div className="font-medium">{eventoSelecionado.detalhes.clienteNome}</div>
+                    </div>
+                    <div>
+                      <div className="text-sm text-muted-foreground">Tema</div>
+                      <div className="font-medium">{eventoSelecionado.detalhes.tema || "-"}</div>
+                    </div>
+                    <div>
+                      <div className="text-sm text-muted-foreground">Horário</div>
+                      <div className="font-medium">{eventoSelecionado.detalhes.horario || "-"}</div>
+                    </div>
+                    <div>
+                      <div className="text-sm text-muted-foreground">Valor Total</div>
+                      <div className="font-medium">
+                        R$ {(eventoSelecionado.detalhes.valorTotal / 100).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}
+                      </div>
+                    </div>
+                    <div>
+                      <div className="text-sm text-muted-foreground">Status</div>
+                      <Badge>{eventoSelecionado.detalhes.status}</Badge>
+                    </div>
+                  </div>
+                )}
+
+                {eventoSelecionado.tipo === "pagamento" && (
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <div className="text-sm text-muted-foreground">Código</div>
+                      <div className="font-medium">{eventoSelecionado.detalhes.codigo}</div>
+                    </div>
+                    <div>
+                      <div className="text-sm text-muted-foreground">Pagador</div>
+                      <div className="font-medium">{eventoSelecionado.detalhes.pagador || "-"}</div>
+                    </div>
+                    <div>
+                      <div className="text-sm text-muted-foreground">Valor</div>
+                      <div className="font-medium text-green-600">
+                        R$ {(eventoSelecionado.detalhes.valor / 100).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}
+                      </div>
+                    </div>
+                    <div>
+                      <div className="text-sm text-muted-foreground">Método</div>
+                      <Badge variant="outline">{eventoSelecionado.detalhes.metodoPagamento || "PIX"}</Badge>
+                    </div>
+                    <div className="col-span-2">
+                      <div className="text-sm text-muted-foreground">Festa Associada</div>
+                      <div className="font-medium">
+                        {eventoSelecionado.detalhes.festaId ? `Festa #${eventoSelecionado.detalhes.festaId}` : "Sem festa associada"}
+                      </div>
+                    </div>
+                    {eventoSelecionado.detalhes.observacoes && (
+                      <div className="col-span-2">
+                        <div className="text-sm text-muted-foreground">Observações</div>
+                        <div className="text-sm">{eventoSelecionado.detalhes.observacoes}</div>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {eventoSelecionado.tipo === "visitacao" && (
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <div className="text-sm text-muted-foreground">Cliente</div>
+                      <div className="font-medium">{eventoSelecionado.detalhes.nomeCliente}</div>
+                    </div>
+                    <div>
+                      <div className="text-sm text-muted-foreground">Telefone</div>
+                      <div className="font-medium">{eventoSelecionado.detalhes.telefone || "-"}</div>
+                    </div>
+                    <div>
+                      <div className="text-sm text-muted-foreground">Email</div>
+                      <div className="font-medium">{eventoSelecionado.detalhes.email || "-"}</div>
+                    </div>
+                    <div>
+                      <div className="text-sm text-muted-foreground">Status</div>
+                      <Badge>{eventoSelecionado.detalhes.status}</Badge>
+                    </div>
+                    {eventoSelecionado.detalhes.observacoes && (
+                      <div className="col-span-2">
+                        <div className="text-sm text-muted-foreground">Observações</div>
+                        <div className="text-sm">{eventoSelecionado.detalhes.observacoes}</div>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            )}
+          </DialogContent>
+        </Dialog>
       </div>
     </DashboardLayout>
   );

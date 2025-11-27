@@ -13,8 +13,16 @@ import {
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { trpc } from "@/lib/trpc";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { toast } from "sonner";
 import { DollarSign, Loader2, Plus, TrendingDown, TrendingUp, Wallet, Receipt } from "lucide-react";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import {
   LineChart,
   Line,
@@ -37,6 +45,29 @@ export default function Financeiro() {
   const { user, loading: authLoading } = useAuth();
   const { data: festas, isLoading: loadingFestas } = trpc.festas.list.useQuery();
   const { data: pagamentos, isLoading: loadingPagamentos } = trpc.pagamentos.listAll.useQuery();
+  const [associandoPagamento, setAssociandoPagamento] = useState<number | null>(null);
+  
+  const utils = trpc.useUtils();
+  const associarFesta = trpc.pagamentos.associarFesta.useMutation({
+    onSuccess: () => {
+      toast.success("Pagamento associado com sucesso!");
+      utils.pagamentos.listAll.invalidate();
+      utils.festas.list.invalidate();
+      setAssociandoPagamento(null);
+    },
+    onError: (error) => {
+      toast.error(`Erro ao associar: ${error.message}`);
+      setAssociandoPagamento(null);
+    },
+  });
+
+  const handleAssociarFesta = async (pagamentoId: number, festaId: string) => {
+    setAssociandoPagamento(pagamentoId);
+    await associarFesta.mutateAsync({
+      pagamentoId,
+      festaId: festaId === "null" ? null : parseInt(festaId),
+    });
+  };
 
   const estatisticas = useMemo(() => {
     if (!festas || !pagamentos) return null;
@@ -388,13 +419,25 @@ export default function Financeiro() {
                               R$ {(pag.valor / 100).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}
                             </TableCell>
                             <TableCell>
-                              {pag.festaId ? (
-                                <Badge variant="secondary">
-                                  {festas?.find(f => f.id === pag.festaId)?.codigo || `Festa #${pag.festaId}`}
-                                </Badge>
-                              ) : (
-                                <span className="text-muted-foreground text-sm">Sem festa</span>
-                              )}
+                              <Select
+                                value={pag.festaId?.toString() || "null"}
+                                onValueChange={(value) => handleAssociarFesta(pag.id, value)}
+                                disabled={associandoPagamento === pag.id}
+                              >
+                                <SelectTrigger className="w-[200px]">
+                                  <SelectValue placeholder="Selecione uma festa" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  <SelectItem value="null">
+                                    <span className="text-muted-foreground">Sem festa</span>
+                                  </SelectItem>
+                                  {festas?.map((festa) => (
+                                    <SelectItem key={festa.id} value={festa.id.toString()}>
+                                      {festa.codigo} - {festa.clienteNome}
+                                    </SelectItem>
+                                  ))}
+                                </SelectContent>
+                              </Select>
                             </TableCell>
                           </TableRow>
                         ))
