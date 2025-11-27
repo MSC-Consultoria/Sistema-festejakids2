@@ -3,8 +3,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { trpc } from "@/lib/trpc";
 import { formatCurrency } from "@/const";
 import { Calendar, DollarSign, PartyPopper, TrendingUp, FileCheck, CheckCircle, UserPlus, CalendarCheck, ShoppingCart } from "lucide-react";
+import { useLocation } from "wouter";
 
 export default function Dashboard() {
+  const [, setLocation] = useLocation();
   const { data: stats, isLoading } = trpc.festas.stats.useQuery();
   const { data: visitacoesStats } = trpc.visitacoes.stats.useQuery();
 
@@ -30,7 +32,10 @@ export default function Dashboard() {
 
         {/* Cards principais */}
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          <Card>
+          <Card 
+            className="cursor-pointer hover:bg-slate-800/50 transition-colors" 
+            onClick={() => setLocation("/festas")}
+          >
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
                 Contratos Fechados
@@ -45,7 +50,10 @@ export default function Dashboard() {
             </CardContent>
           </Card>
 
-          <Card>
+          <Card 
+            className="cursor-pointer hover:bg-slate-800/50 transition-colors" 
+            onClick={() => setLocation("/festas?status=realizada")}
+          >
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
                 Festas Realizadas
@@ -60,7 +68,10 @@ export default function Dashboard() {
             </CardContent>
           </Card>
 
-          <Card>
+          <Card 
+            className="cursor-pointer hover:bg-slate-800/50 transition-colors" 
+            onClick={() => setLocation("/visitacoes")}
+          >
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
                 Visitas Realizadas
@@ -75,7 +86,10 @@ export default function Dashboard() {
             </CardContent>
           </Card>
 
-          <Card>
+          <Card 
+            className="cursor-pointer hover:bg-slate-800/50 transition-colors" 
+            onClick={() => setLocation("/visitacoes")}
+          >
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
                 Taxa de Conversão
@@ -93,7 +107,10 @@ export default function Dashboard() {
 
         {/* Cards do Mês Corrente */}
         <div className="grid gap-4 md:grid-cols-2">
-          <Card>
+          <Card 
+            className="cursor-pointer hover:bg-slate-800/50 transition-colors" 
+            onClick={() => setLocation("/festas?status=realizada")}
+          >
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
                 Festas Realizadas (Mês)
@@ -108,7 +125,10 @@ export default function Dashboard() {
             </CardContent>
           </Card>
 
-          <Card>
+          <Card 
+            className="cursor-pointer hover:bg-slate-800/50 transition-colors" 
+            onClick={() => setLocation("/festas")}
+          >
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
                 Festas Vendidas (Mês)
@@ -126,7 +146,10 @@ export default function Dashboard() {
 
         {/* Cards de faturamento */}
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          <Card>
+          <Card 
+            className="cursor-pointer hover:bg-slate-800/50 transition-colors" 
+            onClick={() => setLocation("/festas")}
+          >
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
                 Total de Festas
@@ -141,7 +164,10 @@ export default function Dashboard() {
             </CardContent>
           </Card>
 
-          <Card>
+          <Card 
+            className="cursor-pointer hover:bg-slate-800/50 transition-colors" 
+            onClick={() => setLocation("/financeiro")}
+          >
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
                 Faturamento Total
@@ -158,7 +184,10 @@ export default function Dashboard() {
             </CardContent>
           </Card>
 
-          <Card>
+          <Card 
+            className="cursor-pointer hover:bg-slate-800/50 transition-colors" 
+            onClick={() => setLocation("/financeiro")}
+          >
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
                 Valor a Receber
@@ -175,7 +204,10 @@ export default function Dashboard() {
             </CardContent>
           </Card>
 
-          <Card>
+          <Card 
+            className="cursor-pointer hover:bg-slate-800/50 transition-colors" 
+            onClick={() => setLocation("/relatorios")}
+          >
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
                 Ticket Médio

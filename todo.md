@@ -411,3 +411,39 @@
 ## E. Otimização de Performance
 - [ ] Otimizar velocidade de carregamento da aba Acompanhamentos
 - [ ] Investigar possíveis problemas de quebra de banco
+
+## Próximas Melhorias - Sprint Atual
+
+### Dashboard Clicável
+- [x] Tornar card "Contratos Fechados" clicável → redireciona para /festas
+- [x] Tornar card "Festas Realizadas" clicável → redireciona para /festas?status=realizada
+- [x] Tornar card "Visitas Realizadas" clicável → redireciona para /visitacoes
+- [x] Tornar card "Taxa de Conversão" clicável → redireciona para /visitacoes
+- [x] Tornar card "Total de Festas" clicável → redireciona para /festas
+- [x] Tornar card "Faturamento Total" clicável → redireciona para /financeiro
+
+### Filtros Avançados
+- [ ] Adicionar busca por código de contrato na página de Festas
+- [ ] Adicionar busca por CPF na página de Festas
+- [ ] Adicionar filtro de período de datas (data de fechamento e data do evento)
+- [ ] Adicionar ordenação customizável (por data, valor, cliente, status)
+- [ ] Implementar filtros na página de Clientes (busca por CPF, telefone, email)
+- [ ] Implementar filtros na página de Visitações (busca por nome, telefone, status, período)
+
+### Gerenciamento de Usuários
+- [ ] Criar interface de listagem de usuários na página /usuarios
+- [ ] Implementar formulário de adicionar novo usuário
+- [ ] Implementar formulário de editar usuário existente
+- [ ] Adicionar seleção de role (Admin/Atendimento) no formulário
+- [ ] Implementar exclusão de usuários (com confirmação)
+- [ ] Configurar usuários iniciais: recantodoacaienventosrj@gmail.com e gabrielol2035@gmail.com como Admin
+
+### Documentação e Repositório
+- [ ] Atualizar TIMELINE.md com todas as fases do projeto
+- [ ] Criar documentação de setup local (.env.example e instruções)
+- [ ] Criar guia de configuração para Windows 10
+- [ ] Analisar issues existentes no GitHub
+- [ ] Criar novos issues para funcionalidades pendentes
+- [ ] Fechar issues já resolvidos
+- [ ] Fazer commit e push de todas as alterações
+- [ ] Atualizar README.md com estado atual do projeto

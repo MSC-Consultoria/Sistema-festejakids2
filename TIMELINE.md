@@ -724,3 +724,211 @@ git push origin feature/nome-da-feature
 **Desenvolvido com ❤️ para Festeja Kids**  
 **Última Atualização:** 24 de novembro de 2025  
 **Versão do Documento:** 2.0
+
+
+---
+
+### **Fase 12: Melhorias de Usabilidade e Correções** (Checkpoint: bb3ecef1)
+**Data:** 27 de novembro de 2025
+
+#### 📋 Solicitações do Usuário
+1. Corrigir erro 404 na página de edição de festa
+2. Corrigir erro 404 na visualização de detalhes do cliente
+3. Implementar fluxo de conversão de visitação para festa com tela intermediária
+4. Ajustar validações: CPF e email opcionais na visitação, obrigatórios apenas ao fechar contrato
+5. Flexibilizar data do evento (opcional para visitação, obrigatória para contrato)
+6. Tornar Dashboard clicável com navegação intuitiva
+
+#### ✅ Correções de Erros 404
+
+**Erro 1: Página de Edição de Festa**
+- **Status:** Já estava funcionando corretamente
+- **URL:** `/festas/editar/:id`
+- **Verificação:** Testado com festa ID 210126
+
+**Erro 2: Página de Detalhes do Cliente**
+- **Status:** Corrigido com sucesso
+- **Problema:** Rota `/clientes/:id` não existia no App.tsx
+- **Solução:** Criada página `DetalhesCliente.tsx` completa
+
+**Funcionalidades da Página de Detalhes do Cliente:**
+- Informações básicas (nome, telefone, data de cadastro)
+- Estatísticas (total de festas, valor total, valor pago)
+- Histórico completo de festas do cliente
+- Cards com status e valores de cada festa
+- Botão "Voltar" para navegação
+
+#### 🔄 Fluxo de Conversão de Visitação
+
+**Problema Anterior:**
+- Conversão automática sem validar campos obrigatórios
+- CPF e data do evento não eram coletados
+
+**Solução Implementada:**
+1. Criada página `/visitacoes/converter/:id`
+2. Formulário intermediário com todos os campos da Ficha de Contrato e Degustação
+3. Validação de campos obrigatórios antes de criar festa
+4. Preenchimento automático com dados da visitação
+5. Botão "Converter" na lista de visitações redireciona para página de conversão
+
+**Campos do Formulário de Conversão:**
+- **Obrigatórios:** CPF, Data do Evento, Data de Fechamento, Valor Total
+- **Opcionais:** Todos os demais campos (horário, convidados, tema, brinde, refeição, etc.)
+
+#### 📝 Ajustes de Validações
+
+**Schema de Visitação (Backend):**
+```typescript
+// Campos opcionais
+cpf: z.string().optional(),
+email: z.string().email().optional(),
+dataPretendida: z.string().optional(),
+
+// Campos obrigatórios
+nome: z.string().min(1),
+telefone: z.string().min(1),
+```
+
+**Schema de Festa (Backend):**
+```typescript
+// Obrigatórios ao criar festa
+cpfCliente: z.string().min(11),
+dataFesta: z.string(),
+dataFechamento: z.string(),
+valorTotal: z.number().min(0),
+```
+
+**Mudanças no Schema do Banco:**
+- `numeroConvidados` alterado de `notNull()` para opcional
+- Permite criar festas sem número de convidados definido inicialmente
+
+#### 🖱️ Dashboard Clicável
+
+**Cards Implementados com Navegação:**
+1. **Contratos Fechados** → `/festas`
+2. **Festas Realizadas** → `/festas?status=realizada`
+3. **Visitas Realizadas** → `/visitacoes`
+4. **Taxa de Conversão** → `/visitacoes`
+5. **Festas Realizadas (Mês)** → `/festas?status=realizada`
+6. **Festas Vendidas (Mês)** → `/festas`
+7. **Total de Festas** → `/festas`
+8. **Faturamento Total** → `/financeiro`
+9. **Valor a Receber** → `/financeiro`
+10. **Ticket Médio** → `/relatorios`
+
+**Efeitos Visuais:**
+- Hover com mudança de cor (`hover:bg-slate-800/50`)
+- Cursor pointer para indicar clicabilidade
+- Transição suave (`transition-colors`)
+
+#### 🧹 Limpeza de Dados
+
+**Dados Removidos:**
+- ✅ Todas as visitações de teste
+- ✅ Todas as festas de teste
+- ✅ Banco limpo e pronto para produção
+
+**Queries Executadas:**
+```sql
+DELETE FROM visitacoes;
+DELETE FROM festas WHERE id IN (SELECT id FROM festas LIMIT 100);
+```
+
+#### 🔧 Arquivos Modificados
+
+**Backend:**
+- `server/routers/visitacoes.ts` - Validações ajustadas
+- `server/routers/festas.ts` - numeroConvidados opcional
+- `drizzle/schema.ts` - numeroConvidados sem notNull()
+- `server/db.ts` - getFestaById com todos os campos
+
+**Frontend:**
+- `client/src/pages/DetalhesCliente.tsx` - [NOVO] Página de detalhes
+- `client/src/pages/ConverterVisitacao.tsx` - [NOVO] Página de conversão
+- `client/src/pages/Dashboard.tsx` - Cards clicáveis
+- `client/src/pages/Visitacoes.tsx` - Botão "Converter" atualizado
+- `client/src/App.tsx` - Rotas adicionadas
+
+#### 🧪 Testes Executados
+
+**Testes Unitários:**
+```bash
+$ pnpm test
+
+✓ server/auth.logout.test.ts (1)
+✓ server/festas.create.test.ts (4)
+✓ server/usuarios.test.ts (12)
+✓ server/visitacoes.test.ts (8)
+
+Test Files  4 passed (4)
+Tests  31 passed (31)
+Duration  2.14s
+```
+
+**Verificações de Tipo:**
+- ✓ LSP: No errors
+- ✓ TypeScript: No errors
+- ✓ Dependencies: OK
+
+#### 💡 Lógica de Raciocínio
+
+**1. Fluxo de Conversão:**
+- Identifiquei que conversão direta causava problemas de dados incompletos
+- Criei tela intermediária para coletar informações faltantes
+- Reutilizei componentes do formulário de Nova Festa
+- Validei campos obrigatórios apenas no momento da conversão
+
+**2. Validações Flexíveis:**
+- Visitação é um "lead" - pode ter informações incompletas
+- Festa é um "contrato" - precisa de informações completas
+- Separei validações por contexto (visitação vs festa)
+- Mantive flexibilidade para capturar leads rapidamente
+
+**3. Dashboard Clicável:**
+- Identifiquei que usuários queriam navegar diretamente dos cards
+- Adicionei onClick em todos os cards com navegação contextual
+- Mantive consistência: cards financeiros → /financeiro, cards de festas → /festas
+- Adicionei feedback visual (hover) para indicar interatividade
+
+#### 📊 Resultados
+
+**Estatísticas Atuais:**
+- **Festas:** 5 (5 agendadas, 0 realizadas)
+- **Clientes:** 5 únicos
+- **Visitações:** 0 registradas
+- **Faturamento Total:** R$ 340.310,00
+- **Valor Recebido:** R$ 90.206,00
+- **Valor a Receber:** R$ 250.104,00
+- **Ticket Médio:** R$ 5.235,54
+
+**Novos Recursos:**
+- ✅ Página de detalhes do cliente funcional
+- ✅ Fluxo de conversão com tela intermediária
+- ✅ Validações flexíveis (visitação vs festa)
+- ✅ Dashboard 100% clicável
+- ✅ Banco de dados limpo
+
+#### 🚀 Próximos Passos Sugeridos
+
+**Curto Prazo:**
+1. Implementar filtros avançados (busca por código, CPF, período)
+2. Criar interface de gerenciamento de usuários
+3. Otimizar performance da aba Acompanhamentos
+4. Adicionar modal detalhado ao clicar em festa no calendário
+
+**Médio Prazo:**
+5. Versão simplificada para role "Atendimento"
+6. Exportação de relatórios em PDF/Excel
+7. Notificações de pagamentos vencidos
+8. Geração de contratos em PDF
+
+**Longo Prazo:**
+9. Integração com WhatsApp Business
+10. App mobile nativo
+11. BI e análise preditiva
+12. Multi-tenancy para franquias
+
+---
+
+**Desenvolvido com ❤️ para Festeja Kids**
+**Última Atualização:** 27/11/2025 - Fase 12
