@@ -196,10 +196,10 @@
 - [ ] Gerar recibos de pagamento
 
 ## Filtros Avançados
-- [ ] Adicionar busca por código
-- [ ] Implementar filtros por data
-- [ ] Implementar filtros por status
-- [ ] Adicionar ordenação
+- [x] Adicionar busca por código (implementado em Festas)
+- [x] Implementar filtros por data (implementado em Festas)
+- [x] Implementar filtros por status (implementado em Festas)
+- [x] Adicionar ordenação (implementado em Festas e Clientes)
 
 ## Otimização Mobile
 - [x] Adaptar DashboardLayout com menu hamburguer

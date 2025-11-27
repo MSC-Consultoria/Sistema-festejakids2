@@ -1,12 +1,12 @@
-import DashboardLayout from "@/components/DashboardLayout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
 import { trpc } from "@/lib/trpc";
 import { formatCurrency, formatDate } from "@/const";
-import { Plus, Eye, Pencil, Trash2, Calendar, Users, DollarSign } from "lucide-react";
+import { Plus, Eye, Pencil, Trash2, Calendar, Users, DollarSign, Search, X } from "lucide-react";
 import { Link } from "wouter";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import {
   Select,
   SelectContent,
@@ -14,16 +14,71 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import DashboardLayout from "@/components/DashboardLayout";
 
 export default function Festas() {
   const [statusFilter, setStatusFilter] = useState<string>("todas");
+  const [searchCodigo, setSearchCodigo] = useState<string>("");
+  const [searchCpf, setSearchCpf] = useState<string>("");
+  const [dataInicio, setDataInicio] = useState<string>("");
+  const [dataFim, setDataFim] = useState<string>("");
+  const [ordenacao, setOrdenacao] = useState<string>("data-desc");
+  
   const { data: festas, isLoading } = trpc.festas.list.useQuery();
   const { data: clientes } = trpc.clientes.list.useQuery();
 
-  const festasFiltradas = festas?.filter((festa) => {
-    if (statusFilter === "todas") return true;
-    return festa.status === statusFilter;
-  });
+  const festasFiltradas = useMemo(() => {
+    if (!festas) return [];
+    
+    let resultado = festas.filter((festa) => {
+      // Filtro de status
+      if (statusFilter !== "todas" && festa.status !== statusFilter) return false;
+      
+      // Filtro de código
+      if (searchCodigo && !festa.codigo.toLowerCase().includes(searchCodigo.toLowerCase())) return false;
+      
+      // Filtro de CPF
+      if (searchCpf) {
+        const cliente = clientes?.find(c => c.id === festa.clienteId);
+        if (!cliente || !cliente.cpf?.includes(searchCpf)) return false;
+      }
+      
+      // Filtro de período de datas
+      if (dataInicio) {
+        const dataFesta = new Date(festa.dataFesta);
+        const dataInicioObj = new Date(dataInicio);
+        if (dataFesta < dataInicioObj) return false;
+      }
+      
+      if (dataFim) {
+        const dataFesta = new Date(festa.dataFesta);
+        const dataFimObj = new Date(dataFim);
+        if (dataFesta > dataFimObj) return false;
+      }
+      
+      return true;
+    });
+    
+    // Aplicar ordenação
+    resultado.sort((a, b) => {
+      switch (ordenacao) {
+        case "data-asc":
+          return new Date(a.dataFesta).getTime() - new Date(b.dataFesta).getTime();
+        case "data-desc":
+          return new Date(b.dataFesta).getTime() - new Date(a.dataFesta).getTime();
+        case "valor-asc":
+          return (a.valorTotal || 0) - (b.valorTotal || 0);
+        case "valor-desc":
+          return (b.valorTotal || 0) - (a.valorTotal || 0);
+        case "cliente-asc":
+          return (a.clienteNome || "").localeCompare(b.clienteNome || "");
+        default:
+          return 0;
+      }
+    });
+    
+    return resultado;
+  }, [festas, statusFilter, searchCodigo, searchCpf, dataInicio, dataFim, ordenacao, clientes]);
 
   const getClienteNome = (clienteId: number) => {
     const cliente = clientes?.find((c) => c.id === clienteId);
@@ -73,24 +128,106 @@ export default function Festas() {
           </Link>
         </div>
 
-        {/* Filtros - Mobile Optimized */}
+        {/* Filtros Avançados */}
         <Card>
           <CardHeader className="pb-3">
-            <CardTitle className="text-base">Filtros</CardTitle>
+            <CardTitle className="text-base">Filtros Avançados</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="flex flex-col sm:flex-row gap-3">
-              <Select value={statusFilter} onValueChange={setStatusFilter}>
-                <SelectTrigger className="w-full sm:w-[200px]">
-                  <SelectValue placeholder="Status" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="todas">Todas</SelectItem>
-                  <SelectItem value="agendada">Agendadas</SelectItem>
-                  <SelectItem value="realizada">Realizadas</SelectItem>
-                  <SelectItem value="cancelada">Canceladas</SelectItem>
-                </SelectContent>
-              </Select>
+            <div className="space-y-4">
+              {/* Linha 1: Status e Busca por Código */}
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Select value={statusFilter} onValueChange={setStatusFilter}>
+                  <SelectTrigger className="w-full sm:w-[150px]">
+                    <SelectValue placeholder="Status" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="todas">Todas</SelectItem>
+                    <SelectItem value="agendada">Agendadas</SelectItem>
+                    <SelectItem value="realizada">Realizadas</SelectItem>
+                    <SelectItem value="cancelada">Canceladas</SelectItem>
+                  </SelectContent>
+                </Select>
+                
+                <div className="flex-1 relative">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    placeholder="Buscar por código (ex: FK001)"
+                    value={searchCodigo}
+                    onChange={(e) => setSearchCodigo(e.target.value)}
+                    className="pl-10"
+                  />
+                </div>
+              </div>
+              
+              {/* Linha 2: CPF e Período de Datas */}
+              <div className="flex flex-col sm:flex-row gap-3">
+                <div className="flex-1 relative">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    placeholder="Buscar por CPF"
+                    value={searchCpf}
+                    onChange={(e) => setSearchCpf(e.target.value)}
+                    className="pl-10"
+                  />
+                </div>
+                
+                <Input
+                  type="date"
+                  placeholder="Data início"
+                  value={dataInicio}
+                  onChange={(e) => setDataInicio(e.target.value)}
+                  className="w-full sm:w-[150px]"
+                />
+                
+                <Input
+                  type="date"
+                  placeholder="Data fim"
+                  value={dataFim}
+                  onChange={(e) => setDataFim(e.target.value)}
+                  className="w-full sm:w-[150px]"
+                />
+              </div>
+              
+              {/* Linha 3: Ordenação e Botão Limpar */}
+              <div className="flex flex-col sm:flex-row gap-3 items-end">
+                <Select value={ordenacao} onValueChange={setOrdenacao}>
+                  <SelectTrigger className="w-full sm:w-[200px]">
+                    <SelectValue placeholder="Ordenar por" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="data-desc">Data (Mais Recente)</SelectItem>
+                    <SelectItem value="data-asc">Data (Mais Antiga)</SelectItem>
+                    <SelectItem value="valor-desc">Valor (Maior)</SelectItem>
+                    <SelectItem value="valor-asc">Valor (Menor)</SelectItem>
+                    <SelectItem value="cliente-asc">Cliente (A-Z)</SelectItem>
+                  </SelectContent>
+                </Select>
+                
+                {(searchCodigo || searchCpf || dataInicio || dataFim || statusFilter !== "todas") && (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => {
+                      setStatusFilter("todas");
+                      setSearchCodigo("");
+                      setSearchCpf("");
+                      setDataInicio("");
+                      setDataFim("");
+                      setOrdenacao("data-desc");
+                    }}
+                    className="w-full sm:w-auto"
+                  >
+                    <X className="h-4 w-4 mr-2" />
+                    Limpar Filtros
+                  </Button>
+                )}
+              </div>
+              
+              {/* Contador de resultados */}
+              <div className="text-sm text-muted-foreground">
+                Mostrando {festasFiltradas.length} de {festas?.length || 0} festas
+              </div>
             </div>
           </CardContent>
         </Card>
@@ -119,68 +256,31 @@ export default function Festas() {
                   {/* Informações Principais */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
                     <div className="flex items-center gap-2 text-sm">
-                      <Calendar className="h-4 w-4 text-muted-foreground flex-shrink-0" />
-                      <div>
-                        <p className="text-xs text-muted-foreground">Data da Festa</p>
-                        <p className="font-medium">{formatDate(festa.dataFesta)}</p>
-                      </div>
+                      <Calendar className="h-4 w-4 text-muted-foreground" />
+                      <span>{formatDate(festa.dataFesta)}</span>
                     </div>
-
                     <div className="flex items-center gap-2 text-sm">
-                      <Users className="h-4 w-4 text-muted-foreground flex-shrink-0" />
-                      <div>
-                        <p className="text-xs text-muted-foreground">Convidados</p>
-                        <p className="font-medium">{festa.numeroConvidados}</p>
-                      </div>
+                      <Users className="h-4 w-4 text-muted-foreground" />
+                      <span>{festa.numeroConvidados || 0} convidados</span>
                     </div>
-                  </div>
-
-                  {/* Valores Financeiros */}
-                  <div className="grid grid-cols-3 gap-2 mb-3 p-3 bg-muted/30 rounded-lg">
-                    <div>
-                      <p className="text-xs text-muted-foreground mb-1">Valor Total</p>
-                      <p className="font-semibold text-sm">{formatCurrency(festa.valorTotal)}</p>
+                    <div className="flex items-center gap-2 text-sm">
+                      <DollarSign className="h-4 w-4 text-muted-foreground" />
+                      <span className="font-semibold">{formatCurrency(festa.valorTotal || 0)}</span>
                     </div>
-                    <div>
-                      <p className="text-xs text-muted-foreground mb-1">Pago</p>
-                      <p className="font-semibold text-sm text-green-600">
-                        {formatCurrency(festa.valorPago)}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-muted-foreground mb-1">Saldo</p>
-                      <p className="font-semibold text-sm text-orange-600">
-                        {formatCurrency(festa.valorTotal - festa.valorPago)}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Barra de Progresso */}
-                  <div className="mb-3">
-                    <div className="h-2 bg-muted rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-green-600 transition-all"
-                        style={{
-                          width: `${(festa.valorPago / festa.valorTotal) * 100}%`,
-                        }}
-                      />
-                    </div>
-                    <p className="text-xs text-muted-foreground mt-1 text-right">
-                      {((festa.valorPago / festa.valorTotal) * 100).toFixed(0)}% pago
-                    </p>
                   </div>
 
                   {/* Ações */}
-                  <div className="flex gap-2">
-                    <Link href={`/festas/${festa.id}`} className="flex-1">
-                      <Button variant="outline" size="sm" className="w-full">
-                        <Eye className="mr-2 h-4 w-4" />
-                        Ver Detalhes
+                  <div className="flex gap-2 pt-3 border-t">
+                    <Link href={`/clientes/${festa.clienteId}`}>
+                      <Button variant="ghost" size="sm" className="flex-1">
+                        <Eye className="h-4 w-4 mr-2" />
+                        Ver Cliente
                       </Button>
                     </Link>
                     <Link href={`/festas/editar/${festa.id}`}>
-                      <Button variant="ghost" size="sm">
-                        <Pencil className="h-4 w-4" />
+                      <Button variant="ghost" size="sm" className="flex-1">
+                        <Pencil className="h-4 w-4 mr-2" />
+                        Editar
                       </Button>
                     </Link>
                   </div>
@@ -190,23 +290,11 @@ export default function Festas() {
           ) : (
             <Card>
               <CardContent className="p-8 text-center">
-                <p className="text-muted-foreground">Nenhuma festa encontrada</p>
+                <p className="text-muted-foreground">Nenhuma festa encontrada com os filtros selecionados</p>
               </CardContent>
             </Card>
           )}
         </div>
-
-        {/* Resumo - Mobile Optimized */}
-        {festasFiltradas && festasFiltradas.length > 0 && (
-          <Card className="bg-primary/5">
-            <CardContent className="p-4">
-              <p className="text-sm text-center text-muted-foreground">
-                <span className="font-semibold text-foreground">{festasFiltradas.length}</span>{" "}
-                {festasFiltradas.length === 1 ? "festa encontrada" : "festas encontradas"}
-              </p>
-            </CardContent>
-          </Card>
-        )}
       </div>
     </DashboardLayout>
   );
