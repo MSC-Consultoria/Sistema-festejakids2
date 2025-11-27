@@ -330,3 +330,27 @@
 - [x] Resetar banco de dados
 - [x] Reimportar festas com datas corretas
 - [x] Verificar datas no sistema (Rodrigo Rios agora é 07/12/25 12:00:00 UTC)
+
+## Interface de Gerenciamento de Usuários
+- [x] Criar helpers de banco para CRUD de usuários
+- [x] Criar procedures tRPC protegidas com adminProcedure
+- [x] Criar página Usuarios.tsx com listagem em tabela
+- [x] Implementar filtros por role (admin, gerente, atendente, cliente)
+- [x] Adicionar busca por nome/email
+- [x] Criar formulário de adicionar usuário (dialog)
+- [x] Criar formulário de editar usuário (dialog)
+- [x] Implementar exclusão de usuário com confirmação
+- [x] Adicionar rota /usuarios no App.tsx
+- [x] Adicionar item "Usuários" no menu (apenas admin)
+- [x] Criar testes unitários para procedures de usuários (12 testes passando)
+- [x] Testar funcionalidade completa
+
+## Melhoria da Tela de Visitações (Ficha de Contrato e Degustação)
+- [ ] Estender schema de visitações com novos campos (CPF, endereço, quantidade convidados, brinde, refeição, bolo, etc)
+- [ ] Criar procedures tRPC para CRUD completo de visitações
+- [ ] Atualizar página Visitacoes.tsx com formulários de Ficha de Contrato e Ficha de Degustação
+- [ ] Implementar abas para alternar entre Contrato e Degustação
+- [ ] Adicionar campos de brinde, refeição, bolo com opções pré-definidas
+- [ ] Implementar listagem com filtros e busca
+- [ ] Importar 8 visitações da semana de 27/11/2025
+- [ ] Testar funcionalidade completa
