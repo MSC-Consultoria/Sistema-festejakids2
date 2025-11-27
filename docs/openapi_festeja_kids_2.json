@@ -1,0 +1,2464 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Festeja Kids 2.0 API",
+    "description": "\n# API do Sistema Festeja Kids 2.0\n\nSistema completo de gestão de festas infantis com controle de visitações, contratos, pagamentos, custos e relatórios financeiros.\n\n## Autenticação\n\nO sistema utiliza **Manus OAuth 2.0** para autenticação. Após o login, um cookie de sessão é criado e deve ser enviado em todas as requisições autenticadas.\n\n## Autorização\n\nO sistema possui 4 níveis de acesso:\n- **Admin**: Acesso total ao sistema\n- **Gerente**: Visualizar relatórios e gerenciar festas\n- **Atendente**: Cadastrar visitações e festas\n- **Cliente**: Visualizar apenas suas próprias festas\n\n## Tecnologias\n\n- **Backend**: Node.js 22 + Express 4 + tRPC 11\n- **Banco de Dados**: MySQL/TiDB Cloud\n- **ORM**: Drizzle ORM\n- **Storage**: S3 (Manus Platform)\n- **Autenticação**: Manus OAuth 2.0\n\n## Base URL\n\n```\nhttps://3000-i8uxn75fzdy63bnx3nrgn-7be14050.manusvm.computer\n```\n\n## Formato de Resposta\n\nTodas as respostas seguem o padrão tRPC:\n\n```json\n{\n  \"result\": {\n    \"data\": { /* dados da resposta */ }\n  }\n}\n```\n\nEm caso de erro:\n\n```json\n{\n  \"error\": {\n    \"code\": \"UNAUTHORIZED\",\n    \"message\": \"Descrição do erro\"\n  }\n}\n```\n        ",
+    "version": "1.0.0",
+    "contact": {
+      "name": "MSC Consultoria",
+      "url": "https://github.com/MSC-Consultoria/Sistema-festejakids2"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://3000-i8uxn75fzdy63bnx3nrgn-7be14050.manusvm.computer",
+      "description": "Servidor de Produção"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Auth",
+      "description": "Autenticação e autorização"
+    },
+    {
+      "name": "Festas",
+      "description": "Gerenciamento de festas"
+    },
+    {
+      "name": "Clientes",
+      "description": "Gerenciamento de clientes"
+    },
+    {
+      "name": "Visitacoes",
+      "description": "Gerenciamento de visitações (leads)"
+    },
+    {
+      "name": "Pagamentos",
+      "description": "Controle de pagamentos"
+    },
+    {
+      "name": "Custos",
+      "description": "Gerenciamento de custos"
+    },
+    {
+      "name": "Acompanhamento",
+      "description": "Acompanhamento financeiro"
+    },
+    {
+      "name": "Importacao",
+      "description": "Importação de dados"
+    },
+    {
+      "name": "Usuarios",
+      "description": "Gerenciamento de usuários"
+    }
+  ],
+  "paths": {
+    "/api/trpc/festas.list": {
+      "get": {
+        "operationId": "festas_list",
+        "summary": null,
+        "tags": [
+          "Festas"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: query | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        }
+      }
+    },
+    "/api/trpc/festas.byId": {
+      "get": {
+        "operationId": "festas_byId",
+        "summary": null,
+        "tags": [
+          "Festas"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: query | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        }
+      }
+    },
+    "/api/trpc/festas.byCodigo": {
+      "get": {
+        "operationId": "festas_byCodigo",
+        "summary": null,
+        "tags": [
+          "Festas"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: query | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        }
+      }
+    },
+    "/api/trpc/festas.byStatus": {
+      "get": {
+        "operationId": "festas_byStatus",
+        "summary": null,
+        "tags": [
+          "Festas"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: query | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        }
+      }
+    },
+    "/api/trpc/festas.byCliente": {
+      "get": {
+        "operationId": "festas_byCliente",
+        "summary": null,
+        "tags": [
+          "Festas"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: query | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        }
+      }
+    },
+    "/api/trpc/festas.byDateRange": {
+      "get": {
+        "operationId": "festas_byDateRange",
+        "summary": null,
+        "tags": [
+          "Festas"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: query | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        }
+      }
+    },
+    "/api/trpc/festas.create": {
+      "post": {
+        "operationId": "festas_create",
+        "summary": null,
+        "tags": [
+          "Festas"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: unknown | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/trpc/festas.update": {
+      "post": {
+        "operationId": "festas_update",
+        "summary": null,
+        "tags": [
+          "Festas"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: unknown | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/trpc/festas.delete": {
+      "post": {
+        "operationId": "festas_delete",
+        "summary": null,
+        "tags": [
+          "Festas"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: mutation | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/trpc/festas.generateCodigo": {
+      "get": {
+        "operationId": "festas_generateCodigo",
+        "summary": "Função auxiliar para gerar código de contrato",
+        "tags": [
+          "Festas"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: query | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        }
+      }
+    },
+    "/api/trpc/festas.stats": {
+      "get": {
+        "operationId": "festas_stats",
+        "summary": "Estatísticas",
+        "tags": [
+          "Festas"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: query | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        }
+      }
+    },
+    "/api/trpc/festas.gerarContrato": {
+      "post": {
+        "operationId": "festas_gerarContrato",
+        "summary": null,
+        "tags": [
+          "Festas"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: mutation | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/trpc/festas.contratosGerados": {
+      "get": {
+        "operationId": "festas_contratosGerados",
+        "summary": null,
+        "tags": [
+          "Festas"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: query | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        }
+      }
+    },
+    "/api/trpc/clientes.list": {
+      "get": {
+        "operationId": "clientes_list",
+        "summary": null,
+        "tags": [
+          "Clientes"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: query | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        }
+      }
+    },
+    "/api/trpc/clientes.byId": {
+      "get": {
+        "operationId": "clientes_byId",
+        "summary": null,
+        "tags": [
+          "Clientes"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: query | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        }
+      }
+    },
+    "/api/trpc/clientes.search": {
+      "get": {
+        "operationId": "clientes_search",
+        "summary": null,
+        "tags": [
+          "Clientes"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: query | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        }
+      }
+    },
+    "/api/trpc/clientes.create": {
+      "post": {
+        "operationId": "clientes_create",
+        "summary": null,
+        "tags": [
+          "Clientes"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: unknown | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/trpc/clientes.update": {
+      "post": {
+        "operationId": "clientes_update",
+        "summary": null,
+        "tags": [
+          "Clientes"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: unknown | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/trpc/clientes.delete": {
+      "post": {
+        "operationId": "clientes_delete",
+        "summary": null,
+        "tags": [
+          "Clientes"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: mutation | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/trpc/clientes.withFestas": {
+      "get": {
+        "operationId": "clientes_withFestas",
+        "summary": null,
+        "tags": [
+          "Clientes"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: query | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        }
+      }
+    },
+    "/api/trpc/pagamentos.listAll": {
+      "get": {
+        "operationId": "pagamentos_listAll",
+        "summary": null,
+        "tags": [
+          "Pagamentos"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: query | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        }
+      }
+    },
+    "/api/trpc/pagamentos.byFesta": {
+      "get": {
+        "operationId": "pagamentos_byFesta",
+        "summary": null,
+        "tags": [
+          "Pagamentos"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: query | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        }
+      }
+    },
+    "/api/trpc/pagamentos.create": {
+      "post": {
+        "operationId": "pagamentos_create",
+        "summary": null,
+        "tags": [
+          "Pagamentos"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: unknown | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/trpc/pagamentos.delete": {
+      "post": {
+        "operationId": "pagamentos_delete",
+        "summary": null,
+        "tags": [
+          "Pagamentos"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: mutation | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/trpc/pagamentos.resumoFesta": {
+      "get": {
+        "operationId": "pagamentos_resumoFesta",
+        "summary": "Resumo financeiro de uma festa",
+        "tags": [
+          "Pagamentos"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: query | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        }
+      }
+    },
+    "/api/trpc/custos.list": {
+      "get": {
+        "operationId": "custos_list",
+        "summary": "============ CUSTOS FIXOS ============",
+        "tags": [
+          "Custos"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: query | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        }
+      }
+    },
+    "/api/trpc/custos.active": {
+      "get": {
+        "operationId": "custos_active",
+        "summary": null,
+        "tags": [
+          "Custos"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: query | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        }
+      }
+    },
+    "/api/trpc/custos.create": {
+      "post": {
+        "operationId": "custos_create",
+        "summary": null,
+        "tags": [
+          "Custos"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: unknown | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/trpc/custos.update": {
+      "post": {
+        "operationId": "custos_update",
+        "summary": null,
+        "tags": [
+          "Custos"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: unknown | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/trpc/custos.delete": {
+      "post": {
+        "operationId": "custos_delete",
+        "summary": null,
+        "tags": [
+          "Custos"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: mutation | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/trpc/custos.calcularTotal": {
+      "get": {
+        "operationId": "custos_calcularTotal",
+        "summary": null,
+        "tags": [
+          "Custos"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: query | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        }
+      }
+    },
+    "/api/trpc/custos.calcularTotalMensal": {
+      "get": {
+        "operationId": "custos_calcularTotalMensal",
+        "summary": null,
+        "tags": [
+          "Custos"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: query | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        }
+      }
+    },
+    "/api/trpc/custos.calcularMargemLucro": {
+      "get": {
+        "operationId": "custos_calcularMargemLucro",
+        "summary": "============ CÁLCULOS ============",
+        "tags": [
+          "Custos"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: query | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        }
+      }
+    },
+    "/api/trpc/custos.resumoCompleto": {
+      "get": {
+        "operationId": "custos_resumoCompleto",
+        "summary": null,
+        "tags": [
+          "Custos"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: query | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        }
+      }
+    },
+    "/api/trpc/acompanhamento.listarComStatus": {
+      "get": {
+        "operationId": "acompanhamento_listarComStatus",
+        "summary": "Listar festas com status de pagamento detalhado",
+        "tags": [
+          "Acompanhamento"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: query | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        }
+      }
+    },
+    "/api/trpc/acompanhamento.projecaoRecebimentos": {
+      "get": {
+        "operationId": "acompanhamento_projecaoRecebimentos",
+        "summary": "Projeção de recebimentos para próximos 12 meses",
+        "tags": [
+          "Acompanhamento"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: query | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        }
+      }
+    },
+    "/api/trpc/visitacoes.list": {
+      "get": {
+        "operationId": "visitacoes_list",
+        "summary": "Listar todas as visitações",
+        "tags": [
+          "Visitacoes"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: query | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        }
+      }
+    },
+    "/api/trpc/visitacoes.getById": {
+      "get": {
+        "operationId": "visitacoes_getById",
+        "summary": "Buscar visitação por ID",
+        "tags": [
+          "Visitacoes"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: query | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        }
+      }
+    },
+    "/api/trpc/visitacoes.create": {
+      "post": {
+        "operationId": "visitacoes_create",
+        "summary": "Criar nova visitação",
+        "tags": [
+          "Visitacoes"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: unknown | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/trpc/visitacoes.update": {
+      "post": {
+        "operationId": "visitacoes_update",
+        "summary": "Atualizar visitação",
+        "tags": [
+          "Visitacoes"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: unknown | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/trpc/visitacoes.delete": {
+      "post": {
+        "operationId": "visitacoes_delete",
+        "summary": "Deletar visitação",
+        "tags": [
+          "Visitacoes"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: mutation | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/trpc/visitacoes.converterEmCliente": {
+      "post": {
+        "operationId": "visitacoes_converterEmCliente",
+        "summary": "Converter visitação em cliente",
+        "tags": [
+          "Visitacoes"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: mutation | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/trpc/visitacoes.stats": {
+      "get": {
+        "operationId": "visitacoes_stats",
+        "summary": "Estatísticas de visitações",
+        "tags": [
+          "Visitacoes"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: query | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        }
+      }
+    },
+    "/api/trpc/importacao.preview": {
+      "post": {
+        "operationId": "importacao_preview",
+        "summary": null,
+        "tags": [
+          "Importacao"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: mutation | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/trpc/importacao.importar": {
+      "post": {
+        "operationId": "importacao_importar",
+        "summary": null,
+        "tags": [
+          "Importacao"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: mutation | Auth: protected",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/trpc/usuarios.list": {
+      "post": {
+        "operationId": "usuarios_list",
+        "summary": "Listar todos os usuários (apenas admin)",
+        "tags": [
+          "Usuarios"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: unknown | Auth: admin",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          },
+          "403": {
+            "description": "Sem permissão (apenas admin)"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/trpc/usuarios.getById": {
+      "get": {
+        "operationId": "usuarios_getById",
+        "summary": "Buscar usuário por ID",
+        "tags": [
+          "Usuarios"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: query | Auth: admin",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          },
+          "403": {
+            "description": "Sem permissão (apenas admin)"
+          }
+        }
+      }
+    },
+    "/api/trpc/usuarios.create": {
+      "post": {
+        "operationId": "usuarios_create",
+        "summary": "Criar novo usuário",
+        "tags": [
+          "Usuarios"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: unknown | Auth: admin",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          },
+          "403": {
+            "description": "Sem permissão (apenas admin)"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/trpc/usuarios.update": {
+      "post": {
+        "operationId": "usuarios_update",
+        "summary": "Atualizar usuário",
+        "tags": [
+          "Usuarios"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: unknown | Auth: admin",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          },
+          "403": {
+            "description": "Sem permissão (apenas admin)"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/trpc/usuarios.delete": {
+      "post": {
+        "operationId": "usuarios_delete",
+        "summary": "Deletar usuário",
+        "tags": [
+          "Usuarios"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: mutation | Auth: admin",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          },
+          "403": {
+            "description": "Sem permissão (apenas admin)"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/trpc/usuarios.stats": {
+      "get": {
+        "operationId": "usuarios_stats",
+        "summary": "Estatísticas de usuários",
+        "tags": [
+          "Usuarios"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "description": "Tipo: query | Auth: admin",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado"
+          },
+          "403": {
+            "description": "Sem permissão (apenas admin)"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "cookieAuth": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "festeja_kids_session",
+        "description": "Cookie de sessão criado após login via Manus OAuth"
+      }
+    },
+    "schemas": {
+      "users": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Coluna id (Primary Key)"
+          },
+          "openId": {
+            "type": "string",
+            "description": "Coluna openId (Unique)"
+          },
+          "name": {
+            "type": "string",
+            "description": "Coluna name"
+          },
+          "email": {
+            "type": "string",
+            "description": "Coluna email"
+          },
+          "loginMethod": {
+            "type": "string",
+            "description": "Coluna loginMethod"
+          },
+          "role": {
+            "type": "string",
+            "description": "Coluna role"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Coluna createdAt",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "Coluna updatedAt",
+            "format": "date-time"
+          },
+          "lastSignedIn": {
+            "type": "string",
+            "description": "Coluna lastSignedIn",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "openId",
+          "role",
+          "createdAt",
+          "updatedAt",
+          "lastSignedIn"
+        ]
+      },
+      "clientes": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Coluna id (Primary Key)"
+          },
+          "nome": {
+            "type": "string",
+            "description": "Coluna nome"
+          },
+          "telefone": {
+            "type": "string",
+            "description": "Coluna telefone"
+          },
+          "email": {
+            "type": "string",
+            "description": "Coluna email"
+          },
+          "cpf": {
+            "type": "string",
+            "description": "Coluna cpf"
+          },
+          "endereco": {
+            "type": "string",
+            "description": "Coluna endereco"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Coluna createdAt",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "Coluna updatedAt",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "nome",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "visitacoes": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Coluna id (Primary Key)"
+          },
+          "nome": {
+            "type": "string",
+            "description": "Coluna nome"
+          },
+          "telefone": {
+            "type": "string",
+            "description": "Coluna telefone"
+          },
+          "email": {
+            "type": "string",
+            "description": "Coluna email"
+          },
+          "cpf": {
+            "type": "string",
+            "description": "Coluna cpf"
+          },
+          "endereco": {
+            "type": "string",
+            "description": "Coluna endereco"
+          },
+          "dataVisita": {
+            "type": "string",
+            "description": "Coluna dataVisita",
+            "format": "date-time"
+          },
+          "dataPretendida": {
+            "type": "string",
+            "description": "Coluna dataPretendida"
+          },
+          "horario": {
+            "type": "string",
+            "description": "Coluna horario"
+          },
+          "interesse": {
+            "type": "string",
+            "description": "Coluna interesse"
+          },
+          "tema": {
+            "type": "string",
+            "description": "Coluna tema"
+          },
+          "numeroConvidados": {
+            "type": "integer",
+            "description": "Coluna numeroConvidados"
+          },
+          "brinde": {
+            "type": "string",
+            "description": "Coluna brinde"
+          },
+          "refeicao": {
+            "type": "string",
+            "description": "Coluna refeicao"
+          },
+          "massaType": {
+            "type": "string",
+            "description": "Coluna massaType"
+          },
+          "molhoType": {
+            "type": "string",
+            "description": "Coluna molhoType"
+          },
+          "bolo": {
+            "type": "string",
+            "description": "Coluna bolo"
+          },
+          "nomeAniversariante": {
+            "type": "string",
+            "description": "Coluna nomeAniversariante"
+          },
+          "idadeAniversariante": {
+            "type": "integer",
+            "description": "Coluna idadeAniversariante"
+          },
+          "status": {
+            "type": "string",
+            "description": "Coluna status"
+          },
+          "observacoes": {
+            "type": "string",
+            "description": "Coluna observacoes"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Coluna createdAt",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "Coluna updatedAt",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "nome",
+          "telefone",
+          "dataVisita",
+          "status",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "festas": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Coluna id (Primary Key)"
+          },
+          "codigo": {
+            "type": "string",
+            "description": "Coluna codigo (Unique)"
+          },
+          "clienteId": {
+            "type": "integer",
+            "description": "Coluna clienteId (Foreign Key)"
+          },
+          "clienteNome": {
+            "type": "string",
+            "description": "Coluna clienteNome"
+          },
+          "dataFechamento": {
+            "type": "string",
+            "description": "Coluna dataFechamento",
+            "format": "date-time"
+          },
+          "dataFesta": {
+            "type": "string",
+            "description": "Coluna dataFesta",
+            "format": "date-time"
+          },
+          "horario": {
+            "type": "string",
+            "description": "Coluna horario"
+          },
+          "tema": {
+            "type": "string",
+            "description": "Coluna tema"
+          },
+          "numeroConvidados": {
+            "type": "integer",
+            "description": "Coluna numeroConvidados"
+          },
+          "valorTotal": {
+            "type": "integer",
+            "description": "Coluna valorTotal"
+          },
+          "valorPago": {
+            "type": "integer",
+            "description": "Coluna valorPago"
+          },
+          "cpfCliente": {
+            "type": "string",
+            "description": "Coluna cpfCliente"
+          },
+          "enderecoCliente": {
+            "type": "string",
+            "description": "Coluna enderecoCliente"
+          },
+          "brinde": {
+            "type": "string",
+            "description": "Coluna brinde"
+          },
+          "refeicao": {
+            "type": "string",
+            "description": "Coluna refeicao"
+          },
+          "massaType": {
+            "type": "string",
+            "description": "Coluna massaType"
+          },
+          "molhoType": {
+            "type": "string",
+            "description": "Coluna molhoType"
+          },
+          "bolo": {
+            "type": "string",
+            "description": "Coluna bolo"
+          },
+          "nomeAniversariante": {
+            "type": "string",
+            "description": "Coluna nomeAniversariante"
+          },
+          "idadeAniversariante": {
+            "type": "integer",
+            "description": "Coluna idadeAniversariante"
+          },
+          "status": {
+            "type": "string",
+            "description": "Coluna status"
+          },
+          "observacoes": {
+            "type": "string",
+            "description": "Coluna observacoes"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Coluna createdAt",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "Coluna updatedAt",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "codigo",
+          "clienteId",
+          "clienteNome",
+          "dataFechamento",
+          "dataFesta",
+          "valorTotal",
+          "valorPago",
+          "status",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "pagamentos": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Coluna id (Primary Key)"
+          },
+          "codigo": {
+            "type": "string",
+            "description": "Coluna codigo (Unique)"
+          },
+          "festaId": {
+            "type": "integer",
+            "description": "Coluna festaId (Foreign Key)"
+          },
+          "valor": {
+            "type": "integer",
+            "description": "Coluna valor"
+          },
+          "dataPagamento": {
+            "type": "string",
+            "description": "Coluna dataPagamento",
+            "format": "date-time"
+          },
+          "metodoPagamento": {
+            "type": "string",
+            "description": "Coluna metodoPagamento"
+          },
+          "pagador": {
+            "type": "string",
+            "description": "Coluna pagador"
+          },
+          "comprovanteUrl": {
+            "type": "string",
+            "description": "Coluna comprovanteUrl"
+          },
+          "comprovanteFileKey": {
+            "type": "string",
+            "description": "Coluna comprovanteFileKey"
+          },
+          "observacoes": {
+            "type": "string",
+            "description": "Coluna observacoes"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Coluna createdAt",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "codigo",
+          "valor",
+          "dataPagamento",
+          "createdAt"
+        ]
+      },
+      "custosVariaveis": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Coluna id (Primary Key)"
+          },
+          "festaId": {
+            "type": "integer",
+            "description": "Coluna festaId (Foreign Key)"
+          },
+          "descricao": {
+            "type": "string",
+            "description": "Coluna descricao"
+          },
+          "valor": {
+            "type": "integer",
+            "description": "Coluna valor"
+          },
+          "categoria": {
+            "type": "string",
+            "description": "Coluna categoria"
+          },
+          "fornecedor": {
+            "type": "string",
+            "description": "Coluna fornecedor"
+          },
+          "dataCusto": {
+            "type": "string",
+            "description": "Coluna dataCusto",
+            "format": "date-time"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Coluna createdAt",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "festaId",
+          "descricao",
+          "valor",
+          "dataCusto",
+          "createdAt"
+        ]
+      },
+      "custosFixos": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Coluna id (Primary Key)"
+          },
+          "descricao": {
+            "type": "string",
+            "description": "Coluna descricao"
+          },
+          "valor": {
+            "type": "integer",
+            "description": "Coluna valor"
+          },
+          "categoria": {
+            "type": "string",
+            "description": "Coluna categoria"
+          },
+          "mesReferencia": {
+            "type": "string",
+            "description": "Coluna mesReferencia"
+          },
+          "recorrente": {
+            "type": "boolean",
+            "description": "Coluna recorrente"
+          },
+          "observacoes": {
+            "type": "string",
+            "description": "Coluna observacoes"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Coluna createdAt",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "descricao",
+          "valor",
+          "mesReferencia",
+          "recorrente",
+          "createdAt"
+        ]
+      },
+      "contratos_gerados": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Coluna id (Primary Key)"
+          },
+          "festaId": {
+            "type": "integer",
+            "description": "Coluna festaId (Foreign Key)"
+          },
+          "versao": {
+            "type": "integer",
+            "description": "Coluna versao"
+          },
+          "url": {
+            "type": "string",
+            "description": "Coluna url"
+          },
+          "fileKey": {
+            "type": "string",
+            "description": "Coluna fileKey"
+          },
+          "geradoPor": {
+            "type": "integer",
+            "description": "Coluna geradoPor (Foreign Key)"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Coluna createdAt",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "festaId",
+          "versao",
+          "url",
+          "fileKey",
+          "createdAt"
+        ]
+      },
+      "templates_contrato": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Coluna id (Primary Key)"
+          },
+          "nome": {
+            "type": "string",
+            "description": "Coluna nome"
+          },
+          "ativo": {
+            "type": "boolean",
+            "description": "Coluna ativo"
+          },
+          "servicosIncluidos": {
+            "type": "string",
+            "description": "Coluna servicosIncluidos"
+          },
+          "buffetAdulto": {
+            "type": "string",
+            "description": "Coluna buffetAdulto"
+          },
+          "buffetInfantil": {
+            "type": "string",
+            "description": "Coluna buffetInfantil"
+          },
+          "brindes": {
+            "type": "string",
+            "description": "Coluna brindes"
+          },
+          "observacoesGerais": {
+            "type": "string",
+            "description": "Coluna observacoesGerais"
+          },
+          "dadosBancarios": {
+            "type": "string",
+            "description": "Coluna dadosBancarios"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Coluna createdAt",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "Coluna updatedAt",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "nome",
+          "ativo",
+          "createdAt",
+          "updatedAt"
+        ]
+      }
+    }
+  }
+}

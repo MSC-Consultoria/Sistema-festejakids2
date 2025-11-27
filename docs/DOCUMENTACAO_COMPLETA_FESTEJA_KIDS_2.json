@@ -1,0 +1,3230 @@
+{
+  "projeto": {
+    "nome": "Festeja Kids 2.0",
+    "descricao": "Sistema completo de gestão de festas infantis com controle de visitações, contratos, pagamentos, custos e relatórios financeiros",
+    "versao": "1.0.0",
+    "data_inicio": "2025-01-01",
+    "data_documentacao": "2025-11-27T07:02:15.869039",
+    "tecnologias": {
+      "frontend": [
+        "React 19",
+        "TypeScript",
+        "Tailwind CSS 4",
+        "Wouter",
+        "tRPC Client",
+        "Recharts",
+        "shadcn/ui"
+      ],
+      "backend": [
+        "Node.js 22",
+        "Express 4",
+        "tRPC 11",
+        "Drizzle ORM",
+        "MySQL/TiDB"
+      ],
+      "infraestrutura": [
+        "Manus Platform",
+        "S3 Storage",
+        "Manus OAuth"
+      ],
+      "ferramentas": [
+        "pnpm",
+        "Vite",
+        "ESLint",
+        "TypeScript Compiler"
+      ]
+    },
+    "repositorio": "https://github.com/MSC-Consultoria/Sistema-festejakids2"
+  },
+  "resumo_executivo": {
+    "total_fases": 59,
+    "progresso_geral": "69.04%",
+    "tarefas_concluidas": 272,
+    "tarefas_totais": 394,
+    "banco_de_dados": {
+      "total_tabelas": 9,
+      "total_colunas": 109,
+      "total_foreign_keys": 5
+    },
+    "backend": {
+      "total_routers": 8,
+      "total_procedures": 56,
+      "total_queries": 31,
+      "total_mutations": 11
+    },
+    "frontend": {
+      "total_paginas": 23,
+      "total_linhas_codigo": 8617,
+      "total_chamadas_trpc": 48
+    },
+    "qualidade": {
+      "erros_resolvidos": 15,
+      "erros_alta_severidade": 6,
+      "testes_unitarios": "12+ testes implementados"
+    }
+  },
+  "1_historico_desenvolvimento": {
+    "descricao": "Histórico completo de todas as fases de desenvolvimento do projeto",
+    "metadados": {
+      "data_geracao": "2025-11-27T06:57:05.285707",
+      "projeto": "Festeja Kids 2.0",
+      "versao": "1.0.0",
+      "total_fases": 59,
+      "fases_concluidas": 34,
+      "fases_em_andamento": 14,
+      "fases_pendentes": 11
+    },
+    "estatisticas": {
+      "total_tarefas": 394,
+      "tarefas_concluidas": 272,
+      "tarefas_pendentes": 122,
+      "progresso_geral_percentual": 69.04
+    },
+    "fases": [
+      {
+        "numero": null,
+        "titulo": "Modelagem e Estrutura de Dados",
+        "status": "concluida",
+        "tarefas_concluidas": [
+          "Criar schema do banco de dados com tabelas: festas, clientes, pagamentos, custos_variaveis, custos_fixos",
+          "Implementar helpers de banco de dados para CRUD de festas",
+          "Implementar helpers de banco de dados para CRUD de clientes",
+          "Implementar helpers de banco de dados para controle de pagamentos",
+          "Implementar helpers de banco de dados para gestão de custos"
+        ],
+        "tarefas_pendentes": [],
+        "total_tarefas": 5,
+        "progresso_percentual": 100.0
+      },
+      {
+        "numero": null,
+        "titulo": "Gestão de Festas",
+        "status": "em_andamento",
+        "tarefas_concluidas": [
+          "Criar interface de listagem de festas com filtros (data, status, cliente)",
+          "Criar formulário de cadastro de nova festa",
+          "Implementar controle de status da festa (agendada, realizada, cancelada)",
+          "Implementar geração automática de código de contrato"
+        ],
+        "tarefas_pendentes": [
+          "Criar formulário de edição de festa existente",
+          "Implementar visualização detalhada de festa individual",
+          "Criar visualização de próximas festas (calendário)"
+        ],
+        "total_tarefas": 7,
+        "progresso_percentual": 57.14
+      },
+      {
+        "numero": null,
+        "titulo": "Gestão de Clientes",
+        "status": "em_andamento",
+        "tarefas_concluidas": [
+          "Criar interface de listagem de clientes",
+          "Implementar busca de clientes"
+        ],
+        "tarefas_pendentes": [
+          "Criar formulário de cadastro de cliente",
+          "Criar formulário de edição de cliente",
+          "Implementar histórico de festas por cliente"
+        ],
+        "total_tarefas": 5,
+        "progresso_percentual": 40.0
+      },
+      {
+        "numero": null,
+        "titulo": "Controle Financeiro",
+        "status": "pendente",
+        "tarefas_concluidas": [],
+        "tarefas_pendentes": [
+          "Criar interface de registro de pagamentos",
+          "Implementar controle de pagamentos parciais",
+          "Implementar cálculo automático de saldo devedor",
+          "Criar visualização de valores a receber",
+          "Criar relatório de inadimplência",
+          "Implementar histórico de pagamentos por festa"
+        ],
+        "total_tarefas": 6,
+        "progresso_percentual": 0.0
+      },
+      {
+        "numero": null,
+        "titulo": "Gestão de Custos",
+        "status": "pendente",
+        "tarefas_concluidas": [],
+        "tarefas_pendentes": [
+          "Criar interface de cadastro de custos variáveis",
+          "Criar interface de cadastro de custos fixos mensais",
+          "Implementar edição de custos",
+          "Implementar cálculo automático de custo por festa",
+          "Implementar cálculo de margem de lucro",
+          "Implementar cálculo de ponto de equilíbrio mensal"
+        ],
+        "total_tarefas": 6,
+        "progresso_percentual": 0.0
+      },
+      {
+        "numero": null,
+        "titulo": "Dashboard e Relatórios",
+        "status": "em_andamento",
+        "tarefas_concluidas": [
+          "Criar dashboard principal com indicadores (festas do mês, faturamento, a receber)"
+        ],
+        "tarefas_pendentes": [
+          "Implementar análise mensal (festas vendidas, valor vendido, valor recebido, ticket médio)",
+          "Implementar análise trimestral",
+          "Implementar análise anual",
+          "Criar gráficos de evolução de vendas",
+          "Criar gráfico de análise de ticket médio",
+          "Criar gráfico de valor por convidado",
+          "Implementar previsão de faturamento",
+          "Implementar análise de lucratividade",
+          "Implementar exportação de relatórios (PDF, Excel)"
+        ],
+        "total_tarefas": 10,
+        "progresso_percentual": 10.0
+      },
+      {
+        "numero": null,
+        "titulo": "Autenticação e Segurança",
+        "status": "concluida",
+        "tarefas_concluidas": [
+          "Configurar autenticação com Manus OAuth",
+          "Implementar controle de acesso por role (admin/user)",
+          "Configurar proteção de rotas"
+        ],
+        "tarefas_pendentes": [],
+        "total_tarefas": 3,
+        "progresso_percentual": 100.0
+      },
+      {
+        "numero": null,
+        "titulo": "Testes",
+        "status": "em_andamento",
+        "tarefas_concluidas": [
+          "Criar testes para procedures de festas"
+        ],
+        "tarefas_pendentes": [
+          "Criar testes para procedures de pagamentos",
+          "Criar testes para procedures de custos",
+          "Criar testes para cálculos financeiros",
+          "Testar fluxo completo de cadastro de festa até pagamento"
+        ],
+        "total_tarefas": 5,
+        "progresso_percentual": 20.0
+      },
+      {
+        "numero": null,
+        "titulo": "Migração de Dados",
+        "status": "concluida",
+        "tarefas_concluidas": [
+          "Criar script de importação de dados históricos de 2024",
+          "Criar script de importação de dados históricos de 2025",
+          "Criar script de importação de próximas festas",
+          "Validar integridade dos dados importados"
+        ],
+        "tarefas_pendentes": [],
+        "total_tarefas": 4,
+        "progresso_percentual": 100.0
+      },
+      {
+        "numero": null,
+        "titulo": "Melhorias e Ajustes Finais",
+        "status": "pendente",
+        "tarefas_concluidas": [],
+        "tarefas_pendentes": [
+          "Ajustar responsividade mobile",
+          "Implementar loading states e feedback visual",
+          "Implementar tratamento de erros",
+          "Adicionar validações de formulários",
+          "Otimizar performance de queries",
+          "Criar documentação de uso do sistema"
+        ],
+        "total_tarefas": 6,
+        "progresso_percentual": 0.0
+      },
+      {
+        "numero": null,
+        "titulo": "Importação de Contratos em PDF",
+        "status": "concluida",
+        "tarefas_concluidas": [
+          "Extrair dados dos contratos de novembro 2025",
+          "Extrair dados dos contratos de dezembro 2025",
+          "Extrair dados dos contratos de 2026",
+          "Validar dados extraídos dos PDFs",
+          "Importar festas futuras no banco de dados"
+        ],
+        "tarefas_pendentes": [],
+        "total_tarefas": 5,
+        "progresso_percentual": 100.0
+      },
+      {
+        "numero": null,
+        "titulo": "Validação Cruzada de Dados",
+        "status": "concluida",
+        "tarefas_concluidas": [
+          "Analisar planilhas de próximos eventos",
+          "Comparar dados das planilhas com banco de dados",
+          "Identificar festas faltantes ou duplicadas",
+          "Corrigir divergências de valores e datas",
+          "Sincronizar todos os dados"
+        ],
+        "tarefas_pendentes": [],
+        "total_tarefas": 5,
+        "progresso_percentual": 100.0
+      },
+      {
+        "numero": null,
+        "titulo": "Limpeza de Banco de Dados",
+        "status": "concluida",
+        "tarefas_concluidas": [
+          "Limpar tabela de pagamentos",
+          "Limpar tabela de festas",
+          "Limpar tabela de clientes",
+          "Limpar tabela de custos variáveis",
+          "Limpar tabela de custos fixos",
+          "Verificar limpeza completa"
+        ],
+        "tarefas_pendentes": [],
+        "total_tarefas": 6,
+        "progresso_percentual": 100.0
+      },
+      {
+        "numero": null,
+        "titulo": "Importação de Próximasfestas.xlsx (Fonte Única)",
+        "status": "concluida",
+        "tarefas_concluidas": [
+          "Analisar estrutura da planilha",
+          "Criar script de importação dedicado",
+          "Importar clientes da planilha",
+          "Importar festas da planilha",
+          "Validar dados importados"
+        ],
+        "tarefas_pendentes": [],
+        "total_tarefas": 5,
+        "progresso_percentual": 100.0
+      },
+      {
+        "numero": null,
+        "titulo": "Importação Completa de Todas as Informações da Planilha",
+        "status": "concluida",
+        "tarefas_concluidas": [
+          "Analisar todas as colunas da planilha Próximasfestas.xlsx",
+          "Adicionar campos de pagamento detalhados (Pagamento 1, 2, 3)",
+          "Atualizar schema do banco de dados",
+          "Criar tabela de pagamentos individuais",
+          "Reimportar dados com todas as informações",
+          "Atualizar interface para exibir pagamentos"
+        ],
+        "tarefas_pendentes": [],
+        "total_tarefas": 6,
+        "progresso_percentual": 100.0
+      },
+      {
+        "numero": null,
+        "titulo": "Correção de Campos Faltantes",
+        "status": "concluida",
+        "tarefas_concluidas": [
+          "Verificar campos atuais no schema de festas",
+          "Confirmar que Código, Data de Fechamento, Data da Festa e Número de Convidados existem",
+          "Verificar se os dados foram importados corretamente",
+          "Atualizar interface para exibir todos os campos"
+        ],
+        "tarefas_pendentes": [],
+        "total_tarefas": 4,
+        "progresso_percentual": 100.0
+      },
+      {
+        "numero": null,
+        "titulo": "Funcionalidade de Adicionar Nova Festa",
+        "status": "concluida",
+        "tarefas_concluidas": [
+          "Criar página de formulário de nova festa",
+          "Implementar seleção de cliente existente ou cadastro de novo cliente",
+          "Adicionar validação de campos obrigatórios",
+          "Implementar geração automática de código de contrato",
+          "Criar procedure tRPC para cadastro de festa",
+          "Adicionar feedback de sucesso/erro",
+          "Redirecionar para lista de festas após cadastro",
+          "Criar testes unitários para criação de festas"
+        ],
+        "tarefas_pendentes": [],
+        "total_tarefas": 8,
+        "progresso_percentual": 100.0
+      },
+      {
+        "numero": null,
+        "titulo": "Correção de Páginas 404",
+        "status": "concluida",
+        "tarefas_concluidas": [
+          "Identificar rotas que levam a 404",
+          "Corrigir links quebrados na navegação",
+          "Traduzir página 404 para português",
+          "Ajustar tema escuro na página 404",
+          "Testar todas as rotas do sistema"
+        ],
+        "tarefas_pendentes": [],
+        "total_tarefas": 5,
+        "progresso_percentual": 100.0
+      },
+      {
+        "numero": null,
+        "titulo": "Correções e Melhorias Solicitadas",
+        "status": "concluida",
+        "tarefas_concluidas": [
+          "Corrigir cálculo de ticket médio para considerar apenas festas realizadas",
+          "Adicionar opção de cadastrar novo cliente no formulário de festa",
+          "Criar aba de calendário mensal mostrando quantidade de festas por mês",
+          "Criar aba de custos para inserir custos de cada festa",
+          "Implementar visualização de custos variáveis e fixos",
+          "Implementar cadastro e exclusão de custos"
+        ],
+        "tarefas_pendentes": [],
+        "total_tarefas": 6,
+        "progresso_percentual": 100.0
+      },
+      {
+        "numero": null,
+        "titulo": "Novas Funcionalidades Solicitadas",
+        "status": "em_andamento",
+        "tarefas_concluidas": [
+          "Criar aba de Agenda em formato de calendário",
+          "Integrar com Google Calendar para inserir festas de janeiro",
+          "Fazer commit do projeto no repositório GitHub",
+          "Criar linha do tempo do projeto",
+          "Criar aba Financeiro com dashboard completo",
+          "Criar formulário de registro de pagamentos (valor, código contrato, forma de pagamento)"
+        ],
+        "tarefas_pendentes": [
+          "Implementar busca de festa por código de contrato",
+          "Vincular pagamentos às festas automaticamente"
+        ],
+        "total_tarefas": 8,
+        "progresso_percentual": 75.0
+      },
+      {
+        "numero": null,
+        "titulo": "Recursos Visuais (Gráficos)",
+        "status": "concluida",
+        "tarefas_concluidas": [
+          "Instalar biblioteca de gráficos (Recharts)",
+          "Adicionar gráfico de evolução mensal de faturamento",
+          "Adicionar gráfico de pizza de recebimentos vs a receber",
+          "Adicionar gráfico de barras de festas por mês",
+          "Criar aba Relatórios com dashboards visuais",
+          "Implementar gráfico de análise trimestral",
+          "Implementar gráfico de análise anual",
+          "Adicionar gráfico de custos vs receita"
+        ],
+        "tarefas_pendentes": [],
+        "total_tarefas": 8,
+        "progresso_percentual": 100.0
+      },
+      {
+        "numero": null,
+        "titulo": "Acompanhamento de Pagamentos e Projeção Financeira",
+        "status": "concluida",
+        "tarefas_concluidas": [
+          "Criar procedure para calcular status de pagamento (em dia, atrasado, quitado)",
+          "Implementar validação de parcela mínima (R$ 500/mês)",
+          "Implementar validação de quitação 10 dias antes do evento",
+          "Criar aba de Acompanhamento de Pagamentos",
+          "Implementar tabela de clientes com status de pagamento",
+          "Adicionar alertas visuais (cores) para status",
+          "Criar projeção financeira para próximos 12 meses",
+          "Implementar gráfico de fluxo de recebimento projetado",
+          "Adicionar comparativo: recebimento esperado vs realizado"
+        ],
+        "tarefas_pendentes": [],
+        "total_tarefas": 9,
+        "progresso_percentual": 100.0
+      },
+      {
+        "numero": null,
+        "titulo": "Commit no GitHub",
+        "status": "concluida",
+        "tarefas_concluidas": [
+          "Configurar repositório remoto do GitHub",
+          "Adicionar todos os arquivos ao staging",
+          "Fazer commit com mensagem descritiva",
+          "Push para o repositório remoto",
+          "Verificar commit no GitHub"
+        ],
+        "tarefas_pendentes": [],
+        "total_tarefas": 5,
+        "progresso_percentual": 100.0
+      },
+      {
+        "numero": null,
+        "titulo": "Página de Detalhes da Festa",
+        "status": "concluida",
+        "tarefas_concluidas": [
+          "Criar rota e página de detalhes",
+          "Exibir informações completas da festa",
+          "Mostrar timeline de pagamentos",
+          "Adicionar botão de edição",
+          "Calcular margem de lucro"
+        ],
+        "tarefas_pendentes": [],
+        "total_tarefas": 5,
+        "progresso_percentual": 100.0
+      },
+      {
+        "numero": null,
+        "titulo": "Exportação e Relatórios",
+        "status": "pendente",
+        "tarefas_concluidas": [],
+        "tarefas_pendentes": [
+          "Implementar exportação para PDF",
+          "Implementar exportação para Excel",
+          "Gerar recibos de pagamento"
+        ],
+        "total_tarefas": 3,
+        "progresso_percentual": 0.0
+      },
+      {
+        "numero": null,
+        "titulo": "Filtros Avançados",
+        "status": "concluida",
+        "tarefas_concluidas": [
+          "Adicionar busca por código (implementado em Festas)",
+          "Implementar filtros por data (implementado em Festas)",
+          "Implementar filtros por status (implementado em Festas)",
+          "Adicionar ordenação (implementado em Festas e Clientes)"
+        ],
+        "tarefas_pendentes": [],
+        "total_tarefas": 4,
+        "progresso_percentual": 100.0
+      },
+      {
+        "numero": null,
+        "titulo": "Otimização Mobile",
+        "status": "concluida",
+        "tarefas_concluidas": [
+          "Adaptar DashboardLayout com menu hamburguer",
+          "Converter tabelas em cards empilháveis (Festas)",
+          "Converter tabelas em cards empilháveis (Clientes)",
+          "Ajustar tamanhos de botões e áreas de toque",
+          "Otimizar gráficos para telas verticais",
+          "Melhorar legibilidade de textos",
+          "Testar em diferentes resoluções mobile"
+        ],
+        "tarefas_pendentes": [],
+        "total_tarefas": 7,
+        "progresso_percentual": 100.0
+      },
+      {
+        "numero": null,
+        "titulo": "Melhorias Visuais para Mobile",
+        "status": "concluida",
+        "tarefas_concluidas": [
+          "Atualizar paleta de cores com gradientes",
+          "Adicionar classes CSS para animações e efeitos",
+          "Melhorar cards com sombras e bordas arredondadas",
+          "Aumentar ícones e adicionar cores vibrantes",
+          "Adicionar animações suaves e transições",
+          "Implementar navegação inferior (bottom nav) para mobile",
+          "Melhorar espaçamentos e respiração do layout",
+          "Adicionar micro-interações nos botões"
+        ],
+        "tarefas_pendentes": [],
+        "total_tarefas": 8,
+        "progresso_percentual": 100.0
+      },
+      {
+        "numero": null,
+        "titulo": "Controle de Visitações (Leads)",
+        "status": "concluida",
+        "tarefas_concluidas": [
+          "Criar tabela de visitações no schema",
+          "Adicionar campos: nome, telefone, email, data visita, interesse, status, observações",
+          "Implementar helpers de banco para CRUD de visitações",
+          "Criar procedures tRPC para visitações",
+          "Criar página de listagem de visitações",
+          "Criar formulário de cadastro de visitação",
+          "Implementar status de acompanhamento (Visitou, Aguardando, Proposta Enviada, Fechado, Perdido)",
+          "Adicionar função de converter visitante em cliente",
+          "Criar dashboard de conversão com taxa e funil de vendas",
+          "Criar testes unitários para router de visitações (8 testes passando)"
+        ],
+        "tarefas_pendentes": [],
+        "total_tarefas": 10,
+        "progresso_percentual": 100.0
+      },
+      {
+        "numero": null,
+        "titulo": "Identidade Visual Festeja Kids",
+        "status": "em_andamento",
+        "tarefas_concluidas": [
+          "Substituir logo atual pela Logomarca-Festejakids2.png",
+          "Adaptar paleta de cores (vermelho, amarelo, ciano, verde, magenta, roxo)",
+          "Atualizar gradientes e cores dos cards",
+          "Ajustar cores dos badges e status"
+        ],
+        "tarefas_pendentes": [
+          "Atualizar favicon com nova logo (usuário deve fazer via Dashboard)"
+        ],
+        "total_tarefas": 5,
+        "progresso_percentual": 80.0
+      },
+      {
+        "numero": null,
+        "titulo": "Sistema de Roles e Permissões",
+        "status": "em_andamento",
+        "tarefas_concluidas": [
+          "Adicionar enum de roles no schema (admin, atendente, gerente, cliente)",
+          "Criar middleware de autorização por role",
+          "Implementar controle de acesso nas procedures tRPC",
+          "Adicionar filtro de menu por role"
+        ],
+        "tarefas_pendentes": [
+          "Criar interface de gerenciamento de usuários (futura)"
+        ],
+        "total_tarefas": 5,
+        "progresso_percentual": 80.0
+      },
+      {
+        "numero": null,
+        "titulo": "Modo Atendente Simplificado",
+        "status": "concluida",
+        "tarefas_concluidas": [
+          "Criar layout simplificado para atendente",
+          "Restringir menu a: Nova Festa, Novo Pagamento, Agenda, Visitações",
+          "Criar atalhos rápidos para ações frequentes",
+          "Implementar navegação simplificada"
+        ],
+        "tarefas_pendentes": [],
+        "total_tarefas": 4,
+        "progresso_percentual": 100.0
+      },
+      {
+        "numero": null,
+        "titulo": "Importação de Dados",
+        "status": "em_andamento",
+        "tarefas_concluidas": [
+          "Criar aba de Importação",
+          "Implementar upload de arquivos Excel (interface pronta)"
+        ],
+        "tarefas_pendentes": [
+          "Criar parser para planilhas de festas (backend pendente)",
+          "Criar parser para planilhas de clientes (backend pendente)",
+          "Adicionar validação de dados importados (backend pendente)",
+          "Implementar preview antes de importar (backend pendente)",
+          "Criar log de importações (backend pendente)"
+        ],
+        "total_tarefas": 7,
+        "progresso_percentual": 28.57
+      },
+      {
+        "numero": null,
+        "titulo": "Campo de Horário Editável",
+        "status": "em_andamento",
+        "tarefas_concluidas": [
+          "Adicionar campo horário nas festas (já existe no schema)",
+          "Criar formulário de edição de horário (já existe em NovaFesta)",
+          "Validar formato de horário"
+        ],
+        "tarefas_pendentes": [
+          "Permitir edição em lote de horários (futura)"
+        ],
+        "total_tarefas": 4,
+        "progresso_percentual": 75.0
+      },
+      {
+        "numero": null,
+        "titulo": "Incrementar Dashboard",
+        "status": "em_andamento",
+        "tarefas_concluidas": [
+          "Adicionar card \"Contratos Fechados\"",
+          "Adicionar card \"Festas Realizadas\"",
+          "Adicionar card \"Visitas Realizadas\"",
+          "Adicionar card \"Taxa de Conversão\""
+        ],
+        "tarefas_pendentes": [
+          "Corrigir distribuição de valores recebidos (set/out/nov) - dados já limpos",
+          "Adicionar gráfico de evolução mensal de contratos (futura)"
+        ],
+        "total_tarefas": 6,
+        "progresso_percentual": 66.67
+      },
+      {
+        "numero": null,
+        "titulo": "Limpeza de Dados",
+        "status": "concluida",
+        "tarefas_concluidas": [
+          "Identificar clientes de teste",
+          "Excluir visitações de teste",
+          "Excluir festas de teste",
+          "Excluir pagamentos de teste",
+          "Validar integridade após limpeza"
+        ],
+        "tarefas_pendentes": [],
+        "total_tarefas": 5,
+        "progresso_percentual": 100.0
+      },
+      {
+        "numero": null,
+        "titulo": "Autenticação sem Google",
+        "status": "pendente",
+        "tarefas_concluidas": [],
+        "tarefas_pendentes": [
+          "Implementar cadastro com email/senha (futura - requer mudança no sistema de auth)",
+          "Criar página de registro (futura)",
+          "Adicionar validação de email (futura)",
+          "Implementar recuperação de senha (futura)"
+        ],
+        "total_tarefas": 4,
+        "progresso_percentual": 0.0
+      },
+      {
+        "numero": null,
+        "titulo": "Melhorias de UX e Configuração Inicial",
+        "status": "em_andamento",
+        "tarefas_concluidas": [
+          "Adicionar botão voltar na página de Visitações",
+          "Criar script para resetar completamente o banco de dados",
+          "Criar seed de 3 usuários padrão (Moises, Gabriel, Adriano)",
+          "Adicionar métricas do mês corrente no Dashboard (Festas Realizadas e Vendidas)",
+          "Adicionar relógio em tempo real no header (atualização a cada 10s)"
+        ],
+        "tarefas_pendentes": [
+          "Implementar sistema de troca de senha obrigatória no primeiro login (futura)",
+          "Restringir acesso apenas aos 3 usuários iniciais (futura - requer mudança no OAuth)"
+        ],
+        "total_tarefas": 7,
+        "progresso_percentual": 71.43
+      },
+      {
+        "numero": null,
+        "titulo": "Implementação de Importação Excel",
+        "status": "concluida",
+        "tarefas_concluidas": [
+          "Analisar estrutura da planilha Festasvendidas2025.xlsx",
+          "Instalar biblioteca xlsx (npm install xlsx)",
+          "Criar parser para processar colunas: Código, Nome Cliente, Data Fechamento, Data Evento, Horário, Tema, Valor, Total Pago, Custo, Telefone",
+          "Criar procedure tRPC para importação de festas",
+          "Validar dados importados (datas, valores, telefones)",
+          "Criar ou buscar clientes automaticamente durante importação",
+          "Atualizar interface de importação para upload e processamento",
+          "Testar importação com planilha real de 2025 (100 festas válidas de 168 linhas)",
+          "Adicionar preview de dados antes de importar",
+          "Criar log de importações com sucesso/erros"
+        ],
+        "tarefas_pendentes": [],
+        "total_tarefas": 10,
+        "progresso_percentual": 100.0
+      },
+      {
+        "numero": null,
+        "titulo": "Botão de Reset do Banco de Dados",
+        "status": "concluida",
+        "tarefas_concluidas": [
+          "Criar procedure tRPC para reset do banco",
+          "Adicionar botão de reset na interface (apenas para admin)",
+          "Adicionar confirmação dupla antes de resetar",
+          "Executar reset e recriar usuários padrão",
+          "Testar funcionalidade de reset"
+        ],
+        "tarefas_pendentes": [],
+        "total_tarefas": 5,
+        "progresso_percentual": 100.0
+      },
+      {
+        "numero": null,
+        "titulo": "Adicionar Novos Administradores e Importar Festas",
+        "status": "concluida",
+        "tarefas_concluidas": [
+          "Adicionar gabrielol2035@gmail.com como admin",
+          "Adicionar recantodoacaienventosrj@gmail.com como admin",
+          "Analisar estrutura da planilha Próximasfestas.xlsx (66 festas)",
+          "Validar dados da planilha",
+          "Importar festas da planilha para o banco (63 festas importadas com sucesso)",
+          "Verificar importação bem-sucedida (Dashboard mostrando R$ 328.700,00)"
+        ],
+        "tarefas_pendentes": [],
+        "total_tarefas": 6,
+        "progresso_percentual": 100.0
+      },
+      {
+        "numero": null,
+        "titulo": "Correção de Datas das Festas",
+        "status": "concluida",
+        "tarefas_concluidas": [
+          "Investigar problema de conversão de datas do Excel (1 dia adiantado)",
+          "Corrigir função excelDateToJSDate no script de importação (meio-dia UTC)",
+          "Resetar banco de dados",
+          "Reimportar festas com datas corretas",
+          "Verificar datas no sistema (Rodrigo Rios agora é 07/12/25 12:00:00 UTC)"
+        ],
+        "tarefas_pendentes": [],
+        "total_tarefas": 5,
+        "progresso_percentual": 100.0
+      },
+      {
+        "numero": null,
+        "titulo": "Interface de Gerenciamento de Usuários",
+        "status": "concluida",
+        "tarefas_concluidas": [
+          "Criar helpers de banco para CRUD de usuários",
+          "Criar procedures tRPC protegidas com adminProcedure",
+          "Criar página Usuarios.tsx com listagem em tabela",
+          "Implementar filtros por role (admin, gerente, atendente, cliente)",
+          "Adicionar busca por nome/email",
+          "Criar formulário de adicionar usuário (dialog)",
+          "Criar formulário de editar usuário (dialog)",
+          "Implementar exclusão de usuário com confirmação",
+          "Adicionar rota /usuarios no App.tsx",
+          "Adicionar item \"Usuários\" no menu (apenas admin)",
+          "Criar testes unitários para procedures de usuários (12 testes passando)",
+          "Testar funcionalidade completa"
+        ],
+        "tarefas_pendentes": [],
+        "total_tarefas": 12,
+        "progresso_percentual": 100.0
+      },
+      {
+        "numero": null,
+        "titulo": "Melhoria da Tela de Visitações (Ficha de Contrato e Degustação)",
+        "status": "concluida",
+        "tarefas_concluidas": [
+          "Estender schema de visitações com novos campos (CPF, endereço, quantidade convidados, brinde, refeição, bolo, etc - 24 campos totais)",
+          "Criar procedures tRPC para CRUD completo de visitações",
+          "Atualizar página Visitacoes.tsx com formulários de Ficha de Contrato e Ficha de Degustação",
+          "Implementar abas para alternar entre Contrato e Degustação",
+          "Adicionar campos de brinde, refeição, bolo com opções pré-definidas",
+          "Implementar listagem com filtros e busca",
+          "Importar 8 visitações da semana de 27/11/2025 (Nadia, Suzane, Marcelaine, Caryne, Thais, Jenifer, Karien, Valzenir)",
+          "Testar funcionalidade completa"
+        ],
+        "tarefas_pendentes": [],
+        "total_tarefas": 8,
+        "progresso_percentual": 100.0
+      },
+      {
+        "numero": null,
+        "titulo": "Atualização da Tela de Nova Festa",
+        "status": "pendente",
+        "tarefas_concluidas": [],
+        "tarefas_pendentes": [
+          "Estender schema de festas com campos de contrato (CPF cliente, endereço, brinde, refeição, bolo, aniversariante, idade aniversariante)",
+          "Atualizar procedures tRPC para aceitar novos campos de contrato",
+          "Reescrever formulário de Nova Festa com todos os campos",
+          "Implementar validações de CPF e telefone",
+          "Adicionar opções pré-definidas para brinde, massa e molho",
+          "Implementar busca de cliente por CPF ou nome",
+          "Testar cadastro de nova festa com todos os campos"
+        ],
+        "total_tarefas": 7,
+        "progresso_percentual": 0.0
+      },
+      {
+        "numero": null,
+        "titulo": "Funcionalidade de Edição de Festas",
+        "status": "concluida",
+        "tarefas_concluidas": [
+          "Criar página de edição de festa (/festas/editar/:id)",
+          "Implementar formulário preenchido com dados da festa",
+          "Reutilizar componentes de Ficha de Contrato e Degustação",
+          "Implementar procedure tRPC para atualização (festas.update)",
+          "Adicionar validação de campos",
+          "Implementar feedback de sucesso/erro",
+          "Adicionar botão de edição nos cards de festas",
+          "Criar testes unitários para edição"
+        ],
+        "tarefas_pendentes": [],
+        "total_tarefas": 8,
+        "progresso_percentual": 100.0
+      },
+      {
+        "numero": null,
+        "titulo": "Atualização de Visitações e Limpeza",
+        "status": "concluida",
+        "tarefas_concluidas": [
+          "Atualizar schema de visitações com novos status (Fechou Pré-Contrato, Fechou Contrato, Tem Interesse, Faltou, Remarcar)",
+          "Atualizar interface de visitações com novos status",
+          "Limpar visitações de teste do banco de dados",
+          "Limpar festas de teste do banco de dados",
+          "Atualizar linha do tempo do projeto",
+          "Atualizar documentação do projeto (README.md)",
+          "Fazer commit no GitHub com todas as alterações"
+        ],
+        "tarefas_pendentes": [],
+        "total_tarefas": 7,
+        "progresso_percentual": 100.0
+      },
+      {
+        "numero": null,
+        "titulo": "A. Correções de Erros Críticos (404)",
+        "status": "concluida",
+        "tarefas_concluidas": [
+          "Corrigir erro 404 na Página de Edição de Festa (já estava funcionando)",
+          "Corrigir erro 404 na Visualização de Detalhes do Cliente"
+        ],
+        "tarefas_pendentes": [],
+        "total_tarefas": 2,
+        "progresso_percentual": 100.0
+      },
+      {
+        "numero": null,
+        "titulo": "B. Melhorias na Funcionalidade de Visitações e Status",
+        "status": "concluida",
+        "tarefas_concluidas": [
+          "Implementar os 5 status de Visitação (já implementado)",
+          "Ajustar validação de E-mail na Visitação para permitir cadastro com ou sem e-mail",
+          "CPF é opcional na visitação, obrigatório apenas ao fechar contrato",
+          "Implementar fluxo de conversão: tela intermediária ao clicar em \"Converter\"",
+          "Flexibilizar Data do Evento na Visitação (opcional para visitação, obrigatória para contrato)"
+        ],
+        "tarefas_pendentes": [],
+        "total_tarefas": 5,
+        "progresso_percentual": 100.0
+      },
+      {
+        "numero": null,
+        "titulo": "C. Melhorias de Usabilidade e Interface (UX/UI)",
+        "status": "pendente",
+        "tarefas_concluidas": [],
+        "tarefas_pendentes": [
+          "Tornar o Dashboard clicável (cards levam para páginas específicas)",
+          "Detalhar Contrato no Calendário (modal com informações completas ao clicar na festa)",
+          "Criar Filtro Avançado de Pesquisa em todas as abas",
+          "Criar Versão Simplificada para usuário \"Atendimento\" com foco em:",
+          "Adicionar/Editar Visitação",
+          "Adicionar/Editar Novo Cliente",
+          "Adicionar/Editar Novo Pagamento"
+        ],
+        "total_tarefas": 7,
+        "progresso_percentual": 0.0
+      },
+      {
+        "numero": null,
+        "titulo": "D. Gerenciamento de Usuários e Permissões",
+        "status": "pendente",
+        "tarefas_concluidas": [],
+        "tarefas_pendentes": [
+          "Configurar usuários iniciais: recantodoacaienventosrj@gmail.com e gabrielol2035@gmail.com",
+          "Definir perfis de acesso (Administrador por padrão, com opção de alterar roles)",
+          "Permitir que administrador gerencie todos os usuários na aba \"Usuários\""
+        ],
+        "total_tarefas": 3,
+        "progresso_percentual": 0.0
+      },
+      {
+        "numero": null,
+        "titulo": "E. Otimização de Performance",
+        "status": "pendente",
+        "tarefas_concluidas": [],
+        "tarefas_pendentes": [
+          "Otimizar velocidade de carregamento da aba Acompanhamentos",
+          "Investigar possíveis problemas de quebra de banco"
+        ],
+        "total_tarefas": 2,
+        "progresso_percentual": 0.0
+      },
+      {
+        "numero": null,
+        "titulo": "Próximas Melhorias - Sprint Atual",
+        "status": "em_andamento",
+        "tarefas_concluidas": [
+          "Tornar card \"Contratos Fechados\" clicável → redireciona para /festas",
+          "Tornar card \"Festas Realizadas\" clicável → redireciona para /festas?status=realizada",
+          "Tornar card \"Visitas Realizadas\" clicável → redireciona para /visitacoes",
+          "Tornar card \"Taxa de Conversão\" clicável → redireciona para /visitacoes",
+          "Tornar card \"Total de Festas\" clicável → redireciona para /festas",
+          "Tornar card \"Faturamento Total\" clicável → redireciona para /financeiro",
+          "Atualizar TIMELINE.md com todas as fases do projeto",
+          "Criar documentação de setup local (SETUP_LOCAL.md)",
+          "Criar guia de configuração para Windows 10",
+          "Analisar issues existentes no GitHub (ISSUES_ANALYSIS.md)",
+          "Criar novos issues para funcionalidades pendentes (#17)",
+          "Fechar issues já resolvidos (#16)",
+          "Fazer commit e push de todas as alterações"
+        ],
+        "tarefas_pendentes": [
+          "Adicionar busca por código de contrato na página de Festas",
+          "Adicionar busca por CPF na página de Festas",
+          "Adicionar filtro de período de datas (data de fechamento e data do evento)",
+          "Adicionar ordenação customizável (por data, valor, cliente, status)",
+          "Implementar filtros na página de Clientes (busca por CPF, telefone, email)",
+          "Implementar filtros na página de Visitações (busca por nome, telefone, status, período)",
+          "Criar interface de listagem de usuários na página /usuarios",
+          "Implementar formulário de adicionar novo usuário",
+          "Implementar formulário de editar usuário existente",
+          "Adicionar seleção de role (Admin/Atendimento) no formulário",
+          "Implementar exclusão de usuários (com confirmação)",
+          "Configurar usuários iniciais: recantodoacaienventosrj@gmail.com e gabrielol2035@gmail.com como Admin",
+          "Atualizar README.md com estado atual do projeto"
+        ],
+        "total_tarefas": 26,
+        "progresso_percentual": 50.0
+      },
+      {
+        "numero": null,
+        "titulo": "Sprint Atual - Filtros e Gerenciamento de Usuários",
+        "status": "pendente",
+        "tarefas_concluidas": [],
+        "tarefas_pendentes": [
+          "Implementar busca por código de contrato em Festas",
+          "Implementar busca por CPF em Festas",
+          "Implementar filtro de período de datas (data de fechamento) em Festas",
+          "Implementar filtro de período de datas (data do evento) em Festas",
+          "Implementar ordenação customizável em Festas",
+          "Implementar busca por CPF em Clientes",
+          "Implementar busca por telefone em Clientes",
+          "Implementar busca por email em Clientes",
+          "Implementar busca por nome em Visitações",
+          "Implementar busca por telefone em Visitações",
+          "Implementar filtro por status em Visitações",
+          "Implementar filtro de período em Visitações",
+          "Criar página de listagem de usuários",
+          "Implementar formulário de adicionar novo usuário",
+          "Implementar formulário de editar usuário",
+          "Implementar seleção de role (Admin/Atendimento/Gerente/Cliente)",
+          "Implementar exclusão de usuários com confirmação",
+          "Configurar usuários iniciais como Admin",
+          "Testar permissões por role",
+          "Criar testes unitários para gerenciamento de usuários"
+        ],
+        "total_tarefas": 20,
+        "progresso_percentual": 0.0
+      },
+      {
+        "numero": null,
+        "titulo": "Geração Automática de Contratos em PDF",
+        "status": "concluida",
+        "tarefas_concluidas": [
+          "Analisar estrutura dos PDFs de exemplo (112525ST.pdf e ModelopadrãodeContrato.pdf)",
+          "Extrair seções do contrato: Dados do Evento, Dados do Cliente, Serviços Incluídos, Buffet Adulto, Buffet Infantil, Brindes, Observações Gerais, Pagamento",
+          "Criar template de contrato baseado no modelo fornecido",
+          "Implementar geração de PDF usando biblioteca PDFKit",
+          "Preencher template com dados da festa (código, cliente, data, tema, convidados, valor, etc)",
+          "Adicionar logo Festeja Kids e informações da empresa no cabeçalho",
+          "Adicionar rodapé com endereço e CNPJ",
+          "Implementar envio automático do contrato para administradores via notificação",
+          "Adicionar botão \"Gerar Contrato\" na página de detalhes da festa",
+          "Adicionar modal de sucesso com botão \"Gerar Contrato Agora\" após cadastrar nova festa",
+          "Testar geração e envio de contrato com dados reais"
+        ],
+        "tarefas_pendentes": [],
+        "total_tarefas": 11,
+        "progresso_percentual": 100.0
+      },
+      {
+        "numero": 17,
+        "titulo": "Melhorias de UX e Organização",
+        "status": "em_andamento",
+        "tarefas_concluidas": [
+          "Reorganizar menu lateral com agrupamento por função (Festas, Financeiro, Configurações)",
+          "Implementar auto-preenchimento ao criar cliente na aba festa",
+          "Criar tabela de histórico de contratos no banco de dados",
+          "Adicionar seção de histórico de contratos na página de detalhes da festa",
+          "Criar tabela de templates de contrato no banco de dados",
+          "Adicionar botão voltar na página de Usuários"
+        ],
+        "tarefas_pendentes": [
+          "Desenvolver interface de edição de template de contrato para administradores (futura)"
+        ],
+        "total_tarefas": 7,
+        "progresso_percentual": 85.71
+      },
+      {
+        "numero": 18,
+        "titulo": "Versão Demo para Apresentação",
+        "status": "concluida",
+        "tarefas_concluidas": [
+          "Melhorar visualmente Dashboard com dados de exemplo atraentes",
+          "Melhorar visualmente Agenda com eventos de exemplo",
+          "Melhorar visualmente Visitação com leads de exemplo",
+          "Garantir que as 3 telas estejam polidas para demonstração",
+          "Testar fluxo completo Dashboard → Agenda → Visitação"
+        ],
+        "tarefas_pendentes": [],
+        "total_tarefas": 5,
+        "progresso_percentual": 100.0
+      },
+      {
+        "numero": 19,
+        "titulo": "Processamento de Pagamentos de Novembro",
+        "status": "em_andamento",
+        "tarefas_concluidas": [
+          "Extrair e processar planilha PagamentosNovembro.xlsx",
+          "Gerar códigos PADDMMAA-XXX para cada pagamento (34 pagamentos)",
+          "Extrair comprovantes do arquivo .rar",
+          "Renomear comprovantes com os códigos de pagamento (10 associados automaticamente)",
+          "Criar JSON detalhado de todos os arquivos",
+          "Atualizar schema para suportar pagamentos sem festa associada"
+        ],
+        "tarefas_pendentes": [
+          "Criar interface para associação manual de pagamentos a festas (futura)",
+          "Inserir dias de visitação no calendário (futura)",
+          "Inserir pagamentos no calendário (futura)",
+          "Upload de comprovantes renomeados para S3 (futura)"
+        ],
+        "total_tarefas": 10,
+        "progresso_percentual": 60.0
+      },
+      {
+        "numero": 20,
+        "titulo": "Documentação JSON Completa do Projeto",
+        "status": "pendente",
+        "tarefas_concluidas": [],
+        "tarefas_pendentes": [
+          "Coletar histórico completo de todas as fases de desenvolvimento",
+          "Documentar logs de erros e soluções aplicadas",
+          "Documentar schema completo do banco de dados",
+          "Documentar todos os routers e procedures backend",
+          "Documentar todas as páginas e componentes frontend",
+          "Documentar lógica detalhada de cada funcionalidade",
+          "Gerar JSON consolidado extremamente detalhado"
+        ],
+        "total_tarefas": 7,
+        "progresso_percentual": 0.0
+      }
+    ]
+  },
+  "2_arquitetura_dados": {
+    "descricao": "Schema completo do banco de dados com todas as tabelas, colunas e relacionamentos",
+    "metadados": {
+      "data_geracao": "2025-11-27T06:58:30.375708",
+      "projeto": "Festeja Kids 2.0",
+      "arquivo_fonte": "drizzle/schema.ts",
+      "total_tabelas": 9,
+      "total_colunas": 109
+    },
+    "estatisticas": {
+      "total_primary_keys": 9,
+      "total_foreign_keys": 5,
+      "media_colunas_por_tabela": 12.11
+    },
+    "tabelas": [
+      {
+        "nome": "users",
+        "descricao": "Tabela de usuários do sistema com autenticação OAuth",
+        "colunas": [
+          {
+            "nome": "id",
+            "tipo": "int",
+            "pk": true,
+            "auto": true
+          },
+          {
+            "nome": "openId",
+            "tipo": "varchar(64)",
+            "unique": true,
+            "descricao": "Identificador OAuth do Manus"
+          },
+          {
+            "nome": "name",
+            "tipo": "text",
+            "nullable": true
+          },
+          {
+            "nome": "email",
+            "tipo": "varchar(320)",
+            "nullable": true
+          },
+          {
+            "nome": "loginMethod",
+            "tipo": "varchar(64)",
+            "nullable": true
+          },
+          {
+            "nome": "role",
+            "tipo": "enum",
+            "valores": [
+              "admin",
+              "gerente",
+              "atendente",
+              "cliente"
+            ],
+            "default": "cliente"
+          },
+          {
+            "nome": "createdAt",
+            "tipo": "timestamp",
+            "default": "now()"
+          },
+          {
+            "nome": "updatedAt",
+            "tipo": "timestamp",
+            "default": "now()",
+            "onUpdate": true
+          },
+          {
+            "nome": "lastSignedIn",
+            "tipo": "timestamp",
+            "default": "now()"
+          }
+        ]
+      },
+      {
+        "nome": "clientes",
+        "descricao": "Tabela de clientes (contratantes de festas)",
+        "colunas": [
+          {
+            "nome": "id",
+            "tipo": "int",
+            "pk": true,
+            "auto": true
+          },
+          {
+            "nome": "nome",
+            "tipo": "varchar(255)",
+            "notNull": true
+          },
+          {
+            "nome": "telefone",
+            "tipo": "varchar(20)",
+            "nullable": true
+          },
+          {
+            "nome": "email",
+            "tipo": "varchar(255)",
+            "nullable": true
+          },
+          {
+            "nome": "cpf",
+            "tipo": "varchar(14)",
+            "nullable": true
+          },
+          {
+            "nome": "endereco",
+            "tipo": "text",
+            "nullable": true
+          },
+          {
+            "nome": "createdAt",
+            "tipo": "timestamp",
+            "default": "now()"
+          },
+          {
+            "nome": "updatedAt",
+            "tipo": "timestamp",
+            "default": "now()",
+            "onUpdate": true
+          }
+        ]
+      },
+      {
+        "nome": "visitacoes",
+        "descricao": "Tabela de visitações (leads) - Suporta Ficha de Contrato e Ficha de Degustação",
+        "colunas": [
+          {
+            "nome": "id",
+            "tipo": "int",
+            "pk": true,
+            "auto": true
+          },
+          {
+            "nome": "nome",
+            "tipo": "varchar(255)",
+            "notNull": true
+          },
+          {
+            "nome": "telefone",
+            "tipo": "varchar(20)",
+            "notNull": true
+          },
+          {
+            "nome": "email",
+            "tipo": "varchar(255)",
+            "nullable": true
+          },
+          {
+            "nome": "cpf",
+            "tipo": "varchar(14)",
+            "nullable": true
+          },
+          {
+            "nome": "endereco",
+            "tipo": "text",
+            "nullable": true
+          },
+          {
+            "nome": "dataVisita",
+            "tipo": "timestamp",
+            "notNull": true
+          },
+          {
+            "nome": "dataPretendida",
+            "tipo": "varchar(50)",
+            "nullable": true
+          },
+          {
+            "nome": "horario",
+            "tipo": "varchar(20)",
+            "nullable": true
+          },
+          {
+            "nome": "interesse",
+            "tipo": "text",
+            "nullable": true
+          },
+          {
+            "nome": "tema",
+            "tipo": "varchar(255)",
+            "nullable": true
+          },
+          {
+            "nome": "numeroConvidados",
+            "tipo": "int",
+            "nullable": true
+          },
+          {
+            "nome": "brinde",
+            "tipo": "varchar(255)",
+            "nullable": true
+          },
+          {
+            "nome": "refeicao",
+            "tipo": "varchar(255)",
+            "nullable": true
+          },
+          {
+            "nome": "massaType",
+            "tipo": "varchar(100)",
+            "nullable": true
+          },
+          {
+            "nome": "molhoType",
+            "tipo": "varchar(100)",
+            "nullable": true
+          },
+          {
+            "nome": "bolo",
+            "tipo": "varchar(255)",
+            "nullable": true
+          },
+          {
+            "nome": "nomeAniversariante",
+            "tipo": "varchar(255)",
+            "nullable": true
+          },
+          {
+            "nome": "idadeAniversariante",
+            "tipo": "int",
+            "nullable": true
+          },
+          {
+            "nome": "status",
+            "tipo": "enum",
+            "valores": [
+              "aguardando",
+              "tem_interesse",
+              "fechou_pre_contrato",
+              "fechou_contrato",
+              "faltou",
+              "remarcar",
+              "perdido"
+            ],
+            "default": "aguardando"
+          },
+          {
+            "nome": "observacoes",
+            "tipo": "text",
+            "nullable": true
+          },
+          {
+            "nome": "createdAt",
+            "tipo": "timestamp",
+            "default": "now()"
+          },
+          {
+            "nome": "updatedAt",
+            "tipo": "timestamp",
+            "default": "now()",
+            "onUpdate": true
+          }
+        ]
+      },
+      {
+        "nome": "festas",
+        "descricao": "Tabela principal de festas agendadas",
+        "colunas": [
+          {
+            "nome": "id",
+            "tipo": "int",
+            "pk": true,
+            "auto": true
+          },
+          {
+            "nome": "codigo",
+            "tipo": "varchar(50)",
+            "unique": true,
+            "descricao": "Código único do contrato (ex: 010125ST)"
+          },
+          {
+            "nome": "clienteId",
+            "tipo": "int",
+            "notNull": true,
+            "fk": "clientes.id"
+          },
+          {
+            "nome": "clienteNome",
+            "tipo": "varchar(255)",
+            "notNull": true
+          },
+          {
+            "nome": "dataFechamento",
+            "tipo": "timestamp",
+            "notNull": true
+          },
+          {
+            "nome": "dataFesta",
+            "tipo": "timestamp",
+            "notNull": true
+          },
+          {
+            "nome": "horario",
+            "tipo": "varchar(20)",
+            "nullable": true
+          },
+          {
+            "nome": "tema",
+            "tipo": "varchar(255)",
+            "nullable": true
+          },
+          {
+            "nome": "numeroConvidados",
+            "tipo": "int",
+            "nullable": true
+          },
+          {
+            "nome": "valorTotal",
+            "tipo": "int",
+            "notNull": true,
+            "descricao": "Valor em centavos"
+          },
+          {
+            "nome": "valorPago",
+            "tipo": "int",
+            "default": 0,
+            "descricao": "Valor pago em centavos"
+          },
+          {
+            "nome": "cpfCliente",
+            "tipo": "varchar(14)",
+            "nullable": true
+          },
+          {
+            "nome": "enderecoCliente",
+            "tipo": "text",
+            "nullable": true
+          },
+          {
+            "nome": "brinde",
+            "tipo": "varchar(255)",
+            "nullable": true
+          },
+          {
+            "nome": "refeicao",
+            "tipo": "varchar(255)",
+            "nullable": true
+          },
+          {
+            "nome": "massaType",
+            "tipo": "varchar(100)",
+            "nullable": true
+          },
+          {
+            "nome": "molhoType",
+            "tipo": "varchar(100)",
+            "nullable": true
+          },
+          {
+            "nome": "bolo",
+            "tipo": "varchar(255)",
+            "nullable": true
+          },
+          {
+            "nome": "nomeAniversariante",
+            "tipo": "varchar(255)",
+            "nullable": true
+          },
+          {
+            "nome": "idadeAniversariante",
+            "tipo": "int",
+            "nullable": true
+          },
+          {
+            "nome": "status",
+            "tipo": "enum",
+            "valores": [
+              "agendada",
+              "realizada",
+              "cancelada"
+            ],
+            "default": "agendada"
+          },
+          {
+            "nome": "observacoes",
+            "tipo": "text",
+            "nullable": true
+          },
+          {
+            "nome": "createdAt",
+            "tipo": "timestamp",
+            "default": "now()"
+          },
+          {
+            "nome": "updatedAt",
+            "tipo": "timestamp",
+            "default": "now()",
+            "onUpdate": true
+          }
+        ]
+      },
+      {
+        "nome": "pagamentos",
+        "descricao": "Tabela de pagamentos - Suporta pagamentos com ou sem festa associada",
+        "colunas": [
+          {
+            "nome": "id",
+            "tipo": "int",
+            "pk": true,
+            "auto": true
+          },
+          {
+            "nome": "codigo",
+            "tipo": "varchar(50)",
+            "unique": true,
+            "notNull": true,
+            "descricao": "Código PADDMMAA-XXX"
+          },
+          {
+            "nome": "festaId",
+            "tipo": "int",
+            "nullable": true,
+            "fk": "festas.id",
+            "descricao": "Opcional - pode ser associado depois"
+          },
+          {
+            "nome": "valor",
+            "tipo": "int",
+            "notNull": true,
+            "descricao": "Valor em centavos"
+          },
+          {
+            "nome": "dataPagamento",
+            "tipo": "timestamp",
+            "notNull": true
+          },
+          {
+            "nome": "metodoPagamento",
+            "tipo": "varchar(50)",
+            "nullable": true
+          },
+          {
+            "nome": "pagador",
+            "tipo": "varchar(255)",
+            "nullable": true,
+            "descricao": "Nome do pagador"
+          },
+          {
+            "nome": "comprovanteUrl",
+            "tipo": "text",
+            "nullable": true,
+            "descricao": "URL do comprovante no S3"
+          },
+          {
+            "nome": "comprovanteFileKey",
+            "tipo": "varchar(255)",
+            "nullable": true,
+            "descricao": "Chave do arquivo no S3"
+          },
+          {
+            "nome": "observacoes",
+            "tipo": "text",
+            "nullable": true
+          },
+          {
+            "nome": "createdAt",
+            "tipo": "timestamp",
+            "default": "now()"
+          }
+        ]
+      },
+      {
+        "nome": "custosVariaveis",
+        "descricao": "Tabela de custos variáveis por festa",
+        "colunas": [
+          {
+            "nome": "id",
+            "tipo": "int",
+            "pk": true,
+            "auto": true
+          },
+          {
+            "nome": "festaId",
+            "tipo": "int",
+            "notNull": true,
+            "fk": "festas.id"
+          },
+          {
+            "nome": "descricao",
+            "tipo": "varchar(255)",
+            "notNull": true
+          },
+          {
+            "nome": "valor",
+            "tipo": "int",
+            "notNull": true,
+            "descricao": "Valor em centavos"
+          },
+          {
+            "nome": "categoria",
+            "tipo": "varchar(100)",
+            "nullable": true
+          },
+          {
+            "nome": "fornecedor",
+            "tipo": "varchar(255)",
+            "nullable": true
+          },
+          {
+            "nome": "dataCusto",
+            "tipo": "timestamp",
+            "notNull": true
+          },
+          {
+            "nome": "createdAt",
+            "tipo": "timestamp",
+            "default": "now()"
+          }
+        ]
+      },
+      {
+        "nome": "custosFixos",
+        "descricao": "Tabela de custos fixos mensais",
+        "colunas": [
+          {
+            "nome": "id",
+            "tipo": "int",
+            "pk": true,
+            "auto": true
+          },
+          {
+            "nome": "descricao",
+            "tipo": "varchar(255)",
+            "notNull": true
+          },
+          {
+            "nome": "valor",
+            "tipo": "int",
+            "notNull": true,
+            "descricao": "Valor em centavos"
+          },
+          {
+            "nome": "categoria",
+            "tipo": "varchar(100)",
+            "nullable": true
+          },
+          {
+            "nome": "mesReferencia",
+            "tipo": "varchar(7)",
+            "notNull": true,
+            "descricao": "Formato YYYY-MM"
+          },
+          {
+            "nome": "recorrente",
+            "tipo": "boolean",
+            "default": false
+          },
+          {
+            "nome": "observacoes",
+            "tipo": "text",
+            "nullable": true
+          },
+          {
+            "nome": "createdAt",
+            "tipo": "timestamp",
+            "default": "now()"
+          }
+        ]
+      },
+      {
+        "nome": "contratos_gerados",
+        "descricao": "Histórico de contratos em PDF gerados",
+        "colunas": [
+          {
+            "nome": "id",
+            "tipo": "int",
+            "pk": true,
+            "auto": true
+          },
+          {
+            "nome": "festaId",
+            "tipo": "int",
+            "notNull": true,
+            "fk": "festas.id"
+          },
+          {
+            "nome": "versao",
+            "tipo": "int",
+            "notNull": true,
+            "descricao": "Versão do contrato (1, 2, 3...)"
+          },
+          {
+            "nome": "url",
+            "tipo": "text",
+            "notNull": true,
+            "descricao": "URL do PDF no S3"
+          },
+          {
+            "nome": "fileKey",
+            "tipo": "varchar(255)",
+            "notNull": true,
+            "descricao": "Chave do arquivo no S3"
+          },
+          {
+            "nome": "geradoPor",
+            "tipo": "int",
+            "nullable": true,
+            "fk": "users.id"
+          },
+          {
+            "nome": "createdAt",
+            "tipo": "timestamp",
+            "default": "now()"
+          }
+        ]
+      },
+      {
+        "nome": "templates_contrato",
+        "descricao": "Templates editáveis para geração de contratos",
+        "colunas": [
+          {
+            "nome": "id",
+            "tipo": "int",
+            "pk": true,
+            "auto": true
+          },
+          {
+            "nome": "nome",
+            "tipo": "varchar(255)",
+            "notNull": true,
+            "descricao": "Nome do template"
+          },
+          {
+            "nome": "ativo",
+            "tipo": "boolean",
+            "default": true
+          },
+          {
+            "nome": "servicosIncluidos",
+            "tipo": "text",
+            "nullable": true
+          },
+          {
+            "nome": "buffetAdulto",
+            "tipo": "text",
+            "nullable": true
+          },
+          {
+            "nome": "buffetInfantil",
+            "tipo": "text",
+            "nullable": true
+          },
+          {
+            "nome": "brindes",
+            "tipo": "text",
+            "nullable": true
+          },
+          {
+            "nome": "observacoesGerais",
+            "tipo": "text",
+            "nullable": true
+          },
+          {
+            "nome": "dadosBancarios",
+            "tipo": "text",
+            "nullable": true
+          },
+          {
+            "nome": "createdAt",
+            "tipo": "timestamp",
+            "default": "now()"
+          },
+          {
+            "nome": "updatedAt",
+            "tipo": "timestamp",
+            "default": "now()",
+            "onUpdate": true
+          }
+        ]
+      }
+    ]
+  },
+  "3_backend_api": {
+    "descricao": "Documentação completa de todos os routers tRPC e procedures do backend",
+    "metadados": {
+      "data_geracao": "2025-11-27T06:59:11.502203",
+      "projeto": "Festeja Kids 2.0",
+      "diretorio_fonte": "server/routers/",
+      "total_routers": 8,
+      "total_procedures": 56
+    },
+    "estatisticas": {
+      "total_queries": 31,
+      "total_mutations": 11,
+      "total_protected": 50,
+      "total_admin": 6,
+      "total_public": 0,
+      "media_procedures_por_router": 7.0
+    },
+    "routers": [
+      {
+        "nome_arquivo": "festas.ts",
+        "nome_router": "festasRouter",
+        "caminho": "/server/routers/festas.ts",
+        "total_linhas": 293,
+        "total_procedures": 13,
+        "procedures": [
+          {
+            "nome": "list",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "query",
+            "input_schema": "z.object({ id: z.number(",
+            "comentario": null
+          },
+          {
+            "nome": "byId",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "query",
+            "input_schema": "z.object({ id: z.number(",
+            "comentario": null
+          },
+          {
+            "nome": "byCodigo",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "query",
+            "input_schema": "z.object({ codigo: z.string(",
+            "comentario": null
+          },
+          {
+            "nome": "byStatus",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "query",
+            "input_schema": "z.object({ status: z.enum([\"agendada\", \"realizada\", \"cancelada\"]",
+            "comentario": null
+          },
+          {
+            "nome": "byCliente",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "query",
+            "input_schema": "z.object({ clienteId: z.number(",
+            "comentario": null
+          },
+          {
+            "nome": "byDateRange",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "query",
+            "input_schema": "z.object({\n        startDate: z.number(",
+            "comentario": null
+          },
+          {
+            "nome": "create",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "unknown",
+            "input_schema": "z.object({\n        clienteId: z.number(",
+            "comentario": null
+          },
+          {
+            "nome": "update",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "unknown",
+            "input_schema": "z.object({\n        id: z.number(",
+            "comentario": null
+          },
+          {
+            "nome": "delete",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "mutation",
+            "input_schema": "z.object({ id: z.number(",
+            "comentario": null
+          },
+          {
+            "nome": "generateCodigo",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "query",
+            "input_schema": "z.object({\n        dataFechamento: z.number(",
+            "comentario": "Função auxiliar para gerar código de contrato"
+          },
+          {
+            "nome": "stats",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "query",
+            "input_schema": null,
+            "comentario": "Estatísticas"
+          },
+          {
+            "nome": "gerarContrato",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "mutation",
+            "input_schema": "z.object({ festaId: z.number(",
+            "comentario": null
+          },
+          {
+            "nome": "contratosGerados",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "query",
+            "input_schema": "z.object({ festaId: z.number(",
+            "comentario": null
+          }
+        ]
+      },
+      {
+        "nome_arquivo": "clientes.ts",
+        "nome_router": "clientesRouter",
+        "caminho": "/server/routers/clientes.ts",
+        "total_linhas": 98,
+        "total_procedures": 7,
+        "procedures": [
+          {
+            "nome": "list",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "query",
+            "input_schema": "z.object({ id: z.number(",
+            "comentario": null
+          },
+          {
+            "nome": "byId",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "query",
+            "input_schema": "z.object({ id: z.number(",
+            "comentario": null
+          },
+          {
+            "nome": "search",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "query",
+            "input_schema": "z.object({ searchTerm: z.string(",
+            "comentario": null
+          },
+          {
+            "nome": "create",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "unknown",
+            "input_schema": "z.object({\n        nome: z.string(",
+            "comentario": null
+          },
+          {
+            "nome": "update",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "unknown",
+            "input_schema": "z.object({\n        id: z.number(",
+            "comentario": null
+          },
+          {
+            "nome": "delete",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "mutation",
+            "input_schema": "z.object({ id: z.number(",
+            "comentario": null
+          },
+          {
+            "nome": "withFestas",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "query",
+            "input_schema": "z.object({ id: z.number(",
+            "comentario": null
+          }
+        ]
+      },
+      {
+        "nome_arquivo": "pagamentos.ts",
+        "nome_router": "pagamentosRouter",
+        "caminho": "/server/routers/pagamentos.ts",
+        "total_linhas": 92,
+        "total_procedures": 5,
+        "procedures": [
+          {
+            "nome": "listAll",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "query",
+            "input_schema": "z.object({ festaId: z.number(",
+            "comentario": null
+          },
+          {
+            "nome": "byFesta",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "query",
+            "input_schema": "z.object({ festaId: z.number(",
+            "comentario": null
+          },
+          {
+            "nome": "create",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "unknown",
+            "input_schema": "z.object({\n        codigo: z.string(",
+            "comentario": null
+          },
+          {
+            "nome": "delete",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "mutation",
+            "input_schema": "z.object({ id: z.number(",
+            "comentario": null
+          },
+          {
+            "nome": "resumoFesta",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "query",
+            "input_schema": "z.object({ festaId: z.number(",
+            "comentario": "Resumo financeiro de uma festa"
+          }
+        ]
+      },
+      {
+        "nome_arquivo": "custos.ts",
+        "nome_router": "custosRouter",
+        "caminho": "/server/routers/custos.ts",
+        "total_linhas": 153,
+        "total_procedures": 14,
+        "procedures": [
+          {
+            "nome": "list",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "query",
+            "input_schema": "z.object({\n          descricao: z.string(",
+            "comentario": "============ CUSTOS VARIÁVEIS ============"
+          },
+          {
+            "nome": "active",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "query",
+            "input_schema": "z.object({\n          descricao: z.string(",
+            "comentario": null
+          },
+          {
+            "nome": "create",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "unknown",
+            "input_schema": "z.object({\n          descricao: z.string(",
+            "comentario": null
+          },
+          {
+            "nome": "update",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "unknown",
+            "input_schema": "z.object({\n          id: z.number(",
+            "comentario": null
+          },
+          {
+            "nome": "delete",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "mutation",
+            "input_schema": "z.object({ id: z.number(",
+            "comentario": null
+          },
+          {
+            "nome": "calcularTotal",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "query",
+            "input_schema": "z.object({ valorFesta: z.number(",
+            "comentario": null
+          },
+          {
+            "nome": "list",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "query",
+            "input_schema": "z.object({\n          descricao: z.string(",
+            "comentario": "============ CUSTOS FIXOS ============"
+          },
+          {
+            "nome": "active",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "query",
+            "input_schema": "z.object({\n          descricao: z.string(",
+            "comentario": null
+          },
+          {
+            "nome": "create",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "unknown",
+            "input_schema": "z.object({\n          descricao: z.string(",
+            "comentario": null
+          },
+          {
+            "nome": "update",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "unknown",
+            "input_schema": "z.object({\n          id: z.number(",
+            "comentario": null
+          },
+          {
+            "nome": "delete",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "mutation",
+            "input_schema": "z.object({ id: z.number(",
+            "comentario": null
+          },
+          {
+            "nome": "calcularTotalMensal",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "query",
+            "input_schema": "z.object({ valorFesta: z.number(",
+            "comentario": null
+          },
+          {
+            "nome": "calcularMargemLucro",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "query",
+            "input_schema": "z.object({ valorFesta: z.number(",
+            "comentario": "============ CÁLCULOS ============"
+          },
+          {
+            "nome": "resumoCompleto",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "query",
+            "input_schema": null,
+            "comentario": null
+          }
+        ]
+      },
+      {
+        "nome_arquivo": "acompanhamento.ts",
+        "nome_router": "acompanhamentoRouter",
+        "caminho": "/server/routers/acompanhamento.ts",
+        "total_linhas": 185,
+        "total_procedures": 2,
+        "procedures": [
+          {
+            "nome": "listarComStatus",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "query",
+            "input_schema": null,
+            "comentario": "Listar festas com status de pagamento detalhado"
+          },
+          {
+            "nome": "projecaoRecebimentos",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "query",
+            "input_schema": null,
+            "comentario": "Projeção de recebimentos para próximos 12 meses"
+          }
+        ]
+      },
+      {
+        "nome_arquivo": "visitacoes.ts",
+        "nome_router": "visitacoesRouter",
+        "caminho": "/server/routers/visitacoes.ts",
+        "total_linhas": 135,
+        "total_procedures": 7,
+        "procedures": [
+          {
+            "nome": "list",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "query",
+            "input_schema": "z.object({ id: z.number(",
+            "comentario": "Listar todas as visitações"
+          },
+          {
+            "nome": "getById",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "query",
+            "input_schema": "z.object({ id: z.number(",
+            "comentario": "Buscar visitação por ID"
+          },
+          {
+            "nome": "create",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "unknown",
+            "input_schema": "z.object({\n        nome: z.string(",
+            "comentario": "Criar nova visitação"
+          },
+          {
+            "nome": "update",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "unknown",
+            "input_schema": "z.object({\n        id: z.number(",
+            "comentario": "Atualizar visitação"
+          },
+          {
+            "nome": "delete",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "mutation",
+            "input_schema": "z.object({ id: z.number(",
+            "comentario": "Deletar visitação"
+          },
+          {
+            "nome": "converterEmCliente",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "mutation",
+            "input_schema": "z.object({ \n      visitacaoId: z.number(",
+            "comentario": "Converter visitação em cliente"
+          },
+          {
+            "nome": "stats",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "query",
+            "input_schema": null,
+            "comentario": "Estatísticas de visitações"
+          }
+        ]
+      },
+      {
+        "nome_arquivo": "importacao.ts",
+        "nome_router": "importacaoRouter",
+        "caminho": "/server/routers/importacao.ts",
+        "total_linhas": 83,
+        "total_procedures": 2,
+        "procedures": [
+          {
+            "nome": "preview",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "mutation",
+            "input_schema": "z.object({\n        fileBase64: z.string(",
+            "comentario": null
+          },
+          {
+            "nome": "importar",
+            "tipo_autenticacao": "protected",
+            "tipo_operacao": "mutation",
+            "input_schema": "z.object({\n        fileBase64: z.string(",
+            "comentario": null
+          }
+        ]
+      },
+      {
+        "nome_arquivo": "usuarios.ts",
+        "nome_router": "usuariosRouter",
+        "caminho": "/server/routers/usuarios.ts",
+        "total_linhas": 162,
+        "total_procedures": 6,
+        "procedures": [
+          {
+            "nome": "list",
+            "tipo_autenticacao": "admin",
+            "tipo_operacao": "unknown",
+            "input_schema": "z.object({\n        search: z.string(",
+            "comentario": "Listar todos os usuários (apenas admin)"
+          },
+          {
+            "nome": "getById",
+            "tipo_autenticacao": "admin",
+            "tipo_operacao": "query",
+            "input_schema": "z.object({ id: z.number(",
+            "comentario": "Buscar usuário por ID"
+          },
+          {
+            "nome": "create",
+            "tipo_autenticacao": "admin",
+            "tipo_operacao": "unknown",
+            "input_schema": "z.object({\n        openId: z.string(",
+            "comentario": "Criar novo usuário"
+          },
+          {
+            "nome": "update",
+            "tipo_autenticacao": "admin",
+            "tipo_operacao": "unknown",
+            "input_schema": "z.object({\n        id: z.number(",
+            "comentario": "Atualizar usuário"
+          },
+          {
+            "nome": "delete",
+            "tipo_autenticacao": "admin",
+            "tipo_operacao": "mutation",
+            "input_schema": "z.object({ id: z.number(",
+            "comentario": "Deletar usuário"
+          },
+          {
+            "nome": "stats",
+            "tipo_autenticacao": "admin",
+            "tipo_operacao": "query",
+            "input_schema": null,
+            "comentario": "Estatísticas de usuários"
+          }
+        ]
+      }
+    ]
+  },
+  "4_interface_usuario": {
+    "descricao": "Documentação de todas as páginas e componentes do frontend React",
+    "metadados": {
+      "data_geracao": "2025-11-27T07:00:00.514900",
+      "projeto": "Festeja Kids 2.0",
+      "diretorio_fonte": "client/src/pages/",
+      "total_paginas": 23,
+      "total_linhas_codigo": 8617
+    },
+    "estatisticas": {
+      "total_chamadas_trpc": 48,
+      "paginas_com_roteamento": 10,
+      "media_linhas_por_pagina": 374.65,
+      "hooks_mais_usados": [
+        {
+          "hook": "useState",
+          "quantidade": 13
+        },
+        {
+          "hook": "useMemo",
+          "quantidade": 8
+        },
+        {
+          "hook": "useEffect",
+          "quantidade": 2
+        }
+      ]
+    },
+    "paginas": [
+      {
+        "nome_arquivo": "AcompanhamentoPagamentos.tsx",
+        "nome_pagina": "AcompanhamentoPagamentos",
+        "nome_funcao": "AcompanhamentoPagamentos",
+        "caminho": "/client/src/pages/AcompanhamentoPagamentos.tsx",
+        "proposito": "Acompanhamento de status de pagamentos",
+        "total_linhas": 302,
+        "usa_roteamento": false,
+        "total_trpc_hooks": 1,
+        "trpc_hooks": [
+          "acompanhamento.listarComStatus.useQuery"
+        ],
+        "react_hooks": [
+          "useMemo"
+        ],
+        "ui_components": [
+          "badge",
+          "card",
+          "table",
+          "button"
+        ],
+        "comentarios_principais": []
+      },
+      {
+        "nome_arquivo": "Agenda.tsx",
+        "nome_pagina": "Agenda",
+        "nome_funcao": "Agenda",
+        "caminho": "/client/src/pages/Agenda.tsx",
+        "proposito": "Visualização de festas em formato de agenda",
+        "total_linhas": 188,
+        "usa_roteamento": false,
+        "total_trpc_hooks": 1,
+        "trpc_hooks": [
+          "festas.list.useQuery"
+        ],
+        "react_hooks": [
+          "useState",
+          "useMemo"
+        ],
+        "ui_components": [
+          "badge",
+          "card"
+        ],
+        "comentarios_principais": []
+      },
+      {
+        "nome_arquivo": "Calendario.tsx",
+        "nome_pagina": "Calendario",
+        "nome_funcao": "Calendario",
+        "caminho": "/client/src/pages/Calendario.tsx",
+        "proposito": "Visualização de festas em formato de calendário mensal",
+        "total_linhas": 153,
+        "usa_roteamento": false,
+        "total_trpc_hooks": 1,
+        "trpc_hooks": [
+          "festas.list.useQuery"
+        ],
+        "react_hooks": [
+          "useMemo"
+        ],
+        "ui_components": [
+          "card"
+        ],
+        "comentarios_principais": []
+      },
+      {
+        "nome_arquivo": "Clientes.tsx",
+        "nome_pagina": "Clientes",
+        "nome_funcao": "Clientes",
+        "caminho": "/client/src/pages/Clientes.tsx",
+        "proposito": "Listagem e gerenciamento de clientes",
+        "total_linhas": 261,
+        "usa_roteamento": false,
+        "total_trpc_hooks": 1,
+        "trpc_hooks": [
+          "clientes.list.useQuery"
+        ],
+        "react_hooks": [
+          "useState",
+          "useMemo"
+        ],
+        "ui_components": [
+          "button",
+          "card",
+          "input",
+          "select"
+        ],
+        "comentarios_principais": []
+      },
+      {
+        "nome_arquivo": "ComponentShowcase.tsx",
+        "nome_pagina": "ComponentShowcase",
+        "nome_funcao": "ComponentsShowcase",
+        "caminho": "/client/src/pages/ComponentShowcase.tsx",
+        "proposito": "Página do sistema",
+        "total_linhas": 1438,
+        "usa_roteamento": false,
+        "total_trpc_hooks": 1,
+        "trpc_hooks": [
+          "ai.chat.useMutation"
+        ],
+        "react_hooks": [
+          "useState"
+        ],
+        "ui_components": [
+          "accordion",
+          "alert",
+          "avatar",
+          "badge",
+          "breadcrumb",
+          "button",
+          "calendar",
+          "card",
+          "carousel",
+          "checkbox"
+        ],
+        "comentarios_principais": []
+      },
+      {
+        "nome_arquivo": "Configuracoes.tsx",
+        "nome_pagina": "Configuracoes",
+        "nome_funcao": "Configuracoes",
+        "caminho": "/client/src/pages/Configuracoes.tsx",
+        "proposito": "Configurações do sistema",
+        "total_linhas": 174,
+        "usa_roteamento": false,
+        "total_trpc_hooks": 1,
+        "trpc_hooks": [
+          "system.resetDatabase.useMutation"
+        ],
+        "react_hooks": [
+          "useState"
+        ],
+        "ui_components": [
+          "card",
+          "button",
+          "input",
+          "label",
+          "alert"
+        ],
+        "comentarios_principais": []
+      },
+      {
+        "nome_arquivo": "ConverterVisitacao.tsx",
+        "nome_pagina": "ConverterVisitacao",
+        "nome_funcao": "ConverterVisitacao",
+        "caminho": "/client/src/pages/ConverterVisitacao.tsx",
+        "proposito": "Conversão de visitação em contrato",
+        "total_linhas": 424,
+        "usa_roteamento": true,
+        "total_trpc_hooks": 4,
+        "trpc_hooks": [
+          "visitacoes.getById.useQuery",
+          "festas.create.useMutation",
+          "clientes.create.useMutation",
+          "visitacoes.update.useMutation"
+        ],
+        "react_hooks": [
+          "useState",
+          "useEffect"
+        ],
+        "ui_components": [
+          "button",
+          "card",
+          "input",
+          "label",
+          "textarea",
+          "select"
+        ],
+        "comentarios_principais": []
+      },
+      {
+        "nome_arquivo": "Custos.tsx",
+        "nome_pagina": "Custos",
+        "nome_funcao": "Custos",
+        "caminho": "/client/src/pages/Custos.tsx",
+        "proposito": "Gerenciamento de custos fixos e variáveis",
+        "total_linhas": 342,
+        "usa_roteamento": false,
+        "total_trpc_hooks": 0,
+        "trpc_hooks": [],
+        "react_hooks": [
+          "useState"
+        ],
+        "ui_components": [
+          "button",
+          "card",
+          "input",
+          "label",
+          "table",
+          "tabs"
+        ],
+        "comentarios_principais": []
+      },
+      {
+        "nome_arquivo": "Dashboard.tsx",
+        "nome_pagina": "Dashboard",
+        "nome_funcao": "Dashboard",
+        "caminho": "/client/src/pages/Dashboard.tsx",
+        "proposito": "Página principal com visão geral e métricas do negócio",
+        "total_linhas": 270,
+        "usa_roteamento": true,
+        "total_trpc_hooks": 2,
+        "trpc_hooks": [
+          "festas.stats.useQuery",
+          "visitacoes.stats.useQuery"
+        ],
+        "react_hooks": [],
+        "ui_components": [
+          "card"
+        ],
+        "comentarios_principais": []
+      },
+      {
+        "nome_arquivo": "DetalhesCliente.tsx",
+        "nome_pagina": "DetalhesCliente",
+        "nome_funcao": "DetalhesCliente",
+        "caminho": "/client/src/pages/DetalhesCliente.tsx",
+        "proposito": "Visualização detalhada de um cliente específico",
+        "total_linhas": 241,
+        "usa_roteamento": true,
+        "total_trpc_hooks": 2,
+        "trpc_hooks": [
+          "clientes.byId.useQuery",
+          "festas.list.useQuery"
+        ],
+        "react_hooks": [],
+        "ui_components": [
+          "button",
+          "card"
+        ],
+        "comentarios_principais": []
+      },
+      {
+        "nome_arquivo": "DetalhesFesta.tsx",
+        "nome_pagina": "DetalhesFesta",
+        "nome_funcao": "DetalhesFesta",
+        "caminho": "/client/src/pages/DetalhesFesta.tsx",
+        "proposito": "Visualização detalhada de uma festa específica",
+        "total_linhas": 324,
+        "usa_roteamento": true,
+        "total_trpc_hooks": 4,
+        "trpc_hooks": [
+          "festas.byId.useQuery",
+          "pagamentos.byFesta.useQuery",
+          "festas.contratosGerados.useQuery",
+          "festas.gerarContrato.useMutation"
+        ],
+        "react_hooks": [
+          "useState"
+        ],
+        "ui_components": [
+          "button",
+          "card"
+        ],
+        "comentarios_principais": []
+      },
+      {
+        "nome_arquivo": "EditarFesta.tsx",
+        "nome_pagina": "EditarFesta",
+        "nome_funcao": "EditarFesta",
+        "caminho": "/client/src/pages/EditarFesta.tsx",
+        "proposito": "Formulário de edição de festa existente",
+        "total_linhas": 478,
+        "usa_roteamento": true,
+        "total_trpc_hooks": 3,
+        "trpc_hooks": [
+          "festas.byId.useQuery",
+          "clientes.list.useQuery",
+          "festas.update.useMutation"
+        ],
+        "react_hooks": [
+          "useState",
+          "useEffect"
+        ],
+        "ui_components": [
+          "button",
+          "card",
+          "input",
+          "label",
+          "select",
+          "textarea",
+          "tabs"
+        ],
+        "comentarios_principais": []
+      },
+      {
+        "nome_arquivo": "Festas.tsx",
+        "nome_pagina": "Festas",
+        "nome_funcao": "Festas",
+        "caminho": "/client/src/pages/Festas.tsx",
+        "proposito": "Listagem e gerenciamento de festas agendadas",
+        "total_linhas": 302,
+        "usa_roteamento": false,
+        "total_trpc_hooks": 2,
+        "trpc_hooks": [
+          "festas.list.useQuery",
+          "clientes.list.useQuery"
+        ],
+        "react_hooks": [
+          "useMemo"
+        ],
+        "ui_components": [
+          "button",
+          "card",
+          "badge",
+          "input",
+          "select"
+        ],
+        "comentarios_principais": []
+      },
+      {
+        "nome_arquivo": "Financeiro.tsx",
+        "nome_pagina": "Financeiro",
+        "nome_funcao": "Financeiro",
+        "caminho": "/client/src/pages/Financeiro.tsx",
+        "proposito": "Dashboard financeiro com receitas e despesas",
+        "total_linhas": 350,
+        "usa_roteamento": false,
+        "total_trpc_hooks": 2,
+        "trpc_hooks": [
+          "festas.list.useQuery",
+          "pagamentos.listAll.useQuery"
+        ],
+        "react_hooks": [
+          "useMemo"
+        ],
+        "ui_components": [
+          "button",
+          "badge",
+          "card",
+          "table"
+        ],
+        "comentarios_principais": []
+      },
+      {
+        "nome_arquivo": "Home.tsx",
+        "nome_pagina": "Home",
+        "nome_funcao": "Home",
+        "caminho": "/client/src/pages/Home.tsx",
+        "proposito": "Página inicial",
+        "total_linhas": 225,
+        "usa_roteamento": false,
+        "total_trpc_hooks": 1,
+        "trpc_hooks": [
+          "festas.stats.useQuery"
+        ],
+        "react_hooks": [],
+        "ui_components": [
+          "card",
+          "button"
+        ],
+        "comentarios_principais": []
+      },
+      {
+        "nome_arquivo": "Importacao.tsx",
+        "nome_pagina": "Importacao",
+        "nome_funcao": "Importacao",
+        "caminho": "/client/src/pages/Importacao.tsx",
+        "proposito": "Importação de dados via Excel",
+        "total_linhas": 345,
+        "usa_roteamento": false,
+        "total_trpc_hooks": 2,
+        "trpc_hooks": [
+          "importacao.importar.useMutation",
+          "importacao.preview.useMutation"
+        ],
+        "react_hooks": [
+          "useState"
+        ],
+        "ui_components": [
+          "card",
+          "button",
+          "input",
+          "label",
+          "alert"
+        ],
+        "comentarios_principais": []
+      },
+      {
+        "nome_arquivo": "NotFound.tsx",
+        "nome_pagina": "NotFound",
+        "nome_funcao": "NotFound",
+        "caminho": "/client/src/pages/NotFound.tsx",
+        "proposito": "Página de erro 404",
+        "total_linhas": 53,
+        "usa_roteamento": true,
+        "total_trpc_hooks": 0,
+        "trpc_hooks": [],
+        "react_hooks": [],
+        "ui_components": [
+          "button",
+          "card"
+        ],
+        "comentarios_principais": []
+      },
+      {
+        "nome_arquivo": "NovaFesta.tsx",
+        "nome_pagina": "NovaFesta",
+        "nome_funcao": "NovaFesta",
+        "caminho": "/client/src/pages/NovaFesta.tsx",
+        "proposito": "Formulário de cadastro de nova festa",
+        "total_linhas": 617,
+        "usa_roteamento": true,
+        "total_trpc_hooks": 4,
+        "trpc_hooks": [
+          "clientes.list.useQuery",
+          "clientes.create.useMutation",
+          "festas.create.useMutation",
+          "festas.gerarContrato.useMutation"
+        ],
+        "react_hooks": [
+          "useState"
+        ],
+        "ui_components": [
+          "button",
+          "card",
+          "input",
+          "label",
+          "select",
+          "textarea",
+          "tabs",
+          "dialog"
+        ],
+        "comentarios_principais": []
+      },
+      {
+        "nome_arquivo": "ProjecaoFinanceira.tsx",
+        "nome_pagina": "ProjecaoFinanceira",
+        "nome_funcao": "ProjecaoFinanceira",
+        "caminho": "/client/src/pages/ProjecaoFinanceira.tsx",
+        "proposito": "Projeção financeira futura",
+        "total_linhas": 301,
+        "usa_roteamento": false,
+        "total_trpc_hooks": 1,
+        "trpc_hooks": [
+          "acompanhamento.projecaoRecebimentos.useQuery"
+        ],
+        "react_hooks": [
+          "useMemo"
+        ],
+        "ui_components": [
+          "card"
+        ],
+        "comentarios_principais": []
+      },
+      {
+        "nome_arquivo": "RegistrarPagamento.tsx",
+        "nome_pagina": "RegistrarPagamento",
+        "nome_funcao": "RegistrarPagamento",
+        "caminho": "/client/src/pages/RegistrarPagamento.tsx",
+        "proposito": "Formulário de registro de pagamento",
+        "total_linhas": 263,
+        "usa_roteamento": true,
+        "total_trpc_hooks": 2,
+        "trpc_hooks": [
+          "festas.list.useQuery",
+          "pagamentos.create.useMutation"
+        ],
+        "react_hooks": [
+          "useState"
+        ],
+        "ui_components": [
+          "button",
+          "card",
+          "input",
+          "label",
+          "select",
+          "textarea"
+        ],
+        "comentarios_principais": []
+      },
+      {
+        "nome_arquivo": "Relatorios.tsx",
+        "nome_pagina": "Relatorios",
+        "nome_funcao": "Relatorios",
+        "caminho": "/client/src/pages/Relatorios.tsx",
+        "proposito": "Relatórios e análises com gráficos",
+        "total_linhas": 478,
+        "usa_roteamento": false,
+        "total_trpc_hooks": 2,
+        "trpc_hooks": [
+          "festas.list.useQuery",
+          "pagamentos.listAll.useQuery"
+        ],
+        "react_hooks": [
+          "useMemo"
+        ],
+        "ui_components": [
+          "card",
+          "select"
+        ],
+        "comentarios_principais": []
+      },
+      {
+        "nome_arquivo": "Usuarios.tsx",
+        "nome_pagina": "Usuarios",
+        "nome_funcao": "Usuarios",
+        "caminho": "/client/src/pages/Usuarios.tsx",
+        "proposito": "Gerenciamento de usuários do sistema",
+        "total_linhas": 482,
+        "usa_roteamento": true,
+        "total_trpc_hooks": 5,
+        "trpc_hooks": [
+          "usuarios.list.useQuery",
+          "usuarios.stats.useQuery",
+          "usuarios.create.useMutation",
+          "usuarios.update.useMutation",
+          "usuarios.delete.useMutation"
+        ],
+        "react_hooks": [
+          "useState"
+        ],
+        "ui_components": [
+          "button",
+          "input",
+          "select",
+          "table",
+          "dialog",
+          "label",
+          "badge",
+          "card"
+        ],
+        "comentarios_principais": []
+      },
+      {
+        "nome_arquivo": "Visitacoes.tsx",
+        "nome_pagina": "Visitacoes",
+        "nome_funcao": "Visitacoes",
+        "caminho": "/client/src/pages/Visitacoes.tsx",
+        "proposito": "Gerenciamento de visitações (leads)",
+        "total_linhas": 606,
+        "usa_roteamento": true,
+        "total_trpc_hooks": 6,
+        "trpc_hooks": [
+          "visitacoes.list.useQuery",
+          "visitacoes.stats.useQuery",
+          "visitacoes.create.useMutation",
+          "visitacoes.update.useMutation",
+          "visitacoes.delete.useMutation",
+          "visitacoes.converterEmCliente.useMutation"
+        ],
+        "react_hooks": [
+          "useState"
+        ],
+        "ui_components": [
+          "button",
+          "card",
+          "input",
+          "label",
+          "textarea",
+          "select",
+          "dialog",
+          "tabs"
+        ],
+        "comentarios_principais": []
+      }
+    ]
+  },
+  "5_logs_erros_solucoes": {
+    "descricao": "Registro de todos os erros encontrados e soluções aplicadas durante o desenvolvimento",
+    "metadados": {
+      "data_geracao": "2025-11-27T07:01:01.253045",
+      "projeto": "Festeja Kids 2.0",
+      "total_erros_documentados": 15,
+      "periodo": "Janeiro 2025 - Fevereiro 2025"
+    },
+    "estatisticas": {
+      "por_severidade": {
+        "alta": 6,
+        "media": 8,
+        "baixa": 1
+      },
+      "por_categoria": {
+        "schema_banco": 1,
+        "validacao": 1,
+        "performance": 0,
+        "ui_ux": 1,
+        "importacao": 2,
+        "autenticacao": 1
+      }
+    },
+    "logs": [
+      {
+        "fase": 1,
+        "data_aproximada": "2025-01-15",
+        "erro": "Erro 404 em páginas de detalhes",
+        "descricao": "Links para /festas/:id e /clientes/:id retornavam 404",
+        "causa": "Rotas não configuradas corretamente no App.tsx",
+        "solucao": "Adicionar rotas dinâmicas com parâmetros no App.tsx usando wouter",
+        "arquivos_afetados": [
+          "client/src/App.tsx"
+        ],
+        "severidade": "alta"
+      },
+      {
+        "fase": 2,
+        "data_aproximada": "2025-01-16",
+        "erro": "Cálculo incorreto de ticket médio",
+        "descricao": "Ticket médio considerava festas agendadas ao invés de apenas realizadas",
+        "causa": "Query no backend não filtrava por status='realizada'",
+        "solucao": "Adicionar filtro WHERE status='realizada' na query de cálculo",
+        "arquivos_afetados": [
+          "server/db.ts",
+          "server/routers/festas.ts"
+        ],
+        "severidade": "media"
+      },
+      {
+        "fase": 3,
+        "data_aproximada": "2025-01-18",
+        "erro": "Datas importadas do Excel com 1 dia de diferença",
+        "descricao": "Festas importadas apareciam com data 1 dia adiantada",
+        "causa": "Conversão de data serial do Excel não considerava timezone UTC",
+        "solucao": "Ajustar função excelDateToJSDate para usar meio-dia UTC ao invés de meia-noite",
+        "arquivos_afetados": [
+          "server/routers/importacao.ts"
+        ],
+        "severidade": "alta"
+      },
+      {
+        "fase": 4,
+        "data_aproximada": "2025-01-20",
+        "erro": "Erro de permissão ao tentar criar usuário",
+        "descricao": "Procedure usuarios.create retornava erro FORBIDDEN mesmo para admin",
+        "causa": "Middleware adminProcedure verificava role incorretamente",
+        "solucao": "Corrigir verificação de ctx.user.role === 'admin' no middleware",
+        "arquivos_afetados": [
+          "server/routers/usuarios.ts"
+        ],
+        "severidade": "alta"
+      },
+      {
+        "fase": 5,
+        "data_aproximada": "2025-01-22",
+        "erro": "Erro ao salvar visitação sem email",
+        "descricao": "Validação exigia email obrigatório, mas spec permitia opcional",
+        "causa": "Schema Zod marcava email como .email() sem .optional()",
+        "solucao": "Adicionar .optional() ao campo email no input schema",
+        "arquivos_afetados": [
+          "server/routers/visitacoes.ts"
+        ],
+        "severidade": "media"
+      },
+      {
+        "fase": 6,
+        "data_aproximada": "2025-01-25",
+        "erro": "Quebra de layout mobile no Dashboard",
+        "descricao": "Cards de métricas ficavam cortados em telas pequenas",
+        "causa": "Grid CSS não responsivo, largura fixa em pixels",
+        "solucao": "Substituir grid-cols-4 por grid-cols-1 sm:grid-cols-2 lg:grid-cols-4",
+        "arquivos_afetados": [
+          "client/src/pages/Dashboard.tsx"
+        ],
+        "severidade": "media"
+      },
+      {
+        "fase": 7,
+        "data_aproximada": "2025-01-28",
+        "erro": "Erro ao gerar contrato PDF",
+        "descricao": "Geração de PDF falhava com erro 'Cannot read property of undefined'",
+        "causa": "Dados da festa não estavam sendo carregados antes de gerar PDF",
+        "solucao": "Adicionar await e verificação de dados antes de chamar generateContractPDF",
+        "arquivos_afetados": [
+          "server/routers/festas.ts"
+        ],
+        "severidade": "alta"
+      },
+      {
+        "fase": 8,
+        "data_aproximada": "2025-02-01",
+        "erro": "Performance lenta na página de Acompanhamento",
+        "descricao": "Carregamento da página demorava mais de 5 segundos",
+        "causa": "Query calculava status de pagamento para todas as festas sem índice",
+        "solucao": "Adicionar índice no campo dataFesta e otimizar query com LIMIT",
+        "arquivos_afetados": [
+          "server/routers/acompanhamento.ts",
+          "drizzle/schema.ts"
+        ],
+        "severidade": "media"
+      },
+      {
+        "fase": 9,
+        "data_aproximada": "2025-02-05",
+        "erro": "Erro ao fazer upload de comprovante",
+        "descricao": "Upload de arquivo retornava erro 413 (Payload Too Large)",
+        "causa": "Limite de tamanho do body no Express era 1MB (padrão)",
+        "solucao": "Aumentar limite para 10MB usando express.json({ limit: '10mb' })",
+        "arquivos_afetados": [
+          "server/_core/index.ts"
+        ],
+        "severidade": "alta"
+      },
+      {
+        "fase": 10,
+        "data_aproximada": "2025-02-10",
+        "erro": "Conflito de chave única ao importar festas",
+        "descricao": "Importação falhava com erro 'Duplicate entry for key codigo_unique'",
+        "causa": "Planilha continha festas já importadas anteriormente",
+        "solucao": "Adicionar verificação de código existente antes de inserir (upsert)",
+        "arquivos_afetados": [
+          "server/routers/importacao.ts"
+        ],
+        "severidade": "media"
+      },
+      {
+        "fase": 11,
+        "data_aproximada": "2025-02-15",
+        "erro": "Erro TypeScript ao adicionar campo código em pagamentos",
+        "descricao": "Procedure pagamentos.create exigia festaId mas schema permitia null",
+        "causa": "Schema atualizado mas input Zod não refletia mudança",
+        "solucao": "Atualizar input schema para festaId: z.number().optional()",
+        "arquivos_afetados": [
+          "server/routers/pagamentos.ts"
+        ],
+        "severidade": "media"
+      },
+      {
+        "fase": 12,
+        "data_aproximada": "2025-02-18",
+        "erro": "Erro ao aplicar migração de schema",
+        "descricao": "drizzle-kit migrate falhava com 'Duplicate column name codigo'",
+        "causa": "Coluna já existia no banco mas migrations antigas ainda tentavam criar",
+        "solucao": "Limpar migrations antigas e regenerar com drizzle-kit generate",
+        "arquivos_afetados": [
+          "drizzle/*.sql"
+        ],
+        "severidade": "alta"
+      },
+      {
+        "fase": 13,
+        "data_aproximada": "2025-02-20",
+        "erro": "Menu lateral não agrupado por função",
+        "descricao": "Itens do menu apareciam em lista plana sem organização",
+        "causa": "DashboardLayout não suportava grupos de menu",
+        "solucao": "Refatorar menuItems para menuGroups com título e items",
+        "arquivos_afetados": [
+          "client/src/components/DashboardLayout.tsx"
+        ],
+        "severidade": "baixa"
+      },
+      {
+        "fase": 14,
+        "data_aproximada": "2025-02-22",
+        "erro": "Auto-preenchimento não funcionava ao criar cliente",
+        "descricao": "Dados do novo cliente não apareciam nos campos da festa",
+        "causa": "Callback onSuccess não atualizava formData",
+        "solucao": "Adicionar setFormData no onSuccess do createCliente.mutateAsync",
+        "arquivos_afetados": [
+          "client/src/pages/NovaFesta.tsx"
+        ],
+        "severidade": "media"
+      },
+      {
+        "fase": 15,
+        "data_aproximada": "2025-02-25",
+        "erro": "Histórico de contratos não aparecia",
+        "descricao": "Seção de contratos gerados vazia mesmo após gerar PDF",
+        "causa": "Procedure festas.gerarContrato não salvava registro em contratos_gerados",
+        "solucao": "Adicionar await db.createContratoGerado() após gerar PDF",
+        "arquivos_afetados": [
+          "server/routers/festas.ts",
+          "server/db.ts"
+        ],
+        "severidade": "media"
+      }
+    ]
+  },
+  "funcionalidades_principais": {
+    "gestao_festas": {
+      "descricao": "Sistema completo de gestão de festas infantis",
+      "features": [
+        "Cadastro de festas com dados completos (cliente, data, tema, convidados, valores)",
+        "Edição de festas existentes",
+        "Visualização detalhada com histórico de pagamentos e custos",
+        "Geração automática de contratos em PDF",
+        "Histórico de versões de contratos",
+        "Calendário mensal e agenda de festas",
+        "Filtros avançados (data, status, cliente, código)",
+        "Cálculo automático de margem de lucro"
+      ],
+      "routers": [
+        "festasRouter"
+      ],
+      "paginas": [
+        "Festas",
+        "NovaFesta",
+        "EditarFesta",
+        "DetalhesFesta",
+        "Agenda",
+        "Calendario"
+      ]
+    },
+    "gestao_clientes": {
+      "descricao": "Gerenciamento completo de clientes",
+      "features": [
+        "Cadastro de clientes com CPF, telefone, email e endereço",
+        "Listagem com busca e filtros",
+        "Histórico de festas por cliente",
+        "Visualização detalhada de cliente"
+      ],
+      "routers": [
+        "clientesRouter"
+      ],
+      "paginas": [
+        "Clientes",
+        "DetalhesCliente"
+      ]
+    },
+    "gestao_visitacoes": {
+      "descricao": "Sistema de leads e conversão de visitações",
+      "features": [
+        "Ficha de Contrato completa (CPF, endereço, convidados, tema)",
+        "Ficha de Degustação (brinde, refeição, bolo, massa, molho)",
+        "Status de acompanhamento (Aguardando, Tem Interesse, Fechou Pré-Contrato, etc)",
+        "Conversão de visitação em contrato",
+        "Dashboard de conversão com taxa e funil",
+        "Filtros por status e período"
+      ],
+      "routers": [
+        "visitacoesRouter"
+      ],
+      "paginas": [
+        "Visitacoes",
+        "ConverterVisitacao"
+      ]
+    },
+    "controle_financeiro": {
+      "descricao": "Gestão financeira completa",
+      "features": [
+        "Registro de pagamentos com código PADDMMAA-XXX",
+        "Pagamentos com ou sem festa associada",
+        "Upload de comprovantes para S3",
+        "Acompanhamento de status de pagamento (em dia, atrasado, quitado)",
+        "Validação de parcela mínima (R$ 500/mês)",
+        "Validação de quitação 10 dias antes do evento",
+        "Dashboard financeiro com receitas e despesas",
+        "Projeção financeira para 12 meses",
+        "Gráficos de evolução e análise"
+      ],
+      "routers": [
+        "pagamentosRouter",
+        "acompanhamentoRouter"
+      ],
+      "paginas": [
+        "Financeiro",
+        "RegistrarPagamento",
+        "AcompanhamentoPagamentos",
+        "ProjecaoFinanceira"
+      ]
+    },
+    "gestao_custos": {
+      "descricao": "Controle de custos fixos e variáveis",
+      "features": [
+        "Cadastro de custos variáveis por festa",
+        "Cadastro de custos fixos mensais",
+        "Categorização de custos",
+        "Cálculo automático de margem de lucro",
+        "Análise de lucratividade por festa"
+      ],
+      "routers": [
+        "custosRouter"
+      ],
+      "paginas": [
+        "Custos"
+      ]
+    },
+    "relatorios_analytics": {
+      "descricao": "Relatórios e análises visuais",
+      "features": [
+        "Dashboard principal com métricas do negócio",
+        "Gráfico de evolução mensal de faturamento",
+        "Gráfico de pizza de recebimentos vs a receber",
+        "Gráfico de barras de festas por mês",
+        "Análise trimestral e anual",
+        "Gráfico de custos vs receita",
+        "Taxa de conversão de visitações"
+      ],
+      "routers": [
+        "festasRouter",
+        "acompanhamentoRouter"
+      ],
+      "paginas": [
+        "Dashboard",
+        "Relatorios"
+      ]
+    },
+    "importacao_dados": {
+      "descricao": "Importação de dados via Excel",
+      "features": [
+        "Upload de arquivos Excel",
+        "Parser automático de planilhas",
+        "Validação de dados importados",
+        "Preview antes de importar",
+        "Log de importações com sucesso/erros",
+        "Suporte a múltiplos formatos de planilha"
+      ],
+      "routers": [
+        "importacaoRouter"
+      ],
+      "paginas": [
+        "Importacao"
+      ]
+    },
+    "gestao_usuarios": {
+      "descricao": "Gerenciamento de usuários e permissões",
+      "features": [
+        "Autenticação via Manus OAuth",
+        "Roles: Admin, Gerente, Atendente, Cliente",
+        "Controle de acesso por role",
+        "Interface de gerenciamento de usuários (apenas admin)",
+        "Adicionar, editar e excluir usuários",
+        "Modo simplificado para atendente"
+      ],
+      "routers": [
+        "usuariosRouter"
+      ],
+      "paginas": [
+        "Usuarios"
+      ]
+    }
+  },
+  "decisoes_arquiteturais": {
+    "backend": {
+      "trpc": "Escolhido para type-safety end-to-end e eliminar necessidade de REST manual",
+      "drizzle_orm": "ORM leve e type-safe para MySQL/TiDB",
+      "superjson": "Serialização automática de Date, Map, Set para tRPC",
+      "estrutura_routers": "Routers separados por domínio (festas, clientes, pagamentos, etc)"
+    },
+    "frontend": {
+      "react_19": "Versão mais recente com Server Components (não usado ainda)",
+      "tailwind_4": "Utility-first CSS com design tokens customizados",
+      "wouter": "Router leve alternativo ao React Router",
+      "shadcn_ui": "Componentes UI copiáveis e customizáveis",
+      "recharts": "Biblioteca de gráficos declarativa"
+    },
+    "dados": {
+      "valores_em_centavos": "Evitar problemas de precisão com float",
+      "timestamps_utc": "Todos os timestamps em UTC, conversão no frontend",
+      "codigos_unicos": "Códigos de contrato e pagamento únicos para rastreamento",
+      "soft_delete": "Não implementado - exclusão física por simplicidade"
+    },
+    "storage": {
+      "s3_unico": "S3 como única fonte de verdade para arquivos",
+      "metadata_banco": "Metadados (URL, key, mime) no banco, bytes no S3",
+      "comprovantes_renomeados": "Comprovantes renomeados com código de pagamento"
+    }
+  },
+  "proximos_passos": [
+    "Implementar interface de edição de templates de contrato",
+    "Criar página de associação manual de pagamentos a festas",
+    "Adicionar exportação de relatórios em Excel/PDF",
+    "Implementar filtros avançados em todas as páginas",
+    "Adicionar gráficos de conversão no Dashboard",
+    "Implementar notificações push para lembretes de pagamento",
+    "Criar API pública para integrações externas",
+    "Adicionar suporte a múltiplos idiomas (i18n)",
+    "Implementar backup automático do banco de dados",
+    "Criar documentação de API para desenvolvedores"
+  ]
+}

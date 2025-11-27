@@ -540,3 +540,13 @@
 - [x] Documentar autenticação e autorização (OAuth 2.0 + 4 roles)
 - [x] Documentar schemas de request/response (9 schemas)
 - [x] Gerar JSON final da API do sistema
+
+
+## Organização de Documentação e Commit GitHub (Fase 22)
+- [ ] Criar diretório /docs no projeto
+- [ ] Copiar todos os JSONs de documentação para /docs
+- [ ] Copiar documentos anexados para /docs
+- [ ] Criar análise completa do estado atual do projeto
+- [ ] Criar roadmap detalhado dos próximos passos
+- [ ] Fazer commit no GitHub com todas as alterações
+- [ ] Atualizar README.md do projeto

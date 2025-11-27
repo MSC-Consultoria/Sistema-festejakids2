@@ -1,0 +1,1130 @@
+{
+  "metadados": {
+    "dataProcessamento": "2025-11-27T06:52:13.868428",
+    "mes": "novembro",
+    "ano": 2025,
+    "totalPagamentos": 34,
+    "valorTotal": 38128.0,
+    "valorTotalFormatado": "R$ 38.128,00",
+    "comprovantesAssociados": 10,
+    "comprovantesNaoAssociados": 27
+  },
+  "pagamentos": [
+    {
+      "codigo": "PA041125-CHA",
+      "data": "2025-11-04",
+      "dataFormatada": "04/11/2025",
+      "diaSemana": "Tuesday",
+      "timestamp": 1762232400000,
+      "pagador": {
+        "nomeCompleto": "Charlene Ignácio da Silva",
+        "primeiroNome": "Charlene",
+        "iniciais": "CHA"
+      },
+      "valor": {
+        "reais": 195.0,
+        "centavos": 19500,
+        "formatado": "R$ 195,00"
+      },
+      "metodoPagamento": "PIX",
+      "observacoes": "",
+      "comprovante": {
+        "temComprovante": false,
+        "arquivoOriginal": null,
+        "arquivoRenomeado": null,
+        "caminhoRenomeado": null
+      },
+      "festa": {
+        "associada": false,
+        "festaId": null,
+        "observacao": "Aguardando associação manual pelo administrador"
+      }
+    },
+    {
+      "codigo": "PA041125-LUC",
+      "data": "2025-11-04",
+      "dataFormatada": "04/11/2025",
+      "diaSemana": "Tuesday",
+      "timestamp": 1762232400000,
+      "pagador": {
+        "nomeCompleto": "Lucas Freitas Martins",
+        "primeiroNome": "Lucas",
+        "iniciais": "LUC"
+      },
+      "valor": {
+        "reais": 3000.0,
+        "centavos": 300000,
+        "formatado": "R$ 3.000,00"
+      },
+      "metodoPagamento": "PIX",
+      "observacoes": "",
+      "comprovante": {
+        "temComprovante": false,
+        "arquivoOriginal": null,
+        "arquivoRenomeado": null,
+        "caminhoRenomeado": null
+      },
+      "festa": {
+        "associada": false,
+        "festaId": null,
+        "observacao": "Aguardando associação manual pelo administrador"
+      }
+    },
+    {
+      "codigo": "PA051125-MON",
+      "data": "2025-11-05",
+      "dataFormatada": "05/11/2025",
+      "diaSemana": "Wednesday",
+      "timestamp": 1762318800000,
+      "pagador": {
+        "nomeCompleto": "Monique Barros De Vasconcelos",
+        "primeiroNome": "Monique",
+        "iniciais": "MON"
+      },
+      "valor": {
+        "reais": 400.0,
+        "centavos": 40000,
+        "formatado": "R$ 400,00"
+      },
+      "metodoPagamento": "PIX",
+      "observacoes": "",
+      "comprovante": {
+        "temComprovante": true,
+        "arquivoOriginal": "Comprovante_05-11-2025_104623.pdf",
+        "arquivoRenomeado": "PA051125-MON.pdf",
+        "caminhoRenomeado": "/home/ubuntu/comprovantes_renomeados/PA051125-MON.pdf"
+      },
+      "festa": {
+        "associada": false,
+        "festaId": null,
+        "observacao": "Aguardando associação manual pelo administrador"
+      }
+    },
+    {
+      "codigo": "PA051125-TIA",
+      "data": "2025-11-05",
+      "dataFormatada": "05/11/2025",
+      "diaSemana": "Wednesday",
+      "timestamp": 1762318800000,
+      "pagador": {
+        "nomeCompleto": "Tiago Vidinha Alves Pontes",
+        "primeiroNome": "Tiago",
+        "iniciais": "TIA"
+      },
+      "valor": {
+        "reais": 500.0,
+        "centavos": 50000,
+        "formatado": "R$ 500,00"
+      },
+      "metodoPagamento": "PIX",
+      "observacoes": "",
+      "comprovante": {
+        "temComprovante": false,
+        "arquivoOriginal": null,
+        "arquivoRenomeado": null,
+        "caminhoRenomeado": null
+      },
+      "festa": {
+        "associada": false,
+        "festaId": null,
+        "observacao": "Aguardando associação manual pelo administrador"
+      }
+    },
+    {
+      "codigo": "PA051125-LUC",
+      "data": "2025-11-05",
+      "dataFormatada": "05/11/2025",
+      "diaSemana": "Wednesday",
+      "timestamp": 1762318800000,
+      "pagador": {
+        "nomeCompleto": "Lucas Freitas Martins",
+        "primeiroNome": "Lucas",
+        "iniciais": "LUC"
+      },
+      "valor": {
+        "reais": 1790.0,
+        "centavos": 179000,
+        "formatado": "R$ 1.790,00"
+      },
+      "metodoPagamento": "PIX",
+      "observacoes": "",
+      "comprovante": {
+        "temComprovante": false,
+        "arquivoOriginal": null,
+        "arquivoRenomeado": null,
+        "caminhoRenomeado": null
+      },
+      "festa": {
+        "associada": false,
+        "festaId": null,
+        "observacao": "Aguardando associação manual pelo administrador"
+      }
+    },
+    {
+      "codigo": "PA061125-MAR",
+      "data": "2025-11-06",
+      "dataFormatada": "06/11/2025",
+      "diaSemana": "Thursday",
+      "timestamp": 1762405200000,
+      "pagador": {
+        "nomeCompleto": "Marcos Vinicius Alves Dias",
+        "primeiroNome": "Marcos",
+        "iniciais": "MAR"
+      },
+      "valor": {
+        "reais": 500.0,
+        "centavos": 50000,
+        "formatado": "R$ 500,00"
+      },
+      "metodoPagamento": "PIX",
+      "observacoes": "",
+      "comprovante": {
+        "temComprovante": true,
+        "arquivoOriginal": "2025-11-06_114052.pdf",
+        "arquivoRenomeado": "PA061125-MAR.pdf",
+        "caminhoRenomeado": "/home/ubuntu/comprovantes_renomeados/PA061125-MAR.pdf"
+      },
+      "festa": {
+        "associada": false,
+        "festaId": null,
+        "observacao": "Aguardando associação manual pelo administrador"
+      }
+    },
+    {
+      "codigo": "PA061125-SIL",
+      "data": "2025-11-06",
+      "dataFormatada": "06/11/2025",
+      "diaSemana": "Thursday",
+      "timestamp": 1762405200000,
+      "pagador": {
+        "nomeCompleto": "Silvia Helena Franca Pereira",
+        "primeiroNome": "Silvia",
+        "iniciais": "SIL"
+      },
+      "valor": {
+        "reais": 1500.0,
+        "centavos": 150000,
+        "formatado": "R$ 1.500,00"
+      },
+      "metodoPagamento": "PIX",
+      "observacoes": "",
+      "comprovante": {
+        "temComprovante": false,
+        "arquivoOriginal": null,
+        "arquivoRenomeado": null,
+        "caminhoRenomeado": null
+      },
+      "festa": {
+        "associada": false,
+        "festaId": null,
+        "observacao": "Aguardando associação manual pelo administrador"
+      }
+    },
+    {
+      "codigo": "PA061125-DAI",
+      "data": "2025-11-06",
+      "dataFormatada": "06/11/2025",
+      "diaSemana": "Thursday",
+      "timestamp": 1762405200000,
+      "pagador": {
+        "nomeCompleto": "Daiana Damasceno Mothe",
+        "primeiroNome": "Daiana",
+        "iniciais": "DAI"
+      },
+      "valor": {
+        "reais": 2000.0,
+        "centavos": 200000,
+        "formatado": "R$ 2.000,00"
+      },
+      "metodoPagamento": "PIX",
+      "observacoes": "",
+      "comprovante": {
+        "temComprovante": false,
+        "arquivoOriginal": null,
+        "arquivoRenomeado": null,
+        "caminhoRenomeado": null
+      },
+      "festa": {
+        "associada": false,
+        "festaId": null,
+        "observacao": "Aguardando associação manual pelo administrador"
+      }
+    },
+    {
+      "codigo": "PA071125-MAR",
+      "data": "2025-11-07",
+      "dataFormatada": "07/11/2025",
+      "diaSemana": "Friday",
+      "timestamp": 1762491600000,
+      "pagador": {
+        "nomeCompleto": "Marcos Vinicius Alves Dias",
+        "primeiroNome": "Marcos",
+        "iniciais": "MAR"
+      },
+      "valor": {
+        "reais": 200.0,
+        "centavos": 20000,
+        "formatado": "R$ 200,00"
+      },
+      "metodoPagamento": "PIX",
+      "observacoes": "",
+      "comprovante": {
+        "temComprovante": true,
+        "arquivoOriginal": "Comprovante_07-11-2025 080231.pdf",
+        "arquivoRenomeado": "PA071125-MAR.pdf",
+        "caminhoRenomeado": "/home/ubuntu/comprovantes_renomeados/PA071125-MAR.pdf"
+      },
+      "festa": {
+        "associada": false,
+        "festaId": null,
+        "observacao": "Aguardando associação manual pelo administrador"
+      }
+    },
+    {
+      "codigo": "PA071125-ALE",
+      "data": "2025-11-07",
+      "dataFormatada": "07/11/2025",
+      "diaSemana": "Friday",
+      "timestamp": 1762491600000,
+      "pagador": {
+        "nomeCompleto": "Alexandre Mendes Miranda",
+        "primeiroNome": "Alexandre",
+        "iniciais": "ALE"
+      },
+      "valor": {
+        "reais": 500.0,
+        "centavos": 50000,
+        "formatado": "R$ 500,00"
+      },
+      "metodoPagamento": "PIX",
+      "observacoes": "",
+      "comprovante": {
+        "temComprovante": false,
+        "arquivoOriginal": null,
+        "arquivoRenomeado": null,
+        "caminhoRenomeado": null
+      },
+      "festa": {
+        "associada": false,
+        "festaId": null,
+        "observacao": "Aguardando associação manual pelo administrador"
+      }
+    },
+    {
+      "codigo": "PA071125-JEN",
+      "data": "2025-11-07",
+      "dataFormatada": "07/11/2025",
+      "diaSemana": "Friday",
+      "timestamp": 1762491600000,
+      "pagador": {
+        "nomeCompleto": "Jeniffer Lauana da Silva",
+        "primeiroNome": "Jeniffer",
+        "iniciais": "JEN"
+      },
+      "valor": {
+        "reais": 500.0,
+        "centavos": 50000,
+        "formatado": "R$ 500,00"
+      },
+      "metodoPagamento": "PIX",
+      "observacoes": "",
+      "comprovante": {
+        "temComprovante": false,
+        "arquivoOriginal": null,
+        "arquivoRenomeado": null,
+        "caminhoRenomeado": null
+      },
+      "festa": {
+        "associada": false,
+        "festaId": null,
+        "observacao": "Aguardando associação manual pelo administrador"
+      }
+    },
+    {
+      "codigo": "PA081125-CAI",
+      "data": "2025-11-08",
+      "dataFormatada": "08/11/2025",
+      "diaSemana": "Saturday",
+      "timestamp": 1762578000000,
+      "pagador": {
+        "nomeCompleto": "Caio José De Oliveira",
+        "primeiroNome": "Caio",
+        "iniciais": "CAI"
+      },
+      "valor": {
+        "reais": 500.0,
+        "centavos": 50000,
+        "formatado": "R$ 500,00"
+      },
+      "metodoPagamento": "PIX",
+      "observacoes": "",
+      "comprovante": {
+        "temComprovante": true,
+        "arquivoOriginal": "comprovante_picpay_pix_08-11-2025-13-14-49.pdf",
+        "arquivoRenomeado": "PA081125-CAI.pdf",
+        "caminhoRenomeado": "/home/ubuntu/comprovantes_renomeados/PA081125-CAI.pdf"
+      },
+      "festa": {
+        "associada": false,
+        "festaId": null,
+        "observacao": "Aguardando associação manual pelo administrador"
+      }
+    },
+    {
+      "codigo": "PA101125-KAM",
+      "data": "2025-11-10",
+      "dataFormatada": "10/11/2025",
+      "diaSemana": "Monday",
+      "timestamp": 1762750800000,
+      "pagador": {
+        "nomeCompleto": "Kamilla Silva Marques",
+        "primeiroNome": "Kamilla",
+        "iniciais": "KAM"
+      },
+      "valor": {
+        "reais": 1000.0,
+        "centavos": 100000,
+        "formatado": "R$ 1.000,00"
+      },
+      "metodoPagamento": "PIX",
+      "observacoes": "",
+      "comprovante": {
+        "temComprovante": true,
+        "arquivoOriginal": "comprovante_picpay_PIX_10112025173218.pdf",
+        "arquivoRenomeado": "PA101125-KAM.pdf",
+        "caminhoRenomeado": "/home/ubuntu/comprovantes_renomeados/PA101125-KAM.pdf"
+      },
+      "festa": {
+        "associada": false,
+        "festaId": null,
+        "observacao": "Aguardando associação manual pelo administrador"
+      }
+    },
+    {
+      "codigo": "PA101125-JES",
+      "data": "2025-11-10",
+      "dataFormatada": "10/11/2025",
+      "diaSemana": "Monday",
+      "timestamp": 1762750800000,
+      "pagador": {
+        "nomeCompleto": "Jessica da Silva Santiago",
+        "primeiroNome": "Jessica",
+        "iniciais": "JES"
+      },
+      "valor": {
+        "reais": 1000.0,
+        "centavos": 100000,
+        "formatado": "R$ 1.000,00"
+      },
+      "metodoPagamento": "PIX",
+      "observacoes": "",
+      "comprovante": {
+        "temComprovante": false,
+        "arquivoOriginal": null,
+        "arquivoRenomeado": null,
+        "caminhoRenomeado": null
+      },
+      "festa": {
+        "associada": false,
+        "festaId": null,
+        "observacao": "Aguardando associação manual pelo administrador"
+      }
+    },
+    {
+      "codigo": "PA131125-EST",
+      "data": "2025-11-13",
+      "dataFormatada": "13/11/2025",
+      "diaSemana": "Thursday",
+      "timestamp": 1763010000000,
+      "pagador": {
+        "nomeCompleto": "Esthefany Oliveira Guimaraes",
+        "primeiroNome": "Esthefany",
+        "iniciais": "EST"
+      },
+      "valor": {
+        "reais": 1000.0,
+        "centavos": 100000,
+        "formatado": "R$ 1.000,00"
+      },
+      "metodoPagamento": "PIX",
+      "observacoes": "",
+      "comprovante": {
+        "temComprovante": true,
+        "arquivoOriginal": "comprovante_picpay_PIX_13112025202743.pdf",
+        "arquivoRenomeado": "PA131125-EST.pdf",
+        "caminhoRenomeado": "/home/ubuntu/comprovantes_renomeados/PA131125-EST.pdf"
+      },
+      "festa": {
+        "associada": false,
+        "festaId": null,
+        "observacao": "Aguardando associação manual pelo administrador"
+      }
+    },
+    {
+      "codigo": "PA131125-JES",
+      "data": "2025-11-13",
+      "dataFormatada": "13/11/2025",
+      "diaSemana": "Thursday",
+      "timestamp": 1763010000000,
+      "pagador": {
+        "nomeCompleto": "Jessica da Silva Santiago",
+        "primeiroNome": "Jessica",
+        "iniciais": "JES"
+      },
+      "valor": {
+        "reais": 460.0,
+        "centavos": 46000,
+        "formatado": "R$ 460,00"
+      },
+      "metodoPagamento": "PIX",
+      "observacoes": "",
+      "comprovante": {
+        "temComprovante": false,
+        "arquivoOriginal": null,
+        "arquivoRenomeado": null,
+        "caminhoRenomeado": null
+      },
+      "festa": {
+        "associada": false,
+        "festaId": null,
+        "observacao": "Aguardando associação manual pelo administrador"
+      }
+    },
+    {
+      "codigo": "PA161125-AND",
+      "data": "2025-11-16",
+      "dataFormatada": "16/11/2025",
+      "diaSemana": "Sunday",
+      "timestamp": 1763269200000,
+      "pagador": {
+        "nomeCompleto": "Anderson de Souza Batista",
+        "primeiroNome": "Anderson",
+        "iniciais": "AND"
+      },
+      "valor": {
+        "reais": 4690.0,
+        "centavos": 469000,
+        "formatado": "R$ 4.690,00"
+      },
+      "metodoPagamento": "PIX",
+      "observacoes": "",
+      "comprovante": {
+        "temComprovante": true,
+        "arquivoOriginal": "comprovante_picpay_pix_16-11-2025-15-03-52.pdf",
+        "arquivoRenomeado": "PA161125-AND.pdf",
+        "caminhoRenomeado": "/home/ubuntu/comprovantes_renomeados/PA161125-AND.pdf"
+      },
+      "festa": {
+        "associada": false,
+        "festaId": null,
+        "observacao": "Aguardando associação manual pelo administrador"
+      }
+    },
+    {
+      "codigo": "PA161125-DAI",
+      "data": "2025-11-16",
+      "dataFormatada": "16/11/2025",
+      "diaSemana": "Sunday",
+      "timestamp": 1763269200000,
+      "pagador": {
+        "nomeCompleto": "Daiana Damasceno Mothe",
+        "primeiroNome": "Daiana",
+        "iniciais": "DAI"
+      },
+      "valor": {
+        "reais": 2390.0,
+        "centavos": 239000,
+        "formatado": "R$ 2.390,00"
+      },
+      "metodoPagamento": "PIX",
+      "observacoes": "",
+      "comprovante": {
+        "temComprovante": false,
+        "arquivoOriginal": null,
+        "arquivoRenomeado": null,
+        "caminhoRenomeado": null
+      },
+      "festa": {
+        "associada": false,
+        "festaId": null,
+        "observacao": "Aguardando associação manual pelo administrador"
+      }
+    },
+    {
+      "codigo": "PA171125-MIC",
+      "data": "2025-11-17",
+      "dataFormatada": "17/11/2025",
+      "diaSemana": "Monday",
+      "timestamp": 1763355600000,
+      "pagador": {
+        "nomeCompleto": "Michele Cristina Santos Rodrigues",
+        "primeiroNome": "Michele",
+        "iniciais": "MIC"
+      },
+      "valor": {
+        "reais": 700.0,
+        "centavos": 70000,
+        "formatado": "R$ 700,00"
+      },
+      "metodoPagamento": "PIX",
+      "observacoes": "",
+      "comprovante": {
+        "temComprovante": true,
+        "arquivoOriginal": "Comprovante_17-11-2025 125710.pdf",
+        "arquivoRenomeado": "PA171125-MIC.pdf",
+        "caminhoRenomeado": "/home/ubuntu/comprovantes_renomeados/PA171125-MIC.pdf"
+      },
+      "festa": {
+        "associada": false,
+        "festaId": null,
+        "observacao": "Aguardando associação manual pelo administrador"
+      }
+    },
+    {
+      "codigo": "PA171125-VAN",
+      "data": "2025-11-17",
+      "dataFormatada": "17/11/2025",
+      "diaSemana": "Monday",
+      "timestamp": 1763355600000,
+      "pagador": {
+        "nomeCompleto": "Vania Cassia A Dutra",
+        "primeiroNome": "Vania",
+        "iniciais": "VAN"
+      },
+      "valor": {
+        "reais": 1000.0,
+        "centavos": 100000,
+        "formatado": "R$ 1.000,00"
+      },
+      "metodoPagamento": "PIX",
+      "observacoes": "",
+      "comprovante": {
+        "temComprovante": false,
+        "arquivoOriginal": null,
+        "arquivoRenomeado": null,
+        "caminhoRenomeado": null
+      },
+      "festa": {
+        "associada": false,
+        "festaId": null,
+        "observacao": "Aguardando associação manual pelo administrador"
+      }
+    },
+    {
+      "codigo": "PA181125-JEA",
+      "data": "2025-11-18",
+      "dataFormatada": "18/11/2025",
+      "diaSemana": "Tuesday",
+      "timestamp": 1763442000000,
+      "pagador": {
+        "nomeCompleto": "Jean Carlos Azevedo Conceicao",
+        "primeiroNome": "Jean",
+        "iniciais": "JEA"
+      },
+      "valor": {
+        "reais": 1000.0,
+        "centavos": 100000,
+        "formatado": "R$ 1.000,00"
+      },
+      "metodoPagamento": "PIX",
+      "observacoes": "",
+      "comprovante": {
+        "temComprovante": false,
+        "arquivoOriginal": null,
+        "arquivoRenomeado": null,
+        "caminhoRenomeado": null
+      },
+      "festa": {
+        "associada": false,
+        "festaId": null,
+        "observacao": "Aguardando associação manual pelo administrador"
+      }
+    },
+    {
+      "codigo": "PA201125-LEO",
+      "data": "2025-11-20",
+      "dataFormatada": "20/11/2025",
+      "diaSemana": "Thursday",
+      "timestamp": 1763614800000,
+      "pagador": {
+        "nomeCompleto": "Leonardo E Silva",
+        "primeiroNome": "Leonardo",
+        "iniciais": "LEO"
+      },
+      "valor": {
+        "reais": 790.0,
+        "centavos": 79000,
+        "formatado": "R$ 790,00"
+      },
+      "metodoPagamento": "PIX",
+      "observacoes": "",
+      "comprovante": {
+        "temComprovante": false,
+        "arquivoOriginal": null,
+        "arquivoRenomeado": null,
+        "caminhoRenomeado": null
+      },
+      "festa": {
+        "associada": false,
+        "festaId": null,
+        "observacao": "Aguardando associação manual pelo administrador"
+      }
+    },
+    {
+      "codigo": "PA211125-GIS",
+      "data": "2025-11-21",
+      "dataFormatada": "21/11/2025",
+      "diaSemana": "Friday",
+      "timestamp": 1763701200000,
+      "pagador": {
+        "nomeCompleto": "Giselle Costa Ribeiro",
+        "primeiroNome": "Giselle",
+        "iniciais": "GIS"
+      },
+      "valor": {
+        "reais": 1000.0,
+        "centavos": 100000,
+        "formatado": "R$ 1.000,00"
+      },
+      "metodoPagamento": "PIX",
+      "observacoes": "",
+      "comprovante": {
+        "temComprovante": true,
+        "arquivoOriginal": "comprovante_picpay_pix_21-11-2025-16-22-23.pdf",
+        "arquivoRenomeado": "PA211125-GIS.pdf",
+        "caminhoRenomeado": "/home/ubuntu/comprovantes_renomeados/PA211125-GIS.pdf"
+      },
+      "festa": {
+        "associada": false,
+        "festaId": null,
+        "observacao": "Aguardando associação manual pelo administrador"
+      }
+    },
+    {
+      "codigo": "PA211125-ELI",
+      "data": "2025-11-21",
+      "dataFormatada": "21/11/2025",
+      "diaSemana": "Friday",
+      "timestamp": 1763701200000,
+      "pagador": {
+        "nomeCompleto": "Elisangela Marcilio da Silva",
+        "primeiroNome": "Elisangela",
+        "iniciais": "ELI"
+      },
+      "valor": {
+        "reais": 500.0,
+        "centavos": 50000,
+        "formatado": "R$ 500,00"
+      },
+      "metodoPagamento": "PIX",
+      "observacoes": "",
+      "comprovante": {
+        "temComprovante": false,
+        "arquivoOriginal": null,
+        "arquivoRenomeado": null,
+        "caminhoRenomeado": null
+      },
+      "festa": {
+        "associada": false,
+        "festaId": null,
+        "observacao": "Aguardando associação manual pelo administrador"
+      }
+    },
+    {
+      "codigo": "PA211125-MAR",
+      "data": "2025-11-21",
+      "dataFormatada": "21/11/2025",
+      "diaSemana": "Friday",
+      "timestamp": 1763701200000,
+      "pagador": {
+        "nomeCompleto": "Maria Jose Cipriano",
+        "primeiroNome": "Maria",
+        "iniciais": "MAR"
+      },
+      "valor": {
+        "reais": 800.0,
+        "centavos": 80000,
+        "formatado": "R$ 800,00"
+      },
+      "metodoPagamento": "PIX",
+      "observacoes": "",
+      "comprovante": {
+        "temComprovante": false,
+        "arquivoOriginal": null,
+        "arquivoRenomeado": null,
+        "caminhoRenomeado": null
+      },
+      "festa": {
+        "associada": false,
+        "festaId": null,
+        "observacao": "Aguardando associação manual pelo administrador"
+      }
+    },
+    {
+      "codigo": "PA211125-THI",
+      "data": "2025-11-21",
+      "dataFormatada": "21/11/2025",
+      "diaSemana": "Friday",
+      "timestamp": 1763701200000,
+      "pagador": {
+        "nomeCompleto": "Thiago Christovao Da Fonseca",
+        "primeiroNome": "Thiago",
+        "iniciais": "THI"
+      },
+      "valor": {
+        "reais": 1863.0,
+        "centavos": 186300,
+        "formatado": "R$ 1.863,00"
+      },
+      "metodoPagamento": "PIX",
+      "observacoes": "",
+      "comprovante": {
+        "temComprovante": false,
+        "arquivoOriginal": null,
+        "arquivoRenomeado": null,
+        "caminhoRenomeado": null
+      },
+      "festa": {
+        "associada": false,
+        "festaId": null,
+        "observacao": "Aguardando associação manual pelo administrador"
+      }
+    },
+    {
+      "codigo": "PA221125-STE",
+      "data": "2025-11-22",
+      "dataFormatada": "22/11/2025",
+      "diaSemana": "Saturday",
+      "timestamp": 1763787600000,
+      "pagador": {
+        "nomeCompleto": "Stephany Adriane de Araújo Garcia",
+        "primeiroNome": "Stephany",
+        "iniciais": "STE"
+      },
+      "valor": {
+        "reais": 500.0,
+        "centavos": 50000,
+        "formatado": "R$ 500,00"
+      },
+      "metodoPagamento": "PIX",
+      "observacoes": "",
+      "comprovante": {
+        "temComprovante": false,
+        "arquivoOriginal": null,
+        "arquivoRenomeado": null,
+        "caminhoRenomeado": null
+      },
+      "festa": {
+        "associada": false,
+        "festaId": null,
+        "observacao": "Aguardando associação manual pelo administrador"
+      }
+    },
+    {
+      "codigo": "PA221125-REN",
+      "data": "2025-11-22",
+      "dataFormatada": "22/11/2025",
+      "diaSemana": "Saturday",
+      "timestamp": 1763787600000,
+      "pagador": {
+        "nomeCompleto": "Renan Luiz Teixeira Reis",
+        "primeiroNome": "Renan",
+        "iniciais": "REN"
+      },
+      "valor": {
+        "reais": 1000.0,
+        "centavos": 100000,
+        "formatado": "R$ 1.000,00"
+      },
+      "metodoPagamento": "PIX",
+      "observacoes": "",
+      "comprovante": {
+        "temComprovante": false,
+        "arquivoOriginal": null,
+        "arquivoRenomeado": null,
+        "caminhoRenomeado": null
+      },
+      "festa": {
+        "associada": false,
+        "festaId": null,
+        "observacao": "Aguardando associação manual pelo administrador"
+      }
+    },
+    {
+      "codigo": "PA251125-MAR",
+      "data": "2025-11-25",
+      "dataFormatada": "25/11/2025",
+      "diaSemana": "Tuesday",
+      "timestamp": 1764046800000,
+      "pagador": {
+        "nomeCompleto": "Marcos Vinicius Alves Dias",
+        "primeiroNome": "Marcos",
+        "iniciais": "MAR"
+      },
+      "valor": {
+        "reais": 500.0,
+        "centavos": 50000,
+        "formatado": "R$ 500,00"
+      },
+      "metodoPagamento": "PIX",
+      "observacoes": "",
+      "comprovante": {
+        "temComprovante": true,
+        "arquivoOriginal": "2025-11-25_123425.pdf",
+        "arquivoRenomeado": "PA251125-MAR.pdf",
+        "caminhoRenomeado": "/home/ubuntu/comprovantes_renomeados/PA251125-MAR.pdf"
+      },
+      "festa": {
+        "associada": false,
+        "festaId": null,
+        "observacao": "Aguardando associação manual pelo administrador"
+      }
+    },
+    {
+      "codigo": "PA251125-KAR",
+      "data": "2025-11-25",
+      "dataFormatada": "25/11/2025",
+      "diaSemana": "Tuesday",
+      "timestamp": 1764046800000,
+      "pagador": {
+        "nomeCompleto": "Karolyne Dias de Assis",
+        "primeiroNome": "Karolyne",
+        "iniciais": "KAR"
+      },
+      "valor": {
+        "reais": 1500.0,
+        "centavos": 150000,
+        "formatado": "R$ 1.500,00"
+      },
+      "metodoPagamento": "PIX",
+      "observacoes": "",
+      "comprovante": {
+        "temComprovante": false,
+        "arquivoOriginal": null,
+        "arquivoRenomeado": null,
+        "caminhoRenomeado": null
+      },
+      "festa": {
+        "associada": false,
+        "festaId": null,
+        "observacao": "Aguardando associação manual pelo administrador"
+      }
+    },
+    {
+      "codigo": "PA251125-RON",
+      "data": "2025-11-25",
+      "dataFormatada": "25/11/2025",
+      "diaSemana": "Tuesday",
+      "timestamp": 1764046800000,
+      "pagador": {
+        "nomeCompleto": "Ronaldo da Fonseca e Cunha",
+        "primeiroNome": "Ronaldo",
+        "iniciais": "RON"
+      },
+      "valor": {
+        "reais": 3300.0,
+        "centavos": 330000,
+        "formatado": "R$ 3.300,00"
+      },
+      "metodoPagamento": "PIX",
+      "observacoes": "",
+      "comprovante": {
+        "temComprovante": false,
+        "arquivoOriginal": null,
+        "arquivoRenomeado": null,
+        "caminhoRenomeado": null
+      },
+      "festa": {
+        "associada": false,
+        "festaId": null,
+        "observacao": "Aguardando associação manual pelo administrador"
+      }
+    },
+    {
+      "codigo": "PA251125-JUL",
+      "data": "2025-11-25",
+      "dataFormatada": "25/11/2025",
+      "diaSemana": "Tuesday",
+      "timestamp": 1764046800000,
+      "pagador": {
+        "nomeCompleto": "Julianna Silva Costa Dos Reis",
+        "primeiroNome": "Julianna",
+        "iniciais": "JUL"
+      },
+      "valor": {
+        "reais": 800.0,
+        "centavos": 80000,
+        "formatado": "R$ 800,00"
+      },
+      "metodoPagamento": "PIX",
+      "observacoes": "",
+      "comprovante": {
+        "temComprovante": false,
+        "arquivoOriginal": null,
+        "arquivoRenomeado": null,
+        "caminhoRenomeado": null
+      },
+      "festa": {
+        "associada": false,
+        "festaId": null,
+        "observacao": "Aguardando associação manual pelo administrador"
+      }
+    },
+    {
+      "codigo": "PA251125-LOR",
+      "data": "2025-11-25",
+      "dataFormatada": "25/11/2025",
+      "diaSemana": "Tuesday",
+      "timestamp": 1764046800000,
+      "pagador": {
+        "nomeCompleto": "Lorena Rodrigues Gentil",
+        "primeiroNome": "Lorena",
+        "iniciais": "LOR"
+      },
+      "valor": {
+        "reais": 250.0,
+        "centavos": 25000,
+        "formatado": "R$ 250,00"
+      },
+      "metodoPagamento": "PIX",
+      "observacoes": "",
+      "comprovante": {
+        "temComprovante": false,
+        "arquivoOriginal": null,
+        "arquivoRenomeado": null,
+        "caminhoRenomeado": null
+      },
+      "festa": {
+        "associada": false,
+        "festaId": null,
+        "observacao": "Aguardando associação manual pelo administrador"
+      }
+    },
+    {
+      "codigo": "PA261125-STE",
+      "data": "2025-11-26",
+      "dataFormatada": "26/11/2025",
+      "diaSemana": "Wednesday",
+      "timestamp": 1764133200000,
+      "pagador": {
+        "nomeCompleto": "Stephany Adriane de Araújo Garcia",
+        "primeiroNome": "Stephany",
+        "iniciais": "STE"
+      },
+      "valor": {
+        "reais": 500.0,
+        "centavos": 50000,
+        "formatado": "R$ 500,00"
+      },
+      "metodoPagamento": "PIX",
+      "observacoes": "",
+      "comprovante": {
+        "temComprovante": false,
+        "arquivoOriginal": null,
+        "arquivoRenomeado": null,
+        "caminhoRenomeado": null
+      },
+      "festa": {
+        "associada": false,
+        "festaId": null,
+        "observacao": "Aguardando associação manual pelo administrador"
+      }
+    }
+  ],
+  "comprovantesNaoAssociados": [
+    "3DD1CFAA-8B31-4465-87A3-5A9D9EA31C8F.pdf",
+    "6DC829C4-D9B5-42E2-8C8C-292C7E5238E3.pdf",
+    "Comprovante 2.pdf",
+    "Comprovante.pdf",
+    "ComprovanteSantander-1762373430.121735.pdf",
+    "Imagem do WhatsApp de 2025-11-27 à(s) 05.50.26_2f6205ca.jpg",
+    "Imagem do WhatsApp de 2025-11-27 à(s) 05.50.26_ffb50a4d.jpg",
+    "Imagem do WhatsApp de 2025-11-27 à(s) 05.51.02_0ef9d95c.jpg",
+    "Imagem do WhatsApp de 2025-11-27 à(s) 05.51.22_c8cf4618.jpg",
+    "Imagem do WhatsApp de 2025-11-27 à(s) 05.52.36_a4cdb43e.jpg",
+    "Imagem do WhatsApp de 2025-11-27 à(s) 05.52.37_a42d5c3d.jpg",
+    "Imagem do WhatsApp de 2025-11-27 à(s) 05.53.17_0b7f0845.jpg",
+    "Imagem do WhatsApp de 2025-11-27 à(s) 05.53.38_7bcd17f8.jpg",
+    "Imagem do WhatsApp de 2025-11-27 à(s) 05.53.58_62fa5758.jpg",
+    "Imagem do WhatsApp de 2025-11-27 à(s) 05.57.28_a7033ffa.jpg",
+    "Imagem do WhatsApp de 2025-11-27 à(s) 06.00.57_01749f55.jpg",
+    "Imagem do WhatsApp de 2025-11-27 à(s) 06.03.56_552c2108.jpg",
+    "Imagem do WhatsApp de 2025-11-27 à(s) 06.04.17_b35aeb7c.jpg",
+    "Imagem do WhatsApp de 2025-11-27 à(s) 06.04.32_5f0d2130.jpg",
+    "Imagem do WhatsApp de 2025-11-27 à(s) 06.05.11_34c851e2.jpg",
+    "Imagem do WhatsApp de 2025-11-27 à(s) 06.05.31_00b0388a.jpg",
+    "Imagem do WhatsApp de 2025-11-27 à(s) 06.45.26_07931b31.jpg",
+    "Imagem do WhatsApp de 2025-11-27 à(s) 06.45.26_d0f456db.jpg",
+    "Imagem do WhatsApp de 2025-11-27 à(s) 06.45.43_da0998d1.jpg",
+    "Imagem do WhatsApp de 2025-11-27 à(s) 06.46.10_b3ae9b87.jpg",
+    "Imagem do WhatsApp de 2025-11-27 à(s) 06.47.43_11f8fa9c.jpg",
+    "Imagem do WhatsApp de 2025-11-27 à(s) 06.58.07_ecb98df7.jpg"
+  ],
+  "estatisticas": {
+    "pagamentosPorDia": {
+      "2025-11-04": {
+        "quantidade": 2,
+        "valorTotal": 3195.0
+      },
+      "2025-11-05": {
+        "quantidade": 3,
+        "valorTotal": 2690.0
+      },
+      "2025-11-06": {
+        "quantidade": 3,
+        "valorTotal": 4000.0
+      },
+      "2025-11-07": {
+        "quantidade": 3,
+        "valorTotal": 1200.0
+      },
+      "2025-11-08": {
+        "quantidade": 1,
+        "valorTotal": 500.0
+      },
+      "2025-11-10": {
+        "quantidade": 2,
+        "valorTotal": 2000.0
+      },
+      "2025-11-13": {
+        "quantidade": 2,
+        "valorTotal": 1460.0
+      },
+      "2025-11-16": {
+        "quantidade": 2,
+        "valorTotal": 7080.0
+      },
+      "2025-11-17": {
+        "quantidade": 2,
+        "valorTotal": 1700.0
+      },
+      "2025-11-18": {
+        "quantidade": 1,
+        "valorTotal": 1000.0
+      },
+      "2025-11-20": {
+        "quantidade": 1,
+        "valorTotal": 790.0
+      },
+      "2025-11-21": {
+        "quantidade": 4,
+        "valorTotal": 4163.0
+      },
+      "2025-11-22": {
+        "quantidade": 2,
+        "valorTotal": 1500.0
+      },
+      "2025-11-25": {
+        "quantidade": 5,
+        "valorTotal": 6350.0
+      },
+      "2025-11-26": {
+        "quantidade": 1,
+        "valorTotal": 500.0
+      }
+    },
+    "maiorPagamento": 4690.0,
+    "menorPagamento": 195.0,
+    "pagamentoMedio": 1121.4117647058824
+  }
+}
