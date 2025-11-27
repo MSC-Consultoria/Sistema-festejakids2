@@ -439,11 +439,11 @@
 - [ ] Configurar usuários iniciais: recantodoacaienventosrj@gmail.com e gabrielol2035@gmail.com como Admin
 
 ### Documentação e Repositório
-- [ ] Atualizar TIMELINE.md com todas as fases do projeto
-- [ ] Criar documentação de setup local (.env.example e instruções)
-- [ ] Criar guia de configuração para Windows 10
-- [ ] Analisar issues existentes no GitHub
-- [ ] Criar novos issues para funcionalidades pendentes
-- [ ] Fechar issues já resolvidos
-- [ ] Fazer commit e push de todas as alterações
+- [x] Atualizar TIMELINE.md com todas as fases do projeto
+- [x] Criar documentação de setup local (SETUP_LOCAL.md)
+- [x] Criar guia de configuração para Windows 10
+- [x] Analisar issues existentes no GitHub (ISSUES_ANALYSIS.md)
+- [x] Criar novos issues para funcionalidades pendentes (#17)
+- [x] Fechar issues já resolvidos (#16)
+- [x] Fazer commit e push de todas as alterações
 - [ ] Atualizar README.md com estado atual do projeto
