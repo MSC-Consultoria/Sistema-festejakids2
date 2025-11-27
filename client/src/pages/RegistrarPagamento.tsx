@@ -62,12 +62,23 @@ export default function RegistrarPagamento() {
       return;
     }
 
+    // Gerar código PADDMMAA-XXX
+    const dataPag = new Date(formData.dataPagamento);
+    const dia = String(dataPag.getDate()).padStart(2, '0');
+    const mes = String(dataPag.getMonth() + 1).padStart(2, '0');
+    const ano = String(dataPag.getFullYear()).slice(-2);
+    const nomeCliente = festa.clienteNome || "XXX";
+    const iniciais = nomeCliente.split(' ')[0].substring(0, 3).toUpperCase();
+    const codigoPagamento = `PA${dia}${mes}${ano}-${iniciais}`;
+
     try {
       await createPagamento.mutateAsync({
+        codigo: codigoPagamento,
         festaId: festa.id,
         valor: valorEmCentavos,
         dataPagamento: new Date(formData.dataPagamento).getTime(),
         metodoPagamento: formData.metodoPagamento || undefined,
+        pagador: festa.clienteNome || undefined,
         observacoes: formData.observacoes || undefined,
       });
 

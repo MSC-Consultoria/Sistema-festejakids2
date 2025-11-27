@@ -1,1 +1,0 @@
-ALTER TABLE `visitacoes` MODIFY COLUMN `status` enum('aguardando','fechou_pre_contrato','fechou_contrato','tem_interesse','faltou','remarcar') NOT NULL DEFAULT 'aguardando';

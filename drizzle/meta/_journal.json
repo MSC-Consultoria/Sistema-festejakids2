@@ -78,6 +78,13 @@
       "when": 1764218577791,
       "tag": "0010_puzzling_spectrum",
       "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "5",
+      "when": 1764244376079,
+      "tag": "0011_square_lady_deathstrike",
+      "breakpoints": true
     }
   ]
 }

@@ -1,1 +1,0 @@
-ALTER TABLE `festas` MODIFY COLUMN `numeroConvidados` int;

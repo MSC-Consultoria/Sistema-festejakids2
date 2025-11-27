@@ -16,28 +16,38 @@ export const pagamentosRouter = router({
   create: protectedProcedure
     .input(
       z.object({
-        festaId: z.number(),
+        codigo: z.string(),
+        festaId: z.number().optional(),
         valor: z.number().min(1), // em centavos
         dataPagamento: z.number(), // timestamp em ms
         metodoPagamento: z.string().optional(),
+        pagador: z.string().optional(),
+        comprovanteUrl: z.string().optional(),
+        comprovanteFileKey: z.string().optional(),
         observacoes: z.string().optional(),
       })
     )
     .mutation(async ({ input }) => {
       // Criar o pagamento
       const id = await db.createPagamento({
-        festaId: input.festaId,
+        codigo: input.codigo,
+        festaId: input.festaId || null,
         valor: input.valor,
         dataPagamento: new Date(input.dataPagamento),
         metodoPagamento: input.metodoPagamento || null,
+        pagador: input.pagador || null,
+        comprovanteUrl: input.comprovanteUrl || null,
+        comprovanteFileKey: input.comprovanteFileKey || null,
         observacoes: input.observacoes || null,
       });
 
-      // Atualizar o valor pago na festa
-      const festa = await db.getFestaById(input.festaId);
-      if (festa) {
-        const novoValorPago = festa.valorPago + input.valor;
-        await db.updateFesta(input.festaId, { valorPago: novoValorPago });
+      // Atualizar o valor pago na festa (se associado)
+      if (input.festaId) {
+        const festa = await db.getFestaById(input.festaId);
+        if (festa) {
+          const novoValorPago = festa.valorPago + input.valor;
+          await db.updateFesta(input.festaId, { valorPago: novoValorPago });
+        }
       }
 
       return { id };

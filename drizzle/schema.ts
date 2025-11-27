@@ -111,13 +111,18 @@ export type InsertFesta = typeof festas.$inferInsert;
 
 /**
  * Tabela de pagamentos
+ * Suporta pagamentos com ou sem festa associada (para associação manual posterior)
  */
 export const pagamentos = mysqlTable("pagamentos", {
   id: int("id").autoincrement().primaryKey(),
-  festaId: int("festaId").notNull(),
+  codigo: varchar("codigo", { length: 50 }).notNull().unique(), // PADDMMAA-XXX
+  festaId: int("festaId"), // Opcional - pode ser associado depois
   valor: int("valor").notNull(), // em centavos
   dataPagamento: timestamp("dataPagamento").notNull(),
   metodoPagamento: varchar("metodoPagamento", { length: 50 }),
+  pagador: varchar("pagador", { length: 255 }), // Nome do pagador
+  comprovanteUrl: text("comprovanteUrl"), // URL do comprovante no S3
+  comprovanteFileKey: varchar("comprovanteFileKey", { length: 255 }), // Chave do arquivo no S3
   observacoes: text("observacoes"),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
 });

@@ -506,3 +506,16 @@
 - [x] Melhorar visualmente Visitação com leads de exemplo
 - [x] Garantir que as 3 telas estejam polidas para demonstração
 - [x] Testar fluxo completo Dashboard → Agenda → Visitação
+
+
+## Processamento de Pagamentos de Novembro (Fase 19)
+- [x] Extrair e processar planilha PagamentosNovembro.xlsx
+- [x] Gerar códigos PADDMMAA-XXX para cada pagamento (34 pagamentos)
+- [x] Extrair comprovantes do arquivo .rar
+- [x] Renomear comprovantes com os códigos de pagamento (10 associados automaticamente)
+- [x] Criar JSON detalhado de todos os arquivos
+- [x] Atualizar schema para suportar pagamentos sem festa associada
+- [ ] Criar interface para associação manual de pagamentos a festas (futura)
+- [ ] Inserir dias de visitação no calendário (futura)
+- [ ] Inserir pagamentos no calendário (futura)
+- [ ] Upload de comprovantes renomeados para S3 (futura)
