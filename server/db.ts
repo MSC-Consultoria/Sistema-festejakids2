@@ -14,7 +14,11 @@ import {
   custosFixos,
   InsertCustoFixo,
   visitacoes,
-  InsertVisitacao
+  InsertVisitacao,
+  contratosGerados,
+  InsertContratoGerado,
+  templatesContrato,
+  InsertTemplateContrato
 } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
@@ -494,4 +498,116 @@ export async function getVisitacoesStats() {
     remarcar,
     taxaConversao: Math.round(taxaConversao * 10) / 10
   };
+}
+
+
+// ========================================
+// Helpers para Contratos Gerados
+// ========================================
+
+export async function createContratoGerado(contrato: InsertContratoGerado) {
+  const database = await getDb();
+  if (!database) throw new Error("Database not available");
+  
+  const result = await database.insert(contratosGerados).values(contrato);
+  return result;
+}
+
+export async function getContratosByFesta(festaId: number) {
+  const database = await getDb();
+  if (!database) return [];
+  
+  const result = await database
+    .select()
+    .from(contratosGerados)
+    .where(eq(contratosGerados.festaId, festaId))
+    .orderBy(contratosGerados.createdAt);
+  
+  return result;
+}
+
+export async function getProximaVersaoContrato(festaId: number): Promise<number> {
+  const database = await getDb();
+  if (!database) return 1;
+  
+  const contratos = await database
+    .select()
+    .from(contratosGerados)
+    .where(eq(contratosGerados.festaId, festaId));
+  
+  if (contratos.length === 0) return 1;
+  
+  const maxVersao = Math.max(...contratos.map(c => c.versao || 1));
+  return maxVersao + 1;
+}
+
+// ========================================
+// Helpers para Templates de Contrato
+// ========================================
+
+export async function createTemplateContrato(template: InsertTemplateContrato) {
+  const database = await getDb();
+  if (!database) throw new Error("Database not available");
+  
+  const result = await database.insert(templatesContrato).values(template);
+  return result;
+}
+
+export async function getAllTemplatesContrato() {
+  const database = await getDb();
+  if (!database) return [];
+  
+  const result = await database.select().from(templatesContrato);
+  return result;
+}
+
+export async function getTemplateContratoAtivo() {
+  const database = await getDb();
+  if (!database) return null;
+  
+  const result = await database
+    .select()
+    .from(templatesContrato)
+    .where(eq(templatesContrato.ativo, 1))
+    .limit(1);
+  
+  return result.length > 0 ? result[0] : null;
+}
+
+export async function getTemplateContratoById(id: number) {
+  const database = await getDb();
+  if (!database) return null;
+  
+  const result = await database
+    .select()
+    .from(templatesContrato)
+    .where(eq(templatesContrato.id, id))
+    .limit(1);
+  
+  return result.length > 0 ? result[0] : null;
+}
+
+export async function updateTemplateContrato(id: number, data: Partial<InsertTemplateContrato>) {
+  const database = await getDb();
+  if (!database) throw new Error("Database not available");
+  
+  await database.update(templatesContrato).set(data).where(eq(templatesContrato.id, id));
+}
+
+export async function deleteTemplateContrato(id: number) {
+  const database = await getDb();
+  if (!database) throw new Error("Database not available");
+  
+  await database.delete(templatesContrato).where(eq(templatesContrato.id, id));
+}
+
+export async function setTemplateContratoAtivo(id: number) {
+  const database = await getDb();
+  if (!database) throw new Error("Database not available");
+  
+  // Desativar todos os templates
+  await database.update(templatesContrato).set({ ativo: 0 });
+  
+  // Ativar o template selecionado
+  await database.update(templatesContrato).set({ ativo: 1 }).where(eq(templatesContrato.id, id));
 }

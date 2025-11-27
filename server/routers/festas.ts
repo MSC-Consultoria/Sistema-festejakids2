@@ -256,18 +256,37 @@ export const festasRouter = router({
 
       // Upload do PDF para S3
       const fileName = `contrato-${festa.codigo}-${Date.now()}.pdf`;
+      const fileKey = `contratos/${fileName}`;
       const { url } = await storagePut(
-        `contratos/${fileName}`,
+        fileKey,
         pdfBuffer,
         "application/pdf"
       );
 
-      // Notificar administradores
-      await notifyOwner({
-        title: `Novo Contrato Gerado: ${festa.codigo}`,
-        content: `Contrato da festa ${festa.tema} para ${cliente.nome} foi gerado. Acesse: ${url}`,
+      // Obter próxima versão do contrato
+      const versao = await db.getProximaVersaoContrato(input.festaId);
+
+      // Salvar no histórico de contratos
+      await db.createContratoGerado({
+        festaId: input.festaId,
+        url,
+        fileKey,
+        versao,
+        geradoPor: undefined, // TODO: adicionar ctx.user.id quando disponível
       });
 
-      return { url, fileName };
+      // Notificar administradores
+      await notifyOwner({
+        title: `Novo Contrato Gerado: ${festa.codigo} (v${versao})`,
+        content: `Contrato da festa ${festa.tema} para ${cliente.nome} foi gerado. Versão: ${versao}. Acesse: ${url}`,
+      });
+
+      return { url, fileName, versao };
+    }),
+
+  contratosGerados: protectedProcedure
+    .input(z.object({ festaId: z.number() }))
+    .query(async ({ input }) => {
+      return db.getContratosByFesta(input.festaId);
     }),
 });

@@ -53,7 +53,8 @@ export default function NovaFesta() {
   
   const createCliente = trpc.clientes.create.useMutation({
     onSuccess: (data) => {
-      toast.success("Cliente cadastrado com sucesso!");
+      toast.success("Cliente cadastrado com sucesso! Dados preenchidos automaticamente.");
+      // Preencher todos os campos do formulário com os dados do novo cliente
       setFormData(prev => ({ 
         ...prev, 
         clienteId: data.id.toString(),

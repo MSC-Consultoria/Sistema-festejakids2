@@ -34,20 +34,45 @@ type MenuItem = {
   roles?: string[]; // Se não especificado, todos podem acessar
 };
 
-const menuItems: MenuItem[] = [
-  { icon: LayoutDashboard, label: "Dashboard", path: "/", roles: ["admin", "gerente"] },
-  { icon: PartyPopper, label: "Festas", path: "/festas", roles: ["admin", "gerente", "atendente"] },
-  { icon: Calendar, label: "Calendário", path: "/calendario", roles: ["admin", "gerente"] },
-  { icon: Calendar, label: "Agenda", path: "/agenda", roles: ["admin", "gerente", "atendente"] },
-  { icon: Users, label: "Clientes", path: "/clientes", roles: ["admin", "gerente"] },
-  { icon: DollarSign, label: "Custos", path: "/custos", roles: ["admin", "gerente"] },
-  { icon: Wallet, label: "Financeiro", path: "/financeiro", roles: ["admin", "gerente", "atendente"] },
-  { icon: TrendingUp, label: "Acompanhamento", path: "/acompanhamento", roles: ["admin", "gerente"] },
-  { icon: BarChart3, label: "Relatórios", path: "/relatorios", roles: ["admin", "gerente"] },
-  { icon: UserPlus, label: "Visitações", path: "/visitacoes", roles: ["admin", "gerente", "atendente"] },
-  { icon: Upload, label: "Importação", path: "/importacao", roles: ["admin", "gerente"] },
-  { icon: UserCog, label: "Usuários", path: "/usuarios", roles: ["admin"] },
-  { icon: Settings, label: "Configurações", path: "/configuracoes", roles: ["admin"] },
+type MenuGroup = {
+  title: string;
+  items: MenuItem[];
+};
+
+const menuGroups: MenuGroup[] = [
+  {
+    title: "Principal",
+    items: [
+      { icon: LayoutDashboard, label: "Dashboard", path: "/", roles: ["admin", "gerente"] },
+    ]
+  },
+  {
+    title: "Festas",
+    items: [
+      { icon: PartyPopper, label: "Festas", path: "/festas", roles: ["admin", "gerente", "atendente"] },
+      { icon: Calendar, label: "Calendário", path: "/calendario", roles: ["admin", "gerente"] },
+      { icon: Calendar, label: "Agenda", path: "/agenda", roles: ["admin", "gerente", "atendente"] },
+      { icon: UserPlus, label: "Visitações", path: "/visitacoes", roles: ["admin", "gerente", "atendente"] },
+      { icon: Users, label: "Clientes", path: "/clientes", roles: ["admin", "gerente"] },
+    ]
+  },
+  {
+    title: "Financeiro",
+    items: [
+      { icon: Wallet, label: "Financeiro", path: "/financeiro", roles: ["admin", "gerente", "atendente"] },
+      { icon: DollarSign, label: "Custos", path: "/custos", roles: ["admin", "gerente"] },
+      { icon: TrendingUp, label: "Acompanhamento", path: "/acompanhamento", roles: ["admin", "gerente"] },
+      { icon: BarChart3, label: "Relatórios", path: "/relatorios", roles: ["admin", "gerente"] },
+    ]
+  },
+  {
+    title: "Configurações",
+    items: [
+      { icon: UserCog, label: "Usuários", path: "/usuarios", roles: ["admin"] },
+      { icon: Upload, label: "Importação", path: "/importacao", roles: ["admin", "gerente"] },
+      { icon: Settings, label: "Configurações", path: "/configuracoes", roles: ["admin"] },
+    ]
+  },
 ];
 
 // Menu simplificado para atendentes
@@ -58,6 +83,23 @@ const atendenteMenuItems: MenuItem[] = [
   { icon: UserPlus, label: "Visitações", path: "/visitacoes" },
 ];
 
+function getMenuGroupsForRole(role: string | undefined): MenuGroup[] {
+  if (!role) return [];
+  
+  // Atendente tem menu simplificado (sem grupos)
+  if (role === "atendente") {
+    return [];
+  }
+  
+  // Filtrar grupos e itens baseado na role
+  return menuGroups.map(group => ({
+    title: group.title,
+    items: group.items.filter(item => 
+      !item.roles || item.roles.includes(role)
+    )
+  })).filter(group => group.items.length > 0);
+}
+
 function getMenuItemsForRole(role: string | undefined): MenuItem[] {
   if (!role) return [];
   
@@ -66,9 +108,9 @@ function getMenuItemsForRole(role: string | undefined): MenuItem[] {
     return atendenteMenuItems;
   }
   
-  // Filtrar menu completo baseado na role
-  return menuItems.filter(item => 
-    !item.roles || item.roles.includes(role)
+  // Retornar todos os itens dos grupos (para compatibilidade)
+  return menuGroups.flatMap(group => 
+    group.items.filter(item => !item.roles || item.roles.includes(role))
   );
 }
 
@@ -201,6 +243,7 @@ function DashboardLayoutContent({
   
   // Obter menu baseado na role do usuário
   const userMenuItems = getMenuItemsForRole(user?.role);
+  const userMenuGroups = getMenuGroupsForRole(user?.role);
   const activeMenuItem = userMenuItems.find(item => item.path === location);
 
   useEffect(() => {
@@ -287,26 +330,62 @@ function DashboardLayoutContent({
           </SidebarHeader>
 
           <SidebarContent className="gap-0">
-            <SidebarMenu className="px-2 py-1">
-              {userMenuItems.map(item => {
-                const isActive = location === item.path;
-                return (
-                  <SidebarMenuItem key={item.path}>
-                    <SidebarMenuButton
-                      isActive={isActive}
-                      onClick={() => setLocation(item.path)}
-                      tooltip={item.label}
-                      className={`h-10 transition-all font-normal`}
-                    >
-                      <item.icon
-                        className={`h-4 w-4 ${isActive ? "text-primary" : ""}`}
-                      />
-                      <span>{item.label}</span>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                );
-              })}
-            </SidebarMenu>
+            {user?.role === "atendente" ? (
+              <SidebarMenu className="px-2 py-1">
+                {userMenuItems.map(item => {
+                  const isActive = location === item.path;
+                  return (
+                    <SidebarMenuItem key={item.path}>
+                      <SidebarMenuButton
+                        isActive={isActive}
+                        onClick={() => setLocation(item.path)}
+                        tooltip={item.label}
+                        className={`h-10 transition-all font-normal`}
+                      >
+                        <item.icon
+                          className={`h-4 w-4 ${isActive ? "text-primary" : ""}`}
+                        />
+                        <span>{item.label}</span>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  );
+                })}
+              </SidebarMenu>
+            ) : (
+              <div className="flex flex-col gap-4 py-2">
+                {userMenuGroups.map((group, groupIndex) => (
+                  <div key={group.title} className="px-2">
+                    {!isCollapsed && (
+                      <div className="px-2 mb-2">
+                        <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                          {group.title}
+                        </span>
+                      </div>
+                    )}
+                    <SidebarMenu>
+                      {group.items.map(item => {
+                        const isActive = location === item.path;
+                        return (
+                          <SidebarMenuItem key={item.path}>
+                            <SidebarMenuButton
+                              isActive={isActive}
+                              onClick={() => setLocation(item.path)}
+                              tooltip={item.label}
+                              className={`h-10 transition-all font-normal`}
+                            >
+                              <item.icon
+                                className={`h-4 w-4 ${isActive ? "text-primary" : ""}`}
+                              />
+                              <span>{item.label}</span>
+                            </SidebarMenuButton>
+                          </SidebarMenuItem>
+                        );
+                      })}
+                    </SidebarMenu>
+                  </div>
+                ))}
+              </div>
+            )}
           </SidebarContent>
 
           <SidebarFooter className="p-3">

@@ -38,8 +38,9 @@ import {
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { UserPlus, Search, Pencil, Trash2, Users, Shield, UserCog, User } from "lucide-react";
+import { UserPlus, Search, Pencil, Trash2, Users, Shield, UserCog, User, ArrowLeft } from "lucide-react";
 import { toast } from "sonner";
+import { useLocation } from "wouter";
 
 type Role = "admin" | "gerente" | "atendente" | "cliente";
 
@@ -65,6 +66,7 @@ const roleIcons: Record<Role, React.ReactNode> = {
 };
 
 export default function Usuarios() {
+  const [, setLocation] = useLocation();
   const [search, setSearch] = useState("");
   const [roleFilter, setRoleFilter] = useState<Role | "all">("all");
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -180,11 +182,19 @@ export default function Usuarios() {
     <div className="container mx-auto py-6 space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold">Gerenciamento de Usuários</h1>
-          <p className="text-muted-foreground">
-            Gerencie usuários e permissões do sistema
-          </p>
+        <div className="flex items-center gap-4">
+          <button
+            onClick={() => setLocation("/")}
+            className="p-2 hover:bg-accent rounded-lg transition"
+          >
+            <ArrowLeft className="w-6 h-6" />
+          </button>
+          <div>
+            <h1 className="text-3xl font-bold">Gerenciamento de Usuários</h1>
+            <p className="text-muted-foreground">
+              Gerencie usuários e permissões do sistema
+            </p>
+          </div>
         </div>
         <Button onClick={() => handleOpenDialog()}>
           <UserPlus className="w-4 h-4 mr-2" />

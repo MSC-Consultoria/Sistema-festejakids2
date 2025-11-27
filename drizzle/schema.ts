@@ -158,3 +158,45 @@ export const custosFixos = mysqlTable("custosFixos", {
 
 export type CustoFixo = typeof custosFixos.$inferSelect;
 export type InsertCustoFixo = typeof custosFixos.$inferInsert;
+
+
+/**
+ * Tabela de histórico de contratos gerados
+ * Armazena todas as versões de contratos gerados para cada festa
+ */
+export const contratosGerados = mysqlTable("contratos_gerados", {
+  id: int("id").autoincrement().primaryKey(),
+  festaId: int("festaId").notNull(), // ID da festa
+  url: text("url").notNull(), // URL do contrato no S3
+  fileKey: varchar("fileKey", { length: 255 }).notNull(), // Chave do arquivo no S3
+  versao: int("versao").default(1).notNull(), // Versão do contrato (1, 2, 3...)
+  geradoPor: int("geradoPor"), // ID do usuário que gerou
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type ContratoGerado = typeof contratosGerados.$inferSelect;
+export type InsertContratoGerado = typeof contratosGerados.$inferInsert;
+
+/**
+ * Tabela de templates de contrato
+ * Permite editar textos padrão do contrato sem modificar código
+ */
+export const templatesContrato = mysqlTable("templates_contrato", {
+  id: int("id").autoincrement().primaryKey(),
+  nome: varchar("nome", { length: 255 }).notNull(), // Nome do template (ex: "Padrão", "Premium")
+  ativo: int("ativo").default(1).notNull(), // 0 ou 1 (boolean)
+  
+  // Textos editáveis do contrato
+  servicosIncluidos: text("servicosIncluidos"), // Lista de serviços incluídos
+  buffetAdulto: text("buffetAdulto"), // Descrição do buffet adulto
+  buffetInfantil: text("buffetInfantil"), // Descrição do buffet infantil
+  brindes: text("brindes"), // Descrição dos brindes
+  observacoesGerais: text("observacoesGerais"), // Observações gerais do contrato
+  dadosBancarios: text("dadosBancarios"), // Dados bancários para pagamento
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type TemplateContrato = typeof templatesContrato.$inferSelect;
+export type InsertTemplateContrato = typeof templatesContrato.$inferInsert;

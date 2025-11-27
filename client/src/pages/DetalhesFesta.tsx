@@ -3,7 +3,7 @@ import DashboardLayout from "@/components/DashboardLayout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { trpc } from "@/lib/trpc";
-import { ArrowLeft, Calendar, DollarSign, Download, Edit, Loader2, Users } from "lucide-react";
+import { ArrowLeft, Calendar, DollarSign, Download, Edit, Loader2, Users, FileText, ExternalLink } from "lucide-react";
 import { toast } from "sonner";
 import { useState } from "react";
 import { Link, useParams } from "wouter";
@@ -16,6 +16,7 @@ export default function DetalhesFesta() {
 
   const { data: festa, isLoading } = trpc.festas.byId.useQuery({ id: festaId });
   const { data: pagamentos } = trpc.pagamentos.byFesta.useQuery({ festaId });
+  const { data: contratos } = trpc.festas.contratosGerados.useQuery({ festaId });
   const gerarContratoMutation = trpc.festas.gerarContrato.useMutation();
 
   const handleGerarContrato = async () => {
@@ -204,6 +205,58 @@ export default function DetalhesFesta() {
                 </CardContent>
               </Card>
             </div>
+
+            {/* Histórico de Contratos */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Histórico de Contratos Gerados</CardTitle>
+              </CardHeader>
+              <CardContent>
+                {contratos && contratos.length > 0 ? (
+                  <div className="space-y-3">
+                    {contratos.map((contrato) => (
+                      <div
+                        key={contrato.id}
+                        className="flex items-center justify-between p-4 border rounded-lg hover:bg-muted/50"
+                      >
+                        <div className="flex items-center gap-4">
+                          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600/10">
+                            <FileText className="h-5 w-5 text-blue-600" />
+                          </div>
+                          <div>
+                            <p className="font-medium">
+                              Versão {contrato.versao}
+                            </p>
+                            <p className="text-sm text-muted-foreground">
+                              {new Date(contrato.createdAt).toLocaleString("pt-BR", {
+                                day: "2-digit",
+                                month: "2-digit",
+                                year: "numeric",
+                                hour: "2-digit",
+                                minute: "2-digit",
+                              })}
+                            </p>
+                          </div>
+                        </div>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => window.open(contrato.url, "_blank")}
+                          className="gap-2"
+                        >
+                          <ExternalLink className="h-4 w-4" />
+                          Abrir PDF
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-center text-muted-foreground py-8">
+                    Nenhum contrato gerado ainda
+                  </p>
+                )}
+              </CardContent>
+            </Card>
 
             {/* Timeline de Pagamentos */}
             <Card>

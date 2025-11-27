@@ -488,3 +488,13 @@
 - [x] Adicionar botão "Gerar Contrato" na página de detalhes da festa
 - [x] Adicionar modal de sucesso com botão "Gerar Contrato Agora" após cadastrar nova festa
 - [x] Testar geração e envio de contrato com dados reais
+
+
+## Melhorias de UX e Organização (Fase 17)
+- [x] Reorganizar menu lateral com agrupamento por função (Festas, Financeiro, Configurações)
+- [x] Implementar auto-preenchimento ao criar cliente na aba festa
+- [x] Criar tabela de histórico de contratos no banco de dados
+- [x] Adicionar seção de histórico de contratos na página de detalhes da festa
+- [x] Criar tabela de templates de contrato no banco de dados
+- [ ] Desenvolver interface de edição de template de contrato para administradores (futura)
+- [x] Adicionar botão voltar na página de Usuários

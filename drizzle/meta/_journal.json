@@ -71,6 +71,13 @@
       "when": 1764214856549,
       "tag": "0009_cuddly_vermin",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "5",
+      "when": 1764218577791,
+      "tag": "0010_puzzling_spectrum",
+      "breakpoints": true
     }
   ]
 }
