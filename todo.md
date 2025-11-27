@@ -447,3 +447,30 @@
 - [x] Fechar issues já resolvidos (#16)
 - [x] Fazer commit e push de todas as alterações
 - [ ] Atualizar README.md com estado atual do projeto
+
+
+## Sprint Atual - Filtros e Gerenciamento de Usuários
+
+### Filtros Avançados (Issue #17)
+- [ ] Implementar busca por código de contrato em Festas
+- [ ] Implementar busca por CPF em Festas
+- [ ] Implementar filtro de período de datas (data de fechamento) em Festas
+- [ ] Implementar filtro de período de datas (data do evento) em Festas
+- [ ] Implementar ordenação customizável em Festas
+- [ ] Implementar busca por CPF em Clientes
+- [ ] Implementar busca por telefone em Clientes
+- [ ] Implementar busca por email em Clientes
+- [ ] Implementar busca por nome em Visitações
+- [ ] Implementar busca por telefone em Visitações
+- [ ] Implementar filtro por status em Visitações
+- [ ] Implementar filtro de período em Visitações
+
+### Gerenciamento de Usuários (Issue #2)
+- [ ] Criar página de listagem de usuários
+- [ ] Implementar formulário de adicionar novo usuário
+- [ ] Implementar formulário de editar usuário
+- [ ] Implementar seleção de role (Admin/Atendimento/Gerente/Cliente)
+- [ ] Implementar exclusão de usuários com confirmação
+- [ ] Configurar usuários iniciais como Admin
+- [ ] Testar permissões por role
+- [ ] Criar testes unitários para gerenciamento de usuários
