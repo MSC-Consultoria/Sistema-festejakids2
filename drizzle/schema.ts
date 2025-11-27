@@ -44,14 +44,28 @@ export type InsertCliente = typeof clientes.$inferInsert;
 
 /**
  * Tabela de visitações (leads)
+ * Suporta Ficha de Contrato e Ficha de Degustação
  */
 export const visitacoes = mysqlTable("visitacoes", {
   id: int("id").autoincrement().primaryKey(),
   nome: varchar("nome", { length: 255 }).notNull(),
   telefone: varchar("telefone", { length: 20 }).notNull(),
   email: varchar("email", { length: 255 }),
+  cpf: varchar("cpf", { length: 14 }),
+  endereco: text("endereco"),
   dataVisita: timestamp("dataVisita").notNull(),
+  dataPretendida: timestamp("dataPretendida"), // Data pretendida para o evento
+  horario: varchar("horario", { length: 50 }), // Horario da visita/evento
   interesse: text("interesse"), // Tipo de festa, tema, etc
+  tema: varchar("tema", { length: 255 }), // Tema escolhido ou pretendido
+  numeroConvidados: int("numeroConvidados"), // Quantidade de convidados
+  brinde: varchar("brinde", { length: 255 }), // Tipo de brinde (acai, sorvete, etc)
+  refeicao: text("refeicao"), // Descricao da refeicao
+  massaType: varchar("massaType", { length: 100 }), // Tipo de massa (pene, fusilli, etc)
+  molhoType: varchar("molhoType", { length: 100 }), // Tipo de molho (bolonhesa, calabresa, etc)
+  bolo: text("bolo"), // Descricao do bolo
+  nomeAniversariante: varchar("nomeAniversariante", { length: 255 }), // Nome do aniversariante
+  idadeAniversariante: int("idadeAniversariante"), // Idade do aniversariante
   status: mysqlEnum("status", ["visitou", "aguardando", "proposta_enviada", "fechado", "perdido"]).default("visitou").notNull(),
   observacoes: text("observacoes"),
   clienteId: int("clienteId"), // ID do cliente se foi convertido

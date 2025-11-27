@@ -20,6 +20,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { UserPlus, Phone, Mail, Calendar, TrendingUp, Users, CheckCircle2, XCircle, Clock, Send, ArrowLeft } from "lucide-react";
 import { toast } from "sonner";
 
@@ -27,6 +28,7 @@ export default function Visitacoes() {
   const [, setLocation] = useLocation();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingId, setEditingId] = useState<number | null>(null);
+  const [activeTab, setActiveTab] = useState("contrato");
   
   const { data: visitacoes = [], refetch } = trpc.visitacoes.list.useQuery();
   const { data: stats } = trpc.visitacoes.stats.useQuery();
@@ -39,8 +41,21 @@ export default function Visitacoes() {
     nome: "",
     telefone: "",
     email: "",
+    cpf: "",
+    endereco: "",
     dataVisita: new Date().toISOString().split("T")[0],
+    dataPretendida: "",
+    horario: "",
     interesse: "",
+    tema: "",
+    numeroConvidados: "",
+    brinde: "",
+    refeicao: "",
+    massaType: "",
+    molhoType: "",
+    bolo: "",
+    nomeAniversariante: "",
+    idadeAniversariante: "",
     observacoes: "",
   });
 
@@ -48,35 +63,70 @@ export default function Visitacoes() {
     e.preventDefault();
     
     try {
+      const payload = {
+        nome: formData.nome,
+        telefone: formData.telefone,
+        email: formData.email,
+        cpf: formData.cpf || undefined,
+        endereco: formData.endereco || undefined,
+        dataVisita: new Date(formData.dataVisita).getTime(),
+        dataPretendida: formData.dataPretendida ? new Date(formData.dataPretendida).getTime() : undefined,
+        horario: formData.horario || undefined,
+        interesse: formData.interesse || undefined,
+        tema: formData.tema || undefined,
+        numeroConvidados: formData.numeroConvidados ? parseInt(formData.numeroConvidados) : undefined,
+        brinde: formData.brinde || undefined,
+        refeicao: formData.refeicao || undefined,
+        massaType: formData.massaType || undefined,
+        molhoType: formData.molhoType || undefined,
+        bolo: formData.bolo || undefined,
+        nomeAniversariante: formData.nomeAniversariante || undefined,
+        idadeAniversariante: formData.idadeAniversariante ? parseInt(formData.idadeAniversariante) : undefined,
+        observacoes: formData.observacoes || undefined,
+      };
+
       if (editingId) {
         await updateMutation.mutateAsync({
           id: editingId,
-          ...formData,
-          dataVisita: new Date(formData.dataVisita).getTime(),
+          ...payload,
         });
         toast.success("Visitação atualizada com sucesso!");
       } else {
-        await createMutation.mutateAsync({
-          ...formData,
-          dataVisita: new Date(formData.dataVisita).getTime(),
-        });
+        await createMutation.mutateAsync(payload);
         toast.success("Visitação cadastrada com sucesso!");
       }
       
       setDialogOpen(false);
       setEditingId(null);
-      setFormData({
-        nome: "",
-        telefone: "",
-        email: "",
-        dataVisita: new Date().toISOString().split("T")[0],
-        interesse: "",
-        observacoes: "",
-      });
+      resetForm();
       refetch();
     } catch (error: any) {
       toast.error(error.message || "Erro ao salvar visitação");
     }
+  };
+
+  const resetForm = () => {
+    setFormData({
+      nome: "",
+      telefone: "",
+      email: "",
+      cpf: "",
+      endereco: "",
+      dataVisita: new Date().toISOString().split("T")[0],
+      dataPretendida: "",
+      horario: "",
+      interesse: "",
+      tema: "",
+      numeroConvidados: "",
+      brinde: "",
+      refeicao: "",
+      massaType: "",
+      molhoType: "",
+      bolo: "",
+      nomeAniversariante: "",
+      idadeAniversariante: "",
+      observacoes: "",
+    });
   };
 
   const handleEdit = (visitacao: any) => {
@@ -85,8 +135,21 @@ export default function Visitacoes() {
       nome: visitacao.nome,
       telefone: visitacao.telefone,
       email: visitacao.email || "",
+      cpf: visitacao.cpf || "",
+      endereco: visitacao.endereco || "",
       dataVisita: new Date(visitacao.dataVisita).toISOString().split("T")[0],
+      dataPretendida: visitacao.dataPretendida ? new Date(visitacao.dataPretendida).toISOString().split("T")[0] : "",
+      horario: visitacao.horario || "",
       interesse: visitacao.interesse || "",
+      tema: visitacao.tema || "",
+      numeroConvidados: visitacao.numeroConvidados?.toString() || "",
+      brinde: visitacao.brinde || "",
+      refeicao: visitacao.refeicao || "",
+      massaType: visitacao.massaType || "",
+      molhoType: visitacao.molhoType || "",
+      bolo: visitacao.bolo || "",
+      nomeAniversariante: visitacao.nomeAniversariante || "",
+      idadeAniversariante: visitacao.idadeAniversariante?.toString() || "",
       observacoes: visitacao.observacoes || "",
     });
     setDialogOpen(true);
@@ -104,342 +167,404 @@ export default function Visitacoes() {
     }
   };
 
-  const handleConverterEmCliente = async (visitacaoId: number) => {
-    if (!confirm("Converter esta visitação em cliente?")) return;
-    
+  const handleConverter = async (id: number) => {
     try {
-      await converterMutation.mutateAsync({ visitacaoId });
+      await converterMutation.mutateAsync({ visitacaoId: id });
       toast.success("Visitação convertida em cliente com sucesso!");
       refetch();
     } catch (error: any) {
-      toast.error(error.message || "Erro ao converter em cliente");
+      toast.error(error.message || "Erro ao converter visitação");
     }
-  };
-
-  const handleUpdateStatus = async (id: number, status: string) => {
-    try {
-      await updateMutation.mutateAsync({ id, status: status as any });
-      toast.success("Status atualizado!");
-      refetch();
-    } catch (error: any) {
-      toast.error(error.message || "Erro ao atualizar status");
-    }
-  };
-
-  const getStatusBadge = (status: string) => {
-    const badges: Record<string, { label: string; color: string; icon: any }> = {
-      visitou: { label: "Visitou", color: "bg-blue-500/20 text-blue-400 border-blue-500/30", icon: Users },
-      aguardando: { label: "Aguardando", color: "bg-yellow-500/20 text-yellow-400 border-yellow-500/30", icon: Clock },
-      proposta_enviada: { label: "Proposta Enviada", color: "bg-purple-500/20 text-purple-400 border-purple-500/30", icon: Send },
-      fechado: { label: "Fechado", color: "bg-green-500/20 text-green-400 border-green-500/30", icon: CheckCircle2 },
-      perdido: { label: "Perdido", color: "bg-red-500/20 text-red-400 border-red-500/30", icon: XCircle },
-    };
-    
-    const badge = badges[status] || badges.visitou;
-    const Icon = badge.icon;
-    
-    return (
-      <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border ${badge.color}`}>
-        <Icon className="h-3.5 w-3.5" />
-        {badge.label}
-      </span>
-    );
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 p-4 md:p-6">
-      <div className="max-w-7xl mx-auto space-y-6">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-6">
+      <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-          <div className="flex items-center gap-4">
+        <div className="mb-8">
+          <div className="flex items-center gap-3 mb-4">
             <Button
               variant="ghost"
               size="icon"
               onClick={() => setLocation("/")}
-              className="text-gray-400 hover:text-white hover:bg-gray-800"
+              className="hover:bg-slate-700"
             >
-              <ArrowLeft className="h-5 w-5" />
+              <ArrowLeft className="w-5 h-5" />
             </Button>
             <div>
-              <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                Controle de Visitações
-              </h1>
-              <p className="text-gray-400 mt-1">Gerencie leads e acompanhe conversões</p>
+              <h1 className="text-4xl font-bold text-white">Visitações</h1>
+              <p className="text-slate-400">Gerencie leads e degustações</p>
             </div>
           </div>
-          
-          <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-            <DialogTrigger asChild>
-              <Button className="gradient-primary">
-                <UserPlus className="h-4 w-4 mr-2" />
-                Nova Visitação
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="bg-gray-900 border-gray-800 max-w-2xl">
-              <DialogHeader>
-                <DialogTitle className="text-2xl font-bold text-white">
-                  {editingId ? "Editar Visitação" : "Nova Visitação"}
-                </DialogTitle>
-              </DialogHeader>
-              
-              <form onSubmit={handleSubmit} className="space-y-4 mt-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="nome" className="text-gray-300">Nome *</Label>
-                    <Input
-                      id="nome"
-                      value={formData.nome}
-                      onChange={(e) => setFormData({ ...formData, nome: e.target.value })}
-                      required
-                      className="bg-gray-800 border-gray-700 text-white"
-                    />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="telefone" className="text-gray-300">Telefone *</Label>
-                    <Input
-                      id="telefone"
-                      value={formData.telefone}
-                      onChange={(e) => setFormData({ ...formData, telefone: e.target.value })}
-                      required
-                      className="bg-gray-800 border-gray-700 text-white"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="email" className="text-gray-300">Email</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="bg-gray-800 border-gray-700 text-white"
-                    />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="dataVisita" className="text-gray-300">Data da Visita *</Label>
-                    <Input
-                      id="dataVisita"
-                      type="date"
-                      value={formData.dataVisita}
-                      onChange={(e) => setFormData({ ...formData, dataVisita: e.target.value })}
-                      required
-                      className="bg-gray-800 border-gray-700 text-white"
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="interesse" className="text-gray-300">Interesse</Label>
-                  <Input
-                    id="interesse"
-                    value={formData.interesse}
-                    onChange={(e) => setFormData({ ...formData, interesse: e.target.value })}
-                    placeholder="Ex: Festa infantil tema Frozen"
-                    className="bg-gray-800 border-gray-700 text-white"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="observacoes" className="text-gray-300">Observações</Label>
-                  <Textarea
-                    id="observacoes"
-                    value={formData.observacoes}
-                    onChange={(e) => setFormData({ ...formData, observacoes: e.target.value })}
-                    rows={3}
-                    className="bg-gray-800 border-gray-700 text-white"
-                  />
-                </div>
-
-                <div className="flex justify-end gap-3 pt-4">
-                  <Button
-                    type="button"
-                    variant="outline"
-                    onClick={() => {
-                      setDialogOpen(false);
-                      setEditingId(null);
-                    }}
-                    className="border-gray-700"
-                  >
-                    Cancelar
-                  </Button>
-                  <Button type="submit" className="gradient-primary">
-                    {editingId ? "Atualizar" : "Cadastrar"}
-                  </Button>
-                </div>
-              </form>
-            </DialogContent>
-          </Dialog>
         </div>
 
-        {/* Stats Cards */}
+        {/* Stats */}
         {stats && (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            <Card className="bg-gradient-to-br from-blue-500/10 to-blue-600/10 border-blue-500/20 p-4">
-              <div className="flex items-center gap-3">
-                <Users className="h-8 w-8 text-blue-400" />
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+            <Card className="bg-slate-800 border-slate-700 p-6">
+              <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-2xl font-bold text-white">{stats.total}</p>
-                  <p className="text-xs text-gray-400">Total</p>
+                  <p className="text-slate-400 text-sm">Total Visitações</p>
+                  <p className="text-3xl font-bold text-white">{stats.total}</p>
                 </div>
+                <Users className="w-8 h-8 text-blue-400" />
               </div>
             </Card>
-
-            <Card className="bg-gradient-to-br from-yellow-500/10 to-yellow-600/10 border-yellow-500/20 p-4">
-              <div className="flex items-center gap-3">
-                <Clock className="h-8 w-8 text-yellow-400" />
+            <Card className="bg-slate-800 border-slate-700 p-6">
+              <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-2xl font-bold text-white">{stats.aguardando}</p>
-                  <p className="text-xs text-gray-400">Aguardando</p>
+                  <p className="text-slate-400 text-sm">Aguardando</p>
+                  <p className="text-3xl font-bold text-yellow-400">{stats.aguardando || 0}</p>
                 </div>
+                <Clock className="w-8 h-8 text-yellow-400" />
               </div>
             </Card>
-
-            <Card className="bg-gradient-to-br from-purple-500/10 to-purple-600/10 border-purple-500/20 p-4">
-              <div className="flex items-center gap-3">
-                <Send className="h-8 w-8 text-purple-400" />
+            <Card className="bg-slate-800 border-slate-700 p-6">
+              <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-2xl font-bold text-white">{stats.propostaEnviada}</p>
-                  <p className="text-xs text-gray-400">Propostas</p>
+                  <p className="text-slate-400 text-sm">Fechados</p>
+                  <p className="text-3xl font-bold text-green-400">{stats.fechado || 0}</p>
                 </div>
+                <CheckCircle2 className="w-8 h-8 text-green-400" />
               </div>
             </Card>
-
-            <Card className="bg-gradient-to-br from-green-500/10 to-green-600/10 border-green-500/20 p-4">
-              <div className="flex items-center gap-3">
-                <CheckCircle2 className="h-8 w-8 text-green-400" />
+            <Card className="bg-slate-800 border-slate-700 p-6">
+              <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-2xl font-bold text-white">{stats.fechado}</p>
-                  <p className="text-xs text-gray-400">Fechados</p>
+                  <p className="text-slate-400 text-sm">Perdidos</p>
+                  <p className="text-3xl font-bold text-red-400">{stats.perdido || 0}</p>
                 </div>
-              </div>
-            </Card>
-
-            <Card className="bg-gradient-to-br from-red-500/10 to-red-600/10 border-red-500/20 p-4">
-              <div className="flex items-center gap-3">
-                <XCircle className="h-8 w-8 text-red-400" />
-                <div>
-                  <p className="text-2xl font-bold text-white">{stats.perdido}</p>
-                  <p className="text-xs text-gray-400">Perdidos</p>
-                </div>
-              </div>
-            </Card>
-
-            <Card className="bg-gradient-to-br from-cyan-500/10 to-cyan-600/10 border-cyan-500/20 p-4">
-              <div className="flex items-center gap-3">
-                <TrendingUp className="h-8 w-8 text-cyan-400" />
-                <div>
-                  <p className="text-2xl font-bold text-white">{stats.taxaConversao}%</p>
-                  <p className="text-xs text-gray-400">Conversão</p>
-                </div>
+                <XCircle className="w-8 h-8 text-red-400" />
               </div>
             </Card>
           </div>
         )}
 
-        {/* Visitações List */}
-        <div className="space-y-4">
-          {visitacoes.length === 0 ? (
-            <Card className="bg-gray-900/50 border-gray-800 p-12 text-center">
-              <Users className="h-16 w-16 text-gray-600 mx-auto mb-4" />
-              <p className="text-gray-400 text-lg">Nenhuma visitação cadastrada</p>
-              <p className="text-gray-500 text-sm mt-2">Clique em "Nova Visitação" para começar</p>
-            </Card>
-          ) : (
-            visitacoes.map((visitacao: any) => (
-              <Card key={visitacao.id} className="bg-gray-900/50 border-gray-800 p-4 md:p-6 card-hover">
-                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-                  <div className="flex-1 space-y-3">
-                    <div className="flex items-start justify-between">
-                      <div>
-                        <h3 className="text-lg font-semibold text-white">{visitacao.nome}</h3>
-                        <div className="flex flex-wrap items-center gap-3 mt-2 text-sm text-gray-400">
-                          <span className="flex items-center gap-1.5">
-                            <Phone className="h-4 w-4" />
-                            {visitacao.telefone}
-                          </span>
-                          {visitacao.email && (
-                            <span className="flex items-center gap-1.5">
-                              <Mail className="h-4 w-4" />
-                              {visitacao.email}
-                            </span>
-                          )}
-                          <span className="flex items-center gap-1.5">
-                            <Calendar className="h-4 w-4" />
-                            {new Date(visitacao.dataVisita).toLocaleDateString("pt-BR")}
-                          </span>
-                        </div>
-                      </div>
-                      {getStatusBadge(visitacao.status)}
+        {/* Dialog para nova visitação */}
+        <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+          <DialogTrigger asChild>
+            <Button 
+              className="mb-6 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700"
+              onClick={() => {
+                setEditingId(null);
+                resetForm();
+                setActiveTab("contrato");
+              }}
+            >
+              <UserPlus className="w-4 h-4 mr-2" />
+              Nova Visitação
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-slate-800 border-slate-700">
+            <DialogHeader>
+              <DialogTitle className="text-white">
+                {editingId ? "Editar Visitação" : "Nova Visitação"}
+              </DialogTitle>
+            </DialogHeader>
+
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+                <TabsList className="grid w-full grid-cols-2 bg-slate-700">
+                  <TabsTrigger value="contrato" className="data-[state=active]:bg-blue-600">
+                    Ficha de Contrato
+                  </TabsTrigger>
+                  <TabsTrigger value="degustacao" className="data-[state=active]:bg-blue-600">
+                    Ficha de Degustação
+                  </TabsTrigger>
+                </TabsList>
+
+                {/* Aba Contrato */}
+                <TabsContent value="contrato" className="space-y-4 mt-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <Label className="text-slate-300">Nome *</Label>
+                      <Input
+                        value={formData.nome}
+                        onChange={(e) => setFormData({ ...formData, nome: e.target.value })}
+                        placeholder="Nome do cliente"
+                        className="bg-slate-700 border-slate-600 text-white"
+                        required
+                      />
                     </div>
-
-                    {visitacao.interesse && (
-                      <p className="text-sm text-gray-300">
-                        <span className="font-medium">Interesse:</span> {visitacao.interesse}
-                      </p>
-                    )}
-
-                    {visitacao.observacoes && (
-                      <p className="text-sm text-gray-400">
-                        <span className="font-medium">Obs:</span> {visitacao.observacoes}
-                      </p>
-                    )}
+                    <div>
+                      <Label className="text-slate-300">CPF</Label>
+                      <Input
+                        value={formData.cpf}
+                        onChange={(e) => setFormData({ ...formData, cpf: e.target.value })}
+                        placeholder="000.000.000-00"
+                        className="bg-slate-700 border-slate-600 text-white"
+                      />
+                    </div>
                   </div>
 
-                  <div className="flex flex-col gap-2">
-                    <Select
-                      value={visitacao.status}
-                      onValueChange={(value) => handleUpdateStatus(visitacao.id, value)}
-                    >
-                      <SelectTrigger className="w-full md:w-48 bg-gray-800 border-gray-700">
-                        <SelectValue />
+                  <div>
+                    <Label className="text-slate-300">Email</Label>
+                    <Input
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      placeholder="email@example.com"
+                      className="bg-slate-700 border-slate-600 text-white"
+                    />
+                  </div>
+
+                  <div>
+                    <Label className="text-slate-300">Endereço</Label>
+                    <Textarea
+                      value={formData.endereco}
+                      onChange={(e) => setFormData({ ...formData, endereco: e.target.value })}
+                      placeholder="Rua, número, bairro..."
+                      className="bg-slate-700 border-slate-600 text-white"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <Label className="text-slate-300">Telefone *</Label>
+                      <Input
+                        value={formData.telefone}
+                        onChange={(e) => setFormData({ ...formData, telefone: e.target.value })}
+                        placeholder="(21) 9999-9999"
+                        className="bg-slate-700 border-slate-600 text-white"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <Label className="text-slate-300">Quantidade de Convidados</Label>
+                      <Input
+                        type="number"
+                        value={formData.numeroConvidados}
+                        onChange={(e) => setFormData({ ...formData, numeroConvidados: e.target.value })}
+                        placeholder="80"
+                        className="bg-slate-700 border-slate-600 text-white"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <Label className="text-slate-300">Data do Evento</Label>
+                      <Input
+                        type="date"
+                        value={formData.dataPretendida}
+                        onChange={(e) => setFormData({ ...formData, dataPretendida: e.target.value })}
+                        className="bg-slate-700 border-slate-600 text-white"
+                      />
+                    </div>
+                    <div>
+                      <Label className="text-slate-300">Horário</Label>
+                      <Input
+                        type="time"
+                        value={formData.horario}
+                        onChange={(e) => setFormData({ ...formData, horario: e.target.value })}
+                        className="bg-slate-700 border-slate-600 text-white"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <Label className="text-slate-300">Tema</Label>
+                    <Input
+                      value={formData.tema}
+                      onChange={(e) => setFormData({ ...formData, tema: e.target.value })}
+                      placeholder="Pintando o 7 - formatura"
+                      className="bg-slate-700 border-slate-600 text-white"
+                    />
+                  </div>
+
+                  <div>
+                    <Label className="text-slate-300">Nome do Aniversariante</Label>
+                    <Input
+                      value={formData.nomeAniversariante}
+                      onChange={(e) => setFormData({ ...formData, nomeAniversariante: e.target.value })}
+                      placeholder="Nome"
+                      className="bg-slate-700 border-slate-600 text-white"
+                    />
+                  </div>
+
+                  <div>
+                    <Label className="text-slate-300">Idade do Aniversariante</Label>
+                    <Input
+                      type="number"
+                      value={formData.idadeAniversariante}
+                      onChange={(e) => setFormData({ ...formData, idadeAniversariante: e.target.value })}
+                      placeholder="7"
+                      className="bg-slate-700 border-slate-600 text-white"
+                    />
+                  </div>
+                </TabsContent>
+
+                {/* Aba Degustação */}
+                <TabsContent value="degustacao" className="space-y-4 mt-4">
+                  <div>
+                    <Label className="text-slate-300">Brinde</Label>
+                    <Select value={formData.brinde} onValueChange={(value) => setFormData({ ...formData, brinde: value })}>
+                      <SelectTrigger className="bg-slate-700 border-slate-600 text-white">
+                        <SelectValue placeholder="Selecione o brinde" />
                       </SelectTrigger>
-                      <SelectContent className="bg-gray-800 border-gray-700">
-                        <SelectItem value="visitou">Visitou</SelectItem>
-                        <SelectItem value="aguardando">Aguardando</SelectItem>
-                        <SelectItem value="proposta_enviada">Proposta Enviada</SelectItem>
-                        <SelectItem value="fechado">Fechado</SelectItem>
-                        <SelectItem value="perdido">Perdido</SelectItem>
+                      <SelectContent className="bg-slate-700 border-slate-600">
+                        <SelectItem value="acai">Açaí</SelectItem>
+                        <SelectItem value="sorvete">Sorvete</SelectItem>
+                        <SelectItem value="picolé">Picolé</SelectItem>
+                        <SelectItem value="doce">Doce</SelectItem>
                       </SelectContent>
                     </Select>
+                  </div>
 
-                    <div className="flex gap-2">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => handleEdit(visitacao)}
-                        className="flex-1 border-gray-700"
-                      >
-                        Editar
-                      </Button>
-                      
-                      {visitacao.status !== "fechado" && !visitacao.clienteId && (
-                        <Button
-                          size="sm"
-                          onClick={() => handleConverterEmCliente(visitacao.id)}
-                          className="flex-1 gradient-success"
-                        >
-                          Converter
-                        </Button>
-                      )}
-                      
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => handleDelete(visitacao.id)}
-                        className="border-red-500/30 text-red-400 hover:bg-red-500/10"
-                      >
-                        Excluir
-                      </Button>
+                  <div>
+                    <Label className="text-slate-300">Refeição</Label>
+                    <Textarea
+                      value={formData.refeicao}
+                      onChange={(e) => setFormData({ ...formData, refeicao: e.target.value })}
+                      placeholder="Descrição da refeição"
+                      className="bg-slate-700 border-slate-600 text-white"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <Label className="text-slate-300">Tipo de Massa</Label>
+                      <Select value={formData.massaType} onValueChange={(value) => setFormData({ ...formData, massaType: value })}>
+                        <SelectTrigger className="bg-slate-700 border-slate-600 text-white">
+                          <SelectValue placeholder="Selecione" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-slate-700 border-slate-600">
+                          <SelectItem value="pene">Pene</SelectItem>
+                          <SelectItem value="fusilli">Fusilli</SelectItem>
+                          <SelectItem value="talharim">Talharim</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <Label className="text-slate-300">Tipo de Molho</Label>
+                      <Select value={formData.molhoType} onValueChange={(value) => setFormData({ ...formData, molhoType: value })}>
+                        <SelectTrigger className="bg-slate-700 border-slate-600 text-white">
+                          <SelectValue placeholder="Selecione" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-slate-700 border-slate-600">
+                          <SelectItem value="bolonhesa">Bolonhesa</SelectItem>
+                          <SelectItem value="calabresa">Calabresa</SelectItem>
+                          <SelectItem value="sugo">Ao Sugo</SelectItem>
+                          <SelectItem value="branco">Molho Branco</SelectItem>
+                        </SelectContent>
+                      </Select>
                     </div>
                   </div>
+
+                  <div>
+                    <Label className="text-slate-300">Bolo</Label>
+                    <Textarea
+                      value={formData.bolo}
+                      onChange={(e) => setFormData({ ...formData, bolo: e.target.value })}
+                      placeholder="Massa de chocolate e recheio de brigadeiro"
+                      className="bg-slate-700 border-slate-600 text-white"
+                    />
+                  </div>
+                </TabsContent>
+              </Tabs>
+
+              <div>
+                <Label className="text-slate-300">Observações</Label>
+                <Textarea
+                  value={formData.observacoes}
+                  onChange={(e) => setFormData({ ...formData, observacoes: e.target.value })}
+                  placeholder="Notas adicionais..."
+                  className="bg-slate-700 border-slate-600 text-white"
+                />
+              </div>
+
+              <div className="flex gap-3 justify-end pt-4">
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => {
+                    setDialogOpen(false);
+                    resetForm();
+                  }}
+                  className="border-slate-600 text-slate-300 hover:bg-slate-700"
+                >
+                  Cancelar
+                </Button>
+                <Button
+                  type="submit"
+                  disabled={createMutation.isPending || updateMutation.isPending}
+                  className="bg-blue-600 hover:bg-blue-700"
+                >
+                  {createMutation.isPending || updateMutation.isPending ? "Salvando..." : "Salvar"}
+                </Button>
+              </div>
+            </form>
+          </DialogContent>
+        </Dialog>
+
+        {/* Listagem */}
+        <div className="space-y-4">
+          {visitacoes.map((visitacao) => (
+            <Card key={visitacao.id} className="bg-slate-800 border-slate-700 p-6 hover:border-slate-600 transition">
+              <div className="flex items-start justify-between">
+                <div className="flex-1">
+                  <div className="flex items-center gap-3 mb-3">
+                    <h3 className="text-xl font-semibold text-white">{visitacao.nome}</h3>
+                    <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+                      visitacao.status === "fechado" ? "bg-green-900 text-green-200" :
+                      visitacao.status === "aguardando" ? "bg-yellow-900 text-yellow-200" :
+                      visitacao.status === "perdido" ? "bg-red-900 text-red-200" :
+                      "bg-blue-900 text-blue-200"
+                    }`}>
+                      {visitacao.status}
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm text-slate-400">
+                    <div className="flex items-center gap-2">
+                      <Phone className="w-4 h-4" />
+                      {visitacao.telefone}
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Mail className="w-4 h-4" />
+                      {visitacao.email}
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Calendar className="w-4 h-4" />
+                      {new Date(visitacao.dataVisita).toLocaleDateString("pt-BR")}
+                    </div>
+                    {visitacao.tema && (
+                      <div className="text-slate-400">
+                        Tema: {visitacao.tema}
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </Card>
-            ))
-          )}
+                <div className="flex gap-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => handleEdit(visitacao)}
+                    className="border-slate-600 text-slate-300 hover:bg-slate-700"
+                  >
+                    Editar
+                  </Button>
+                  {visitacao.status === "fechado" && !visitacao.clienteId && (
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handleConverter(visitacao.id)}
+                      className="border-green-600 text-green-400 hover:bg-green-900"
+                    >
+                      Converter
+                    </Button>
+                  )}
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => handleDelete(visitacao.id)}
+                    className="border-red-600 text-red-400 hover:bg-red-900"
+                  >
+                    Excluir
+                  </Button>
+                </div>
+              </div>
+            </Card>
+          ))}
         </div>
       </div>
     </div>

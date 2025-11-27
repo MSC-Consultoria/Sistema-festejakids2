@@ -346,11 +346,11 @@
 - [x] Testar funcionalidade completa
 
 ## Melhoria da Tela de Visitações (Ficha de Contrato e Degustação)
-- [ ] Estender schema de visitações com novos campos (CPF, endereço, quantidade convidados, brinde, refeição, bolo, etc)
-- [ ] Criar procedures tRPC para CRUD completo de visitações
-- [ ] Atualizar página Visitacoes.tsx com formulários de Ficha de Contrato e Ficha de Degustação
-- [ ] Implementar abas para alternar entre Contrato e Degustação
-- [ ] Adicionar campos de brinde, refeição, bolo com opções pré-definidas
-- [ ] Implementar listagem com filtros e busca
-- [ ] Importar 8 visitações da semana de 27/11/2025
-- [ ] Testar funcionalidade completa
+- [x] Estender schema de visitações com novos campos (CPF, endereço, quantidade convidados, brinde, refeição, bolo, etc - 24 campos totais)
+- [x] Criar procedures tRPC para CRUD completo de visitações
+- [x] Atualizar página Visitacoes.tsx com formulários de Ficha de Contrato e Ficha de Degustação
+- [x] Implementar abas para alternar entre Contrato e Degustação
+- [x] Adicionar campos de brinde, refeição, bolo com opções pré-definidas
+- [x] Implementar listagem com filtros e busca
+- [x] Importar 8 visitações da semana de 27/11/2025 (Nadia, Suzane, Marcelaine, Caryne, Thais, Jenifer, Karien, Valzenir)
+- [x] Testar funcionalidade completa
