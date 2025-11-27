@@ -596,3 +596,10 @@
 - [x] Importar parte 4 (85 festas) com sucesso - Última parte!
 - [x] Verificar total de 307 festas importadas (faturamento: R$ 1.521.484,00)
 - [x] Validar campos essenciais (data fechamento, data evento, valor, convidados)
+
+## Atualização de Pagamentos de Festas Realizadas (Fase 27)
+- [x] Atualizar valorPago = valorTotal para todas as festas até 03/12/2025
+- [x] Verificar quantidade de festas afetadas
+- [x] Recalcular valores recebidos e a receber por ano
+- [x] Gerar relatório detalhado separando 2024, 2025 e 2026
+- [x] Validar Dashboard com valores corretos
