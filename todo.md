@@ -572,3 +572,14 @@
 - [x] Criar interface dropdown na aba Pagamentos para associar à festa (Select component)
 - [x] Atualizar automaticamente valorPago da festa ao associar pagamento (procedure associarFesta)
 - [x] Testar fluxo completo de importação, visualização e associação
+
+
+## Códigos Únicos e Edição na Agenda (Fase 25)
+- [x] Adicionar campo codigo na tabela visitacoes
+- [x] Criar função para gerar códigos VISDDMMAA-XXX
+- [x] Atualizar visitações existentes com códigos gerados (8 visitações)
+- [x] Simplificar agenda para mostrar apenas códigos (sem subtítulo)
+- [x] Adicionar botões de edição no modal de detalhes (botão Editar unificado)
+- [x] Implementar navegação para edição de Festas, Pagamentos e Visitações
+- [x] Geração automática de código ao criar nova visitação
+- [x] Testar fluxo completo de visualização e edição

@@ -1,0 +1,9 @@
+{
+  "query": "ALTER TABLE `visitacoes` ADD `codigo` varchar(20);\nALTER TABLE `visitacoes` ADD CONSTRAINT `visitacoes_codigo_unique` UNIQUE(`codigo`);",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 48JvJ4xGnzv6z7Y.root --database kipPpydFSSmPdFAif48Epo --execute ALTER TABLE `visitacoes` ADD `codigo` varchar(20);\nALTER TABLE `visitacoes` ADD CONSTRAINT `visitacoes_codigo_unique` UNIQUE(`codigo`);",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 892
+}

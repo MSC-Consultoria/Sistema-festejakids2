@@ -85,6 +85,13 @@
       "when": 1764244376079,
       "tag": "0011_square_lady_deathstrike",
       "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "5",
+      "when": 1764250364326,
+      "tag": "0012_tiresome_stellaris",
+      "breakpoints": true
     }
   ]
 }

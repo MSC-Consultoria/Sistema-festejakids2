@@ -1,0 +1,58 @@
+{
+  "query": "SELECT id, codigo, nome, DATE_FORMAT(dataVisita, '%d/%m/%Y') as data FROM visitacoes LIMIT 10;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 48JvJ4xGnzv6z7Y.root --database kipPpydFSSmPdFAif48Epo --execute SELECT id, codigo, nome, DATE_FORMAT(dataVisita, '%d/%m/%Y') as data FROM visitacoes LIMIT 10;",
+  "rows": [
+    {
+      "id": "300001",
+      "codigo": "VIS271125-SUZ",
+      "nome": "Suzane Oliveira",
+      "data": "27/11/2025"
+    },
+    {
+      "id": "300002",
+      "codigo": "VIS271125-MAR",
+      "nome": "Marcelaine Borges",
+      "data": "27/11/2025"
+    },
+    {
+      "id": "300003",
+      "codigo": "VIS271125-CAR",
+      "nome": "Caryne Pacheco",
+      "data": "27/11/2025"
+    },
+    {
+      "id": "300004",
+      "codigo": "VIS271125-THA",
+      "nome": "Thais e Cassia",
+      "data": "27/11/2025"
+    },
+    {
+      "id": "300005",
+      "codigo": "VIS271125-JEN",
+      "nome": "Jenifer",
+      "data": "27/11/2025"
+    },
+    {
+      "id": "300006",
+      "codigo": "VIS271125-KAR",
+      "nome": "Karien Soares",
+      "data": "27/11/2025"
+    },
+    {
+      "id": "300007",
+      "codigo": "VIS271125-VAL",
+      "nome": "Valzenir",
+      "data": "27/11/2025"
+    },
+    {
+      "id": "300008",
+      "codigo": "VIS041225-NAD",
+      "nome": "Nadia Araujo",
+      "data": "04/12/2025"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tcodigo\tnome\tdata\n300001\tVIS271125-SUZ\tSuzane Oliveira\t27/11/2025\n300002\tVIS271125-MAR\tMarcelaine Borges\t27/11/2025\n300003\tVIS271125-CAR\tCaryne Pacheco\t27/11/2025\n300004\tVIS271125-THA\tThais e Cassia\t27/11/2025\n300005\tVIS271125-JEN\tJenifer\t27/11/2025\n300006\tVIS271125-KAR\tKarien Soares\t27/11/2025\n300007\tVIS271125-VAL\tValzenir\t27/11/2025\n300008\tVIS041225-NAD\tNadia Araujo\t04/12/2025\n",
+  "stderr": "",
+  "execution_time_ms": 53
+}

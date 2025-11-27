@@ -43,9 +43,20 @@ export const visitacoesRouter = router({
     )
     .mutation(async ({ input }) => {
       const { dataPretendida, ...rest } = input;
+      
+      // Gerar código VISDDMMAA-XXX
+      const dataVisita = new Date(input.dataVisita);
+      const dia = String(dataVisita.getDate()).padStart(2, '0');
+      const mes = String(dataVisita.getMonth() + 1).padStart(2, '0');
+      const ano = String(dataVisita.getFullYear()).slice(-2);
+      const nomeClean = input.nome.replace(/[\s.]/g, '').toUpperCase();
+      const iniciais = nomeClean.substring(0, 3);
+      const codigo = `VIS${dia}${mes}${ano}-${iniciais}`;
+      
       return await db.createVisitacao({
         ...rest,
-        dataVisita: new Date(input.dataVisita),
+        codigo,
+        dataVisita,
         dataPretendida: dataPretendida ? new Date(dataPretendida) : null,
         status: input.status || "aguardando",
       });

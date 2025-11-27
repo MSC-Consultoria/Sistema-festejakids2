@@ -11,8 +11,9 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { trpc } from "@/lib/trpc";
-import { CalendarDays, Loader2, PartyPopper, DollarSign, Users, Filter } from "lucide-react";
+import { CalendarDays, Loader2, PartyPopper, DollarSign, Users, Filter, Pencil } from "lucide-react";
 import { useMemo, useState } from "react";
+import { useLocation } from "wouter";
 
 type EventoAgenda = {
   id: number;
@@ -42,6 +43,20 @@ export default function Agenda() {
   });
   
   const [eventoSelecionado, setEventoSelecionado] = useState<EventoAgenda | null>(null);
+  const [, setLocation] = useLocation();
+
+  const handleEditar = () => {
+    if (!eventoSelecionado) return;
+    
+    if (eventoSelecionado.tipo === "festa") {
+      setLocation(`/festas/${eventoSelecionado.id}`);
+    } else if (eventoSelecionado.tipo === "pagamento") {
+      setLocation(`/financeiro/registrar?id=${eventoSelecionado.id}`);
+    } else if (eventoSelecionado.tipo === "visitacao") {
+      setLocation(`/visitacoes?edit=${eventoSelecionado.id}`);
+    }
+    setEventoSelecionado(null);
+  };
 
   // Consolidar todos os eventos
   const eventos = useMemo((): EventoAgenda[] => {
@@ -54,7 +69,6 @@ export default function Agenda() {
           tipo: "festa",
           data: new Date(festa.dataFesta),
           titulo: festa.codigo,
-          subtitulo: festa.clienteNome ?? undefined,
           valor: festa.valorTotal,
           detalhes: festa,
         });
@@ -68,7 +82,6 @@ export default function Agenda() {
           tipo: "pagamento",
           data: new Date(pag.dataPagamento),
           titulo: pag.codigo,
-          subtitulo: pag.pagador ?? undefined,
           valor: pag.valor,
           detalhes: pag,
         });
@@ -82,8 +95,7 @@ export default function Agenda() {
             id: vis.id,
             tipo: "visitacao",
             data: new Date(vis.dataVisita),
-            titulo: `Visitação - ${vis.nome}`,
-            subtitulo: vis.telefone ?? undefined,
+            titulo: vis.codigo || `VIS-${vis.id}`,
             detalhes: vis,
           });
         }
@@ -427,6 +439,16 @@ export default function Agenda() {
                 )}
               </div>
             )}
+            
+            <div className="flex justify-end gap-2 mt-6 pt-4 border-t">
+              <Button variant="outline" onClick={() => setEventoSelecionado(null)}>
+                Fechar
+              </Button>
+              <Button onClick={handleEditar} className="gap-2">
+                <Pencil className="h-4 w-4" />
+                Editar
+              </Button>
+            </div>
           </DialogContent>
         </Dialog>
       </div>

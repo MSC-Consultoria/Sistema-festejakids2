@@ -48,6 +48,7 @@ export type InsertCliente = typeof clientes.$inferInsert;
  */
 export const visitacoes = mysqlTable("visitacoes", {
   id: int("id").autoincrement().primaryKey(),
+  codigo: varchar("codigo", { length: 20 }).unique(),
   nome: varchar("nome", { length: 255 }).notNull(),
   telefone: varchar("telefone", { length: 20 }).notNull(),
   email: varchar("email", { length: 255 }),
