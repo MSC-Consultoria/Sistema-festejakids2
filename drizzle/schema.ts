@@ -66,7 +66,7 @@ export const visitacoes = mysqlTable("visitacoes", {
   bolo: text("bolo"), // Descricao do bolo
   nomeAniversariante: varchar("nomeAniversariante", { length: 255 }), // Nome do aniversariante
   idadeAniversariante: int("idadeAniversariante"), // Idade do aniversariante
-  status: mysqlEnum("status", ["visitou", "aguardando", "proposta_enviada", "fechado", "perdido"]).default("visitou").notNull(),
+  status: mysqlEnum("status", ["aguardando", "fechou_pre_contrato", "fechou_contrato", "tem_interesse", "faltou", "remarcar"]).default("aguardando").notNull(),
   observacoes: text("observacoes"),
   clienteId: int("clienteId"), // ID do cliente se foi convertido
   createdAt: timestamp("createdAt").defaultNow().notNull(),

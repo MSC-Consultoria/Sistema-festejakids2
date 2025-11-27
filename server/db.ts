@@ -475,21 +475,23 @@ export async function getVisitacoesStats() {
   
   const all = await db.select().from(visitacoes);
   
-  const visitou = all.filter(v => v.status === "visitou").length;
   const aguardando = all.filter(v => v.status === "aguardando").length;
-  const propostaEnviada = all.filter(v => v.status === "proposta_enviada").length;
-  const fechado = all.filter(v => v.status === "fechado").length;
-  const perdido = all.filter(v => v.status === "perdido").length;
+  const fechouPreContrato = all.filter(v => v.status === "fechou_pre_contrato").length;
+  const fechouContrato = all.filter(v => v.status === "fechou_contrato").length;
+  const temInteresse = all.filter(v => v.status === "tem_interesse").length;
+  const faltou = all.filter(v => v.status === "faltou").length;
+  const remarcar = all.filter(v => v.status === "remarcar").length;
   
-  const taxaConversao = all.length > 0 ? (fechado / all.length) * 100 : 0;
+  const taxaConversao = all.length > 0 ? ((fechouPreContrato + fechouContrato) / all.length) * 100 : 0;
   
   return {
     total: all.length,
-    visitou,
     aguardando,
-    propostaEnviada,
-    fechado,
-    perdido,
+    fechouPreContrato,
+    fechouContrato,
+    temInteresse,
+    faltou,
+    remarcar,
     taxaConversao: Math.round(taxaConversao * 10) / 10
   };
 }

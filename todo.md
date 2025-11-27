@@ -373,3 +373,12 @@
 - [x] Implementar feedback de sucesso/erro
 - [x] Adicionar botão de edição nos cards de festas
 - [x] Criar testes unitários para edição
+
+## Atualização de Visitações e Limpeza
+- [x] Atualizar schema de visitações com novos status (Fechou Pré-Contrato, Fechou Contrato, Tem Interesse, Faltou, Remarcar)
+- [x] Atualizar interface de visitações com novos status
+- [x] Limpar visitações de teste do banco de dados
+- [x] Limpar festas de teste do banco de dados
+- [x] Atualizar linha do tempo do projeto
+- [x] Atualizar documentação do projeto (README.md)
+- [ ] Fazer commit no GitHub com todas as alterações

@@ -56,6 +56,7 @@ export default function Visitacoes() {
     bolo: "",
     nomeAniversariante: "",
     idadeAniversariante: "",
+    status: "aguardando",
     observacoes: "",
   });
 
@@ -125,6 +126,7 @@ export default function Visitacoes() {
       bolo: "",
       nomeAniversariante: "",
       idadeAniversariante: "",
+      status: "aguardando",
       observacoes: "",
     });
   };
@@ -150,6 +152,7 @@ export default function Visitacoes() {
       bolo: visitacao.bolo || "",
       nomeAniversariante: visitacao.nomeAniversariante || "",
       idadeAniversariante: visitacao.idadeAniversariante?.toString() || "",
+      status: visitacao.status || "aguardando",
       observacoes: visitacao.observacoes || "",
     });
     setDialogOpen(true);
@@ -464,6 +467,23 @@ export default function Visitacoes() {
               </Tabs>
 
               <div>
+                <Label className="text-slate-300">Status da Visitação</Label>
+                <Select value={formData.status} onValueChange={(value) => setFormData({ ...formData, status: value })}>
+                  <SelectTrigger className="bg-slate-700 border-slate-600 text-white">
+                    <SelectValue placeholder="Selecione o status" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-slate-700 border-slate-600">
+                    <SelectItem value="aguardando">Aguardando</SelectItem>
+                    <SelectItem value="fechou_pre_contrato">Fechou Pré-Contrato</SelectItem>
+                    <SelectItem value="fechou_contrato">Fechou Contrato</SelectItem>
+                    <SelectItem value="tem_interesse">Tem Interesse</SelectItem>
+                    <SelectItem value="faltou">Faltou</SelectItem>
+                    <SelectItem value="remarcar">Remarcar</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div>
                 <Label className="text-slate-300">Observações</Label>
                 <Textarea
                   value={formData.observacoes}
@@ -506,12 +526,20 @@ export default function Visitacoes() {
                   <div className="flex items-center gap-3 mb-3">
                     <h3 className="text-xl font-semibold text-white">{visitacao.nome}</h3>
                     <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                      visitacao.status === "fechado" ? "bg-green-900 text-green-200" :
+                      visitacao.status === "fechou_contrato" ? "bg-green-900 text-green-200" :
+                      visitacao.status === "fechou_pre_contrato" ? "bg-emerald-900 text-emerald-200" :
+                      visitacao.status === "tem_interesse" ? "bg-blue-900 text-blue-200" :
                       visitacao.status === "aguardando" ? "bg-yellow-900 text-yellow-200" :
-                      visitacao.status === "perdido" ? "bg-red-900 text-red-200" :
-                      "bg-blue-900 text-blue-200"
+                      visitacao.status === "faltou" ? "bg-red-900 text-red-200" :
+                      visitacao.status === "remarcar" ? "bg-orange-900 text-orange-200" :
+                      "bg-gray-900 text-gray-200"
                     }`}>
-                      {visitacao.status}
+                      {visitacao.status === "fechou_contrato" ? "Fechou Contrato" :
+                       visitacao.status === "fechou_pre_contrato" ? "Fechou Pré-Contrato" :
+                       visitacao.status === "tem_interesse" ? "Tem Interesse" :
+                       visitacao.status === "aguardando" ? "Aguardando" :
+                       visitacao.status === "faltou" ? "Faltou" :
+                       visitacao.status === "remarcar" ? "Remarcar" : visitacao.status}
                     </span>
                   </div>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm text-slate-400">
@@ -543,7 +571,7 @@ export default function Visitacoes() {
                   >
                     Editar
                   </Button>
-                  {visitacao.status === "fechado" && !visitacao.clienteId && (
+                  {(visitacao.status === "fechou_contrato" || visitacao.status === "fechou_pre_contrato") && !visitacao.clienteId && (
                     <Button
                       variant="outline"
                       size="sm"

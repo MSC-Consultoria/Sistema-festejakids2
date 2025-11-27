@@ -31,7 +31,7 @@ export const visitacoesRouter = router({
       return await db.createVisitacao({
         ...input,
         dataVisita: new Date(input.dataVisita),
-        status: "visitou",
+        status: "aguardando",
       });
     }),
 
@@ -89,10 +89,10 @@ export const visitacoesRouter = router({
         endereco: input.endereco,
       });
 
-      // Atualizar visitação com clienteId e status fechado
+      // Atualizar visitação com clienteId e status fechou_contrato
       await db.updateVisitacao(input.visitacaoId, {
         clienteId,
-        status: "fechado",
+        status: "fechou_contrato",
       });
 
       return { clienteId, success: true };
