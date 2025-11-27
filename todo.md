@@ -519,3 +519,13 @@
 - [ ] Inserir dias de visitação no calendário (futura)
 - [ ] Inserir pagamentos no calendário (futura)
 - [ ] Upload de comprovantes renomeados para S3 (futura)
+
+
+## Documentação JSON Completa do Projeto (Fase 20)
+- [x] Coletar histórico completo de todas as fases de desenvolvimento (59 fases)
+- [x] Documentar logs de erros e soluções aplicadas (15 erros resolvidos)
+- [x] Documentar schema completo do banco de dados (9 tabelas, 109 colunas)
+- [x] Documentar todos os routers e procedures backend (8 routers, 56 procedures)
+- [x] Documentar todas as páginas e componentes frontend (23 páginas, 8.617 linhas)
+- [x] Documentar lógica detalhada de cada funcionalidade (8 módulos principais)
+- [x] Gerar JSON consolidado extremamente detalhado (106 KB)
