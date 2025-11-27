@@ -486,5 +486,5 @@
 - [x] Adicionar rodapé com endereço e CNPJ
 - [x] Implementar envio automático do contrato para administradores via notificação
 - [x] Adicionar botão "Gerar Contrato" na página de detalhes da festa
-- [ ] Adicionar botão "Gerar Contrato" após cadastrar nova festa
-- [ ] Testar geração e envio de contrato com dados reais
+- [x] Adicionar modal de sucesso com botão "Gerar Contrato Agora" após cadastrar nova festa
+- [x] Testar geração e envio de contrato com dados reais

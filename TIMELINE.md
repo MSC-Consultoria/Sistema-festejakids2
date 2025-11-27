@@ -1301,3 +1301,83 @@ Tests: 31 passed, 5 failed, 36 total
 
 **Status do Projeto:** 🟢 Em Desenvolvimento
 **Próximo Checkpoint:** Após implementação de Filtros em Visitações
+
+
+---
+
+### **Fase 16: Modal de Geração Automática de Contrato** (Checkpoint: bb182684)
+**Data:** 27 de novembro de 2025
+
+#### 📋 Solicitação do Usuário
+Adicionar botão para gerar contrato automaticamente logo após cadastro de nova festa
+
+#### 🎯 Implementação
+
+**Modal de Sucesso:**
+- ✅ Dialog que aparece automaticamente após cadastrar festa
+- ✅ Título verde: "✅ Festa Cadastrada com Sucesso!"
+- ✅ Mensagem: "A festa foi cadastrada no sistema. Deseja gerar o contrato agora?"
+- ✅ Botões:
+  - "Gerar Depois" (cinza) - Redireciona para lista de festas
+  - "Gerar Contrato Agora" (verde) - Gera PDF imediatamente
+
+**Fluxo de Uso:**
+1. Usuário preenche formulário de Nova Festa
+2. Clica em "Cadastrar Festa"
+3. Modal aparece automaticamente
+4. Escolhe entre gerar agora ou depois
+5. Se "Gerar Contrato Agora":
+   - PDF é gerado com PDFKit
+   - Upload para S3
+   - Notificação para administradores
+   - PDF abre em nova aba automaticamente
+
+**Componentes Modificados:**
+- `client/src/pages/NovaFesta.tsx` - Adicionado modal de sucesso
+- Imports: Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter
+- Estados: `mostrarModalSucesso`, `festaRecemCriada`
+- Mutation: `trpc.festas.gerarContrato.useMutation()`
+
+#### 🧪 Teste Realizado
+
+**Cenário:** Cadastro de festa "Festa Teste Contrato"
+- Cliente: Alexandro Alves
+- Data: 14/06/2026
+- Horário: 14h às 18h
+- Convidados: 100
+- Valor: R$ 6.000,00
+
+**Resultado:**
+- ✅ Modal apareceu automaticamente
+- ✅ Clique em "Gerar Contrato Agora"
+- ✅ PDF gerado com 4 páginas completas
+- ✅ Arquivo: `contrato-113025AL-1764217661959.pdf`
+- ✅ Upload para S3: `https://d2xsxph8kpxj0f.cloudfront.net/...`
+- ✅ PDF aberto em nova aba
+- ✅ Administradores notificados
+
+**Seções do PDF Geradas:**
+1. Cabeçalho: FESTEJA KIDS + contato
+2. Título: CONTRATO BUFFET INFANTIL (verde)
+3. Data de Fechamento: 30/11/2025
+4. Dados do Evento: Endereço, duração, convidados, data, tema
+5. Dados do Cliente: Nome, telefone
+6. Serviços Incluídos: Decoração, brinquedos, som, equipe, mesas, animação, DJ
+7. Buffet Adulto e Infantil
+8. Brindes
+9. Observações Gerais
+10. Pagamento e Assinatura
+
+#### 📊 Métricas
+
+**Tempo de Implementação:** 1 fase
+**Componentes Modificados:** 1 (NovaFesta.tsx)
+**Linhas de Código Adicionadas:** ~50
+**Testes Realizados:** 1 teste completo de ponta a ponta
+**Resultado:** 100% funcional
+
+#### 🎯 Próximos Passos Sugeridos
+
+1. **Histórico de Contratos** - Adicionar seção na página de detalhes mostrando todos os contratos gerados (data, hora, link)
+2. **Edição de Template** - Criar interface administrativa para editar texto padrão do contrato
+3. **Envio por Email** - Implementar opção de enviar contrato por email para cliente

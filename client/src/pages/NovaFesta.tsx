@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Loader2, ArrowLeft } from "lucide-react";
@@ -67,13 +68,29 @@ export default function NovaFesta() {
     },
   });
   
+  const [festaRecemCriada, setFestaRecemCriada] = useState<number | null>(null);
+  const [mostrarModalSucesso, setMostrarModalSucesso] = useState(false);
+
   const createFesta = trpc.festas.create.useMutation({
-    onSuccess: () => {
+    onSuccess: (data) => {
+      setFestaRecemCriada(data.id);
+      setMostrarModalSucesso(true);
       toast.success("Festa cadastrada com sucesso!");
-      setLocation("/festas");
     },
     onError: (error) => {
       toast.error(`Erro ao cadastrar festa: ${error.message}`);
+    },
+  });
+
+  const gerarContrato = trpc.festas.gerarContrato.useMutation({
+    onSuccess: (data) => {
+      toast.success("Contrato gerado com sucesso!");
+      window.open(data.url, "_blank");
+      setMostrarModalSucesso(false);
+      setLocation("/festas");
+    },
+    onError: (error) => {
+      toast.error(`Erro ao gerar contrato: ${error.message}`);
     },
   });
 
@@ -557,6 +574,42 @@ export default function NovaFesta() {
           </form>
         </div>
       </div>
+
+      {/* Modal de Sucesso */}
+      <Dialog open={mostrarModalSucesso} onOpenChange={setMostrarModalSucesso}>
+        <DialogContent className="bg-slate-800 border-slate-700 text-white">
+          <DialogHeader>
+            <DialogTitle className="text-2xl text-green-400">✅ Festa Cadastrada com Sucesso!</DialogTitle>
+            <DialogDescription className="text-slate-300">
+              A festa foi cadastrada no sistema. Deseja gerar o contrato agora?
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter className="gap-2">
+            <Button
+              variant="outline"
+              onClick={() => {
+                setMostrarModalSucesso(false);
+                setLocation("/festas");
+              }}
+              className="text-slate-300 border-slate-600 hover:bg-slate-700"
+            >
+              Gerar Depois
+            </Button>
+            <Button
+              onClick={() => {
+                if (festaRecemCriada) {
+                  gerarContrato.mutate({ festaId: festaRecemCriada });
+                }
+              }}
+              disabled={gerarContrato.isPending}
+              className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white"
+            >
+              {gerarContrato.isPending ? <Loader2 className="animate-spin mr-2 w-4 h-4" /> : null}
+              Gerar Contrato Agora
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </DashboardLayout>
   );
 }
