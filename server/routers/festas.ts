@@ -1,6 +1,9 @@
 import { z } from "zod";
 import { protectedProcedure, router } from "../_core/trpc";
 import * as db from "../db";
+import { gerarContratoPDF } from "../contratoGenerator";
+import { storagePut } from "../storage";
+import { notifyOwner } from "../_core/notification";
 
 export const festasRouter = router({
   list: protectedProcedure.query(async () => {
@@ -217,4 +220,54 @@ export const festasRouter = router({
       ticketMedio,
     };
   }),
+
+  gerarContrato: protectedProcedure
+    .input(z.object({ festaId: z.number() }))
+    .mutation(async ({ input }) => {
+      const festa = await db.getFestaById(input.festaId);
+      if (!festa) {
+        throw new Error("Festa n\u00e3o encontrada");
+      }
+
+      const cliente = await db.getClienteById(festa.clienteId);
+      if (!cliente) {
+        throw new Error("Cliente n\u00e3o encontrado");
+      }
+
+      // Gerar PDF do contrato
+      const pdfBuffer = await gerarContratoPDF({
+        codigo: festa.codigo,
+        dataFechamento: festa.dataFechamento,
+        dataEvento: festa.dataFesta,
+        horario: festa.horario || "13 \u00e0s 17h",
+        numeroConvidados: festa.numeroConvidados || 0,
+        tema: festa.tema || "Festa",
+        nomeAniversariante: festa.nomeAniversariante || undefined,
+        idadeAniversariante: festa.idadeAniversariante || undefined,
+        clienteNome: cliente.nome,
+        clienteCPF: cliente.cpf || undefined,
+        clienteEndereco: cliente.endereco || undefined,
+        clienteTelefone: cliente.telefone || "",
+        brinde: festa.brinde || undefined,
+        refeicao: festa.refeicao || undefined,
+        bolo: festa.bolo || undefined,
+        valorTotal: festa.valorTotal,
+      });
+
+      // Upload do PDF para S3
+      const fileName = `contrato-${festa.codigo}-${Date.now()}.pdf`;
+      const { url } = await storagePut(
+        `contratos/${fileName}`,
+        pdfBuffer,
+        "application/pdf"
+      );
+
+      // Notificar administradores
+      await notifyOwner({
+        title: `Novo Contrato Gerado: ${festa.codigo}`,
+        content: `Contrato da festa ${festa.tema} para ${cliente.nome} foi gerado. Acesse: ${url}`,
+      });
+
+      return { url, fileName };
+    }),
 });

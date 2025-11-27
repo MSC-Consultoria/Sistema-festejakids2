@@ -3,16 +3,37 @@ import DashboardLayout from "@/components/DashboardLayout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { trpc } from "@/lib/trpc";
-import { ArrowLeft, Calendar, DollarSign, Edit, Loader2, Users } from "lucide-react";
+import { ArrowLeft, Calendar, DollarSign, Download, Edit, Loader2, Users } from "lucide-react";
+import { toast } from "sonner";
+import { useState } from "react";
 import { Link, useParams } from "wouter";
 
 export default function DetalhesFesta() {
   const { user, loading: authLoading } = useAuth();
   const params = useParams();
   const festaId = params.id ? parseInt(params.id) : 0;
+  const [gerandoContrato, setGerandoContrato] = useState(false);
 
   const { data: festa, isLoading } = trpc.festas.byId.useQuery({ id: festaId });
   const { data: pagamentos } = trpc.pagamentos.byFesta.useQuery({ festaId });
+  const gerarContratoMutation = trpc.festas.gerarContrato.useMutation();
+
+  const handleGerarContrato = async () => {
+    if (!festa) return;
+    
+    setGerandoContrato(true);
+    try {
+      const resultado = await gerarContratoMutation.mutateAsync({ festaId: festa.id });
+      toast.success("Contrato gerado com sucesso!");
+      // Abrir o contrato em nova aba
+      window.open(resultado.url, "_blank");
+    } catch (error) {
+      toast.error("Erro ao gerar contrato");
+      console.error(error);
+    } finally {
+      setGerandoContrato(false);
+    }
+  };
 
   if (authLoading) {
     return (
@@ -38,12 +59,27 @@ export default function DetalhesFesta() {
             <h1 className="text-3xl font-bold">Detalhes da Festa</h1>
           </div>
           {festa && (
-            <Link href={`/festas/${festa.id}/editar`}>
-              <Button className="gap-2">
-                <Edit className="h-4 w-4" />
-                Editar Festa
+            <div className="flex gap-2">
+              <Button
+                onClick={handleGerarContrato}
+                disabled={gerandoContrato}
+                variant="outline"
+                className="gap-2"
+              >
+                {gerandoContrato ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  <Download className="h-4 w-4" />
+                )}
+                Gerar Contrato
               </Button>
-            </Link>
+              <Link href={`/festas/${festa.id}/editar`}>
+                <Button className="gap-2">
+                  <Edit className="h-4 w-4" />
+                  Editar Festa
+                </Button>
+              </Link>
+            </div>
           )}
         </div>
 

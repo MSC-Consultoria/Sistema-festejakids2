@@ -474,3 +474,17 @@
 - [ ] Configurar usuários iniciais como Admin
 - [ ] Testar permissões por role
 - [ ] Criar testes unitários para gerenciamento de usuários
+
+
+## Geração Automática de Contratos em PDF
+- [x] Analisar estrutura dos PDFs de exemplo (112525ST.pdf e ModelopadrãodeContrato.pdf)
+- [x] Extrair seções do contrato: Dados do Evento, Dados do Cliente, Serviços Incluídos, Buffet Adulto, Buffet Infantil, Brindes, Observações Gerais, Pagamento
+- [x] Criar template de contrato baseado no modelo fornecido
+- [x] Implementar geração de PDF usando biblioteca PDFKit
+- [x] Preencher template com dados da festa (código, cliente, data, tema, convidados, valor, etc)
+- [x] Adicionar logo Festeja Kids e informações da empresa no cabeçalho
+- [x] Adicionar rodapé com endereço e CNPJ
+- [x] Implementar envio automático do contrato para administradores via notificação
+- [x] Adicionar botão "Gerar Contrato" na página de detalhes da festa
+- [ ] Adicionar botão "Gerar Contrato" após cadastrar nova festa
+- [ ] Testar geração e envio de contrato com dados reais
