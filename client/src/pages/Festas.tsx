@@ -178,7 +178,7 @@ export default function Festas() {
                         Ver Detalhes
                       </Button>
                     </Link>
-                    <Link href={`/festas/${festa.id}/editar`}>
+                    <Link href={`/festas/editar/${festa.id}`}>
                       <Button variant="ghost" size="sm">
                         <Pencil className="h-4 w-4" />
                       </Button>

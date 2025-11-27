@@ -363,3 +363,13 @@
 - [ ] Adicionar opções pré-definidas para brinde, massa e molho
 - [ ] Implementar busca de cliente por CPF ou nome
 - [ ] Testar cadastro de nova festa com todos os campos
+
+## Funcionalidade de Edição de Festas
+- [x] Criar página de edição de festa (/festas/editar/:id)
+- [x] Implementar formulário preenchido com dados da festa
+- [x] Reutilizar componentes de Ficha de Contrato e Degustação
+- [x] Implementar procedure tRPC para atualização (festas.update)
+- [x] Adicionar validação de campos
+- [x] Implementar feedback de sucesso/erro
+- [x] Adicionar botão de edição nos cards de festas
+- [x] Criar testes unitários para edição

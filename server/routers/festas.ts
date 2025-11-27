@@ -117,6 +117,15 @@ export const festasRouter = router({
         horario: z.string().optional(),
         status: z.enum(["agendada", "realizada", "cancelada"]).optional(),
         observacoes: z.string().optional(),
+        cpfCliente: z.string().optional(),
+        endereco: z.string().optional(),
+        brinde: z.string().optional(),
+        refeicao: z.string().optional(),
+        massaType: z.string().optional(),
+        molhoType: z.string().optional(),
+        bolo: z.string().optional(),
+        nomeAniversariante: z.string().optional(),
+        idadeAniversariante: z.number().optional(),
       })
     )
     .mutation(async ({ input }) => {

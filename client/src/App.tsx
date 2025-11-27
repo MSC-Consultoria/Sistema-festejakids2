@@ -7,6 +7,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Dashboard from "./pages/Dashboard";
 import Festas from "./pages/Festas";
 import NovaFesta from "./pages/NovaFesta";
+import EditarFesta from "./pages/EditarFesta";
 import Clientes from "./pages/Clientes";
 import Calendario from "./pages/Calendario";
 import Custos from "./pages/Custos";
@@ -29,6 +30,7 @@ function Router() {
       <Route path={"/"} component={Dashboard} />
       <Route path="/festas" component={Festas} />
       <Route path="/festas/nova" component={NovaFesta} />
+      <Route path="/festas/editar/:id" component={EditarFesta} />
       <Route path="/clientes" component={Clientes} />
       <Route path="/calendario" component={Calendario} />
       <Route path="/custos" component={Custos} />
