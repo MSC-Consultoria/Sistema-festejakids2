@@ -1,0 +1,50 @@
+{
+  "query": "SELECT \n  YEAR(dataFesta) as ano,\n  COUNT(*) as total_festas,\n  SUM(valorTotal) as faturamento_total,\n  SUM(valorPago) as valor_recebido,\n  SUM(valorTotal - valorPago) as valor_a_receber,\n  AVG(valorTotal) as ticket_medio,\n  MIN(valorTotal) as menor_valor,\n  MAX(valorTotal) as maior_valor\nFROM festas\nGROUP BY YEAR(dataFesta)\nORDER BY ano;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 48JvJ4xGnzv6z7Y.root --database kipPpydFSSmPdFAif48Epo --execute SELECT \n  YEAR(dataFesta) as ano,\n  COUNT(*) as total_festas,\n  SUM(valorTotal) as faturamento_total,\n  SUM(valorPago) as valor_recebido,\n  SUM(valorTotal - valorPago) as valor_a_receber,\n  AVG(valorTotal) as ticket_medio,\n  MIN(valorTotal) as menor_valor,\n  MAX(valorTotal) as maior_valor\nFROM festas\nGROUP BY YEAR(dataFesta)\nORDER BY ano;",
+  "rows": [
+    {
+      "ano": "2023",
+      "total_festas": "1",
+      "faturamento_total": "509000",
+      "valor_recebido": "0",
+      "valor_a_receber": "509000",
+      "ticket_medio": "509000.0000",
+      "menor_valor": "509000",
+      "maior_valor": "509000"
+    },
+    {
+      "ano": "2024",
+      "total_festas": "136",
+      "faturamento_total": "65191600",
+      "valor_recebido": "0",
+      "valor_a_receber": "65191600",
+      "ticket_medio": "479350.0000",
+      "menor_valor": "4500",
+      "maior_valor": "4995000"
+    },
+    {
+      "ano": "2025",
+      "total_festas": "132",
+      "faturamento_total": "65241900",
+      "valor_recebido": "0",
+      "valor_a_receber": "65241900",
+      "ticket_medio": "494256.8182",
+      "menor_valor": "60900",
+      "maior_valor": "800000"
+    },
+    {
+      "ano": "2026",
+      "total_festas": "38",
+      "faturamento_total": "19841000",
+      "valor_recebido": "0",
+      "valor_a_receber": "19841000",
+      "ticket_medio": "522131.5789",
+      "menor_valor": "439000",
+      "maior_valor": "689000"
+    }
+  ],
+  "messages": [],
+  "stdout": "ano\ttotal_festas\tfaturamento_total\tvalor_recebido\tvalor_a_receber\tticket_medio\tmenor_valor\tmaior_valor\n2023\t1\t509000\t0\t509000\t509000.0000\t509000\t509000\n2024\t136\t65191600\t0\t65191600\t479350.0000\t4500\t4995000\n2025\t132\t65241900\t0\t65241900\t494256.8182\t60900\t800000\n2026\t38\t19841000\t0\t19841000\t522131.5789\t439000\t689000\n",
+  "stderr": "",
+  "execution_time_ms": 60
+}

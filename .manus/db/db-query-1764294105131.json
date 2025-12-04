@@ -1,0 +1,31 @@
+{
+  "query": "SELECT \n  'Festas Realizadas (até 27/11/2025)' as categoria,\n  COUNT(*) as total_festas,\n  SUM(valorTotal)/100 as valor_total,\n  SUM(valorPago)/100 as valor_pago,\n  SUM(valorTotal - valorPago)/100 as saldo_devedor\nFROM festas \nWHERE dataFesta <= '2025-11-27'\nUNION ALL\nSELECT \n  'Festas Agendadas (após 27/11/2025)' as categoria,\n  COUNT(*) as total_festas,\n  SUM(valorTotal)/100 as valor_total,\n  SUM(valorPago)/100 as valor_pago,\n  SUM(valorTotal - valorPago)/100 as saldo_devedor\nFROM festas \nWHERE dataFesta > '2025-11-27'\nUNION ALL\nSELECT \n  'TOTAL GERAL' as categoria,\n  COUNT(*) as total_festas,\n  SUM(valorTotal)/100 as valor_total,\n  SUM(valorPago)/100 as valor_pago,\n  SUM(valorTotal - valorPago)/100 as saldo_devedor\nFROM festas;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 48JvJ4xGnzv6z7Y.root --database kipPpydFSSmPdFAif48Epo --execute SELECT \n  'Festas Realizadas (até 27/11/2025)' as categoria,\n  COUNT(*) as total_festas,\n  SUM(valorTotal)/100 as valor_total,\n  SUM(valorPago)/100 as valor_pago,\n  SUM(valorTotal - valorPago)/100 as saldo_devedor\nFROM festas \nWHERE dataFesta <= '2025-11-27'\nUNION ALL\nSELECT \n  'Festas Agendadas (após 27/11/2025)' as categoria,\n  COUNT(*) as total_festas,\n  SUM(valorTotal)/100 as valor_total,\n  SUM(valorPago)/100 as valor_pago,\n  SUM(valorTotal - valorPago)/100 as saldo_devedor\nFROM festas \nWHERE dataFesta > '2025-11-27'\nUNION ALL\nSELECT \n  'TOTAL GERAL' as categoria,\n  COUNT(*) as total_festas,\n  SUM(valorTotal)/100 as valor_total,\n  SUM(valorPago)/100 as valor_pago,\n  SUM(valorTotal - valorPago)/100 as saldo_devedor\nFROM festas;",
+  "rows": [
+    {
+      "categoria": "Festas Agendadas (após 27/11/2025)",
+      "total_festas": "62",
+      "valor_total": "320920.0000",
+      "valor_pago": "0.0000",
+      "saldo_devedor": "320920.0000"
+    },
+    {
+      "categoria": "Festas Realizadas (até 27/11/2025)",
+      "total_festas": "306",
+      "valor_total": "1524245.0100",
+      "valor_pago": "1524245.0100",
+      "saldo_devedor": "0.0000"
+    },
+    {
+      "categoria": "TOTAL GERAL",
+      "total_festas": "368",
+      "valor_total": "1845165.0100",
+      "valor_pago": "1524245.0100",
+      "saldo_devedor": "320920.0000"
+    }
+  ],
+  "messages": [],
+  "stdout": "categoria\ttotal_festas\tvalor_total\tvalor_pago\tsaldo_devedor\nFestas Agendadas (após 27/11/2025)\t62\t320920.0000\t0.0000\t320920.0000\nFestas Realizadas (até 27/11/2025)\t306\t1524245.0100\t1524245.0100\t0.0000\nTOTAL GERAL\t368\t1845165.0100\t1524245.0100\t320920.0000\n",
+  "stderr": "",
+  "execution_time_ms": 56
+}

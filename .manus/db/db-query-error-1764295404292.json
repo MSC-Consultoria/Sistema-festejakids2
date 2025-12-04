@@ -1,0 +1,12 @@
+{
+  "query": "SELECT \n  COUNT(*) as total_festas,\n  MIN(valorTotal)/100 as menor_valor,\n  MAX(valorTotal)/100 as maior_valor,\n  AVG(valorTotal)/100 as media,\n  (SELECT valorTotal/100 FROM festas ORDER BY valorTotal LIMIT 1 OFFSET (SELECT COUNT(*)/2 FROM festas)) as mediana_aprox,\n  SUM(CASE WHEN valorTotal < 200000 THEN 1 ELSE 0 END) as festas_abaixo_2k,\n  SUM(CASE WHEN valorTotal > 800000 THEN 1 ELSE 0 END) as festas_acima_8k,\n  SUM(CASE WHEN valorTotal >= 200000 AND valorTotal <= 800000 THEN 1 ELSE 0 END) as festas_faixa_normal\nFROM festas;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 48JvJ4xGnzv6z7Y.root --database kipPpydFSSmPdFAif48Epo --execute SELECT \n  COUNT(*) as total_festas,\n  MIN(valorTotal)/100 as menor_valor,\n  MAX(valorTotal)/100 as maior_valor,\n  AVG(valorTotal)/100 as media,\n  (SELECT valorTotal/100 FROM festas ORDER BY valorTotal LIMIT 1 OFFSET (SELECT COUNT(*)/2 FROM festas)) as mediana_aprox,\n  SUM(CASE WHEN valorTotal < 200000 THEN 1 ELSE 0 END) as festas_abaixo_2k,\n  SUM(CASE WHEN valorTotal > 800000 THEN 1 ELSE 0 END) as festas_acima_8k,\n  SUM(CASE WHEN valorTotal >= 200000 AND valorTotal <= 800000 THEN 1 ELSE 0 END) as festas_faixa_normal\nFROM festas;",
+  "returncode": 1,
+  "logs": [
+    "ERROR 1064 (42000) at line 1: You have an error in your SQL syntax; check the manual that corresponds to your TiDB version for the right syntax to use line 6 column 74 near \"(SELECT COUNT(*)/2 FROM festas)) as mediana_aprox,",
+    "  SUM(CASE WHEN valorTotal < 200000 THEN 1 ELSE 0 END) as festas_abaixo_2k,",
+    "  SUM(CASE WHEN valorTotal > 800000 THEN 1 ELSE 0 END) as festas_acima_8k,",
+    "  SUM(CASE WHEN valorTotal >= 200000 AND valorTotal <= 800000 THEN 1 ELSE 0 END) as festas_faixa_normal",
+    "FROM festas\""
+  ]
+}

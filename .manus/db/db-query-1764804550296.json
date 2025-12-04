@@ -1,0 +1,26 @@
+{
+  "query": "SELECT id, username, name, role, email, loginMethod FROM users;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 48JvJ4xGnzv6z7Y.root --database kipPpydFSSmPdFAif48Epo --execute SELECT id, username, name, role, email, loginMethod FROM users;",
+  "rows": [
+    {
+      "id": "1",
+      "username": "moises",
+      "name": "Moises",
+      "role": "admin",
+      "email": "moises@festejakids.com",
+      "loginMethod": "local"
+    },
+    {
+      "id": "2",
+      "username": "gabriel",
+      "name": "Gabriel",
+      "role": "supervisor",
+      "email": "gabriel@festejakids.com",
+      "loginMethod": "local"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tusername\tname\trole\temail\tloginMethod\n1\tmoises\tMoises\tadmin\tmoises@festejakids.com\tlocal\n2\tgabriel\tGabriel\tsupervisor\tgabriel@festejakids.com\tlocal\n",
+  "stderr": "",
+  "execution_time_ms": 59
+}

@@ -1,0 +1,8 @@
+{
+  "query": "ALTER TABLE users \nADD COLUMN username VARCHAR(50) AFTER id,\nADD COLUMN passwordHash VARCHAR(255) AFTER username,\nMODIFY COLUMN openId VARCHAR(64) NULL,\nMODIFY COLUMN name TEXT NOT NULL,\nMODIFY COLUMN loginMethod VARCHAR(64) DEFAULT 'local',\nMODIFY COLUMN role ENUM('admin', 'supervisor', 'gerente', 'atendente', 'cliente') NOT NULL DEFAULT 'cliente';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 48JvJ4xGnzv6z7Y.root --database kipPpydFSSmPdFAif48Epo --execute ALTER TABLE users \nADD COLUMN username VARCHAR(50) AFTER id,\nADD COLUMN passwordHash VARCHAR(255) AFTER username,\nMODIFY COLUMN openId VARCHAR(64) NULL,\nMODIFY COLUMN name TEXT NOT NULL,\nMODIFY COLUMN loginMethod VARCHAR(64) DEFAULT 'local',\nMODIFY COLUMN role ENUM('admin', 'supervisor', 'gerente', 'atendente', 'cliente') NOT NULL DEFAULT 'cliente';",
+  "returncode": 1,
+  "logs": [
+    "ERROR 1054 (42S22) at line 1: Unknown column 'username' in 'users'"
+  ]
+}

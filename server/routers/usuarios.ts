@@ -81,16 +81,8 @@ export const usuariosRouter = router({
         throw new Error("Usuário com este openId ou email já existe");
       }
 
-      await db.insert(users).values({
-        openId: input.openId,
-        name: input.name,
-        email: input.email,
-        loginMethod: input.loginMethod || "manual",
-        role: input.role,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        lastSignedIn: new Date(),
-      });
+      // Sistema de usuários desabilitado - usar apenas os 2 usuários padrão (moises e gabriel)
+      throw new Error("Criação de usuários desabilitada - sistema usa login/senha próprio");
 
       return {
         success: true,

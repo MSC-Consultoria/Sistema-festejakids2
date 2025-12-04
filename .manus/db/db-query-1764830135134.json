@@ -1,0 +1,52 @@
+{
+  "query": "SELECT id, username, name, role FROM users ORDER BY id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 48JvJ4xGnzv6z7Y.root --database kipPpydFSSmPdFAif48Epo --execute SELECT id, username, name, role FROM users ORDER BY id;",
+  "rows": [
+    {
+      "id": "1",
+      "username": "moises",
+      "name": "Moises",
+      "role": "admin"
+    },
+    {
+      "id": "2",
+      "username": "gabriel",
+      "name": "Gabriel",
+      "role": "supervisor"
+    },
+    {
+      "id": "30001",
+      "username": "decoradora",
+      "name": "Decoradora",
+      "role": "atendente"
+    },
+    {
+      "id": "30002",
+      "username": "dono",
+      "name": "Dono",
+      "role": "gerente"
+    },
+    {
+      "id": "30003",
+      "username": "fornecedor",
+      "name": "Fornecedor",
+      "role": "cliente"
+    },
+    {
+      "id": "30004",
+      "username": "assistente1",
+      "name": "Assistente 1",
+      "role": "atendente"
+    },
+    {
+      "id": "30005",
+      "username": "assistente2",
+      "name": "Assistente 2",
+      "role": "atendente"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tusername\tname\trole\n1\tmoises\tMoises\tadmin\n2\tgabriel\tGabriel\tsupervisor\n30001\tdecoradora\tDecoradora\tatendente\n30002\tdono\tDono\tgerente\n30003\tfornecedor\tFornecedor\tcliente\n30004\tassistente1\tAssistente 1\tatendente\n30005\tassistente2\tAssistente 2\tatendente\n",
+  "stderr": "",
+  "execution_time_ms": 415
+}

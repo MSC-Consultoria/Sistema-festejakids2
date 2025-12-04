@@ -1,0 +1,15 @@
+{
+  "query": "SELECT \n  (SELECT COUNT(*) FROM festas) as total_festas,\n  (SELECT COUNT(*) FROM clientes) as total_clientes,\n  (SELECT SUM(valorTotal)/100 FROM festas) as faturamento_total;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 48JvJ4xGnzv6z7Y.root --database kipPpydFSSmPdFAif48Epo --execute SELECT \n  (SELECT COUNT(*) FROM festas) as total_festas,\n  (SELECT COUNT(*) FROM clientes) as total_clientes,\n  (SELECT SUM(valorTotal)/100 FROM festas) as faturamento_total;",
+  "rows": [
+    {
+      "total_festas": "368",
+      "total_clientes": "189",
+      "faturamento_total": "1845165.0100"
+    }
+  ],
+  "messages": [],
+  "stdout": "total_festas\ttotal_clientes\tfaturamento_total\n368\t189\t1845165.0100\n",
+  "stderr": "",
+  "execution_time_ms": 60
+}

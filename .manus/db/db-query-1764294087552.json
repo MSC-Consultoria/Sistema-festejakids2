@@ -1,0 +1,16 @@
+{
+  "query": "SELECT \n  COUNT(*) as total_festas,\n  SUM(valorTotal)/100 as valor_total_reais,\n  SUM(valorPago)/100 as valor_pago_reais,\n  SUM(valorTotal - valorPago)/100 as valor_pendente_reais\nFROM festas \nWHERE dataFesta <= '2025-11-27';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 48JvJ4xGnzv6z7Y.root --database kipPpydFSSmPdFAif48Epo --execute SELECT \n  COUNT(*) as total_festas,\n  SUM(valorTotal)/100 as valor_total_reais,\n  SUM(valorPago)/100 as valor_pago_reais,\n  SUM(valorTotal - valorPago)/100 as valor_pendente_reais\nFROM festas \nWHERE dataFesta <= '2025-11-27';",
+  "rows": [
+    {
+      "total_festas": "306",
+      "valor_total_reais": "1524245.0100",
+      "valor_pago_reais": "657006.0000",
+      "valor_pendente_reais": "867239.0100"
+    }
+  ],
+  "messages": [],
+  "stdout": "total_festas\tvalor_total_reais\tvalor_pago_reais\tvalor_pendente_reais\n306\t1524245.0100\t657006.0000\t867239.0100\n",
+  "stderr": "",
+  "execution_time_ms": 50
+}

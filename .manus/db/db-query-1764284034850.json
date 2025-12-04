@@ -1,0 +1,9 @@
+{
+  "query": "DELETE FROM festas WHERE YEAR(dataFesta) = 2025; DELETE FROM clientes WHERE id > 70;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 48JvJ4xGnzv6z7Y.root --database kipPpydFSSmPdFAif48Epo --execute DELETE FROM festas WHERE YEAR(dataFesta) = 2025; DELETE FROM clientes WHERE id > 70;",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 77
+}

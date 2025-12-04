@@ -1,0 +1,38 @@
+{
+  "query": "SELECT \n  YEAR(dataFesta) as ano,\n  status,\n  COUNT(*) as total_festas,\n  SUM(valorTotal) as faturamento_total,\n  SUM(valorPago) as valor_recebido\nFROM festas\nGROUP BY YEAR(dataFesta), status\nORDER BY ano, status;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 48JvJ4xGnzv6z7Y.root --database kipPpydFSSmPdFAif48Epo --execute SELECT \n  YEAR(dataFesta) as ano,\n  status,\n  COUNT(*) as total_festas,\n  SUM(valorTotal) as faturamento_total,\n  SUM(valorPago) as valor_recebido\nFROM festas\nGROUP BY YEAR(dataFesta), status\nORDER BY ano, status;",
+  "rows": [
+    {
+      "ano": "2023",
+      "status": "agendada",
+      "total_festas": "1",
+      "faturamento_total": "509000",
+      "valor_recebido": "509000"
+    },
+    {
+      "ano": "2024",
+      "status": "agendada",
+      "total_festas": "136",
+      "faturamento_total": "65191600",
+      "valor_recebido": "65191600"
+    },
+    {
+      "ano": "2025",
+      "status": "agendada",
+      "total_festas": "132",
+      "faturamento_total": "65241900",
+      "valor_recebido": "56245900"
+    },
+    {
+      "ano": "2026",
+      "status": "agendada",
+      "total_festas": "38",
+      "faturamento_total": "19841000",
+      "valor_recebido": "0"
+    }
+  ],
+  "messages": [],
+  "stdout": "ano\tstatus\ttotal_festas\tfaturamento_total\tvalor_recebido\n2023\tagendada\t1\t509000\t509000\n2024\tagendada\t136\t65191600\t65191600\n2025\tagendada\t132\t65241900\t56245900\n2026\tagendada\t38\t19841000\t0\n",
+  "stderr": "",
+  "execution_time_ms": 57
+}

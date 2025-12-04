@@ -1,0 +1,30 @@
+{
+  "query": "SELECT \n  YEAR(dataFesta) as ano,\n  COUNT(*) as total_festas,\n  SUM(valorTotal) as faturamento_total\nFROM festas\nGROUP BY YEAR(dataFesta)\nORDER BY ano;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 48JvJ4xGnzv6z7Y.root --database kipPpydFSSmPdFAif48Epo --execute SELECT \n  YEAR(dataFesta) as ano,\n  COUNT(*) as total_festas,\n  SUM(valorTotal) as faturamento_total\nFROM festas\nGROUP BY YEAR(dataFesta)\nORDER BY ano;",
+  "rows": [
+    {
+      "ano": "2023",
+      "total_festas": "1",
+      "faturamento_total": "509000"
+    },
+    {
+      "ano": "2024",
+      "total_festas": "137",
+      "faturamento_total": "65671600"
+    },
+    {
+      "ano": "2025",
+      "total_festas": "192",
+      "faturamento_total": "98494901"
+    },
+    {
+      "ano": "2026",
+      "total_festas": "38",
+      "faturamento_total": "19841000"
+    }
+  ],
+  "messages": [],
+  "stdout": "ano\ttotal_festas\tfaturamento_total\n2023\t1\t509000\n2024\t137\t65671600\n2025\t192\t98494901\n2026\t38\t19841000\n",
+  "stderr": "",
+  "execution_time_ms": 50
+}

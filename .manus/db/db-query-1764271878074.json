@@ -1,0 +1,70 @@
+{
+  "query": "SELECT \n  DATE_FORMAT(dataFesta, '%Y-%m') as mes_ano,\n  COUNT(*) as total_festas,\n  SUM(valorTotal) as faturamento_mes,\n  SUM(valorPago) as valor_recebido_mes\nFROM festas\nWHERE dataFesta >= '2024-12-01' AND dataFesta <= '2025-11-30'\nGROUP BY DATE_FORMAT(dataFesta, '%Y-%m')\nORDER BY mes_ano;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 48JvJ4xGnzv6z7Y.root --database kipPpydFSSmPdFAif48Epo --execute SELECT \n  DATE_FORMAT(dataFesta, '%Y-%m') as mes_ano,\n  COUNT(*) as total_festas,\n  SUM(valorTotal) as faturamento_mes,\n  SUM(valorPago) as valor_recebido_mes\nFROM festas\nWHERE dataFesta >= '2024-12-01' AND dataFesta <= '2025-11-30'\nGROUP BY DATE_FORMAT(dataFesta, '%Y-%m')\nORDER BY mes_ano;",
+  "rows": [
+    {
+      "mes_ano": "2024-12",
+      "total_festas": "16",
+      "faturamento_mes": "6924000",
+      "valor_recebido_mes": "6924000"
+    },
+    {
+      "mes_ano": "2025-01",
+      "total_festas": "2",
+      "faturamento_mes": "1378000",
+      "valor_recebido_mes": "1378000"
+    },
+    {
+      "mes_ano": "2025-04",
+      "total_festas": "2",
+      "faturamento_mes": "958000",
+      "valor_recebido_mes": "958000"
+    },
+    {
+      "mes_ano": "2025-05",
+      "total_festas": "11",
+      "faturamento_mes": "5560000",
+      "valor_recebido_mes": "5560000"
+    },
+    {
+      "mes_ano": "2025-06",
+      "total_festas": "18",
+      "faturamento_mes": "9138000",
+      "valor_recebido_mes": "9138000"
+    },
+    {
+      "mes_ano": "2025-07",
+      "total_festas": "13",
+      "faturamento_mes": "6410000",
+      "valor_recebido_mes": "6410000"
+    },
+    {
+      "mes_ano": "2025-08",
+      "total_festas": "19",
+      "faturamento_mes": "9449000",
+      "valor_recebido_mes": "9449000"
+    },
+    {
+      "mes_ano": "2025-09",
+      "total_festas": "11",
+      "faturamento_mes": "5391000",
+      "valor_recebido_mes": "5391000"
+    },
+    {
+      "mes_ano": "2025-10",
+      "total_festas": "16",
+      "faturamento_mes": "7461000",
+      "valor_recebido_mes": "7461000"
+    },
+    {
+      "mes_ano": "2025-11",
+      "total_festas": "21",
+      "faturamento_mes": "10031900",
+      "valor_recebido_mes": "10031900"
+    }
+  ],
+  "messages": [],
+  "stdout": "mes_ano\ttotal_festas\tfaturamento_mes\tvalor_recebido_mes\n2024-12\t16\t6924000\t6924000\n2025-01\t2\t1378000\t1378000\n2025-04\t2\t958000\t958000\n2025-05\t11\t5560000\t5560000\n2025-06\t18\t9138000\t9138000\n2025-07\t13\t6410000\t6410000\n2025-08\t19\t9449000\t9449000\n2025-09\t11\t5391000\t5391000\n2025-10\t16\t7461000\t7461000\n2025-11\t21\t10031900\t10031900\n",
+  "stderr": "",
+  "execution_time_ms": 51
+}

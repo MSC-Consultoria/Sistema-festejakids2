@@ -1,0 +1,17 @@
+{
+  "query": "SELECT \n  COUNT(*) as total_festas,\n  SUM(valorTotal)/100 as faturamento_reais,\n  AVG(valorTotal)/100 as ticket_medio,\n  MIN(valorTotal)/100 as menor_valor,\n  MAX(valorTotal)/100 as maior_valor\nFROM festas\nWHERE YEAR(dataFesta) = 2025;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 48JvJ4xGnzv6z7Y.root --database kipPpydFSSmPdFAif48Epo --execute SELECT \n  COUNT(*) as total_festas,\n  SUM(valorTotal)/100 as faturamento_reais,\n  AVG(valorTotal)/100 as ticket_medio,\n  MIN(valorTotal)/100 as menor_valor,\n  MAX(valorTotal)/100 as maior_valor\nFROM festas\nWHERE YEAR(dataFesta) = 2025;",
+  "rows": [
+    {
+      "total_festas": "192",
+      "faturamento_reais": "984949.0100",
+      "ticket_medio": "5129.94276000",
+      "menor_valor": "0.0000",
+      "maior_valor": "51090.0000"
+    }
+  ],
+  "messages": [],
+  "stdout": "total_festas\tfaturamento_reais\tticket_medio\tmenor_valor\tmaior_valor\n192\t984949.0100\t5129.94276000\t0.0000\t51090.0000\n",
+  "stderr": "",
+  "execution_time_ms": 54
+}

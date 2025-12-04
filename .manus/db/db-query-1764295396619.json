@@ -1,0 +1,30 @@
+{
+  "query": "SELECT \n  f.id,\n  f.codigo,\n  f.dataFesta,\n  c.nome as cliente,\n  f.tema,\n  f.numeroConvidados,\n  f.valorTotal/100 as valor_reais,\n  f.status\nFROM festas f\nJOIN clientes c ON f.clienteId = c.id\nWHERE f.valorTotal > 800000\nORDER BY f.valorTotal DESC;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 48JvJ4xGnzv6z7Y.root --database kipPpydFSSmPdFAif48Epo --execute SELECT \n  f.id,\n  f.codigo,\n  f.dataFesta,\n  c.nome as cliente,\n  f.tema,\n  f.numeroConvidados,\n  f.valorTotal/100 as valor_reais,\n  f.status\nFROM festas f\nJOIN clientes c ON f.clienteId = c.id\nWHERE f.valorTotal > 800000\nORDER BY f.valorTotal DESC;",
+  "rows": [
+    {
+      "id": "420234",
+      "codigo": "F20250330-036",
+      "dataFesta": "2025-03-30 00:00:00",
+      "cliente": "Karolyne De Oliveira Dos Santos",
+      "tema": "Mundo bita (menina)",
+      "numeroConvidados": "100",
+      "valor_reais": "51090.0000",
+      "status": "agendada"
+    },
+    {
+      "id": "420238",
+      "codigo": "F20250322-040",
+      "dataFesta": "2025-03-22 00:00:00",
+      "cliente": "Thayane Alves Cerqueira",
+      "tema": "Astronauta",
+      "numeroConvidados": "200",
+      "valor_reais": "8300.0000",
+      "status": "agendada"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tcodigo\tdataFesta\tcliente\ttema\tnumeroConvidados\tvalor_reais\tstatus\n420234\tF20250330-036\t2025-03-30 00:00:00\tKarolyne De Oliveira Dos Santos\tMundo bita (menina)\t100\t51090.0000\tagendada\n420238\tF20250322-040\t2025-03-22 00:00:00\tThayane Alves Cerqueira\tAstronauta\t200\t8300.0000\tagendada\n",
+  "stderr": "",
+  "execution_time_ms": 169
+}

@@ -1,0 +1,266 @@
+{
+  "query": "SELECT \n  YEAR(dataFesta) as ano,\n  MONTH(dataFesta) as mes,\n  COUNT(*) as total_festas,\n  SUM(valorTotal) as faturamento_mes,\n  SUM(valorPago) as valor_recebido_mes,\n  SUM(valorTotal - valorPago) as valor_a_receber_mes\nFROM festas\nGROUP BY YEAR(dataFesta), MONTH(dataFesta)\nORDER BY ano, mes;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 48JvJ4xGnzv6z7Y.root --database kipPpydFSSmPdFAif48Epo --execute SELECT \n  YEAR(dataFesta) as ano,\n  MONTH(dataFesta) as mes,\n  COUNT(*) as total_festas,\n  SUM(valorTotal) as faturamento_mes,\n  SUM(valorPago) as valor_recebido_mes,\n  SUM(valorTotal - valorPago) as valor_a_receber_mes\nFROM festas\nGROUP BY YEAR(dataFesta), MONTH(dataFesta)\nORDER BY ano, mes;",
+  "rows": [
+    {
+      "ano": "2023",
+      "mes": "1",
+      "total_festas": "1",
+      "faturamento_mes": "509000",
+      "valor_recebido_mes": "509000",
+      "valor_a_receber_mes": "0"
+    },
+    {
+      "ano": "2024",
+      "mes": "1",
+      "total_festas": "11",
+      "faturamento_mes": "4680700",
+      "valor_recebido_mes": "4680700",
+      "valor_a_receber_mes": "0"
+    },
+    {
+      "ano": "2024",
+      "mes": "2",
+      "total_festas": "11",
+      "faturamento_mes": "5488000",
+      "valor_recebido_mes": "5488000",
+      "valor_a_receber_mes": "0"
+    },
+    {
+      "ano": "2024",
+      "mes": "3",
+      "total_festas": "15",
+      "faturamento_mes": "6968000",
+      "valor_recebido_mes": "6968000",
+      "valor_a_receber_mes": "0"
+    },
+    {
+      "ano": "2024",
+      "mes": "4",
+      "total_festas": "13",
+      "faturamento_mes": "5555300",
+      "valor_recebido_mes": "5555300",
+      "valor_a_receber_mes": "0"
+    },
+    {
+      "ano": "2024",
+      "mes": "5",
+      "total_festas": "15",
+      "faturamento_mes": "11141100",
+      "valor_recebido_mes": "11141100",
+      "valor_a_receber_mes": "0"
+    },
+    {
+      "ano": "2024",
+      "mes": "6",
+      "total_festas": "11",
+      "faturamento_mes": "4995000",
+      "valor_recebido_mes": "4995000",
+      "valor_a_receber_mes": "0"
+    },
+    {
+      "ano": "2024",
+      "mes": "7",
+      "total_festas": "8",
+      "faturamento_mes": "3465000",
+      "valor_recebido_mes": "3465000",
+      "valor_a_receber_mes": "0"
+    },
+    {
+      "ano": "2024",
+      "mes": "8",
+      "total_festas": "14",
+      "faturamento_mes": "6298900",
+      "valor_recebido_mes": "6298900",
+      "valor_a_receber_mes": "0"
+    },
+    {
+      "ano": "2024",
+      "mes": "9",
+      "total_festas": "2",
+      "faturamento_mes": "849000",
+      "valor_recebido_mes": "849000",
+      "valor_a_receber_mes": "0"
+    },
+    {
+      "ano": "2024",
+      "mes": "10",
+      "total_festas": "4",
+      "faturamento_mes": "1857000",
+      "valor_recebido_mes": "1857000",
+      "valor_a_receber_mes": "0"
+    },
+    {
+      "ano": "2024",
+      "mes": "11",
+      "total_festas": "16",
+      "faturamento_mes": "6969600",
+      "valor_recebido_mes": "6969600",
+      "valor_a_receber_mes": "0"
+    },
+    {
+      "ano": "2024",
+      "mes": "12",
+      "total_festas": "16",
+      "faturamento_mes": "6924000",
+      "valor_recebido_mes": "6924000",
+      "valor_a_receber_mes": "0"
+    },
+    {
+      "ano": "2025",
+      "mes": "1",
+      "total_festas": "2",
+      "faturamento_mes": "1378000",
+      "valor_recebido_mes": "1378000",
+      "valor_a_receber_mes": "0"
+    },
+    {
+      "ano": "2025",
+      "mes": "4",
+      "total_festas": "2",
+      "faturamento_mes": "958000",
+      "valor_recebido_mes": "958000",
+      "valor_a_receber_mes": "0"
+    },
+    {
+      "ano": "2025",
+      "mes": "5",
+      "total_festas": "11",
+      "faturamento_mes": "5560000",
+      "valor_recebido_mes": "5560000",
+      "valor_a_receber_mes": "0"
+    },
+    {
+      "ano": "2025",
+      "mes": "6",
+      "total_festas": "18",
+      "faturamento_mes": "9138000",
+      "valor_recebido_mes": "9138000",
+      "valor_a_receber_mes": "0"
+    },
+    {
+      "ano": "2025",
+      "mes": "7",
+      "total_festas": "13",
+      "faturamento_mes": "6410000",
+      "valor_recebido_mes": "6410000",
+      "valor_a_receber_mes": "0"
+    },
+    {
+      "ano": "2025",
+      "mes": "8",
+      "total_festas": "19",
+      "faturamento_mes": "9449000",
+      "valor_recebido_mes": "9449000",
+      "valor_a_receber_mes": "0"
+    },
+    {
+      "ano": "2025",
+      "mes": "9",
+      "total_festas": "11",
+      "faturamento_mes": "5391000",
+      "valor_recebido_mes": "5391000",
+      "valor_a_receber_mes": "0"
+    },
+    {
+      "ano": "2025",
+      "mes": "10",
+      "total_festas": "16",
+      "faturamento_mes": "7461000",
+      "valor_recebido_mes": "7461000",
+      "valor_a_receber_mes": "0"
+    },
+    {
+      "ano": "2025",
+      "mes": "11",
+      "total_festas": "21",
+      "faturamento_mes": "10031900",
+      "valor_recebido_mes": "10031900",
+      "valor_a_receber_mes": "0"
+    },
+    {
+      "ano": "2025",
+      "mes": "12",
+      "total_festas": "19",
+      "faturamento_mes": "9465000",
+      "valor_recebido_mes": "469000",
+      "valor_a_receber_mes": "8996000"
+    },
+    {
+      "ano": "2026",
+      "mes": "1",
+      "total_festas": "9",
+      "faturamento_mes": "4762000",
+      "valor_recebido_mes": "0",
+      "valor_a_receber_mes": "4762000"
+    },
+    {
+      "ano": "2026",
+      "mes": "2",
+      "total_festas": "3",
+      "faturamento_mes": "1440000",
+      "valor_recebido_mes": "0",
+      "valor_a_receber_mes": "1440000"
+    },
+    {
+      "ano": "2026",
+      "mes": "3",
+      "total_festas": "9",
+      "faturamento_mes": "4744000",
+      "valor_recebido_mes": "0",
+      "valor_a_receber_mes": "4744000"
+    },
+    {
+      "ano": "2026",
+      "mes": "4",
+      "total_festas": "7",
+      "faturamento_mes": "3596000",
+      "valor_recebido_mes": "0",
+      "valor_a_receber_mes": "3596000"
+    },
+    {
+      "ano": "2026",
+      "mes": "5",
+      "total_festas": "4",
+      "faturamento_mes": "2207000",
+      "valor_recebido_mes": "0",
+      "valor_a_receber_mes": "2207000"
+    },
+    {
+      "ano": "2026",
+      "mes": "6",
+      "total_festas": "2",
+      "faturamento_mes": "994000",
+      "valor_recebido_mes": "0",
+      "valor_a_receber_mes": "994000"
+    },
+    {
+      "ano": "2026",
+      "mes": "7",
+      "total_festas": "1",
+      "faturamento_mes": "470000",
+      "valor_recebido_mes": "0",
+      "valor_a_receber_mes": "470000"
+    },
+    {
+      "ano": "2026",
+      "mes": "8",
+      "total_festas": "1",
+      "faturamento_mes": "609000",
+      "valor_recebido_mes": "0",
+      "valor_a_receber_mes": "609000"
+    },
+    {
+      "ano": "2026",
+      "mes": "11",
+      "total_festas": "2",
+      "faturamento_mes": "1019000",
+      "valor_recebido_mes": "0",
+      "valor_a_receber_mes": "1019000"
+    }
+  ],
+  "messages": [],
+  "stdout": "ano\tmes\ttotal_festas\tfaturamento_mes\tvalor_recebido_mes\tvalor_a_receber_mes\n2023\t1\t1\t509000\t509000\t0\n2024\t1\t11\t4680700\t4680700\t0\n2024\t2\t11\t5488000\t5488000\t0\n2024\t3\t15\t6968000\t6968000\t0\n2024\t4\t13\t5555300\t5555300\t0\n2024\t5\t15\t11141100\t11141100\t0\n2024\t6\t11\t4995000\t4995000\t0\n2024\t7\t8\t3465000\t3465000\t0\n2024\t8\t14\t6298900\t6298900\t0\n2024\t9\t2\t849000\t849000\t0\n2024\t10\t4\t1857000\t1857000\t0\n2024\t11\t16\t6969600\t6969600\t0\n2024\t12\t16\t6924000\t6924000\t0\n2025\t1\t2\t1378000\t1378000\t0\n2025\t4\t2\t958000\t958000\t0\n2025\t5\t11\t5560000\t5560000\t0\n2025\t6\t18\t9138000\t9138000\t0\n2025\t7\t13\t6410000\t6410000\t0\n2025\t8\t19\t9449000\t9449000\t0\n2025\t9\t11\t5391000\t5391000\t0\n2025\t10\t16\t7461000\t7461000\t0\n2025\t11\t21\t10031900\t10031900\t0\n2025\t12\t19\t9465000\t469000\t8996000\n2026\t1\t9\t4762000\t0\t4762000\n2026\t2\t3\t1440000\t0\t1440000\n2026\t3\t9\t4744000\t0\t4744000\n2026\t4\t7\t3596000\t0\t3596000\n2026\t5\t4\t2207000\t0\t2207000\n2026\t6\t2\t994000\t0\t994000\n2026\t7\t1\t470000\t0\t470000\n2026\t8\t1\t609000\t0\t609000\n2026\t11\t2\t1019000\t0\t1019000\n",
+  "stderr": "",
+  "execution_time_ms": 53
+}

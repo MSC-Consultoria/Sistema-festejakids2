@@ -1,0 +1,19 @@
+{
+  "query": "SELECT \n  COUNT(*) as total_festas,\n  MIN(valorTotal)/100 as menor_valor,\n  MAX(valorTotal)/100 as maior_valor,\n  AVG(valorTotal)/100 as media,\n  SUM(CASE WHEN valorTotal < 200000 THEN 1 ELSE 0 END) as festas_abaixo_2k,\n  SUM(CASE WHEN valorTotal > 800000 THEN 1 ELSE 0 END) as festas_acima_8k,\n  SUM(CASE WHEN valorTotal >= 200000 AND valorTotal <= 800000 THEN 1 ELSE 0 END) as festas_faixa_normal\nFROM festas;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 48JvJ4xGnzv6z7Y.root --database kipPpydFSSmPdFAif48Epo --execute SELECT \n  COUNT(*) as total_festas,\n  MIN(valorTotal)/100 as menor_valor,\n  MAX(valorTotal)/100 as maior_valor,\n  AVG(valorTotal)/100 as media,\n  SUM(CASE WHEN valorTotal < 200000 THEN 1 ELSE 0 END) as festas_abaixo_2k,\n  SUM(CASE WHEN valorTotal > 800000 THEN 1 ELSE 0 END) as festas_acima_8k,\n  SUM(CASE WHEN valorTotal >= 200000 AND valorTotal <= 800000 THEN 1 ELSE 0 END) as festas_faixa_normal\nFROM festas;",
+  "rows": [
+    {
+      "total_festas": "368",
+      "menor_valor": "0.0000",
+      "maior_valor": "51090.0000",
+      "media": "5014.03535300",
+      "festas_abaixo_2k": "8",
+      "festas_acima_8k": "3",
+      "festas_faixa_normal": "357"
+    }
+  ],
+  "messages": [],
+  "stdout": "total_festas\tmenor_valor\tmaior_valor\tmedia\tfestas_abaixo_2k\tfestas_acima_8k\tfestas_faixa_normal\n368\t0.0000\t51090.0000\t5014.03535300\t8\t3\t357\n",
+  "stderr": "",
+  "execution_time_ms": 51
+}

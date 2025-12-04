@@ -1,0 +1,31 @@
+{
+  "query": "SELECT \n  YEAR(dataFesta) as ano,\n  COUNT(*) as total_festas,\n  SUM(valorTotal) as faturamento_total,\n  SUM(valorPago) as valor_recebido,\n  SUM(valorTotal - valorPago) as valor_a_receber\nFROM festas\nWHERE dataFesta <= '2025-11-27'\nGROUP BY YEAR(dataFesta)\nORDER BY ano;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 48JvJ4xGnzv6z7Y.root --database kipPpydFSSmPdFAif48Epo --execute SELECT \n  YEAR(dataFesta) as ano,\n  COUNT(*) as total_festas,\n  SUM(valorTotal) as faturamento_total,\n  SUM(valorPago) as valor_recebido,\n  SUM(valorTotal - valorPago) as valor_a_receber\nFROM festas\nWHERE dataFesta <= '2025-11-27'\nGROUP BY YEAR(dataFesta)\nORDER BY ano;",
+  "rows": [
+    {
+      "ano": "2023",
+      "total_festas": "1",
+      "faturamento_total": "509000",
+      "valor_recebido": "509000",
+      "valor_a_receber": "0"
+    },
+    {
+      "ano": "2024",
+      "total_festas": "136",
+      "faturamento_total": "65191600",
+      "valor_recebido": "65191600",
+      "valor_a_receber": "0"
+    },
+    {
+      "ano": "2025",
+      "total_festas": "108",
+      "faturamento_total": "52990900",
+      "valor_recebido": "52990900",
+      "valor_a_receber": "0"
+    }
+  ],
+  "messages": [],
+  "stdout": "ano\ttotal_festas\tfaturamento_total\tvalor_recebido\tvalor_a_receber\n2023\t1\t509000\t509000\t0\n2024\t136\t65191600\t65191600\t0\n2025\t108\t52990900\t52990900\t0\n",
+  "stderr": "",
+  "execution_time_ms": 52
+}

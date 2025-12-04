@@ -1,0 +1,15 @@
+{
+  "query": "SELECT \n  COUNT(*) as total_pagamentos,\n  SUM(valor) as valor_total_pagamentos,\n  COUNT(DISTINCT festaId) as festas_com_pagamento\nFROM pagamentos;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 48JvJ4xGnzv6z7Y.root --database kipPpydFSSmPdFAif48Epo --execute SELECT \n  COUNT(*) as total_pagamentos,\n  SUM(valor) as valor_total_pagamentos,\n  COUNT(DISTINCT festaId) as festas_com_pagamento\nFROM pagamentos;",
+  "rows": [
+    {
+      "total_pagamentos": "34",
+      "valor_total_pagamentos": "3926500",
+      "festas_com_pagamento": "0"
+    }
+  ],
+  "messages": [],
+  "stdout": "total_pagamentos\tvalor_total_pagamentos\tfestas_com_pagamento\n34\t3926500\t0\n",
+  "stderr": "",
+  "execution_time_ms": 48
+}

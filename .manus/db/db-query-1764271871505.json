@@ -1,0 +1,17 @@
+{
+  "query": "SELECT \n  COUNT(*) as total_festas,\n  SUM(valorTotal) as faturamento_total,\n  SUM(valorPago) as valor_recebido,\n  SUM(valorTotal - valorPago) as valor_a_receber,\n  ROUND(AVG(valorTotal), 2) as ticket_medio\nFROM festas\nWHERE dataFesta >= '2024-12-01' AND dataFesta <= '2025-11-30';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 48JvJ4xGnzv6z7Y.root --database kipPpydFSSmPdFAif48Epo --execute SELECT \n  COUNT(*) as total_festas,\n  SUM(valorTotal) as faturamento_total,\n  SUM(valorPago) as valor_recebido,\n  SUM(valorTotal - valorPago) as valor_a_receber,\n  ROUND(AVG(valorTotal), 2) as ticket_medio\nFROM festas\nWHERE dataFesta >= '2024-12-01' AND dataFesta <= '2025-11-30';",
+  "rows": [
+    {
+      "total_festas": "129",
+      "faturamento_total": "62700900",
+      "valor_recebido": "62700900",
+      "valor_a_receber": "0",
+      "ticket_medio": "486053.49"
+    }
+  ],
+  "messages": [],
+  "stdout": "total_festas\tfaturamento_total\tvalor_recebido\tvalor_a_receber\tticket_medio\n129\t62700900\t62700900\t0\t486053.49\n",
+  "stderr": "",
+  "execution_time_ms": 51
+}

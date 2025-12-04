@@ -603,3 +603,22 @@
 - [x] Recalcular valores recebidos e a receber por ano
 - [x] Gerar relatório detalhado separando 2024, 2025 e 2026
 - [x] Validar Dashboard com valores corretos
+
+
+## Sistema de Login Próprio e Telas por Perfil (Fase 28)
+- [x] Atualizar schema de users com campos username e passwordHash
+- [x] Criar procedures de autenticação (login, logout)
+- [x] Criar usuários padrão (Moises ADMIN, Gabriel SUPERVISOR)
+- [x] Fazer upload da logomarca para projeto
+- [ ] Criar 5 usuários de teste (Decoradora, Dono, Fornecedor, Assistente 1 e 2)
+- [ ] Criar schema de tarefas (criar, atribuir, vincular agenda)
+- [ ] Criar procedures tRPC de tarefas
+- [ ] Criar tela de login profissional com identidade visual Festeja Kids
+- [ ] Implementar proteção de rotas por role
+- [ ] Criar tela Agenda (principal - comum a todos os usuários)
+- [ ] Implementar sistema de Tarefas (criar, atribuir, vincular agenda)
+- [ ] Implementar tela Dashboard do Mês do Supervisor
+- [ ] Implementar tela Visitação do Supervisor
+- [ ] Implementar tela Contratos do Supervisor
+- [ ] Testar fluxo completo de login e navegação
+- [ ] Validar permissões por perfil
